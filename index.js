@@ -59,7 +59,7 @@ function runMethod (endpoint, method) {
 }
 
 // Function to get Id product by sku
-function getIDProductbySKU (sku) {
+function getProductIdBySku (sku) {
   var endpoint = '/products.json?sku=' + sku
   var method = 'GET'
   var id = runMethod(endpoint, method).done(function () {
@@ -68,7 +68,7 @@ function getIDProductbySKU (sku) {
 }
 
 // Function to get Product by id
-function getProductbyIDroduct (id) {
+function getProduct (id) {
   var endpoint = '/products/' + id + '.json'
   var method = 'GET'
   runMethod(endpoint, method)
