@@ -5,30 +5,15 @@ var storeID
   storeID = storeId
 }())
 
-// Function to verify if the script is Node JS
-function NodeJS () {
-  // Establish the root object, `window` in the browser, or `global` on the server.
-  var root = this
-  // Create a reference to this
-  var _ = {}
-
-  var isNode = false
-  // Export the Underscore object for **CommonJS**, with backwards-compatibility
-  // for the old `require()` API. If we're not in CommonJS, add `_` to the
-  // global object.
-  if (typeof module !== 'undefined' && module.exports) {
-    module.exports = _
-    root._ = _
-    isNode = true
-  } else {
-    root._ = _
-  }
-  return isNode
+const isNodeJS = false
+// Verify if the script is Node JS
+if (typeof module !== 'undefined' && module.exports) {
+  isNodeJS = true
 }
 
 // Function to run function by endpoint and method
 function runMethod (endpoint, method) {
-  if (NodeJS() === true) {
+  if (isNodeJS === true) {
     request({
       method: method,
       url: 'https://api.e-com.plus/v1' + endpoint,
@@ -44,13 +29,13 @@ function runMethod (endpoint, method) {
       }
     })
   } else {
-    var ajax = new XMLHttpRequest()
-    var url = 'https://api.e-com.plus/v1' + endpoint
+    let ajax = new XMLHttpRequest()
+    let url = 'https://api.e-com.plus/v1' + endpoint
     ajax.open(method, url, true)
     ajax.send()
     ajax.onreadystatechange = function () {
       if (ajax.readyState === 4 && ajax.status === 200) {
-        var data = ajax.responseText
+        let data = ajax.responseText
         return JSON.parse(data)
       }
     }
@@ -59,10 +44,10 @@ function runMethod (endpoint, method) {
 
 // Function to get ID product by sku
 function getProductBySku (sku) {
-  var endpoint = '/products.json?sku=' + sku
-  var method = 'GET'
-  var response = runMethod(endpoint, method).done(function () {
-    for (var i = 0; i < response.result; i++) {
+  let endpoint = '/products.json?sku=' + sku
+  let method = 'GET'
+  let response = runMethod(endpoint, method).done(function () {
+    for (let i = 0; i < response.result; i++) {
       getProduct(response.result[i]._id)
     }
   })
@@ -70,7 +55,7 @@ function getProductBySku (sku) {
 
 // Function to get Product by ID product
 function getProduct (id) {
-  var endpoint = '/products/' + id + '.json'
-  var method = 'GET'
+  let endpoint = '/products/' + id + '.json'
+  let method = 'GET'
   runMethod(endpoint, method)
 }
