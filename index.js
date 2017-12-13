@@ -14,19 +14,23 @@ if (typeof module !== 'undefined' && module.exports) {
 // Function to run function by endpoint and method
 function runMethod (endpoint, method) {
   if (isNodeJS === true) {
-    request({
+    const options = {
+      hostname: 'https://api.e-com.plus/v1' + endpoint,
       method: method,
-      url: 'https://api.e-com.plus/v1' + endpoint,
       headers: {
         'Content-Type': 'application/json',
         'X-Store-ID': storeID
       }
-    }, function (error, res, body) {
-      if (error) {
-        console.log('Error:', error)
-      } else {
-        return res.body
-      }
+    }
+
+    const req = http.request(options, function (res) {
+      res.on('data', function (body) {
+        return body
+      })
+      req.on('error', function (error) {
+        console.error('problem with request:' + error.message)
+      })
+      req.end()
     })
   } else {
     let ajax = new XMLHttpRequest()
