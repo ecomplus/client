@@ -58,8 +58,32 @@ function getProductBySku (sku) {
 }
 
 // Function to get Product by ID product
-function getProduct (id) {
+function getProduct (id, callback) {
   let endpoint = '/products/' + id + '.json'
   let method = 'GET'
-  runMethod(endpoint, method)
+  callback = function () {
+    runMethod(endpoint, method)
+  }
 }
+
+function getOrder (id, callback) {
+  let endpoint = '/orders/' + id + '.json'
+  let method = 'GET'
+  callback = function () {
+    runMethod(endpoint, method)
+  }
+}
+
+// function getProductbyName (term) {
+//   // GET /twitter/tweet/_search
+//   var query = {
+//     'query': {
+//       'term': { 'user': term },
+//       'sort': [
+//         { 'available': true },
+//         { 'visible': true },
+//         { 'name': term }
+//       ]
+//     }
+//   }
+// }
