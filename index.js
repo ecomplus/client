@@ -1,21 +1,27 @@
 var storeID
 
 // GET STORE ID
-(function StoreId (storeId) {
+function init (storeId, logger) {
   storeID = storeId
-}())
+  if (typeof logger === 'object' && logger.hasOwnProperty('log') && logger.hasOwnProperty('error')) {
+    console = logger
+  }
+}
 
 const isNodeJS = false
+const https
 // Verify if the script is Node JS
 if (typeof module !== 'undefined' && module.exports) {
   isNodeJS = true
+  https = require('https')
 }
 
 // Function to run function by endpoint and method
-function runMethod (endpoint, method) {
+function runMethod (endpoint, method, callback) {
   if (isNodeJS === true) {
     const options = {
-      hostname: 'https://api.e-com.plus/v1' + endpoint,
+      hostname: 'api.e-com.plus',
+      path: '/v1' + endpoint,
       method: method,
       headers: {
         'Content-Type': 'application/json',
@@ -23,9 +29,25 @@ function runMethod (endpoint, method) {
       }
     }
 
-    const req = http.request(options, function (res) {
-      res.on('data', function (body) {
-        return body
+    const req = https.request(options, (res) => {
+      if (res.statusCode !== 200) {
+        // TODO: error handling
+        let err = new Error('Request failed trying to get store info\nStatus code: ' + res.statusCode)
+        console.error(err)
+        // consume response data to free up memory
+        res.resume()
+        return
+      }
+      
+      let rawData = ''
+      res.setEncoding('utf8')
+      res.on('data', (chunk) => { rawData += chunk })
+      res.on('end', () => {
+        try {
+          let parsedData = JSON.parse(rawData)
+        } catch (e) {
+          console.error(e)
+        }
       })
       req.on('error', function (error) {
         console.error('problem with request:' + error.message)
@@ -39,8 +61,12 @@ function runMethod (endpoint, method) {
     ajax.send()
     ajax.onreadystatechange = function () {
       if (ajax.readyState === 4 && ajax.status === 200) {
-        let data = ajax.responseText
-        return JSON.parse(data)
+        let body = JSON.parse(ajax.responseText)
+        if (typeof callback === 'function') {
+          callback(body)
+        } else {
+          return body
+        }
       }
     }
   }
@@ -61,9 +87,7 @@ function getProductBySku (sku) {
 function getProduct (id, callback) {
   let endpoint = '/products/' + id + '.json'
   let method = 'GET'
-  callback = function () {
-    runMethod(endpoint, method)
-  }
+  runMethod(endpoint, method, callback)
 }
 
 function getOrder (id, callback) {
