@@ -25,7 +25,7 @@ var EcomIo = function () {
     if (!method) {
       method = 'GET'
     }
-    
+
     if (isNodeJs === true) {
       const options = {
         hostname: host,
@@ -99,12 +99,10 @@ var EcomIo = function () {
     'storeId': storeId,
 
     // Function to get ID product by sku
-    'getProductBySku': function (sku) {
-      let endpoint = '/products.json?sku=' + sku
-      let method = 'GET'
-      let response = runMethod(endpoint, method).done(function () {
+    'getProductBySku': function (sku, callback) {
+      let response = runMethod(callback, '/products.json?sku=' + sku).done(function () {
         for (let i = 0; i < response.result; i++) {
-          getProduct(response.result[i]._id)
+          EcomIo.getProduct(response.result[i]._id, callback)
         }
       })
     },
@@ -115,29 +113,29 @@ var EcomIo = function () {
     },
 
     'getOrder': function (id, callback) {
-      let endpoint = '/orders/' + id + '.json'
-      let method = 'GET'
-      callback = function () {
-        runMethod(endpoint, method)
-      }
+      runMethod(callback, '/orders/' + id + '.json')
+    },
+
+    'getProductbyName': function (term, callback) {
+      var host = 'apx-search.e-com.plus'
+      var method = 'XPOST'
+      var endpoint = '/items.json'
+      // var body = {
+      //   'query': {
+      //     'term': { 'user': term },
+      //     'sort': [
+      //       { 'available': true },
+      //       { 'visible': true },
+      //       { 'name': term }
+      //     ]
+      //   }
+      // }
+      runMethod(callback, endpoint, host, method)
     }
+
   }
-}()
+}
 
 if (isNodeJs) {
   module.exports = EcomIo
 }
-
-// function getProductbyName (term) {
-//   // GET /twitter/tweet/_search
-//   var query = {
-//     'query': {
-//       'term': { 'user': term },
-//       'sort': [
-//         { 'available': true },
-//         { 'visible': true },
-//         { 'name': term }
-//       ]
-//     }
-//   }
-// }
