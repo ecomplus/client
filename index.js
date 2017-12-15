@@ -118,7 +118,9 @@ var EcomIo = function () {
 
     'getProductbyName': function (term, callback) {
       var host = 'apx-search.e-com.plus'
-      var method = 'XPOST'
+      // proxy will pass XGET
+      // https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html
+      var method = 'POST'
       var endpoint = '/items.json'
       // var body = {
       //   'query': {
@@ -134,7 +136,7 @@ var EcomIo = function () {
     }
 
   }
-}
+}()
 
 if (isNodeJs) {
   module.exports = EcomIo
