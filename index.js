@@ -17,11 +17,22 @@ if (typeof module !== 'undefined' && module.exports) {
 }
 
 // Function to run function by endpoint and method
-function runMethod (endpoint, method, callback) {
+function runMethod (callback, endpoint, host, method) {
+  let path
+  if (!host) {
+    host = 'api.e-com.plus'
+    path = '/v1'
+  } else if (host !== 'api.e-com.plus') {
+    path = '/api/v1'
+  }
+  if (!method) {
+    method = 'GET'
+  }
+  
   if (isNodeJS === true) {
     const options = {
-      hostname: 'api.e-com.plus',
-      path: '/v1' + endpoint,
+      hostname: host,
+      path: path + endpoint,
       method: method,
       headers: {
         'Content-Type': 'application/json',
@@ -38,7 +49,7 @@ function runMethod (endpoint, method, callback) {
         res.resume()
         return
       }
-      
+
       let rawData = ''
       res.setEncoding('utf8')
       res.on('data', (chunk) => { rawData += chunk })
@@ -56,7 +67,7 @@ function runMethod (endpoint, method, callback) {
     })
   } else {
     let ajax = new XMLHttpRequest()
-    let url = 'https://api.e-com.plus/v1' + endpoint
+    let url = 'https://' + host + path + endpoint
     ajax.open(method, url, true)
     ajax.send()
     ajax.onreadystatechange = function () {
@@ -85,9 +96,7 @@ function getProductBySku (sku) {
 
 // Function to get Product by ID product
 function getProduct (id, callback) {
-  let endpoint = '/products/' + id + '.json'
-  let method = 'GET'
-  runMethod(endpoint, method, callback)
+  runMethod(callback, '/products/' + id + '.json')
 }
 
 function getOrder (id, callback) {
