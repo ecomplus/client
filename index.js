@@ -14,7 +14,7 @@ var EcomIo = function () {
   }
 
   // Function to run function by endpoint and method
-  let runMethod = function (callback, endpoint, host, method) {
+  let runMethod = function (callback, endpoint, host, method, body) {
     let path
     if (!host) {
       host = 'api.e-com.plus'
@@ -122,17 +122,17 @@ var EcomIo = function () {
       // https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html
       var method = 'POST'
       var endpoint = '/items.json'
-      // var body = {
-      //   'query': {
-      //     'term': { 'user': term },
-      //     'sort': [
-      //       { 'available': true },
-      //       { 'visible': true },
-      //       { 'name': term }
-      //     ]
-      //   }
-      // }
-      runMethod(callback, endpoint, host, method)
+      var body = {
+        'query': {
+          'term': { 'user': term },
+          'sort': [
+            { 'available': true },
+            { 'visible': true },
+            { 'name': term }
+          ]
+        }
+      }
+      runMethod(callback, endpoint, host, method, body)
     }
 
   }
