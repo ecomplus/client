@@ -136,7 +136,8 @@ var EcomIo = function () {
     }
 
   }
-}()
+}
+EcomIo = EcomIo()
 
 if (isNodeJs) {
   module.exports = EcomIo
