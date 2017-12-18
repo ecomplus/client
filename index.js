@@ -112,8 +112,31 @@ var EcomIo = function () {
       runMethod(callback, '/products/' + id + '.json')
     },
 
+    // Function to get order by ID order
     'getOrder': function (id, callback) {
       runMethod(callback, '/orders/' + id + '.json')
+    },
+
+    // Function to get all store brands
+    'getBrand': function (filter, callback) {
+      var endpoint
+      if (!filter) {
+        endpoint = '/brands.json'
+      } else {
+        endpoint = '/brands.json?' + filter
+      }
+      runMethod(callback, endpoint)
+    },
+
+    // Function to get all store categories
+    'getCategories': function (filter, callback) {
+      var endpoint
+      if (!filter) {
+        endpoint = '/categories.json'
+      } else {
+        endpoint = '/categories.json?' + filter
+      }
+      runMethod(callback, endpoint)
     },
 
     'getProductbyName': function (term, callback) {
