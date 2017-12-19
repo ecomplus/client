@@ -139,7 +139,7 @@ var EcomIo = function () {
       runMethod(callback, endpoint)
     },
 
-    'getProductbyName': function (term, callback) {
+    'searchProducts': function (name, filter, callback) {
       var host = 'apx-search.e-com.plus'
       // proxy will pass XGET
       // https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html
@@ -147,12 +147,20 @@ var EcomIo = function () {
       var endpoint = '/items.json'
       var body = {
         'query': {
-          'term': { 'user': term },
+          'match': {
+            'name': name
+          },
           'sort': [
             { 'available': true },
-            { 'visible': true },
-            { 'name': term }
-          ]
+            { 'ad_relevance': 'desc' },
+            { 'views': 'desc' },
+            '_score'
+          ],
+          'bool': { // condition, only visible products
+            'filter': {
+              'term': { 'visible': true }
+            }
+          }
         }
       }
       runMethod(callback, endpoint, host, method, body)
@@ -165,3 +173,4 @@ EcomIo = EcomIo()
 if (isNodeJs) {
   module.exports = EcomIo
 }
+
