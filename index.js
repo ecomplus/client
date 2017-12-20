@@ -145,6 +145,17 @@ var EcomIo = function () {
       // https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html
       var method = 'POST'
       var endpoint = '/items.json'
+      var object
+      switch (filter) {
+        case 'sales': // filter by sales
+          object = { 'sales': 'desc' }
+          break
+        case 'price': // filter by price
+          object = { 'price': 'desc' }
+          break
+        default: // default is filter by views
+          object = { 'views': 'desc' }
+      }
       var body = {
         'query': {
           'match': {
@@ -153,7 +164,7 @@ var EcomIo = function () {
           'sort': [
             { 'available': true },
             { 'ad_relevance': 'desc' },
-            { 'views': 'desc' },
+            object,
             '_score'
           ],
           'bool': { // condition, only visible products
@@ -173,4 +184,3 @@ EcomIo = EcomIo()
 if (isNodeJs) {
   module.exports = EcomIo
 }
-
