@@ -132,7 +132,7 @@ var EcomIo = function () {
     },
 
     // Function to get all store brands
-    'getBrands': function (filter, callback) {
+    'getBrands': function (callback, filter) {
       var endpoint
       if (!filter) {
         endpoint = '/brands.json'
@@ -143,7 +143,7 @@ var EcomIo = function () {
     },
 
     // Function to get all store categories
-    'getCategories': function (filter, callback) {
+    'getCategories': function (callback, filter) {
       var endpoint
       if (!filter) {
         endpoint = '/categories.json'
