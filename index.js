@@ -98,7 +98,7 @@ var EcomIo = function () {
     // return current store ID in use
     'storeId': storeId,
 
-    // Function to get ID product by sku
+    // Function to get product by sku
     'getProductBySku': function (sku, callback) {
       let response = runMethod(callback, '/products.json?sku=' + sku).done(function () {
         for (let i = 0; i < response.result; i++) {
@@ -107,7 +107,7 @@ var EcomIo = function () {
       })
     },
 
-    // Function to get Product by ID product
+    // Function to get product by ID product
     'getProduct': function (id, callback) {
       runMethod(callback, '/products/' + id + '.json')
     },
@@ -117,8 +117,22 @@ var EcomIo = function () {
       runMethod(callback, '/orders/' + id + '.json')
     },
 
+    // Function to get amount order information (total, subtotal, freight, discount)
+    'getAmountOrderInformation': function (id, callback) {
+      let response = EcomIo.getOrder(id, callback).done(function () {
+        return response.amount
+      })
+    },
+
+    // Function to get items order information (_id, product_id, sku, name, quantity, price)
+    'getItemsOrderInformation': function (id, callback) {
+      let response = EcomIo.getOrder(id, callback).done(function () {
+        return response.items
+      })
+    },
+
     // Function to get all store brands
-    'getBrand': function (filter, callback) {
+    'getBrands': function (filter, callback) {
       var endpoint
       if (!filter) {
         endpoint = '/brands.json'
@@ -139,44 +153,93 @@ var EcomIo = function () {
       runMethod(callback, endpoint)
     },
 
-    'searchProducts': function (name, filter, callback) {
+    // Function to search products
+    'searchProduts': function (term, sort, filter, callback) {
       var host = 'apx-search.e-com.plus'
       // proxy will pass XGET
       // https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html
       var method = 'POST'
       var endpoint = '/items.json'
-      var object
-      switch (filter) {
-        case 'sales': // filter by sales
-          object = { 'sales': 'desc' }
-          break
-        case 'price': // filter by price
-          object = { 'price': 'desc' }
-          break
-        default: // default is filter by views
-          object = { 'views': 'desc' }
+
+      // if sort is an object keep it
+      if (typeof sort === 'number') {
+        switch (sort) {
+          case 1:
+            // sort by sales
+            sort = { 'sales': 'desc' }
+            break
+          case 2:
+            // sort by price (lowest price -> highest price)
+            sort = { 'price': 'asc' }
+            break
+          case 3:
+            // sort by price (highest price -> lowest price)
+            sort = { 'price': 'desc' }
+            break
+          default:
+            // sort by views
+            sort = { 'views': 'desc' }
+        }
+      } else if (typeof sort !== 'object') {
+        // default sort by views
+        sort = { 'views': 'desc' }
       }
+
       var body = {
         'query': {
-          'match': {
-            'name': name
+          'multi_match': {
+            'query': term,
+            'fields': ['name', 'keywords']
           },
           'sort': [
             { 'available': true },
+            '_score',
             { 'ad_relevance': 'desc' },
-            object,
-            '_score'
+            sort
           ],
           'bool': { // condition, only visible products
-            'filter': {
-              'term': { 'visible': true }
+            'filter': [
+              {'term': { 'visible': true }}
+            ]
+          }
+        }
+      }
+
+      // example filter object
+      // filter = {
+      //   'specifications' : {
+      //     'cor': ['azul', 'vermelho']
+      //   },
+      //   'brands' : {
+      //     'name': ['brandName']
+      //   }
+      // }
+
+      if (typeof filter === 'object') {
+        for (var key in filter) {
+          // loop in filter object
+          if (filter.hasOwnProperty(key)) {
+            var propertyObject = filter[key]
+            for (var key2 in propertyObject) {
+              // loop in property propertyObject
+              if (propertyObject.hasOwnProperty(key2) && Array.isArray(propertyObject[key2])) {
+                for (var i = 0; i < propertyObject[key2].length; i++) {
+                  // change the name
+                  var bodytoFilter = {
+                    'term': {
+                      [key]: {[key2]: propertyObject[key2][i]}
+                    }
+                  }
+                  body.bool.filter.push(bodytoFilter)
+                }
+              }
             }
           }
         }
       }
+
       runMethod(callback, endpoint, host, method, body)
     }
-
   }
 }
 EcomIo = EcomIo()
