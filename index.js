@@ -216,16 +216,16 @@ var EcomIo = function () {
       // }
 
       if (typeof filter === 'object') {
-        for (var key in filter) {
+        for (let key in filter) {
           // loop in filter object
           if (filter.hasOwnProperty(key)) {
-            var propertyObject = filter[key]
-            for (var key2 in propertyObject) {
+            let propertyObject = filter[key]
+            for (let key2 in propertyObject) {
               // loop in property propertyObject
               if (propertyObject.hasOwnProperty(key2) && Array.isArray(propertyObject[key2])) {
-                for (var i = 0; i < propertyObject[key2].length; i++) {
+                for (let i = 0; i < propertyObject[key2].length; i++) {
                   // change the name
-                  var bodytoFilter = {
+                  let bodytoFilter = {
                     'term': {
                       [key]: {[key2]: propertyObject[key2][i]}
                     }
