@@ -5,7 +5,7 @@ JS SDK for E-Com Plus to access public resources from store API
 ### init(StoreId, Logger)
 Before you acess the other methods from SDK you need to initialize the function with the StoreId, Logger is not required
 
-#### Params
+#### Arguments
 |   Name  | Type |
 | :---:  | :---:|
 | StoreId | String or Number |
