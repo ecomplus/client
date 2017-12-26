@@ -208,7 +208,7 @@ var EcomIo = function () {
       // example filter object
       // filter = {
       //   'specifications' : {
-      //     'cor': ['azul', 'vermelho']
+      //     'color': ['blue', 'red']
       //   },
       //   'brands' : {
       //     'name': ['brandName']
