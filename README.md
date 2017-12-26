@@ -26,7 +26,7 @@ It is a method to get a Product by your sku
 | callback | Function |
 
 #### Return 
-A object with product properties such as id, name, price
+A object with product properties such as id and name
 
 #### Example
     EcomIo.getProductBySku('COD1', callback)
