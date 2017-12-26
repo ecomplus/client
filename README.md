@@ -1,5 +1,13 @@
 # ecomplus-sdk.js
-SDK Javascript para acessar a API da Ecomplus. 
+JS SDK for E-Com Plus to access public resources from store API
 
-## Instalação
-    $ npm install ecomplus-sdk-js
+## Methods
+### init(StoreId, Logger)
+Before you acess the other methods from SDK you need to initialize the function with the StoreId, Logger is not required
+
+#### Params
+|   Name  | Type |
+| :---:  | :---:|
+| StoreId | String or Number |
+
+    
