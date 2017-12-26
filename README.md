@@ -85,7 +85,7 @@ The return is a object with all store brands
 #### Example
 With no filter:
     
-    EcomIo.getOrder(callback)
+    EcomIo.getBrands(callback)
 With limit filter:    
 
-    EcomIo.getOrder('limit=3', callback)
+    EcomIo.getBrands('limit=3', callback)
