@@ -67,7 +67,7 @@ The return is a object with order properties such as items and amount
 It is a method to get all store Brands. The filter argument is not required but, you can pass some filter to API:  
 
 |  Filter  | Type | usage |
-| :---:  | :---:|  :---:|
+| :---:  | :---:|  :---|
 | offset | number | Max number of objects to return |
 | limit | number | First entry to return |
 | sort | string | Rules to order resultant objects |
@@ -89,3 +89,36 @@ With no filter:
 With limit filter:    
 
     EcomIo.getBrands('limit=3', callback)
+
+### searchProduts(term, sort, filter, callback)
+It is a method to search products. For this method all the arguments are important. 
+
+|  Name  | Type | Usage |
+| :---:  | :---:| :--- |
+| term | String | It is the term that you search, can be the name of the product or the keywords of that product |
+| sort | Number | You can sort the products by sales, price or views |
+| filter | Object | It is a object to filter the products |
+
+#### Sort
+
+|  Number  | Name | Usage |
+| :---:  | :---:| :--- |
+| 1 | sales | You will sort by sales, the products that sells more will appear first than the others |
+| 2 | price | You will sort by price, the products with lowest price will appear first than the others |
+| 3 | price |  You will sort by price, the products with highest price will appear first than the others|
+
+**By default the sort is views, the products with more views will appear first than the others**
+
+#### Filter
+Example of filter object:
+    
+      
+      filter = {
+        'specifications' : {
+          'color': ['blue', 'red']
+        },
+        'brands' : {
+          'name': ['brandName']
+        }
+      }
+   
