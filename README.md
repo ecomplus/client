@@ -32,7 +32,7 @@ A object with product properties such as id and name
     EcomIo.getProductBySku('COD1', callback)
 
 ### getProduct(id, callback)
-Similar to ´getProductBySku´ but here you pass the product id instead of sku
+Similar to `getProductBySku` but here you pass the product id instead of sku
 
 #### Arguments 
 |  Name  | Type |
@@ -41,7 +41,7 @@ Similar to ´getProductBySku´ but here you pass the product id instead of sku
 | callback | Function |
 
 #### Return 
-The return is the same of ´getProductBySku´
+The return is the same of `getProductBySku`
 
 #### Example
     EcomIo.getProductBySku('123a5432109876543210cdef', callback)
