@@ -22,7 +22,7 @@ It is a method to get a Product by your sku
 #### Arguments 
 |  Name  | Type |
 | :---:  | :---:|
-| sku | String or Number |
+| sku | String |
 | callback | Function |
 
 #### Return 
@@ -30,3 +30,18 @@ A object with product properties such as id and name
 
 #### Example
     EcomIo.getProductBySku('COD1', callback)
+
+### getProduct(id, callback)
+Similar to 'getProductBySku' but here you pass the product id instead of sku
+
+#### Arguments 
+|  Name  | Type |
+| :---:  | :---:|
+| id | String |
+| callback | Function |
+
+#### Return 
+The return is the same of 'getProductBySku'
+
+#### Example
+    EcomIo.getProductBySku('123a5432109876543210cdef', callback)
