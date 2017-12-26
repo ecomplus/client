@@ -10,4 +10,6 @@ Before you acess the other methods from SDK you need to initialize the function 
 | :---:  | :---:|
 | StoreId | String or Number |
 
+#### Example
+    EcomIo.init(100)
     
