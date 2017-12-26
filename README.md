@@ -46,3 +46,46 @@ The return is the same of `getProductBySku`
 
 #### Example
     EcomIo.getProductBySku('123a5432109876543210cdef', callback)
+    
+
+### getOrder(id, callback)
+It is a method to get Order by your id
+
+#### Arguments 
+|  Name  | Type |
+| :---:  | :---:|
+| id | String |
+| callback | Function |
+
+#### Return 
+The return is a object with order properties such as items and amount
+
+#### Example
+    EcomIo.getOrder('fe1000000000000000000005', callback)
+    
+### getBrands(filter, callback)
+It is a method to get all store Brands. The filter argument is not required but, you can pass some filter to API:  
+
+|  Filter  | Type | usage |
+| :---:  | :---:|  :---:|
+| offset | number | Max number of objects to return |
+| limit | number | First entry to return |
+| sort | string | Rules to order resultant objects |
+| fields | string | Object properties to return |
+
+#### Arguments 
+|  Name  | Type |
+| :---:  | :---:|
+| filter | String |
+| callback | Function |
+
+#### Return 
+The return is a object with all store brands
+
+#### Example
+With no filter:
+    
+    EcomIo.getOrder(callback)
+With limit filter:    
+
+    EcomIo.getOrder('limit=3', callback)
