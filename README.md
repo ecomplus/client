@@ -25,6 +25,9 @@ It is a method to get a Product by your id
 | id | String |
 | callback | Function |    
 
+#### Example
+    EcomIo.getProduct('123a5432109876543210cdef', callback)
+    
 #### Return 
 Example of return object:
 
@@ -137,9 +140,6 @@ Example of return object:
       ]
     }
 
-#### Example
-    EcomIo.getProduct('123a5432109876543210cdef', callback)
-    
 ### getProductBySku(sku, callback)
 Similar to `getProduct` but here you pass the product sku instead of id
 
@@ -149,11 +149,11 @@ Similar to `getProduct` but here you pass the product sku instead of id
 | sku | String |
 | callback | Function |
 
-#### Return 
-The return is the same of `getProduct`
-
 #### Example
     EcomIo.getProductBySku('COD1', callback)
+
+#### Return 
+The return is the same of `getProduct`
 
 ### getOrder(id, callback)
 It is a method to get Order by your id
@@ -163,6 +163,9 @@ It is a method to get Order by your id
 | :---:  | :---:|
 | id | String |
 | callback | Function |
+
+#### Example
+    EcomIo.getOrder('fe1000000000000000000005', callback)
 
 #### Return 
 Example of return object:
@@ -209,9 +212,6 @@ Example of return object:
       ],
       "notes": "Sample order notes by customer"
     }
-
-#### Example
-    EcomIo.getOrder('fe1000000000000000000005', callback)
     
 ### getBrands(filter, callback)
 It is a method to get all store Brands. The filter argument is not required but, you can pass some filter to API:  
@@ -229,6 +229,14 @@ It is a method to get all store Brands. The filter argument is not required but,
 | filter | String |
 | callback | Function |
 
+#### Example
+With no filter:
+    
+    EcomIo.getBrands(callback)
+With limit filter:    
+
+    EcomIo.getBrands('limit=3', callback)
+    
 #### Return 
 Example of return object:
 
@@ -315,14 +323,6 @@ Example of return object:
         }
       ]
     }
-
-#### Example
-With no filter:
-    
-    EcomIo.getBrands(callback)
-With limit filter:    
-
-    EcomIo.getBrands('limit=3', callback)
 
 ### searchProduts(term, sort, filter, callback)
 For this method you use [Elastic Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html) to search products. So, everything that is valid for Elastic is valid here 
