@@ -15,15 +15,15 @@ Before you access the other methods from SDK you need to initialize the object w
 
 #### Example
     EcomIo.init(100)
-    
-### getProductBySku(sku, callback)
-It is a method to get a Product by your sku
+
+### getProduct(id, callback)
+Similar to `getProductBySku` but here you pass the product id instead of sku
 
 #### Arguments 
 |  Name  | Type |
 | :---:  | :---:|
-| sku | String |
-| callback | Function |
+| id | String |
+| callback | Function |    
 
 #### Return 
 Example of return object:
@@ -138,23 +138,22 @@ Example of return object:
     }
 
 #### Example
-    EcomIo.getProductBySku('COD1', callback)
-
-### getProduct(id, callback)
-Similar to `getProductBySku` but here you pass the product id instead of sku
+    EcomIo.getProduct('COD1', callback)
+    
+### getProductBySku(sku, callback)
+It is a method to get a Product by your sku
 
 #### Arguments 
 |  Name  | Type |
 | :---:  | :---:|
-| id | String |
+| sku | String |
 | callback | Function |
 
 #### Return 
-The return is the same of `getProductBySku`
+The return is the same of `getProduct`
 
 #### Example
     EcomIo.getProductBySku('123a5432109876543210cdef', callback)
-    
 
 ### getOrder(id, callback)
 It is a method to get Order by your id
