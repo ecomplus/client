@@ -1,5 +1,5 @@
 # ecomplus-sdk-js
-JS SDK for E-Com Plus with methods to access public resources from [store API](https://ecomstore.docs.apiary.io)
+JS library for E-Com Plus with methods to access public resources from [Store API](https://ecomstore.docs.apiary.io) and other APIs.
 
 # Getting Started
 The ecomplus-sdk-js has a object called EcomIo with all methods that you can use to access the store API. All the methods of the object has a argument called callback, it is a function that you pass to treat the response of the method
@@ -19,16 +19,16 @@ Before you access the other methods from SDK you need to initialize the object w
 ### getProduct(id, callback)
 It is a method to get a Product by your id
 
-#### Arguments 
+#### Arguments
 |  Name  | Type |
 | :---:  | :---:|
 | id | String |
-| callback | Function |    
+| callback | Function |
 
 #### Example
     EcomIo.getProduct('123a5432109876543210cdef', callback)
-    
-#### Return 
+
+#### Return
 Example of return object:
 
     {
@@ -143,7 +143,7 @@ Example of return object:
 ### getProductBySku(sku, callback)
 Similar to `getProduct` but here you pass the product sku instead of id
 
-#### Arguments 
+#### Arguments
 |  Name  | Type |
 | :---:  | :---:|
 | sku | String |
@@ -152,13 +152,13 @@ Similar to `getProduct` but here you pass the product sku instead of id
 #### Example
     EcomIo.getProductBySku('COD1', callback)
 
-#### Return 
+#### Return
 The return is the same of `getProduct`
 
 ### getOrder(id, callback)
 It is a method to get Order by your id
 
-#### Arguments 
+#### Arguments
 |  Name  | Type |
 | :---:  | :---:|
 | id | String |
@@ -167,7 +167,7 @@ It is a method to get Order by your id
 #### Example
     EcomIo.getOrder('fe1000000000000000000005', callback)
 
-#### Return 
+#### Return
 Example of return object:
 
     {
@@ -212,9 +212,9 @@ Example of return object:
       ],
       "notes": "Sample order notes by customer"
     }
-    
+
 ### getBrands(filter, callback)
-It is a method to get all store Brands. The filter argument is not required but, you can pass some filter to API:  
+It is a method to get all store Brands. The filter argument is not required but, you can pass some filter to API:
 
 |  Filter  | Type | usage |
 | :---:  | :---:|  :---|
@@ -223,7 +223,7 @@ It is a method to get all store Brands. The filter argument is not required but,
 | sort | string | Rules to order resultant objects |
 | fields | string | Object properties to return |
 
-#### Arguments 
+#### Arguments
 |  Name  | Type |
 | :---:  | :---:|
 | filter | String |
@@ -231,13 +231,13 @@ It is a method to get all store Brands. The filter argument is not required but,
 
 #### Example
 With no filter:
-    
+
     EcomIo.getBrands(callback)
-With limit filter:    
+With limit filter:
 
     EcomIo.getBrands('limit=3', callback)
-    
-#### Return 
+
+#### Return
 Example of return object:
 
     {
@@ -325,7 +325,7 @@ Example of return object:
     }
 
 ### searchProduts(term, sort, filter, callback)
-For this method you use [Elastic Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html) to search products. So, everything that is valid for Elastic is valid here 
+For this method you use [Elastic Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html) to search products. So, everything that is valid for Elastic is valid here
 
 |  Name  | Type | Usage |
 | :---:  | :---:| :--- |
@@ -347,8 +347,8 @@ If you dont want to sort by views, sales or prices, you can pass a sort object *
 
 #### Filter
 Example of filter object:
-    
-      
+
+
       filter = {
         'specifications' : {
           'color': ['blue', 'red']
@@ -357,12 +357,11 @@ Example of filter object:
           'name': ['brandName']
         }
       }
-   
-So the model of the filter object is: 
-    
+
+So the model of the filter object is:
+
     filter = {
         'gridName' : {
             'property': ['values']
          }
     }
-

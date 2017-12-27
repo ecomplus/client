@@ -226,10 +226,10 @@ var EcomIo = function () {
                 for (let i = 0; i < propertyObject[key2].length; i++) {
                   // change the name
                   let bodytoFilter = {
-                    'term': {
-                      [key]: {[key2]: propertyObject[key2][i]}
-                    }
+                    'term': {}
                   }
+                  bodytoFilter.term[key] = {}
+                  bodytoFilter.term[key][key2] = propertyObject[key2][i]
                   body.bool.filter.push(bodytoFilter)
                 }
               }
