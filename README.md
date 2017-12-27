@@ -1,25 +1,33 @@
 # ecomplus-sdk-js
-JS library for E-Com Plus storefront with methods to access public resources from:
-+ [Store API](https://ecomstore.docs.apiary.io)
-+ [Graphs API](https://ecomgraphs.docs.apiary.io)
-+ [Search API](https://ecomsearch.docs.apiary.io)
+JS library for E-Com Plus storefront with methods to access public resources from
+[Store API](https://ecomstore.docs.apiary.io),
+[Graphs API](https://ecomgraphs.docs.apiary.io) and
+[Search API](https://ecomsearch.docs.apiary.io)
 
 __This library implements only GET requests to public resources, so there aren't authentication.__
 
 You can include minified script from URL:
+
 `https://ecom.nyc3.digitaloceanspaces.com/plus/js/sdk.min.js`
 
 Or install [npm package](https://www.npmjs.com/package/ecomplus-sdk-js):
+
 `npm install --save ecomplus-sdk-js`
 
 # Getting Started
-The library declares an object called EcomIo, with methods (object properties) to read public resources from the APIs.
-All the methods are functions with _callback_ argument, it's the function that you should pass to treat the request response.
+The library declares an object called `EcomIo`,
+with methods (object properties) to read public resources from the APIs.
+
+All the methods are functions with _callback_ argument,
+it's the function that you should pass to treat the request response.
 
 ## Initialize
 `init(StoreId, Logger)`
+
 Before you call the other methods you need to initialize the library with the store ID.
-The `Logger` argument is not required, but you can pass a _Console_ object, with properties 'log' and 'error', if you want to save output on file.
+
+The `Logger` argument is not required, but you can pass a _Console_ object,
+with properties 'log' and 'error', if you want to save output on file.
 
 #### Arguments
 | Name    | Type             |
