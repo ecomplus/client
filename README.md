@@ -24,7 +24,9 @@ All the methods are functions with _callback_ argument,
 it's the function that you should pass to treat the request response.
 
 ## Initialize
-`init(StoreId, Logger)`
+```javascript
+init(StoreId, Logger)
+```
 
 Before you call the other methods you need to initialize the library with the store ID.
 
