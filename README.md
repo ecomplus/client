@@ -364,7 +364,7 @@ For this method you use [Elastic Search](https://www.elastic.co/guide/en/elastic
 | :---:  | :---:| :--- |
 | 1 | sales | You will sort by sales, the products that sells more will appear first than the others |
 | 2 | price | You will sort by price, the products with lowest price will appear first than the others |
-| 3 | price |  You will sort by price, the products with highest price will appear first than the others|
+| 3 | price | You will sort by price, the products with highest price will appear first than the others |
 
 **By default the sort is views, the products with more views will appear first than the others**
 
@@ -373,20 +373,23 @@ If you dont want to sort by views, sales or prices, you can pass a sort object *
 #### Filter
 Example of filter object:
 
-
-      filter = {
-        'specifications' : {
-          'color': ['blue', 'red']
-        },
-        'brands' : {
-          'name': ['brandName']
-        }
-      }
+```javascript
+filter = {
+  'specifications' : {
+    'color': [ 'blue', 'red' ]
+  },
+  'brands' : {
+    'name': [ 'brandName' ]
+  }
+}
+```
 
 So the model of the filter object is:
 
-    filter = {
-        'gridName' : {
-            'property': ['values']
-         }
-    }
+```javascript
+filter = {
+  'gridName' : {
+    'property': [ 'values' ]
+  }
+}
+```
