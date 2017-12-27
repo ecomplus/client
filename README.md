@@ -1,21 +1,36 @@
 # ecomplus-sdk-js
-JS library for E-Com Plus with methods to access public resources from [Store API](https://ecomstore.docs.apiary.io) and other APIs.
+JS library for E-Com Plus storefront with methods to access public resources from:
++ [Store API](https://ecomstore.docs.apiary.io)
++ [Graphs API](https://ecomgraphs.docs.apiary.io)
++ [Search API](https://ecomsearch.docs.apiary.io)
+
+__This library implements only GET requests to public resources, so there aren't authentication.__
+
+You can include minified script from URL:
+`https://ecom.nyc3.digitaloceanspaces.com/plus/js/sdk.min.js`
+
+Or install [npm package](https://www.npmjs.com/package/ecomplus-sdk-js):
+`npm install --save ecomplus-sdk-js`
 
 # Getting Started
-The ecomplus-sdk-js has a object called EcomIo with all methods that you can use to access the store API. All the methods of the object has a argument called callback, it is a function that you pass to treat the response of the method
+The library declares an object called EcomIo, with methods (object properties) to read public resources from the APIs.
+All the methods are functions with _callback_ argument, it's the function that you should pass to treat the request response.
 
-## Methods
-### init(StoreId, Logger)
-Before you access the other methods from SDK you need to initialize the object with StoreId. The Logger argument is not required but, you can pass a object with properties 'log' and 'error'
+## Initialize
+`init(StoreId, Logger)`
+Before you call the other methods you need to initialize the library with the store ID.
+The `Logger` argument is not required, but you can pass a _Console_ object, with properties 'log' and 'error', if you want to save output on file.
 
 #### Arguments
-|   Name  | Type |
-| :---:  | :---:|
-| StoreId | String or Number |
+| Name    | Type             |
+| :---:   | :---:            |
+| StoreId | Number           |
+| Logger  | `Console` object |
 
 #### Example
-    EcomIo.init(100)
+EcomIo.init(100)
 
+## Methods
 ### getProduct(id, callback)
 It is a method to get a Product by your id
 
