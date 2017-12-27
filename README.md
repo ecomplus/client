@@ -30,19 +30,34 @@ Example of return object:
 
     {
       "_id": "123a5432109876543210cdef",
+      "created_at": "2017-12-01T01:00:30Z",
       "store_id": 100,
       "sku": "s-MP_2B4",
+      "commodity_type": "physical",
       "name": "Mens Pique Polo Shirt",
+      "slug": "mens-pique-polo-shirt",
       "available": true,
       "visible": true,
+      "ad_relevance": 0,
+      "short_description": "Red, 100% cotton, large men’s t-shirt",
+      "body_html": "<p>Red, 100% cotton, large men’s t-shirt.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>",
+      "body_text": "Red, 100% cotton, large men’s t-shirt.\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+      "meta_title": "Mens Pique Polo Shirt - My Shirt Shop",
+      "meta_description": "Mens Pique Polo Shirt, Red, 100% cotton, large men’s t-shirt",
       "keywords": [
         "tshirt",
         "t-shirt",
         "man"
       ],
       "price": 42.9,
+      "price_effective_date": {
+        "end": "2018-12-01T10:00:00Z"
+      },
       "base_price": 60,
+      "currency_id": "BRL",
+      "currency_symbol": "R$",
       "quantity": 100,
+      "manage_stock": true,
       "dimensions": {
         "width": {
           "value": 10,
@@ -61,6 +76,8 @@ Example of return object:
         "value": 400,
         "unit": "g"
       },
+      "condition": "new",
+      "adult": false,
       "brands": [
         {
           "_id": "a10000000000000000000001",
@@ -111,8 +128,12 @@ Example of return object:
           }
         ]
       },
+      "auto_fill_related_products": true,
       "gtin": [
         "12345678901234"
+      ],
+      "mpn": [
+        "T1230"
       ]
     }
 
