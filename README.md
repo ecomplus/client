@@ -2,8 +2,7 @@
 JS SDK for E-Com Plus with methods to access public resources from store API
 
 # Getting Started
-The ecomplus-sdk.js has a object called EcomIo with all methods that you can use to access the store API
-All the methods of the object has a argument called callback, it is a function that you pass to treat the response of the method
+The ecomplus-sdk.js has a object called EcomIo with all methods that you can use to access the store API. All the methods of the object has a argument called callback, it is a function that you pass to treat the response of the method
 
 ## Methods
 ### init(StoreId, Logger)
