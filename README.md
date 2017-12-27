@@ -138,7 +138,7 @@ Example of return object:
     }
 
 #### Example
-    EcomIo.getProduct('COD1', callback)
+    EcomIo.getProduct('123a5432109876543210cdef', callback)
     
 ### getProductBySku(sku, callback)
 Similar to `getProduct` but here you pass the product sku instead of id
@@ -153,7 +153,7 @@ Similar to `getProduct` but here you pass the product sku instead of id
 The return is the same of `getProduct`
 
 #### Example
-    EcomIo.getProductBySku('123a5432109876543210cdef', callback)
+    EcomIo.getProductBySku('COD1', callback)
 
 ### getOrder(id, callback)
 It is a method to get Order by your id
