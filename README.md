@@ -26,7 +26,95 @@ It is a method to get a Product by your sku
 | callback | Function |
 
 #### Return 
-A object with product properties such as id and name. You can see the complete object on [store API - products](https://ecomstore.docs.apiary.io/#reference/products/specific-product/read-product)
+Example of return object:
+
+    {
+      "_id": "123a5432109876543210cdef",
+      "store_id": 100,
+      "sku": "s-MP_2B4",
+      "name": "Mens Pique Polo Shirt",
+      "available": true,
+      "visible": true,
+      "keywords": [
+        "tshirt",
+        "t-shirt",
+        "man"
+      ],
+      "price": 42.9,
+      "base_price": 60,
+      "quantity": 100,
+      "dimensions": {
+        "width": {
+          "value": 10,
+          "unit": "cm"
+        },
+        "height": {
+          "value": 8,
+          "unit": "cm"
+        },
+        "length": {
+          "value": 8,
+          "unit": "cm"
+        }
+      },
+      "weight": {
+        "value": 400,
+        "unit": "g"
+      },
+      "brands": [
+        {
+          "_id": "a10000000000000000000001",
+          "name": "Shirts Example",
+          "slug": "shirts-example",
+          "logo": {
+            "url": "https://mycdn.com/shirts-example.jpg",
+            "size": "100x50"
+          }
+        }
+      ],
+      "categories": [
+        {
+          "_id": "f10000000000000000000001",
+          "name": "Polo Shirts",
+          "slug": "polo"
+        }
+      ],
+      "specifications": {
+        "age_group": {
+          "text": "Adult",
+          "value": "adult"
+        },
+        "gender": {
+          "text": "Male",
+          "value": "male"
+        },
+        "size": {
+          "text": "Large",
+          "value": "large"
+        },
+        "size_type": {
+          "text": "Regular",
+          "value": "regular"
+        },
+        "size_system": {
+          "text": "BR",
+          "value": "BR"
+        },
+        "material": {
+          "text": "Cotton",
+          "value": "cotton"
+        },
+        "colors": [
+          {
+            "text": "Pique",
+            "rgb": "#ff5b00"
+          }
+        ]
+      },
+      "gtin": [
+        "12345678901234"
+      ]
+    }
 
 #### Example
     EcomIo.getProductBySku('COD1', callback)
@@ -57,7 +145,49 @@ It is a method to get Order by your id
 | callback | Function |
 
 #### Return 
-The return is a object with order properties such as items and amount. You can see the complete object on [store API - orders](https://ecomstore.docs.apiary.io/#reference/orders/new-order/read-order)
+    
+    {
+      "_id": "fe1000000000000000000005",
+      "created_at": "2017-11-19T13:10:00Z",
+      "store_id": 100,
+      "checkout_link": "https://www.sampleshop.com.br/checkout?_id=fe1000000000000000000005",
+      "status_link": "https://www.sampleshop.com.br/order/status?_id=fe1000000000000000000005",
+      "utm": {
+        "campaign": "adwords_example"
+      },
+      "source_name": "Web",
+      "channel_id": "www.sampleshop.com.br",
+      "channel_type": "ecommerce",
+      "number": 1105,
+      "status": "open",
+      "opened_at": "2017-11-19T13:10:00Z",
+      "seller_status": "pending",
+      "financial_status": {
+        "updated_at": "2017-11-19T13:10:00Z",
+        "current": "pending"
+      },
+      "currency_id": "BRL",
+      "currency_symbol": "R$",
+      "amount": {
+        "total": 48.05,
+        "subtotal": 42.9,
+        "freight": 5.15,
+        "discount": 0
+      },
+      "payment_method_label": "PayPal",
+      "shipping_method_label": "PAC",
+      "items": [
+        {
+          "_id": "3120000000000000000000a1",
+          "product_id": "123a5432109876543210cdef",
+          "sku": "s-MP_2B4",
+          "name": "Mens Pique Polo Shirt",
+          "quantity": 1,
+          "price": 42.9
+        }
+      ],
+      "notes": "Sample order notes by customer"
+    }
 
 #### Example
     EcomIo.getOrder('fe1000000000000000000005', callback)
@@ -79,7 +209,90 @@ It is a method to get all store Brands. The filter argument is not required but,
 | callback | Function |
 
 #### Return 
-The return is a object with all store brands. You can see the complete object on [store API - brands](https://ecomstore.docs.apiary.io/#reference/brands/all-brands/list-all-store-brands)
+    
+    {
+      "meta": {
+        "limit": 1000,
+        "offset": 0,
+        "sort": [],
+        "fields": [
+          "_id",
+          "name",
+          "slug",
+          "logo"
+        ],
+        "query": {}
+      },
+      "result": [
+        {
+          "_id": "a10000000000000000001110",
+          "name": "Brand 0",
+          "slug": "brand-zero",
+          "logo": {
+            "url": "https://mycdn.com/brand-0-logo.jpg",
+            "size": "90x70",
+            "alt": "Brand Zero"
+          }
+        },
+        {
+          "_id": "a10000000000000000001111",
+          "name": "Brand 1",
+          "slug": "brand-one",
+          "logo": {
+            "url": "https://mycdn.com/brand-1-logo.jpg",
+            "size": "70x70",
+            "alt": "Brand One"
+          }
+        },
+        {
+          "_id": "a10000000000000000001112",
+          "name": "Brand 2",
+          "slug": "brand-two"
+        },
+        {
+          "_id": "a10000000000000000001113",
+          "name": "Brand 3",
+          "slug": "brand-three"
+        },
+        {
+          "_id": "a10000000000000000001114",
+          "name": "Brand 4",
+          "slug": "brand-four",
+          "logo": {
+            "url": "https://mycdn.com/brand-4-logo.jpg",
+            "size": "70x70"
+          }
+        },
+        {
+          "_id": "a10000000000000000001115",
+          "name": "Brand 5",
+          "slug": "brand-five",
+          "logo": {
+            "url": "https://mycdn.com/brand-5-logo.jpg",
+            "size": "70x70"
+          }
+        },
+        {
+          "_id": "a10000000000000000001116",
+          "name": "Brand 6",
+          "slug": "brand-six",
+          "logo": {
+            "url": "https://mycdn.com/brand-6-logo.jpg",
+            "size": "70x70",
+            "alt": "Brand Six"
+          }
+        },
+        {
+          "_id": "a10000000000000000000001",
+          "name": "Shirts Example",
+          "slug": "shirts-example",
+          "logo": {
+            "url": "https://mycdn.com/shirts-example.jpg",
+            "size": "100x50"
+          }
+        }
+      ]
+    }
 
 #### Example
 With no filter:
