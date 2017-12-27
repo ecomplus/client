@@ -145,7 +145,8 @@ It is a method to get Order by your id
 | callback | Function |
 
 #### Return 
-    
+Example of return object:
+
     {
       "_id": "fe1000000000000000000005",
       "created_at": "2017-11-19T13:10:00Z",
@@ -209,7 +210,8 @@ It is a method to get all store Brands. The filter argument is not required but,
 | callback | Function |
 
 #### Return 
-    
+Example of return object:
+
     {
       "meta": {
         "limit": 1000,
