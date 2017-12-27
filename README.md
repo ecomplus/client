@@ -17,7 +17,7 @@ Before you access the other methods from SDK you need to initialize the object w
     EcomIo.init(100)
 
 ### getProduct(id, callback)
-Similar to `getProductBySku` but here you pass the product id instead of sku
+It is a method to get a Product by your id
 
 #### Arguments 
 |  Name  | Type |
@@ -141,7 +141,7 @@ Example of return object:
     EcomIo.getProduct('COD1', callback)
     
 ### getProductBySku(sku, callback)
-It is a method to get a Product by your sku
+Similar to `getProduct` but here you pass the product sku instead of id
 
 #### Arguments 
 |  Name  | Type |
