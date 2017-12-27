@@ -29,7 +29,7 @@ it's the function that you should pass to treat the request response.
 Before you call the other methods you need to initialize the library with the store ID.
 
 The `Logger` argument is not required, but you can pass a _Console_ object,
-with properties 'log' and 'error', if you want to save output on file.
+with properties _log_ and _error_, if you want to save output on file.
 
 #### Arguments
 | Name    | Type             |
@@ -38,7 +38,7 @@ with properties 'log' and 'error', if you want to save output on file.
 | Logger  | `Console` object |
 
 #### Example
-EcomIo.init(100)
+`EcomIo.init(100)`
 
 ## Methods
 ### getProduct(id, callback)
