@@ -2,7 +2,7 @@
 JS SDK for E-Com Plus with methods to access public resources from [store API](https://ecomstore.docs.apiary.io)
 
 # Getting Started
-The ecomplus-sdk.js has a object called EcomIo with all methods that you can use to access the store API. All the methods of the object has a argument called callback, it is a function that you pass to treat the response of the method
+The ecomplus-sdk-js has a object called EcomIo with all methods that you can use to access the store API. All the methods of the object has a argument called callback, it is a function that you pass to treat the response of the method
 
 ## Methods
 ### init(StoreId, Logger)
@@ -26,7 +26,7 @@ It is a method to get a Product by your sku
 | callback | Function |
 
 #### Return 
-A object with product properties such as id and name
+A object with product properties such as id and name. You can see the complete object on [store API - products](https://ecomstore.docs.apiary.io/#reference/products/specific-product/read-product)
 
 #### Example
     EcomIo.getProductBySku('COD1', callback)
@@ -57,7 +57,7 @@ It is a method to get Order by your id
 | callback | Function |
 
 #### Return 
-The return is a object with order properties such as items and amount
+The return is a object with order properties such as items and amount. You can see the complete object on [store API - orders](https://ecomstore.docs.apiary.io/#reference/orders/new-order/read-order)
 
 #### Example
     EcomIo.getOrder('fe1000000000000000000005', callback)
@@ -79,7 +79,7 @@ It is a method to get all store Brands. The filter argument is not required but,
 | callback | Function |
 
 #### Return 
-The return is a object with all store brands
+The return is a object with all store brands. You can see the complete object on [store API - brands](https://ecomstore.docs.apiary.io/#reference/brands/all-brands/list-all-store-brands)
 
 #### Example
 With no filter:
