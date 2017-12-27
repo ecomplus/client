@@ -24,9 +24,7 @@ All the methods are functions with _callback_ argument,
 it's the function that you should pass to treat the request response.
 
 ## Initialize
-```javascript
-init(StoreId, Logger)
-```
+`init(StoreId, Logger)`
 
 Before you call the other methods you need to initialize the library with the store ID.
 
@@ -40,7 +38,9 @@ with properties _log_ and _error_, if you want to save output on file.
 | Logger  | `Console` object |
 
 #### Example
-`EcomIo.init(100)`
+```javascript
+EcomIo.init(100)
+```
 
 ## Methods
 ### getProduct(id, callback)
