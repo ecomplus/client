@@ -2,13 +2,15 @@
 JS library for E-Com Plus storefront with methods to access public resources from
 [Store API](https://ecomstore.docs.apiary.io),
 [Graphs API](https://ecomgraphs.docs.apiary.io) and
-[Search API](https://ecomsearch.docs.apiary.io)
+[Search API](https://ecomsearch.docs.apiary.io).
 
 __This library implements only GET requests to public resources, so there aren't authentication.__
 
 You can include minified script from URL:
 
-`https://ecom.nyc3.digitaloceanspaces.com/plus/js/sdk.min.js`
+[https://ecom.nyc3.digitaloceanspaces.com/plus/js/sdk.min.js](https://ecom.nyc3.digitaloceanspaces.com/plus/js/sdk.min.js)
+
+`<script src="https://ecom.nyc3.digitaloceanspaces.com/plus/js/sdk.min.js"></script>`
 
 Or install [npm package](https://www.npmjs.com/package/ecomplus-sdk-js):
 
