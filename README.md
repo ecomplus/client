@@ -90,7 +90,7 @@ With limit filter:
     EcomIo.getBrands('limit=3', callback)
 
 ### searchProduts(term, sort, filter, callback)
-It is a method to search products. For this method all the arguments are important. 
+It is a method to search products
 
 |  Name  | Type | Usage |
 | :---:  | :---:| :--- |
@@ -121,3 +121,11 @@ Example of filter object:
         }
       }
    
+So the model of the filter object is: 
+    
+    filter = {
+        'gridName' : {
+            'property': ['values']
+         }
+    }
+
