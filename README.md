@@ -90,7 +90,7 @@ With limit filter:
     EcomIo.getBrands('limit=3', callback)
 
 ### searchProduts(term, sort, filter, callback)
-It is a method to search products
+For this method you use [Elastic Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html) to search products. So, everything that is valid for Elastic is valid here 
 
 |  Name  | Type | Usage |
 | :---:  | :---:| :--- |
