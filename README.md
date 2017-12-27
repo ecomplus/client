@@ -95,7 +95,7 @@ For this method you use [Elastic Search](https://www.elastic.co/guide/en/elastic
 |  Name  | Type | Usage |
 | :---:  | :---:| :--- |
 | term | String | It is the term that you search, can be the name of the product or the keywords of that product |
-| sort | Number | You can sort the products by sales, price or views |
+| sort | Number or Object | You can sort the products by sales, price or views |
 | filter | Object | It is a object to filter the products |
 
 #### Sort
@@ -107,6 +107,8 @@ For this method you use [Elastic Search](https://www.elastic.co/guide/en/elastic
 | 3 | price |  You will sort by price, the products with highest price will appear first than the others|
 
 **By default the sort is views, the products with more views will appear first than the others**
+
+If you dont want to sort by views, sales or prices, you can pass a sort object **but you have to follow the Elastic documentation**
 
 #### Filter
 Example of filter object:
