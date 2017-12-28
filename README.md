@@ -190,7 +190,7 @@ EcomIo.getCategories('limit=3', callback)
 ```
 
 ### searchProduts(term, sort, filter, callback)
-This library uses direct the [Elastic Search API](https://www.elastic.co/guide/en/elasticsearch/reference/current/search.html). So everything that is valid for Elastic, is valid here.
+This API uses directly the [Elastic Search API](https://www.elastic.co/guide/en/elasticsearch/reference/current/search.html). So everything that is valid for Elastic, is valid here too.
 
 The body that we use is based on the [Request Body Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html) from Elastic documentation. 
 
