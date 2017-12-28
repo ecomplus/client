@@ -44,7 +44,7 @@ EcomIo.init(100)
 
 ## Methods
 ### getProduct(id, callback)
-It is a method to get a Product by the product ID 
+It is a method to get a Product by the product ID.
 
 #### Arguments
 |  Name  | Type |
@@ -113,7 +113,7 @@ Example of return object:
  ```
 
 ### getProductBySku(sku, callback)
-Similar to `getProduct` but here you pass the product SKU instead of ID
+Similar to `getProduct` but here you pass the product SKU instead of ID.
 
 #### Arguments
 |  Name  | Type |
@@ -129,12 +129,12 @@ EcomIo.getProductBySku('COD1', callback)
 The return is the same of `getProduct`
 
 ### getOrder(id, callback)
-It is a method to get Order by your id
+It is a method to get Order by the order ID.
 
 #### Arguments
 |  Name  | Type |
 | :---:  | :---:|
-| ID | String |
+| id | String |
 | callback | Function |
 
 #### Example
@@ -189,7 +189,7 @@ Example of return object:
 }
 ```
 ### getBrands(filter, callback)
-It is a method to get all store Brands. The filter argument is not required but, you can pass some filter to API:
+It is a method to get all store Brands. The filter argument is a URL parameters, it is not required but if you can use for filtering and pagination purposes.
 
 |  Filter  | Type | usage |
 | :---:  | :---:|  :---|
