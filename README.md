@@ -260,10 +260,17 @@ The sort object is based on the sort argument that you pass. To make your work e
 
 If you don't want to sort by views, sales or prices, you can pass a sort object **but you have to follow the Elastic documentation**
 
-##### Example of sort object
+#### Example of sort object
 ```javascript
 sort = {
   'sales' : 'desc' 
+}
+```
+
+#### Model of sort object
+```javascript
+sort = {
+  'property' : 'value' 
 }
 ```
 
