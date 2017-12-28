@@ -241,10 +241,10 @@ The sort argument is based on [Sort](https://www.elastic.co/guide/en/elasticsear
 ```
 The order that the products will be sort is: 
 
-1. The products that is available
-2. The products with more score
-3. The products with more ad relevance
-4. Sort object
+1. The products that is available;
+2. The products with more score;
+3. The products with more ad relevance;
+4. Sort object.
 
 #### Sort Object
 The sort object is based on the sort argument that you pass. To make your work easier, we have created three examples that are more used for users, sort by views, prices and sales.   
