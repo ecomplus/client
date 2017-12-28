@@ -117,20 +117,6 @@ var EcomIo = function () {
       runMethod(callback, '/orders/' + id + '.json')
     },
 
-    // Function to get amount order information (total, subtotal, freight, discount)
-    'getAmountOrderInformation': function (id, callback) {
-      let response = EcomIo.getOrder(id, callback).done(function () {
-        return response.amount
-      })
-    },
-
-    // Function to get items order information (_id, product_id, sku, name, quantity, price)
-    'getItemsOrderInformation': function (id, callback) {
-      let response = EcomIo.getOrder(id, callback).done(function () {
-        return response.items
-      })
-    },
-
     // Function to get all store brands
     'getBrands': function (callback, filter) {
       var endpoint
