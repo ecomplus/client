@@ -54,62 +54,62 @@ It is a method to get a Product by your id
 
 #### Example
 ```javascript
-    EcomIo.getProduct('123a5432109876543210cdef', callback)
+EcomIo.getProduct('123a5432109876543210cdef', callback)
 ```
 #### Return
 Example of return object:
 
 ```javascript
-    {
-      "_id": "123a5432109876543210cdef",
-      "store_id": 100,
-      "sku": "s-MP_2B4",
-      "name": "Mens Pique Polo Shirt",
-      "keywords": [
-        "tshirt",
-        "t-shirt",
-        "man"
-      ],
-      "price": 42.9,
-      "base_price": 60,
-      "quantity": 100,
-      "dimensions": {
-        "width": {
-          "value": 10,
-          "unit": "cm"
-        },
-        "height": {
-          "value": 8,
-          "unit": "cm"
-        },
-        "length": {
-          "value": 8,
-          "unit": "cm"
-        }
-      },
-      "weight": {
-        "value": 400,
-        "unit": "g"
-      },
-      "brands": [
-        {
-          "_id": "a10000000000000000000001",
-          "name": "Shirts Example",
-          "slug": "shirts-example",
-          "logo": {
-            "url": "https://mycdn.com/shirts-example.jpg",
-            "size": "100x50"
-          }
-        }
-      ],
-      "categories": [
-        {
-          "_id": "f10000000000000000000001",
-          "name": "Polo Shirts",
-          "slug": "polo"
-        }
-      ]
+{
+  "_id": "123a5432109876543210cdef",
+  "store_id": 100,
+  "sku": "s-MP_2B4",
+  "name": "Mens Pique Polo Shirt",
+  "keywords": [
+    "tshirt",
+    "t-shirt",
+    "man"
+  ],
+  "price": 42.9,
+  "base_price": 60,
+  "quantity": 100,
+  "dimensions": {
+    "width": {
+      "value": 10,
+      "unit": "cm"
+    },
+    "height": {
+      "value": 8,
+      "unit": "cm"
+    },
+    "length": {
+      "value": 8,
+      "unit": "cm"
     }
+  },
+  "weight": {
+    "value": 400,
+    "unit": "g"
+  },
+  "brands": [
+    {
+      "_id": "a10000000000000000000001",
+      "name": "Shirts Example",
+      "slug": "shirts-example",
+      "logo": {
+        "url": "https://mycdn.com/shirts-example.jpg",
+        "size": "100x50"
+      }
+    }
+  ],
+  "categories": [
+    {
+      "_id": "f10000000000000000000001",
+      "name": "Polo Shirts",
+      "slug": "polo"
+    }
+  ]
+}
  ```
 
 ### getProductBySku(sku, callback)
@@ -123,7 +123,7 @@ Similar to `getProduct` but here you pass the product sku instead of id
 
 #### Example
 ```javascript
-    EcomIo.getProductBySku('COD1', callback)
+EcomIo.getProductBySku('COD1', callback)
 ```
 #### Return
 The return is the same of `getProduct`
@@ -145,48 +145,48 @@ EcomIo.getOrder('fe1000000000000000000005', callback)
 #### Return
 Example of return object:
 ``` javascript
+{
+  "_id": "fe1000000000000000000005",
+  "created_at": "2017-11-19T13:10:00Z",
+  "store_id": 100,
+  "checkout_link": "https://www.sampleshop.com.br/checkout?_id=fe1000000000000000000005",
+  "status_link": "https://www.sampleshop.com.br/order/status?_id=fe1000000000000000000005",
+  "utm": {
+    "campaign": "adwords_example"
+  },
+  "source_name": "Web",
+  "channel_id": "www.sampleshop.com.br",
+  "channel_type": "ecommerce",
+  "number": 1105,
+  "status": "open",
+  "opened_at": "2017-11-19T13:10:00Z",
+  "seller_status": "pending",
+  "financial_status": {
+    "updated_at": "2017-11-19T13:10:00Z",
+    "current": "pending"
+  },
+  "currency_id": "BRL",
+  "currency_symbol": "R$",
+  "amount": {
+    "total": 48.05,
+    "subtotal": 42.9,
+    "freight": 5.15,
+    "discount": 0
+  },
+  "payment_method_label": "PayPal",
+  "shipping_method_label": "PAC",
+  "items": [
     {
-      "_id": "fe1000000000000000000005",
-      "created_at": "2017-11-19T13:10:00Z",
-      "store_id": 100,
-      "checkout_link": "https://www.sampleshop.com.br/checkout?_id=fe1000000000000000000005",
-      "status_link": "https://www.sampleshop.com.br/order/status?_id=fe1000000000000000000005",
-      "utm": {
-        "campaign": "adwords_example"
-      },
-      "source_name": "Web",
-      "channel_id": "www.sampleshop.com.br",
-      "channel_type": "ecommerce",
-      "number": 1105,
-      "status": "open",
-      "opened_at": "2017-11-19T13:10:00Z",
-      "seller_status": "pending",
-      "financial_status": {
-        "updated_at": "2017-11-19T13:10:00Z",
-        "current": "pending"
-      },
-      "currency_id": "BRL",
-      "currency_symbol": "R$",
-      "amount": {
-        "total": 48.05,
-        "subtotal": 42.9,
-        "freight": 5.15,
-        "discount": 0
-      },
-      "payment_method_label": "PayPal",
-      "shipping_method_label": "PAC",
-      "items": [
-        {
-          "_id": "3120000000000000000000a1",
-          "product_id": "123a5432109876543210cdef",
-          "sku": "s-MP_2B4",
-          "name": "Mens Pique Polo Shirt",
-          "quantity": 1,
-          "price": 42.9
-        }
-      ],
-      "notes": "Sample order notes by customer"
+      "_id": "3120000000000000000000a1",
+      "product_id": "123a5432109876543210cdef",
+      "sku": "s-MP_2B4",
+      "name": "Mens Pique Polo Shirt",
+      "quantity": 1,
+      "price": 42.9
     }
+  ],
+  "notes": "Sample order notes by customer"
+}
 ```
 ### getBrands(filter, callback)
 It is a method to get all store Brands. The filter argument is not required but, you can pass some filter to API:
