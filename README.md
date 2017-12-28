@@ -44,7 +44,7 @@ EcomIo.init(100)
 
 ## Methods
 ### getProduct(id, callback)
-It is a method to get a Product by your id
+It is a method to get a Product by the product ID 
 
 #### Arguments
 |  Name  | Type |
@@ -113,12 +113,12 @@ Example of return object:
  ```
 
 ### getProductBySku(sku, callback)
-Similar to `getProduct` but here you pass the product sku instead of id
+Similar to `getProduct` but here you pass the product SKU instead of ID
 
 #### Arguments
 |  Name  | Type |
 | :---:  | :---:|
-| sku | String |
+| SKU | String |
 | callback | Function |
 
 #### Example
@@ -134,7 +134,7 @@ It is a method to get Order by your id
 #### Arguments
 |  Name  | Type |
 | :---:  | :---:|
-| id | String |
+| ID | String |
 | callback | Function |
 
 #### Example
