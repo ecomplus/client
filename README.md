@@ -189,7 +189,7 @@ Example of return object:
 }
 ```
 ### getBrands(filter, callback)
-It is a method to get all store Brands. The filter argument is a URL parameters, it is not required but if you can use for filtering and pagination purposes.
+It is a method to get all store Brands. The filter argument is a URL parameters, it is not required but you can use for filtering and pagination purposes.
 
 |  Filter  | Type | usage |
 | :---:  | :---:|  :---|
