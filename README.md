@@ -53,12 +53,13 @@ It is a method to get a Product by your id
 | callback | Function |
 
 #### Example
+```javascript
     EcomIo.getProduct('123a5432109876543210cdef', callback)
-
+```
 #### Return
 Example of return object:
 
-```json
+```javascript
     {
       "_id": "123a5432109876543210cdef",
       "store_id": 100,
@@ -121,8 +122,9 @@ Similar to `getProduct` but here you pass the product sku instead of id
 | callback | Function |
 
 #### Example
+```javascript
     EcomIo.getProductBySku('COD1', callback)
-
+```
 #### Return
 The return is the same of `getProduct`
 
@@ -136,11 +138,13 @@ It is a method to get Order by your id
 | callback | Function |
 
 #### Example
-    EcomIo.getOrder('fe1000000000000000000005', callback)
+``` javascript
+EcomIo.getOrder('fe1000000000000000000005', callback)
+```
 
 #### Return
 Example of return object:
-
+``` javascript
     {
       "_id": "fe1000000000000000000005",
       "created_at": "2017-11-19T13:10:00Z",
@@ -183,7 +187,7 @@ Example of return object:
       ],
       "notes": "Sample order notes by customer"
     }
-
+```
 ### getBrands(filter, callback)
 It is a method to get all store Brands. The filter argument is not required but, you can pass some filter to API:
 
@@ -202,99 +206,43 @@ It is a method to get all store Brands. The filter argument is not required but,
 
 #### Example
 With no filter:
-
-    EcomIo.getBrands(callback)
+```javascript
+EcomIo.getBrands(callback)
+```
 With limit filter:
-
-    EcomIo.getBrands('limit=3', callback)
-
+```javascript
+EcomIo.getBrands('limit=3', callback)
+```
 #### Return
 Example of return object:
-
+```javascript
+{
+  "meta": {
+    "limit": 1000,
+    "offset": 0,
+    "sort": [],
+    "fields": [
+      "_id",
+      "name",
+      "slug",
+      "logo"
+    ],
+    "query": {}
+  },
+  "result": [
     {
-      "meta": {
-        "limit": 1000,
-        "offset": 0,
-        "sort": [],
-        "fields": [
-          "_id",
-          "name",
-          "slug",
-          "logo"
-        ],
-        "query": {}
-      },
-      "result": [
-        {
-          "_id": "a10000000000000000001110",
-          "name": "Brand 0",
-          "slug": "brand-zero",
-          "logo": {
-            "url": "https://mycdn.com/brand-0-logo.jpg",
-            "size": "90x70",
-            "alt": "Brand Zero"
-          }
-        },
-        {
-          "_id": "a10000000000000000001111",
-          "name": "Brand 1",
-          "slug": "brand-one",
-          "logo": {
-            "url": "https://mycdn.com/brand-1-logo.jpg",
-            "size": "70x70",
-            "alt": "Brand One"
-          }
-        },
-        {
-          "_id": "a10000000000000000001112",
-          "name": "Brand 2",
-          "slug": "brand-two"
-        },
-        {
-          "_id": "a10000000000000000001113",
-          "name": "Brand 3",
-          "slug": "brand-three"
-        },
-        {
-          "_id": "a10000000000000000001114",
-          "name": "Brand 4",
-          "slug": "brand-four",
-          "logo": {
-            "url": "https://mycdn.com/brand-4-logo.jpg",
-            "size": "70x70"
-          }
-        },
-        {
-          "_id": "a10000000000000000001115",
-          "name": "Brand 5",
-          "slug": "brand-five",
-          "logo": {
-            "url": "https://mycdn.com/brand-5-logo.jpg",
-            "size": "70x70"
-          }
-        },
-        {
-          "_id": "a10000000000000000001116",
-          "name": "Brand 6",
-          "slug": "brand-six",
-          "logo": {
-            "url": "https://mycdn.com/brand-6-logo.jpg",
-            "size": "70x70",
-            "alt": "Brand Six"
-          }
-        },
-        {
-          "_id": "a10000000000000000000001",
-          "name": "Shirts Example",
-          "slug": "shirts-example",
-          "logo": {
-            "url": "https://mycdn.com/shirts-example.jpg",
-            "size": "100x50"
-          }
-        }
-      ]
-    }
-
+      "_id": "a10000000000000000001110",
+      "name": "Brand 0",
+      "slug": "brand-zero",
+      "logo": {
+        "url": "https://mycdn.com/brand-0-logo.jpg",
+        "size": "90x70",
+        "alt": "Brand Zero"
+      }
+    },
+  ]
+}
+```
 ### searchProduts(term, sort, filter, callback)
 For this method you use [Elastic Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html) to search products. So, everything that is valid for Elastic is valid here
 
