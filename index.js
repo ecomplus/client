@@ -65,13 +65,20 @@ var EcomIo = function () {
         req.on('error', function (error) {
           logger.error('problem with request:' + error.message)
         })
+        if (body) {
+          req.write(JSON.stringify(body))
+        }
         req.end()
       })
     } else {
       let ajax = new XMLHttpRequest()
       let url = 'https://' + host + path + endpoint
       ajax.open(method, url, true)
-      ajax.send()
+      if (body) {
+        ajax.send(JSON.stringify(body))
+      } else {
+        ajax.send()
+      }
       ajax.onreadystatechange = function () {
         if (ajax.readyState === 4 && ajax.status === 200) {
           let body = JSON.parse(ajax.responseText)
