@@ -43,6 +43,8 @@ EcomIo.init(100)
 ```
 
 ## Methods
+The return is the same object from [store API](https://ecomstore.docs.apiary.io). So if you want to see more examples, you should access the documentation from store API.
+
 ### getProduct(id, callback)
 It is a method to get a Product by the product ID.
 
@@ -125,8 +127,9 @@ Similar to `getProduct` but here you pass the product SKU instead of ID.
 ```javascript
 EcomIo.getProductBySku('COD1', callback)
 ```
+
 #### Return
-The return is the same of `getProduct`
+Different from the [store API](https://ecomstore.docs.apiary.io), in that case the return is the same of `getProduct`.
 
 ### getOrder(id, callback)
 It is a method to get Order by the order ID.
@@ -140,53 +143,6 @@ It is a method to get Order by the order ID.
 #### Example
 ``` javascript
 EcomIo.getOrder('fe1000000000000000000005', callback)
-```
-
-#### Return
-Example of return object:
-``` javascript
-{
-  "_id": "fe1000000000000000000005",
-  "created_at": "2017-11-19T13:10:00Z",
-  "store_id": 100,
-  "checkout_link": "https://www.sampleshop.com.br/checkout?_id=fe1000000000000000000005",
-  "status_link": "https://www.sampleshop.com.br/order/status?_id=fe1000000000000000000005",
-  "utm": {
-    "campaign": "adwords_example"
-  },
-  "source_name": "Web",
-  "channel_id": "www.sampleshop.com.br",
-  "channel_type": "ecommerce",
-  "number": 1105,
-  "status": "open",
-  "opened_at": "2017-11-19T13:10:00Z",
-  "seller_status": "pending",
-  "financial_status": {
-    "updated_at": "2017-11-19T13:10:00Z",
-    "current": "pending"
-  },
-  "currency_id": "BRL",
-  "currency_symbol": "R$",
-  "amount": {
-    "total": 48.05,
-    "subtotal": 42.9,
-    "freight": 5.15,
-    "discount": 0
-  },
-  "payment_method_label": "PayPal",
-  "shipping_method_label": "PAC",
-  "items": [
-    {
-      "_id": "3120000000000000000000a1",
-      "product_id": "123a5432109876543210cdef",
-      "sku": "s-MP_2B4",
-      "name": "Mens Pique Polo Shirt",
-      "quantity": 1,
-      "price": 42.9
-    }
-  ],
-  "notes": "Sample order notes by customer"
-}
 ```
 ### getBrands(filter, callback)
 It is a method to get all store Brands. The filter argument is a URL parameters, it is not required but you can use for filtering and pagination purposes.
@@ -213,46 +169,85 @@ With limit filter:
 ```javascript
 EcomIo.getBrands('limit=3', callback)
 ```
-#### Return
-Example of return object:
+
+### getCategories(filter, callback)
+Similar to `getBrands` but here the return is all the store Categories.
+
+#### Arguments
+|  Name  | Type |
+| :---:  | :---:|
+| filter | String |
+| callback | Function |
+
+#### Example
+With no filter:
 ```javascript
-{
-  "meta": {
-    "limit": 1000,
-    "offset": 0,
-    "sort": [],
-    "fields": [
-      "_id",
-      "name",
-      "slug",
-      "logo"
-    ],
-    "query": {}
+EcomIo.getCategories(callback)
+```
+With limit filter:
+```javascript
+EcomIo.getCategories('limit=3', callback)
+```
+
+### searchProduts(term, sort, filter, callback)
+This library uses direct the [Elastic Search API](https://www.elastic.co/guide/en/elasticsearch/reference/current/search.html). So everything that is valid for Elastic, is valid here.
+
+The body that we use is based on the [Request Body Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html) from Elastic documentation. 
+
+#### Example
+```javascript
+'query': {
+  'multi_match': {
+    'query': term,
+    'fields': ['name', 'keywords']
   },
-  "result": [
-    {
-      "_id": "a10000000000000000001110",
-      "name": "Brand 0",
-      "slug": "brand-zero",
-      "logo": {
-        "url": "https://mycdn.com/brand-0-logo.jpg",
-        "size": "90x70",
-        "alt": "Brand Zero"
-      }
-    },
-  ]
+  'sort': [
+    { 'available': true },
+    '_score',
+    { 'ad_relevance': 'desc' },
+    sort
+  ],
+  'bool': { // condition, only visible products
+    'filter': [
+      {'term': { 'visible': true }},
+      filterObject
+    ]
+  }
 }
 ```
-### searchProduts(term, sort, filter, callback)
-For this method you use [Elastic Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html) to search products. So, everything that is valid for Elastic is valid here
 
+#### Arguments
 |  Name  | Type | Usage |
 | :---:  | :---:| :--- |
 | term | String | It is the term that you search, can be the name of the product or the keywords of that product |
 | sort | Number or Object | You can sort the products by sales, price or views |
 | filter | Object | It is a object to filter the products |
 
+#### Term 
+We use a [Multi Match Query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-multi-match-query.html) because we will query in two fields, the name and the keywords of the product.
+
 #### Sort
+The sort argument is based on [Sort](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-sort.html) from Elastic documentation. 
+
+```javascript
+'query': {
+  'sort': [
+    { 'available': true },
+    '_score',
+    { 'ad_relevance': 'desc' },
+    sort
+  ]
+}
+```
+The order that the products will be sort is: 
+
+1. The products that is available
+2. The products with more score
+3. The products with more ad relevance
+4. Sort object
+
+#### Sort Object
+The sort object is based on the sort argument that you pass. To make your work easier, we have created three examples that are more used for users, sort by views, prices and sales.   
 
 |  Number  | Name | Usage |
 | :---:  | :---:| :--- |
@@ -260,13 +255,34 @@ For this method you use [Elastic Search](https://www.elastic.co/guide/en/elastic
 | 2 | price | You will sort by price, the products with lowest price will appear first than the others |
 | 3 | price | You will sort by price, the products with highest price will appear first than the others |
 
+
 **By default the sort is views, the products with more views will appear first than the others**
 
-If you dont want to sort by views, sales or prices, you can pass a sort object **but you have to follow the Elastic documentation**
+If you don't want to sort by views, sales or prices, you can pass a sort object **but you have to follow the Elastic documentation**
+
+##### Example of sort object
+```javascript
+sort = {
+  'sales' : 'desc' 
+}
+```
 
 #### Filter
-Example of filter object:
+The filter argument is based on [Post filter](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-post-filter.html) from Elastic documentation. 
 
+```javascript
+'query': {
+  'bool': { // condition, only visible products
+    'filter': [
+      {'term': { 'visible': true }},
+      filterObject
+    ]
+  }
+}
+```
+First we use a filter that shows only visible products. Second, we use the filter argument that you pass but, is not required. So if you want to filter by brands, categories or any other property, you have to pass a filter object.  
+
+#### Example of filter object
 ```javascript
 filter = {
   'specifications' : {
@@ -277,9 +293,7 @@ filter = {
   }
 }
 ```
-
-So the model of the filter object is:
-
+#### Model of filter object
 ```javascript
 filter = {
   'gridName' : {
@@ -287,3 +301,4 @@ filter = {
   }
 }
 ```
+
