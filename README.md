@@ -34,7 +34,7 @@ with properties _log_ and _error_, if you want to save output on file.
 #### Arguments
 | Name    | Type             |
 | :---:   | :---:            |
-| Store ID | Number           |
+| StoreId | Number           |
 | Logger  | `Console` object |
 
 #### Example
@@ -49,7 +49,7 @@ It is a method to get a Product by the product ID
 #### Arguments
 |  Name  | Type |
 | :---:  | :---:|
-| product ID | String |
+| id | String |
 | callback | Function |
 
 #### Example
@@ -118,7 +118,7 @@ Similar to `getProduct` but here you pass the product SKU instead of ID
 #### Arguments
 |  Name  | Type |
 | :---:  | :---:|
-| product SKU | String |
+| sku | String |
 | callback | Function |
 
 #### Example
