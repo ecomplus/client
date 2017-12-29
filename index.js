@@ -276,6 +276,16 @@ var EcomIo = function () {
       }
 
       runMethod(callback, endpoint, host, method, body)
+    },
+
+    'getRecommendedProduct': function (id, callback) {
+      let host = 'apx-graphs.e-com.plus'
+      runMethod(callback, '/products/' + id + 'recommended.json', host)
+    },
+
+    'getRelatedProduct': function (id, callback) {
+      let host = 'apx-graphs.e-com.plus'
+      runMethod(callback, '/products/' + id + 'related.json', host)
     }
   }
 }
