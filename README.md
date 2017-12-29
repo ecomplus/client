@@ -326,7 +326,6 @@ filter = {
 ### getRecommendedProduct(id, callback)
 Returns up to 12 recommended products, selecting the products that was more
 times bought together with the reference product.
-
 You should use it to do something like "who bought it, bought too".
 
 #### Arguments
@@ -343,7 +342,6 @@ EcomIo.getRecommendedProduct('a00000000000000000000000', callback)
 ### getRelatedProduct(id, callback)
 Returns up to 12 related products, selecting the products that have more categories
 in common with the reference product.
-
 You should use it to do something like "you can also be interested by".
 
 #### Arguments
