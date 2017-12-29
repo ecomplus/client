@@ -150,21 +150,21 @@ var EcomIo = function () {
     'storeId': storeId,
 
     // Function to get product by sku
-    'getProductBySku': function (sku, callback) {
+    'getProductBySku': function (callback, sku) {
       let response = runMethod(callback, '/products.json?sku=' + sku).done(function () {
         for (let i = 0; i < response.result; i++) {
-          EcomIo.getProduct(response.result[i]._id, callback)
+          EcomIo.getProduct(callback, response.result[i]._id)
         }
       })
     },
 
     // Function to get product by ID product
-    'getProduct': function (id, callback) {
+    'getProduct': function (callback, id) {
       runMethod(callback, '/products/' + id + '.json')
     },
 
     // Function to get order by ID order
-    'getOrder': function (id, callback) {
+    'getOrder': function (callback, id) {
       runMethod(callback, '/orders/' + id + '.json')
     },
 
@@ -191,7 +191,7 @@ var EcomIo = function () {
     },
 
     // Function to search products
-    'searchProduts': function (term, sort, filter, callback) {
+    'searchProduts': function (callback, term, sort, filter) {
       var host = 'apx-search.e-com.plus'
       // proxy will pass XGET
       // https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html
@@ -278,12 +278,12 @@ var EcomIo = function () {
       runMethod(callback, endpoint, host, method, body)
     },
 
-    'getRecommendedProduct': function (id, callback) {
+    'getRecommendedProduct': function (callback, id) {
       let host = 'apx-graphs.e-com.plus'
       runMethod(callback, '/products/' + id + 'recommended.json', host)
     },
 
-    'getRelatedProduct': function (id, callback) {
+    'getRelatedProduct': function (callback, id) {
       let host = 'apx-graphs.e-com.plus'
       runMethod(callback, '/products/' + id + 'related.json', host)
     }

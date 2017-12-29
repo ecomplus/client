@@ -21,7 +21,7 @@ The library declares an object called `EcomIo`,
 with methods (object properties) to read public resources from the APIs.
 
 ## Callback
-All the methods are functions with _callback_ argument,
+All the methods are functions with _callback_ as his first argument,
 it's the function that you should pass to treat the request response.
 `callback` function must have two arguments:
 
