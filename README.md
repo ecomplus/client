@@ -50,23 +50,25 @@ EcomIo.init(100)
 ```
 
 ## Methods
-The return is the same object from [store API](https://ecomstore.docs.apiary.io). So if you want to see more examples, you should access the documentation from store API.
+The object returned from almost all methods is the response body of Store API endpoints,
+so if you want to see more examples, you should access the
+[API documentation](https://ecomstore.docs.apiary.io/#).
 
-### getProduct(id, callback)
-It is a method to get a Product by the product ID.
+### getProduct(callback, id)
+It is a method to get a product by the ID.
 
 #### Arguments
-|  Name  | Type |
-| :---:  | :---:|
-| id | String |
+|  Name    | Type     |
+| :---:    | :---:    |
 | callback | Function |
+| id       | String   |
 
 #### Example
 ```javascript
-EcomIo.getProduct('123a5432109876543210cdef', callback)
+EcomIo.getProduct(callback, '123a5432109876543210cdef')
 ```
 #### Return
-Example of return object:
+Example of returned body object:
 
 ```javascript
 {
@@ -121,51 +123,55 @@ Example of return object:
 }
  ```
 
-### getProductBySku(sku, callback)
+### getProductBySku(callback, sku)
 Similar to `getProduct` but here you pass the product SKU instead of ID.
 
 #### Arguments
-|  Name  | Type |
-| :---:  | :---:|
-| sku | String |
+|  Name    | Type     |
+| :---:    | :---:    |
 | callback | Function |
+| sku      | String   |
 
 #### Example
 ```javascript
-EcomIo.getProductBySku('COD1', callback)
+EcomIo.getProductBySku(callback, 'COD1')
 ```
 
 #### Return
-Different from the [store API](https://ecomstore.docs.apiary.io), in that case the return is the same of `getProduct`.
+Different from the [store API](https://ecomstore.docs.apiary.io/#),
+in that case the return is the same of `getProduct`.
 
-### getOrder(id, callback)
-It is a method to get Order by the order ID.
+### getOrder(callback, id)
+It is a method to get order by the ID.
 
 #### Arguments
-|  Name  | Type |
-| :---:  | :---:|
-| id | String |
+|  Name    | Type     |
+| :---:    | :---:    |
 | callback | Function |
+| id       | String   |
 
 #### Example
 ``` javascript
-EcomIo.getOrder('fe1000000000000000000005', callback)
+EcomIo.getOrder(callback, 'fe1000000000000000000005')
 ```
-### getBrands(filter, callback)
-It is a method to get all store Brands. The filter argument is a URL parameters, it is not required but you can use for filtering and pagination purposes.
 
-|  Filter  | Type | usage |
-| :---:  | :---:|  :---|
-| offset | number | Max number of objects to return |
-| limit | number | First entry to return |
-| sort | string | Rules to order resultant objects |
-| fields | string | Object properties to return |
+### getBrands(callback, filter)
+It is a method to list store brands.
+The filter argument is a URL query string,
+it is not required but you can use for filtering and pagination purposes.
+
+| Filter  | Type   | Usage |
+| :---:   | :---:  | :---: |
+| offset  | number | Max number of objects to return |
+| limit   | number | First entry to return |
+| sort    | string | Rules to order resultant objects |
+| fields  | string | Object properties to return |
 
 #### Arguments
-|  Name  | Type |
-| :---:  | :---:|
-| filter | String |
+|  Name    | Type     |
+| :---:    | :---:    |
 | callback | Function |
+| filter   | String   |
 
 #### Example
 With no filter:
@@ -174,29 +180,29 @@ EcomIo.getBrands(callback)
 ```
 With limit filter:
 ```javascript
-EcomIo.getBrands('limit=3', callback)
+EcomIo.getBrands(callback, 'limit=40')
 ```
 
-### getCategories(filter, callback)
-Similar to `getBrands` but here the return is all the store Categories.
+### getCategories(callback, filter)
+Similar to `getBrands` but here the returned body is the list of store categories.
 
 #### Arguments
-|  Name  | Type |
-| :---:  | :---:|
-| filter | String |
+| Name     | Type     |
+| :---:    | :---:    |
 | callback | Function |
+| filter   | String   |
 
 #### Example
 With no filter:
 ```javascript
 EcomIo.getCategories(callback)
 ```
-With limit filter:
+With limit and offset:
 ```javascript
-EcomIo.getCategories('limit=3', callback)
+EcomIo.getCategories(callback, 'limit=20&offset=10')
 ```
 
-### searchProduts(term, sort, filter, callback)
+### searchProduts(callback, term, sort, filter)
 This method calls [E-Com Plus Search API](https://ecomsearch.docs.apiary.io/#),
 that proxy pass all requests to Elasticsearch
 [Search APIs](https://www.elastic.co/guide/en/elasticsearch/reference/current/search.html)
@@ -207,71 +213,71 @@ You must follow
 [Request Body Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html)
 specifications.
 
-#### Example
-```javascript
-'query': {
-  'multi_match': {
-    'query': term,
-    'fields': ['name', 'keywords']
-  },
-  'sort': [
-    { 'available': true },
-    '_score',
-    { 'ad_relevance': 'desc' },
-    sort
-  ],
-  'bool': { // condition, only visible products
-    'filter': [
-      {'term': { 'visible': true }},
-      filterObject
-    ]
-  }
-}
-```
+[Type mapping reference](https://ecomsearch.docs.apiary.io/#reference/items).
 
 #### Arguments
-|  Name  | Type | Usage |
-| :---:  | :---:| :--- |
-| term | String | It is the term that you search, can be the name of the product or the keywords of that product |
-| sort | Number or Object | You can sort the products by sales, price or views |
-| filter | Object | It is a object to filter the products |
+|  Name    | Type             | Description |
+| :---:    | :---:            | :---:       |
+| callback | Function         | [Callback function](#callback) |
+| term     | String           | It is the term that you are searching for |
+| sort     | Number or Object | Sort products, default for views |
+| filter   | Object           | It is a object to filter results |
+
+#### Example
+Search by term only:
+```javascript
+EcomIo.searchProduts(callback, 'tshirt')
+```
+Order by sales:
+```javascript
+EcomIo.searchProduts(callback, 'tshirt', 1)
+```
+Custom order:
+```javascript
+EcomIo.searchProduts(callback, 'tshirt', {
+  'base_price': 'desc'
+})
+```
+Custom order and filter:
+```javascript
+EcomIo.searchProduts(callback, 'tshirt', {
+  'base_price': 'desc'
+}, 'specifications' : {
+  'color': [ 'blue', 'red' ]
+})
+```
 
 #### Term
-We use a [multi match query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-multi-match-query.html) because we will query in two fields, the name and the keywords of the product.
+We use a
+[multi match query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-multi-match-query.html)
+because we will query in two fields, the name and the keywords of each product.
 
 #### Sort
-The sort argument is based on [sort](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-sort.html) from Elasticsearch documentation.
+The sort argument is based on
+[sort](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-sort.html)
+from Elasticsearch documentation.
 
-```javascript
-'query': {
-  'sort': [
-    { 'available': true },
-    '_score',
-    { 'ad_relevance': 'desc' },
-    sort
-  ]
-}
-```
-The order that the products will be sort is:
+The order that the resultant products will be sort is:
 
-1. The products that is available;
-2. The products with more score;
+1. The available products;
+2. Search score;
 3. The products with more ad relevance;
 4. Sort object.
 
-#### Sort Object
-The sort object is based on the sort argument that you pass. To make your work easier, we have created three examples that are more used for users, sort by views, prices and sales.
+##### Sort Object
+To make your work easier, we have created three default sort options, by views, price and sales:
 
-|  Number  | Name | Usage |
-| :---:  | :---:| :--- |
-| 1 | sales | You will sort by sales, the products that sells more will appear first than the others |
-| 2 | price | You will sort by price, the products with lowest price will appear first than the others |
-| 3 | price | You will sort by price, the products with highest price will appear first than the others |
+| Number | Name  | Usage |
+| :---:  | :---: | :---: |
+| 0      | views | Sort by views, products with more views will appear first |
+| 1      | sales | Sort by sales, products that sells more will appear first |
+| 2      | price | Sort by price ascending, products with lowest price will appear first |
+| 3      | price | Sort by price descending, products with highest price will appear first |
 
+If `sort` argument is undefined or null, default is to sort by views.
 
-**By default the sort is views, the products with more views will appear first than the others**
-
-If you don't want to sort by views, sales or prices, you can pass a sort object **but you have to follow the Elasticsearch documentation**
+If you don't want to sort by views, sales or prices,
+you can pass a sort object **but you have to follow the Elasticsearch documentation**.
 
 #### Example of sort object
 ```javascript
@@ -280,27 +286,14 @@ sort = {
 }
 ```
 
-#### Model of sort object
-```javascript
-sort = {
-  'property' : 'value'
-}
-```
-
 #### Filter
-The filter argument is based on [post filter](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-post-filter.html) from Elasticsearch documentation.
+The filter argument is based on
+[post filter](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-post-filter.html)
+from Elasticsearch documentation.
 
-```javascript
-'query': {
-  'bool': { // condition, only visible products
-    'filter': [
-      {'term': { 'visible': true }},
-      filterObject
-    ]
-  }
-}
-```
-First we use a filter that shows only visible products. Second, we use the filter argument that you pass but, is not required. So if you want to filter by brands, categories or any other property, you have to pass a filter object.
+First we use a filter that shows only visible products.
+Second, we use the filter argument that you pass, if defined.
+So if you want to filter by brands, categories or any other property, you have to pass a filter object.
 
 #### Example of filter object
 ```javascript
@@ -309,48 +302,39 @@ filter = {
     'color': [ 'blue', 'red' ]
   },
   'brands' : {
-    'name': [ 'brandName' ]
+    'name': [ 'Sample Shirt Inc' ]
   }
 }
 ```
 
-#### Model of filter object
-```javascript
-filter = {
-  'gridName' : {
-    'property': [ 'values' ]
-  }
-}
-```
-
-### getRecommendedProduct(id, callback)
+### getRecommendedProduct(callback, id)
 Returns up to 12 recommended products, selecting the products that was more
 times bought together with the reference product.
 You should use it to do something like "who bought it, bought too".
 
 #### Arguments
-|  Name  | Type |
-| :---:  | :---:|
-| id | String |
+| Name     | Type     |
+| :---:    | :---:    |
 | callback | Function |
+| id       | String   |
 
 #### Example
 ```javascript
-EcomIo.getRecommendedProduct('a00000000000000000000000', callback)
+EcomIo.getRecommendedProduct(callback, 'a00000000000000000000000')
 ```
 
-### getRelatedProduct(id, callback)
+### getRelatedProduct(callback, id)
 Returns up to 12 related products, selecting the products that have more categories
 in common with the reference product.
 You should use it to do something like "you can also be interested by".
 
 #### Arguments
-|  Name  | Type |
-| :---:  | :---:|
-| id | String |
+| Name     | Type     |
+| :---:    | :---:    |
 | callback | Function |
+| id       | String   |
 
 #### Example
 ```javascript
-EcomIo.getRelatedProduct('a00000000000000000000000', callback)
+EcomIo.getRelatedProduct(callback, 'a00000000000000000000000')
 ```
