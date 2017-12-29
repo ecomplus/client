@@ -1,5 +1,5 @@
 'use strict'
-
+var XMLHttpRequest // Global Variable to fix linter error
 var isNodeJs = false
 // Verify if the script is Node JS
 if (typeof module !== 'undefined' && module.exports) {
@@ -25,7 +25,7 @@ var EcomIo = function () {
     if (!method) {
       method = 'GET'
     }
-
+    let tries = 0
     if (isNodeJs === true) {
       let options = {
         hostname: host,
@@ -37,7 +37,6 @@ var EcomIo = function () {
         }
       }
 
-      let tries = 0
       let send = function () {
         // send request
         let req = https.request(options, function (res) {
@@ -100,13 +99,37 @@ var EcomIo = function () {
       } else {
         ajax.send()
       }
-      ajax.onreadystatechange = function () {
-        if (ajax.readyState === 4 && ajax.status === 200) {
+      let tries = 0
+      let sendAjax = function () {
+        tries++
+        ajax.onreadystatechange = function () {
           let body = JSON.parse(ajax.responseText)
-          if (typeof callback === 'function') {
-            callback(body)
-          } else {
-            return body
+          if (ajax.status === 503 && tries < 3) {
+            setTimeout(function () {
+              sendAjax()
+            }, 500)
+          }
+          try {
+            if (typeof callback === 'function') {
+              let err
+              if (ajax.readyState === 4 && ajax.status === 200) {
+                err = null
+              } else {
+                let msg
+                if (body.hasOwnProperty('message')) {
+                  msg = body.message
+                } else {
+                  msg = 'Unknown error, see response objet to more info'
+                  // logger.error(body)
+                }
+                err = new Error(msg)
+              }
+              callback(err, body)
+            } else {
+              return body
+            }
+          } catch (e) {
+            logger.error(e)
           }
         }
       }
