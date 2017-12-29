@@ -22,7 +22,7 @@ with methods (object properties) to read public resources from the APIs.
 
 All the methods are functions with _callback_ argument,
 it's the function that you should pass to treat the request response.
-The return of _callback_ is two arguments: 
+The return of _callback_ is two arguments:
 1. Error
 2. Object
 
@@ -195,9 +195,17 @@ EcomIo.getCategories('limit=3', callback)
 ```
 
 ### searchProduts(term, sort, filter, callback)
-This API uses directly the [Elastic Search API](https://www.elastic.co/guide/en/elasticsearch/reference/current/search.html). So everything that is valid for Elastic Search, is valid here too.
+This method calls [E-Com Plus Search API](https://ecomsearch.docs.apiary.io/#),
+that proxy pass all requests to Elasticsearch
+[Search APIs](https://www.elastic.co/guide/en/elasticsearch/reference/current/search.html)
+with _XGET_ method (read only).
 
-The body that we use is based on the [Request Body Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html) from Elastic Search documentation.
+You must follow
+[Request Body Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html)
+specifications.
+
+Responses are the same as returned from _Eslasticsearch REST API_,
+so you can read their documentation to get more info and examples.
 
 #### Example
 ```javascript
@@ -229,10 +237,10 @@ The body that we use is based on the [Request Body Search](https://www.elastic.c
 | filter | Object | It is a object to filter the products |
 
 #### Term
-We use a [Multi Match Query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-multi-match-query.html) because we will query in two fields, the name and the keywords of the product.
+We use a [multi match query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-multi-match-query.html) because we will query in two fields, the name and the keywords of the product.
 
 #### Sort
-The sort argument is based on [Sort](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-sort.html) from Elastic Search documentation.
+The sort argument is based on [sort](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-sort.html) from Elasticsearch documentation.
 
 ```javascript
 'query': {
@@ -252,7 +260,7 @@ The order that the products will be sort is:
 4. Sort object.
 
 #### Sort Object
-The sort object is based on the sort argument that you pass. To make your work easier, we have created three examples that are more used for users, sort by views, prices and sales.   
+The sort object is based on the sort argument that you pass. To make your work easier, we have created three examples that are more used for users, sort by views, prices and sales.
 
 |  Number  | Name | Usage |
 | :---:  | :---:| :--- |
@@ -263,7 +271,7 @@ The sort object is based on the sort argument that you pass. To make your work e
 
 **By default the sort is views, the products with more views will appear first than the others**
 
-If you don't want to sort by views, sales or prices, you can pass a sort object **but you have to follow the Elastic Search documentation**
+If you don't want to sort by views, sales or prices, you can pass a sort object **but you have to follow the Elasticsearch documentation**
 
 #### Example of sort object
 ```javascript
@@ -280,7 +288,7 @@ sort = {
 ```
 
 #### Filter
-The filter argument is based on [Post filter](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-post-filter.html) from Elastic Search documentation.
+The filter argument is based on [post filter](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-post-filter.html) from Elasticsearch documentation.
 
 ```javascript
 'query': {
@@ -292,7 +300,7 @@ The filter argument is based on [Post filter](https://www.elastic.co/guide/en/el
   }
 }
 ```
-First we use a filter that shows only visible products. Second, we use the filter argument that you pass but, is not required. So if you want to filter by brands, categories or any other property, you have to pass a filter object.  
+First we use a filter that shows only visible products. Second, we use the filter argument that you pass but, is not required. So if you want to filter by brands, categories or any other property, you have to pass a filter object.
 
 #### Example of filter object
 ```javascript
@@ -305,6 +313,7 @@ filter = {
   }
 }
 ```
+
 #### Model of filter object
 ```javascript
 filter = {
@@ -313,8 +322,9 @@ filter = {
   }
 }
 ```
+
 ### getRecommendedProduct(id, callback)
-It is a method to get the recommended products for a product. Returns up to 12 recommended products, selecting the products that was more times bought together with the reference product
+Returns up to 12 recommended products, selecting the products that was more times bought together with the reference product
 
 #### Arguments
 |  Name  | Type |
@@ -326,8 +336,9 @@ It is a method to get the recommended products for a product. Returns up to 12 r
 ```javascript
 EcomIo.getRecommendedProduct('a00000000000000000000000', callback)
 ```
+
 ### getRelatedProduct(id, callback)
-It is a method to get the related products for a product. Returns up to 12 related products, selecting the products that have more categories in common with the reference product
+Returns up to 12 related products, selecting the products that have more categories in common with the reference product
 
 #### Arguments
 |  Name  | Type |
@@ -338,3 +349,4 @@ It is a method to get the related products for a product. Returns up to 12 relat
 #### Example
 ```javascript
 EcomIo.getRelatedProduct('a00000000000000000000000', callback)
+```
