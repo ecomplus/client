@@ -313,3 +313,28 @@ filter = {
   }
 }
 ```
+### getRecommendedProduct(id, callback)
+It is a method to get the recommended products for a product. Returns up to 12 recommended products, selecting the products that was more times bought together with the reference product
+
+#### Arguments
+|  Name  | Type |
+| :---:  | :---:|
+| id | String |
+| callback | Function |
+
+#### Example
+```javascript
+EcomIo.getRecommendedProduct('a00000000000000000000000', callback)
+```
+### getRelatedProduct(id, callback)
+It is a method to get the related products for a product. Returns up to 12 related products, selecting the products that have more categories in common with the reference product
+
+#### Arguments
+|  Name  | Type |
+| :---:  | :---:|
+| id | String |
+| callback | Function |
+
+#### Example
+```javascript
+EcomIo.getRelatedProduct('a00000000000000000000000', callback)
