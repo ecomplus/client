@@ -1,5 +1,4 @@
 'use strict'
-var XMLHttpRequest // Global Variable to fix linter error
 var isNodeJs = false
 // Verify if the script is Node JS
 if (typeof module !== 'undefined' && module.exports) {
