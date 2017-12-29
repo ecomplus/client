@@ -30,8 +30,6 @@ it's the function that you should pass to treat the request response.
 | err   | Null or Object   | [Error Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error) |
 | body  | Object           | Response body object (JSON parsed) |
 
-The error is a message describing the erro and the object is the response of your request.
-
 ## Initialize
 `init(StoreId, Logger)`
 
