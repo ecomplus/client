@@ -27,7 +27,7 @@ var EcomIo = function () {
     }
 
     if (isNodeJs === true) {
-      const options = {
+      let options = {
         hostname: host,
         path: path + endpoint,
         method: method,
@@ -37,39 +37,59 @@ var EcomIo = function () {
         }
       }
 
-      const req = https.request(options, function (res) {
-        if (res.statusCode !== 200) {
-          // TODO: error handling
-          let err = new Error('Request failed trying to get store info\nStatus code: ' + res.statusCode)
-          logger.error(err)
-          // consume response data to free up memory
-          res.resume()
-          return
-        }
-
-        let rawData = ''
-        res.setEncoding('utf8')
-        res.on('data', function (chunk) { rawData += chunk })
-        res.on('end', function () {
-          try {
-            let body = JSON.parse(rawData)
-            if (typeof callback === 'function') {
-              callback(body)
-            } else {
-              return body
-            }
-          } catch (e) {
-            logger.error(e)
+      let tries = 0
+      let send = function () {
+        // send request
+        let req = https.request(options, function (res) {
+          tries++
+          if (res.statusCode === 503 && tries < 3) {
+            // try to resend request
+            setTimeout(function () {
+              send()
+            }, 500)
+            // consume response data to free up memory
+            res.resume()
+            return
           }
+
+          let rawData = ''
+          res.setEncoding('utf8')
+          res.on('data', function (chunk) { rawData += chunk })
+          res.on('end', function () {
+            try {
+              let body = JSON.parse(rawData)
+              if (typeof callback === 'function') {
+                let err
+                if (res.statusCode === 200) {
+                  err = null
+                } else {
+                  let msg
+                  if (body.hasOwnProperty('message')) {
+                    msg = body.message
+                  } else {
+                    msg = 'Unknown error'
+                    // logger.error(body)
+                  }
+                  err = new Error(msg)
+                }
+
+                callback(err, body)
+              } else {
+                return body
+              }
+            } catch (e) {
+              logger.error(e)
+            }
+          })
+          req.on('error', function (error) {
+            logger.error('problem with request:' + error.message)
+          })
+          if (body) {
+            req.write(JSON.stringify(body))
+          }
+          req.end()
         })
-        req.on('error', function (error) {
-          logger.error('problem with request:' + error.message)
-        })
-        if (body) {
-          req.write(JSON.stringify(body))
-        }
-        req.end()
-      })
+      }
     } else {
       let ajax = new XMLHttpRequest()
       let url = 'https://' + host + path + endpoint
