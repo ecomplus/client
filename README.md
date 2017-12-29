@@ -26,6 +26,8 @@ The return of _callback_ is two arguments:
 1. Error
 2. Object
 
+The error is a message describing the erro and the object is the response of your request.
+
 ## Initialize
 `init(StoreId, Logger)`
 
