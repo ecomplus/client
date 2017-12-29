@@ -278,12 +278,12 @@ var EcomIo = function () {
       runMethod(callback, endpoint, host, method, body)
     },
 
-    'getRecommendedProduct': function (callback, id) {
+    'getRecommendedProducts': function (callback, id) {
       let host = 'apx-graphs.e-com.plus'
       runMethod(callback, '/products/' + id + 'recommended.json', host)
     },
 
-    'getRelatedProduct': function (callback, id) {
+    'getRelatedProducts': function (callback, id) {
       let host = 'apx-graphs.e-com.plus'
       runMethod(callback, '/products/' + id + 'related.json', host)
     }

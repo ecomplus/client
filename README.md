@@ -307,7 +307,7 @@ filter = {
 }
 ```
 
-### getRecommendedProduct(callback, id)
+### getRecommendedProducts(callback, id)
 Returns up to 12 recommended products, selecting the products that was more
 times bought together with the reference product.
 You should use it to do something like "who bought it, bought too".
@@ -320,10 +320,10 @@ You should use it to do something like "who bought it, bought too".
 
 #### Example
 ```javascript
-EcomIo.getRecommendedProduct(callback, 'a00000000000000000000000')
+EcomIo.getRecommendedProducts(callback, 'a00000000000000000000000')
 ```
 
-### getRelatedProduct(callback, id)
+### getRelatedProducts(callback, id)
 Returns up to 12 related products, selecting the products that have more categories
 in common with the reference product.
 You should use it to do something like "you can also be interested by".
@@ -336,5 +336,5 @@ You should use it to do something like "you can also be interested by".
 
 #### Example
 ```javascript
-EcomIo.getRelatedProduct(callback, 'a00000000000000000000000')
+EcomIo.getRelatedProducts(callback, 'a00000000000000000000000')
 ```
