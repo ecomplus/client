@@ -67,7 +67,7 @@ var EcomIo = function () {
                   if (body.hasOwnProperty('message')) {
                     msg = body.message
                   } else {
-                    msg = 'Unknown error'
+                    msg = 'Unknown error, see response objet to more info'
                     // logger.error(body)
                   }
                   err = new Error(msg)
@@ -75,14 +75,15 @@ var EcomIo = function () {
 
                 callback(err, body)
               } else {
+                // without callback (?)
                 return body
               }
             } catch (e) {
               logger.error(e)
             }
           })
-          req.on('error', function (error) {
-            logger.error('problem with request:' + error.message)
+          req.on('error', function (err) {
+            logger.error(err)
           })
           if (body) {
             req.write(JSON.stringify(body))
@@ -116,6 +117,7 @@ var EcomIo = function () {
     'init': function (StoreId, Logger) {
       storeId = StoreId
       if (typeof Logger === 'object' && Logger.hasOwnProperty('log') && Logger.hasOwnProperty('error')) {
+        // log on file
         logger = Logger
       } else {
         logger = console
