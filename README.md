@@ -190,9 +190,9 @@ EcomIo.getCategories('limit=3', callback)
 ```
 
 ### searchProduts(term, sort, filter, callback)
-This API uses directly the [Elastic Search API](https://www.elastic.co/guide/en/elasticsearch/reference/current/search.html). So everything that is valid for Elastic, is valid here too.
+This API uses directly the [Elastic Search API](https://www.elastic.co/guide/en/elasticsearch/reference/current/search.html). So everything that is valid for Elastic Search, is valid here too.
 
-The body that we use is based on the [Request Body Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html) from Elastic documentation. 
+The body that we use is based on the [Request Body Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html) from Elastic Search documentation.
 
 #### Example
 ```javascript
@@ -223,11 +223,11 @@ The body that we use is based on the [Request Body Search](https://www.elastic.c
 | sort | Number or Object | You can sort the products by sales, price or views |
 | filter | Object | It is a object to filter the products |
 
-#### Term 
+#### Term
 We use a [Multi Match Query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-multi-match-query.html) because we will query in two fields, the name and the keywords of the product.
 
 #### Sort
-The sort argument is based on [Sort](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-sort.html) from Elastic documentation. 
+The sort argument is based on [Sort](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-sort.html) from Elastic Search documentation.
 
 ```javascript
 'query': {
@@ -239,7 +239,7 @@ The sort argument is based on [Sort](https://www.elastic.co/guide/en/elasticsear
   ]
 }
 ```
-The order that the products will be sort is: 
+The order that the products will be sort is:
 
 1. The products that is available;
 2. The products with more score;
@@ -258,24 +258,24 @@ The sort object is based on the sort argument that you pass. To make your work e
 
 **By default the sort is views, the products with more views will appear first than the others**
 
-If you don't want to sort by views, sales or prices, you can pass a sort object **but you have to follow the Elastic documentation**
+If you don't want to sort by views, sales or prices, you can pass a sort object **but you have to follow the Elastic Search documentation**
 
 #### Example of sort object
 ```javascript
 sort = {
-  'sales' : 'desc' 
+  'sales' : 'desc'
 }
 ```
 
 #### Model of sort object
 ```javascript
 sort = {
-  'property' : 'value' 
+  'property' : 'value'
 }
 ```
 
 #### Filter
-The filter argument is based on [Post filter](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-post-filter.html) from Elastic documentation. 
+The filter argument is based on [Post filter](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-post-filter.html) from Elastic Search documentation.
 
 ```javascript
 'query': {
@@ -308,4 +308,3 @@ filter = {
   }
 }
 ```
-
