@@ -22,6 +22,9 @@ with methods (object properties) to read public resources from the APIs.
 
 All the methods are functions with _callback_ argument,
 it's the function that you should pass to treat the request response.
+The return of _callback_ is two arguments: 
+1. Error
+2. Object
 
 ## Initialize
 `init(StoreId, Logger)`
