@@ -20,11 +20,15 @@ Or install [npm package](https://www.npmjs.com/package/ecomplus-sdk-js):
 The library declares an object called `EcomIo`,
 with methods (object properties) to read public resources from the APIs.
 
+## Callback
 All the methods are functions with _callback_ argument,
 it's the function that you should pass to treat the request response.
-The return of _callback_ is two arguments:
-1. Error
-2. Object
+`callback` function must have two arguments:
+
+| Name  | Type             | Description |
+| :---: | :---:            | :---: |
+| err   | Null or Object   | [Error Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error) |
+| body  | Object           | Response body object (JSON parsed) |
 
 The error is a message describing the erro and the object is the response of your request.
 
@@ -198,14 +202,12 @@ EcomIo.getCategories('limit=3', callback)
 This method calls [E-Com Plus Search API](https://ecomsearch.docs.apiary.io/#),
 that proxy pass all requests to Elasticsearch
 [Search APIs](https://www.elastic.co/guide/en/elasticsearch/reference/current/search.html)
-with _XGET_ method (read only).
+with _XGET_ method (read only). Responses are the same as returned from _Eslasticsearch REST API_,
+so you can read their documentation to get more info and examples.
 
 You must follow
 [Request Body Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html)
 specifications.
-
-Responses are the same as returned from _Eslasticsearch REST API_,
-so you can read their documentation to get more info and examples.
 
 #### Example
 ```javascript
@@ -324,7 +326,10 @@ filter = {
 ```
 
 ### getRecommendedProduct(id, callback)
-Returns up to 12 recommended products, selecting the products that was more times bought together with the reference product
+Returns up to 12 recommended products, selecting the products that was more
+times bought together with the reference product.
+
+You should use it to do something like "who bought it, bought too".
 
 #### Arguments
 |  Name  | Type |
@@ -338,7 +343,10 @@ EcomIo.getRecommendedProduct('a00000000000000000000000', callback)
 ```
 
 ### getRelatedProduct(id, callback)
-Returns up to 12 related products, selecting the products that have more categories in common with the reference product
+Returns up to 12 related products, selecting the products that have more categories
+in common with the reference product.
+
+You should use it to do something like "you can also be interested by".
 
 #### Arguments
 |  Name  | Type |
