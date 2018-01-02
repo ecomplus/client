@@ -170,22 +170,18 @@ var EcomIo = function () {
 
     // Function to get all store brands
     'getBrands': function (callback, filter) {
-      let endpoint
-      if (!filter) {
-        endpoint = '/brands.json'
-      } else {
-        endpoint = '/brands.json?' + filter
+      let endpoint = '/brands.json'
+      if (filter) {
+        endpoint += filter
       }
       runMethod(callback, endpoint)
     },
 
     // Function to get all store categories
     'getCategories': function (callback, filter) {
-      let endpoint
-      if (!filter) {
-        endpoint = '/categories.json'
-      } else {
-        endpoint = '/categories.json?' + filter
+      let endpoint = '/categories.json'
+      if (filter) {
+        endpoint += filter
       }
       runMethod(callback, endpoint)
     },
