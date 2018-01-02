@@ -288,7 +288,8 @@ var EcomIo = function () {
             'aggs': {
               'key': {
                 'terms': {
-                  'field': 'specs.key'
+                  'field': 'specs.key',
+                  'size': 12
                 },
                 'aggs': {
                   'value': {
@@ -298,6 +299,22 @@ var EcomIo = function () {
                   }
                 }
               }
+            }
+          },
+          // Metric Aggregations
+          'min_price': {
+            'min': {
+              'field': 'price'
+            }
+          },
+          'max_price': {
+            'max': {
+              'field': 'price'
+            }
+          },
+          'avg_price': {
+            'avg': {
+              'field': 'price'
             }
           }
         }
