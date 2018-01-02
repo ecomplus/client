@@ -187,7 +187,7 @@ var EcomIo = function () {
     },
 
     // Function to search products
-    'searchProduts': function (callback, term, sort, filter) {
+    'searchProduts': function (callback, term, from, size, sort, filter) {
       let host = 'apx-search.e-com.plus'
       // proxy will pass XGET
       // https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html
@@ -318,6 +318,17 @@ var EcomIo = function () {
             }
           }
         }
+      }
+      // pagination
+      // https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-from-size.html
+      if (typeof from === 'number') {
+        body.from = from
+      }
+      if (typeof size === 'number') {
+        body.size = size
+      } else {
+        // default page size
+        body.size = 24
       }
 
       /*
