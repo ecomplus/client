@@ -242,9 +242,11 @@ Custom order and filter:
 ```javascript
 EcomIo.searchProduts(callback, 'tshirt', {
   'base_price': 'desc'
-}, 'specifications' : {
-  'color': [ 'blue', 'red' ]
-})
+}, 'specifications': {
+    'color': {
+      'rgb': ['#fff', '#fefefe']
+    }
+  })
 ```
 
 #### Term
@@ -298,11 +300,19 @@ So if you want to filter by brands, categories or any other property, you have t
 #### Example of filter object
 ```javascript
 filter = {
-  'specifications' : {
-    'color': [ 'blue', 'red' ]
+  'specifications': {
+    'color': {
+      'rgb': ['#fff', '#fefefe']
+    },
+    'size': {
+      'value': ['G']
+    }
   },
-  'brands' : {
-    'name': [ 'Sample Shirt Inc' ]
+  'brands': {
+    'name': ['brandName']
+  },
+  'categories': {
+    'name': ['categoryName']
   }
 }
 ```
