@@ -242,11 +242,11 @@ Custom order and filter:
 ```javascript
 EcomIo.searchProduts(callback, 'tshirt', {
   'base_price': 'desc'
-}, 'specifications': {
-    'color': {
-      'rgb': ['#fff', '#fefefe']
-    }
-  })
+}, 'specifications' : {
+  'color': {
+    'rgb': [ '#fff', '#fefefe' ]
+  }
+})
 ```
 
 #### Term
