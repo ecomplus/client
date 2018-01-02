@@ -242,13 +242,21 @@ var EcomIo = function () {
         }
       }
 
-      // example filter object
+      // Example of filter object
       // filter = {
-      //   'specifications' : {
-      //     'color': ['blue', 'red']
+      //   'specifications': {
+      //     'color': {
+      //       'rgb': ['#fff', '#fefefe']
+      //     },
+      //     'size': {
+      //       'value': ['G']
+      //     }
       //   },
-      //   'brands' : {
+      //   'brands': {
       //     'name': ['brandName']
+      //   },
+      //   'categories': {
+      //     'name': ['categoryName']
       //   }
       // }
 
@@ -267,7 +275,25 @@ var EcomIo = function () {
                   }
                   bodytoFilter.term[key] = {}
                   bodytoFilter.term[key][key2] = propertyObject[key2][i]
-                  body.bool.filter.push(bodytoFilter)
+                  body.query.bool.filter.push(bodytoFilter)
+                }
+              } else if (propertyObject.hasOwnProperty(key2) && typeof propertyObject[key2] === 'object') {
+                // specifications
+                let propertyObject2 = propertyObject[key2]
+                for (let key3 in propertyObject2) {
+                  // loop in property of specifications
+                  if (propertyObject2.hasOwnProperty(key3) && Array.isArray(propertyObject2[key3])) {
+                    for (let i = 0; i < propertyObject2[key3].length; i++) {
+                      // change the name
+                      let bodytoFilter = {
+                        'term': {}
+                      }
+                      bodytoFilter.term[key] = {}
+                      bodytoFilter.term[key][key2] = {}
+                      bodytoFilter.term[key][key2][key3] = propertyObject2[key3][i]
+                      body.query.bool.filter.push(bodytoFilter)
+                    }
+                  }
                 }
               }
             }
