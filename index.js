@@ -17,6 +17,19 @@ var EcomIo = function () {
     return 'E-Com Plus SDK ' + logType + ':'
   }
 
+  // header for logger.log
+  let errorHandling = function (callback, errMsg, responseBody) {
+    if (responseBody === undefined) {
+      // default to null
+      // when error occurs before send API request
+      responseBody = null
+    }
+
+    logger.log(logHeader('WARNING') + '\n' + errMsg)
+    let err = new Error(errMsg)
+    callback(err, responseBody)
+  }
+
   // Function to run function by endpoint and method
   let runMethod = function (callback, endpoint, host, method, body) {
     let path
@@ -207,6 +220,13 @@ var EcomIo = function () {
         // https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html
         body = dsl
       } else {
+        // term is required
+        if (typeof term !== 'string') {
+          let msg = 'Search term is required and must be a string'
+          errorHandling(callback, msg)
+          return
+        }
+
         if (typeof sort === 'number') {
           // defines most common sorting options
           switch (sort) {
