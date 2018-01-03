@@ -341,7 +341,7 @@ var EcomIo = function () {
         }
 
         // filters
-        if (typeof specs === 'object' && specs !== null) {
+        if (typeof specs === 'object' && specs !== null && Object.keys(specs).length > 0) {
           // nested ELS object
           // http://nocf-www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-nested-query.html
           body.query.nested = {
@@ -355,14 +355,14 @@ var EcomIo = function () {
           }
 
           for (let key in specs) {
-            if (specs.hasOwnProperty(key)) {
+            if (Array.isArray(specs[key]) && specs[key].length > 0) {
               // dot notation
               body.query.nested.query.bool.filter.push({
                 'term': {
                   'specs.key': key
                 }
               }, {
-                'term': {
+                'terms': {
                   'specs.value': specs[key]
                 }
               })
@@ -373,8 +373,8 @@ var EcomIo = function () {
         if (Array.isArray(brands) && brands.length > 0) {
           // add filter
           body.query.bool.filter.push({
-            'term': {
-              'brands': brands
+            'terms': {
+              'brands.name': brands
             }
           })
         }
@@ -382,14 +382,14 @@ var EcomIo = function () {
         if (Array.isArray(categories) && categories.length > 0) {
           // add filter
           body.query.bool.filter.push({
-            'term': {
-              'categories': categories
+            'terms': {
+              'categories.name': categories
             }
           })
         }
 
         // price ranges
-        if (typeof prices === 'object' && prices !== null) {
+        if (typeof prices === 'object' && prices !== null && Object.keys(prices).length > 0) {
           let rangeQuery = {
             'range': {
               'price': {}
@@ -401,6 +401,8 @@ var EcomIo = function () {
           if (typeof prices.max === 'number' && !isNaN(prices.max)) {
             rangeQuery.range.price.lte = prices.max
           }
+
+          // add filter
           body.query.bool.filter.push(rangeQuery)
         }
       }
