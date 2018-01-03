@@ -73,6 +73,7 @@ var EcomIo = function () {
                     msg = 'Unknown error, see response objet to more info'
                     // logger.error(body)
                   }
+                  logger.log(logHeader('WARNING') + '\n' + msg)
                   err = new Error(msg)
                 }
 
@@ -126,6 +127,7 @@ var EcomIo = function () {
                   msg = 'Unknown error, see response objet to more info'
                   // logger.error(body)
                 }
+                logger.log(logHeader('WARNING') + '\n' + msg)
                 err = new Error(msg)
               }
               callback(err, body)
