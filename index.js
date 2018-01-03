@@ -344,20 +344,20 @@ var EcomIo = function () {
         if (typeof specs === 'object' && specs !== null && Object.keys(specs).length > 0) {
           // nested ELS object
           // http://nocf-www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-nested-query.html
-          body.query.nested = {
-            'path': 'specs',
-            'score_mode': 'avg',
-            'query': {
-              'bool': {
-                'filter': []
+          let nestedQuery = {
+            'nested': {
+              'path': 'specs',
+              'query': {
+                'bool': {
+                  'filter': []
+                }
               }
             }
           }
 
           for (let key in specs) {
             if (Array.isArray(specs[key]) && specs[key].length > 0) {
-              // dot notation
-              body.query.nested.query.bool.filter.push({
+              nestedQuery.nested.query.bool.filter.push({
                 'term': {
                   'specs.key': key
                 }
@@ -366,6 +366,9 @@ var EcomIo = function () {
                   'specs.value': specs[key]
                 }
               })
+
+              // add filter
+              body.query.bool.filter.push(nestedQuery)
             }
           }
         }
