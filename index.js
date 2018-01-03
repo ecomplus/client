@@ -413,12 +413,12 @@ var EcomIo = function () {
 
     'getRecommendedProducts': function (callback, id) {
       let host = 'apx-graphs.e-com.plus'
-      runMethod(callback, '/products/' + id + 'recommended.json', host)
+      runMethod(callback, '/products/' + id + '/recommended.json', host)
     },
 
     'getRelatedProducts': function (callback, id) {
       let host = 'apx-graphs.e-com.plus'
-      runMethod(callback, '/products/' + id + 'related.json', host)
+      runMethod(callback, '/products/' + id + '/related.json', host)
     }
   }
 }
