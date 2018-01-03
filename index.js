@@ -26,22 +26,36 @@ var EcomIo = function () {
     }
 
     logger.log(logHeader('WARNING') + '\n' + errMsg)
-    let err = new Error(errMsg)
-    callback(err, responseBody)
+    if (typeof callback === 'function') {
+      let err = new Error(errMsg)
+      callback(err, responseBody)
+    }
   }
 
   // Function to run function by endpoint and method
   let runMethod = function (callback, endpoint, host, method, body) {
+    if (typeof callback !== 'function') {
+      let msg = 'You need to specify a callback function to receive the request response'
+      errorHandling(null, msg)
+      return
+    }
+
     let path
     if (!host) {
+      // default to E-Com Plus Store API
+      // https://ecomstore.docs.apiary.io/
       host = 'api.e-com.plus'
       path = '/v1'
     } else if (host !== 'api.e-com.plus') {
+      // Graphs API or Search API
+      // https://ecomgraphs.docs.apiary.io/
+      // https://ecomsearch.docs.apiary.io/
       path = '/api/v1'
     }
     if (!method) {
       method = 'GET'
     }
+
     let tries = 0
     if (isNodeJs === true) {
       let options = {
