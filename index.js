@@ -12,6 +12,11 @@ var EcomIo = function () {
     https = require('https')
   }
 
+  // header for logger.log
+  let logHeader = function (logType) {
+    return 'E-Com Plus SDK ' + logType + ':'
+  }
+
   // Function to run function by endpoint and method
   let runMethod = function (callback, endpoint, host, method, body) {
     let path
@@ -187,238 +192,214 @@ var EcomIo = function () {
     },
 
     // Function to search products
-    'searchProduts': function (callback, term, from, size, sort, filter) {
+    'searchProduts': function (callback, term, from, size, sort, specs, brands, categories, prices, dsl) {
       let host = 'apx-search.e-com.plus'
       // proxy will pass XGET
-      // https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html
       let method = 'POST'
       let endpoint = '/items.json'
+      let body
 
-      // header for logger.log
-      let logHeader = function (logType) {
-        return 'E-Com Plus SDK => searchProduts ' + logType + ':'
-      }
-
-      // default sort by views
-      let defaultSort = { 'views': 'desc' }
-      switch (typeof sort) {
-        case 'number':
+      if (typeof dsl === 'object' && dsl !== null) {
+        // custom Query DSL
+        // must be a valid search request body
+        // https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html
+        body = dsl
+      } else {
+        if (typeof sort === 'number') {
           // defines most common sorting options
           switch (sort) {
             case 1:
               // sort by sales
-              sort = { 'sales': 'desc' }
+              sort = {
+                'sales': 'desc'
+              }
               break
 
             case 2:
               // sort by price
               // lowest price -> highest price
-              sort = { 'price': 'asc' }
+              sort = {
+                'price': 'asc'
+              }
               break
 
             case 3:
               // sort by price
               // highest price -> lowest price
-              sort = { 'price': 'desc' }
+              sort = {
+                'price': 'desc'
+              }
               break
 
             default:
-              sort = defaultSort
-          }
-          break
-
-        case 'object':
-          // if sort is an object keep it
-          if (sort === null) {
-            sort = defaultSort
-          }
-          break
-
-        default:
-          // unexpected type
-          sort = defaultSort
-      }
-
-      let body = {
-        'query': {
-          'multi_match': {
-            'query': term,
-            'fields': [
-              'name',
-              'keywords'
-            ]
-          },
-          'sort': [
-            {
-              'available': true
-            },
-            '_score',
-            {
-              'ad_relevance': 'desc'
-            },
-            sort
-          ],
-          'bool': {
-            // condition, only visible products
-            'filter': [
-              {
-                'term': {
-                  'visible': true
-                }
+              // default sort by views
+              sort = {
+                'views': 'desc'
               }
-            ]
           }
-        },
-        'aggs': {
-          'brands': {
-            'terms': {
-              'field': 'brands.name'
-            }
-          },
-          'categories': {
-            'terms': {
-              'field': 'categories.name'
-            }
-          },
-          // ref.: https://github.com/elastic/elasticsearch/issues/5789
-          'specs': {
-            'nested': {
-              'path': 'specs'
-            },
-            'aggs': {
-              'key': {
-                'terms': {
-                  'field': 'specs.key',
-                  'size': 12
-                },
-                'aggs': {
-                  'value': {
-                    'terms': {
-                      'field': 'specs.value'
-                    }
-                  }
-                }
-              }
-            }
-          },
-          // Metric Aggregations
-          'min_price': {
-            'min': {
-              'field': 'price'
-            }
-          },
-          'max_price': {
-            'max': {
-              'field': 'price'
-            }
-          },
-          'avg_price': {
-            'avg': {
-              'field': 'price'
-            }
+        } else {
+          // default sort by views
+          sort = {
+            'views': 'desc'
           }
         }
-      }
-      // pagination
-      // https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-from-size.html
-      if (typeof from === 'number') {
-        body.from = from
-      }
-      if (typeof size === 'number') {
-        body.size = size
-      } else {
-        // default page size
-        body.size = 24
-      }
 
-      /*
-      Example of filter object
-      filter = {
-        'specs.color': [ 'blue', 'red' ],
-        'brands.name': [ 'Sample Shirt Inc' ],
-        'categories.name': [ 'Polo Shirts' ]
-      }
-      */
-
-      if (typeof filter === 'object') {
-        for (let key in filter) {
-          // loop in filter object
-          if (filter.hasOwnProperty(key)) {
-            let invalidType = function () {
-              let msg = logHeader('WARNING') +
-                '\nInvalid filter property type' +
-                '\nProperty of filter object must be a string or array of strings' +
-                '\nSkipping property "' + key + '"'
-              logger.log(msg)
-            }
-
-            if (Array.isArray(filter[key])) {
-              // array of strings
-              let validArray = true
-              for (let i = 0; i < filter[key].length; i++) {
-                if (typeof filter[key] !== 'string') {
-                  validArray = false
-                  break
+        body = {
+          'query': {
+            'multi_match': {
+              'query': term,
+              'fields': [
+                'name',
+                'keywords'
+              ]
+            },
+            'sort': [
+              {
+                'available': true
+              },
+              '_score',
+              {
+                'ad_relevance': 'desc'
+              },
+              sort
+            ],
+            'bool': {
+              // condition, only visible products
+              'filter': [
+                {
+                  'term': {
+                    'visible': true
+                  }
                 }
-              }
-              if (!validArray) {
-                invalidType()
-                continue
-              }
-            } else if (typeof filter[key] !== 'string') {
-              // unexpected type
-              // skip
-              invalidType()
-              continue
+              ]
             }
-
-            // ELS Term Query
-            // https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-term-query.html
-            let termQuery = {
-              'term': {}
-            }
-            termQuery.term[key] = filter[key]
-
-            // split dot notation
-            let paths = key.split('.')
-            let field = paths[0]
-
-            switch (field) {
-              case 'specs':
-              case 'variations':
-                // nested ELS object
-                // http://nocf-www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-nested-query.html
-                if (!body.query.hasOwnProperty('nested')) {
-                  body.query.nested = {
-                    'path': field,
-                    'score_mode': 'avg',
-                    'query': {
-                      'bool': {
-                        'filter': [
-                          termQuery
-                        ]
+          },
+          'aggs': {
+            'brands': {
+              'terms': {
+                'field': 'brands.name'
+              }
+            },
+            'categories': {
+              'terms': {
+                'field': 'categories.name'
+              }
+            },
+            // ref.: https://github.com/elastic/elasticsearch/issues/5789
+            'specs': {
+              'nested': {
+                'path': 'specs'
+              },
+              'aggs': {
+                'key': {
+                  'terms': {
+                    'field': 'specs.key',
+                    'size': 12
+                  },
+                  'aggs': {
+                    'value': {
+                      'terms': {
+                        'field': 'specs.value'
                       }
                     }
                   }
-                } else {
-                  // check nested path
-                  if (body.query.nested.path === field) {
-                    body.query.nested.query.bool.filter.push(termQuery)
-                  } else {
-                    let msg = logHeader('WARNING') +
-                      '\nYou cannot filter by specs and variations at the same time' +
-                      '\nDo not query by two different nested fields' +
-                      '\nSkipping property "' + key + '"'
-                    logger.log(msg)
-                  }
                 }
-                break
-
-              default:
-                // normal field
-                body.query.bool.filter.push(body)
+              }
+            },
+            // Metric Aggregations
+            'min_price': {
+              'min': {
+                'field': 'price'
+              }
+            },
+            'max_price': {
+              'max': {
+                'field': 'price'
+              }
+            },
+            'avg_price': {
+              'avg': {
+                'field': 'price'
+              }
             }
           }
+        }
+        // pagination
+        // https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-from-size.html
+        if (typeof from === 'number' && from > 0) {
+          // offset
+          body.from = from
+        }
+        if (typeof size === 'number' && size > 0) {
+          // limit
+          body.size = size
+        } else {
+          // default page size
+          body.size = 24
+        }
+
+        // filters
+        if (typeof specs === 'object' && specs !== null) {
+          // nested ELS object
+          // http://nocf-www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-nested-query.html
+          body.query.nested = {
+            'path': 'specs',
+            'score_mode': 'avg',
+            'query': {
+              'bool': {
+                'filter': []
+              }
+            }
+          }
+
+          for (let key in specs) {
+            if (specs.hasOwnProperty(key)) {
+              // dot notation
+              body.query.nested.query.bool.filter.push({
+                'term': {
+                  'specs.key': key
+                }
+              }, {
+                'term': {
+                  'specs.value': specs[key]
+                }
+              })
+            }
+          }
+        }
+
+        if (Array.isArray(brands) && brands.length > 0) {
+          // add filter
+          body.query.bool.filter.push({
+            'term': {
+              'brands': brands
+            }
+          })
+        }
+
+        if (Array.isArray(categories) && categories.length > 0) {
+          // add filter
+          body.query.bool.filter.push({
+            'term': {
+              'categories': categories
+            }
+          })
+        }
+
+        // price ranges
+        if (typeof prices === 'object' && prices !== null) {
+          let rangeQuery = {
+            'range': {
+              'price': {}
+            }
+          }
+          if (typeof prices.min === 'number' && !isNaN(prices.min)) {
+            rangeQuery.range.price.gte = prices.min
+          }
+          if (typeof prices.max === 'number' && !isNaN(prices.max)) {
+            rangeQuery.range.price.lte = prices.max
+          }
+          body.query.bool.filter.push(rangeQuery)
         }
       }
 
