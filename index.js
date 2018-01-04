@@ -12,12 +12,11 @@ var EcomIo = function () {
     https = require('https')
   }
 
-  // header for logger.log
   let logHeader = function (logType) {
+    // common header for logger.log
     return 'E-Com Plus SDK ' + logType + ':'
   }
 
-  // header for logger.log
   let errorHandling = function (callback, errMsg, responseBody) {
     if (responseBody === undefined) {
       // default to null
@@ -32,8 +31,7 @@ var EcomIo = function () {
     }
   }
 
-  // Function to run function by endpoint and method
-  let runMethod = function (callback, endpoint, host, method, body) {
+  let runMethod = function (callback, endpoint, host, body) {
     if (typeof callback !== 'function') {
       let msg = 'You need to specify a callback function to receive the request response'
       errorHandling(null, msg)
@@ -51,16 +49,34 @@ var EcomIo = function () {
       // https://ecomgraphs.docs.apiary.io/
       // https://ecomsearch.docs.apiary.io/
       path = '/api/v1'
+    } else {
+      // host defined to Store API
+      path = '/v1'
     }
-    if (!method) {
+    path += endpoint
+    // eg.: /v1/products.json
+
+    // retry up to 3 times if API returns 503
+    let tries = 0
+    sendRequest(tries, host, path, body, callback)
+  }
+
+  let sendRequest = function (tries, host, path, body, callback) {
+    // send request to API
+    let method
+    if (!body) {
+      // default to GET request
       method = 'GET'
+    } else {
+      // request with body
+      method = 'POST'
     }
 
-    let tries = 0
     if (isNodeJs === true) {
+      // call with NodeJS http module
       let options = {
         hostname: host,
-        path: path + endpoint,
+        path: path,
         method: method,
         headers: {
           'Content-Type': 'application/json',
@@ -68,104 +84,99 @@ var EcomIo = function () {
         }
       }
 
-      let send = function () {
-        // send request
-        let req = https.request(options, function (res) {
-          tries++
-          if (res.statusCode === 503 && tries < 3) {
-            // try to resend request
-            setTimeout(function () {
-              send()
-            }, 500)
-            // consume response data to free up memory
-            res.resume()
-            return
-          }
+      let req = https.request(options, function (res) {
+        if (res.statusCode === 503 && tries < 3) {
+          // try to resend request
+          setTimeout(function () {
+            sendRequest(tries, host, path, body, callback)
+          }, 500)
+          // consume response data to free up memory
+          res.resume()
+          return
+        }
 
-          let rawData = ''
-          res.setEncoding('utf8')
-          res.on('data', function (chunk) { rawData += chunk })
-          res.on('end', function () {
-            try {
-              let body = JSON.parse(rawData)
-              if (typeof callback === 'function') {
-                let err
-                if (res.statusCode === 200) {
-                  err = null
-                } else {
-                  let msg
-                  if (body.hasOwnProperty('message')) {
-                    msg = body.message
-                  } else {
-                    msg = 'Unknown error, see response objet to more info'
-                    // logger.error(body)
-                  }
-                  logger.log(logHeader('WARNING') + '\n' + msg)
-                  err = new Error(msg)
-                }
-
-                callback(err, body)
-              } else {
-                // without callback (?)
-                return body
-              }
-            } catch (e) {
-              logger.error(e)
-            }
-          })
-          req.on('error', function (err) {
-            logger.error(err)
-          })
-          if (body) {
-            req.write(JSON.stringify(body))
-          }
-          req.end()
+        let rawData = ''
+        res.setEncoding('utf8')
+        res.on('data', function (chunk) {
+          // buffer
+          rawData += chunk
         })
-      }
+        res.on('end', function () {
+          // treat response
+          response(res.statusCode, rawData, callback)
+        })
+        req.on('error', function (err) {
+          logger.error(err)
+        })
+
+        if (body) {
+          // send JSON body
+          req.write(JSON.stringify(body))
+        }
+        req.end()
+      })
     } else {
+      // call with AJAX
       let ajax = new XMLHttpRequest()
-      let url = 'https://' + host + path + endpoint
+      let url = 'https://' + host + path
       ajax.open(method, url, true)
+
       if (body) {
+        // send JSON body
         ajax.send(JSON.stringify(body))
       } else {
         ajax.send()
       }
-      let tries = 0
-      let sendAjax = function () {
-        tries++
-        ajax.onreadystatechange = function () {
-          let body = JSON.parse(ajax.responseText)
-          if (ajax.status === 503 && tries < 3) {
+
+      ajax.onreadystatechange = function () {
+        if (this.readyState === 4) {
+          // request finished and response is ready
+          if (this.status === 503 && tries < 3) {
+            // try to resend request
             setTimeout(function () {
-              sendAjax()
+              sendRequest(tries, host, path, body, callback)
             }, 500)
+            return
           }
-          try {
-            if (typeof callback === 'function') {
-              let err
-              if (ajax.readyState === 4 && ajax.status === 200) {
-                err = null
-              } else {
-                let msg
-                if (body.hasOwnProperty('message')) {
-                  msg = body.message
-                } else {
-                  msg = 'Unknown error, see response objet to more info'
-                  // logger.error(body)
-                }
-                logger.log(logHeader('WARNING') + '\n' + msg)
-                err = new Error(msg)
-              }
-              callback(err, body)
-            } else {
-              return body
-            }
-          } catch (e) {
-            logger.error(e)
-          }
+
+          // treat response
+          response(this.status, this.responseText, callback)
         }
       }
+    }
+
+    // tried more once
+    tries++
+  }
+
+  let response = function (status, data, callback) {
+    // treat request response
+    // expecting JSON response body
+    try {
+      let body = JSON.parse(data)
+      let err
+      if (status === 200) {
+        err = null
+      } else {
+        let msg
+        if (body.hasOwnProperty('message')) {
+          msg = body.message
+        } else {
+          // probably an error response from Graphs or Search API
+          // not handling Neo4j and Elasticsearch errors
+          msg = 'Unknown error, see response objet to more info'
+        }
+        logger.log(logHeader('WARNING') + '\n' + msg)
+        err = new Error(msg)
+      }
+
+      // already verified callback valid function
+      callback(err, body)
+    } catch (e) {
+      logger.error(e)
+
+      // callback with null body
+      callback(e, null)
     }
   }
 
@@ -224,7 +235,7 @@ var EcomIo = function () {
     'searchProduts': function (callback, term, from, size, sort, specs, brands, categories, prices, dsl) {
       let host = 'apx-search.e-com.plus'
       // proxy will pass XGET
-      let method = 'POST'
+      // let method = 'POST'
       let endpoint = '/items.json'
       let body
 
@@ -449,7 +460,7 @@ var EcomIo = function () {
         '\n' + JSON.stringify(body)
       logger.log(msg)
 
-      runMethod(callback, endpoint, host, method, body)
+      runMethod(callback, endpoint, host, body)
     },
 
     'getRecommendedProducts': function (callback, id) {
