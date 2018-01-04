@@ -381,18 +381,18 @@ var EcomIo = function () {
       runMethod(callback, endpoint)
     },
 
-    'searchProduts': function (callback, term, from, size, sort, specs, brands, categories, prices, dsl) {
+    'searchProduts': function (callback, term, from, size, sort, specs, brands, categories, prices, customDsl) {
       let host = 'apx-search.e-com.plus'
       // proxy will pass XGET
       // let method = 'POST'
       let endpoint = '/items.json'
       let body
 
-      if (typeof dsl === 'object' && dsl !== null) {
+      if (typeof customDsl === 'object' && customDsl !== null) {
         // custom Query DSL
         // must be a valid search request body
         // https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html
-        body = dsl
+        body = customDsl
       } else {
         // term is required
         if (typeof term !== 'string') {
