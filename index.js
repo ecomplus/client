@@ -196,6 +196,105 @@ var EcomIo = function () {
     return false
   }
 
+  let pagination = function (callback, endpoint, filter) {
+    // filter for pagination and ordering
+    let parameter = false
+    if (filter) {
+      for (var key in filter) {
+        // if the url parameters is more than one add & to endpoint
+        if (parameter === true) {
+          endpoint += '&'
+          parameter = false
+        }
+        if (filter.hasOwnProperty(key)) {
+          // the key of filter object is the url parameter (offset, limit, sort and fields)
+          // filter = {
+          //   'offset': 0,
+          //   'limit': 1000,
+          //   'sort': ['name', '-price'],
+          //   'fields': ['name', 'code', 'date']
+          // }
+          switch (key) {
+            case 'offset':
+              // offset value has to be a number
+              if (typeof filter[key] === 'number') {
+                endpoint += 'offset=' + filter[key]
+              } else {
+                // error message
+                let msg = 'The offset parameter must be a number'
+                errorHandling(callback, msg)
+              }
+              break
+            case 'limit':
+              // limit value has to be a number
+              if (typeof filter[key] === 'number') {
+                endpoint += 'limit=' + filter[key]
+              } else {
+                // error message
+                let msg = 'The limit parameter must be a number'
+                errorHandling(callback, msg)
+              }
+              break
+            case 'sort':
+              // sort value is a array with the names to sort.
+              // If the name has a '-' in beginning of the word the order to sort is descending
+              // example : { 'sort': [name, '-price'] }
+              if (Array.isArray(filter[key])) {
+                endpoint += 'sort='
+                for (let i = 0; i < filter[key].length; i++) {
+                  if (typeof filter[key][i] === 'string') {
+                    if (i !== filter[key].length - 1) {
+                      // escape string to endpoint
+                      endpoint += escape(filter[key][i]) + escape(',')
+                    } else {
+                      endpoint += escape(filter[key][i])
+                    }
+                  } else {
+                    let msg = filter[key][i] + 'is not a string'
+                    errorHandling(callback, msg)
+                    break
+                  }
+                }
+              } else {
+                // error message
+                let msg = 'The fields parameter must be a array'
+                errorHandling(callback, msg)
+              }
+              break
+            case 'fields':
+              // fields value is a array with fields names.
+              // example: fields: [name, code, date]
+              if (Array.isArray(filter[key])) {
+                endpoint += 'fields='
+                for (let i = 0; i < filter[key].length; i++) {
+                  if (typeof filter[key][i] === 'string') {
+                    if (i !== filter[key].length - 1) {
+                      // escape string to endpoint
+                      endpoint += escape(filter[key][i]) + escape(',')
+                    } else {
+                      endpoint += escape(filter[key][i])
+                    }
+                  } else {
+                    // error message
+                    let msg = filter[key][i] + 'is not a string'
+                    errorHandling(callback, msg)
+                    break
+                  }
+                }
+              } else {
+                let msg = 'The fields parameter must be a array'
+                errorHandling(callback, msg)
+              }
+              break
+          }
+        }
+      }
+      // set parameter true because if funtion returns to loop add '&' to endpoint
+      parameter = true
+    }
+    runMethod(callback, endpoint)
+  }
+
   let getByField = function (callback, field, fieldName, resource, endpoint, ioMethod) {
     // common function to all getAnyByAny methods
     if (typeof field === 'string') {
@@ -269,9 +368,15 @@ var EcomIo = function () {
     'listBrands': function (callback, filter) {
       let endpoint = '/brands.json'
       if (filter) {
-        endpoint += filter
+        if (typeof filter !== 'undefined' && typeof filter === 'object') {
+          pagination(callback, endpoint, filter)
+        } else {
+          let msg = 'The' + filter + 'must be a object'
+          errorHandling(callback, msg)
+        }
+      } else {
+        pagination(callback, endpoint)
       }
-      runMethod(callback, endpoint)
     },
 
     'getCategory': function (callback, id) {
@@ -288,9 +393,15 @@ var EcomIo = function () {
     'listCategories': function (callback, filter) {
       let endpoint = '/categories.json'
       if (filter) {
-        endpoint += filter
+        if (typeof filter !== 'undefined' && typeof filter === 'object') {
+          pagination(callback, endpoint, filter)
+        } else {
+          let msg = 'The' + filter + 'must be a object'
+          errorHandling(callback, msg)
+        }
+      } else {
+        pagination(callback, endpoint)
       }
-      runMethod(callback, endpoint)
     },
 
     'getCollection': function (callback, id) {
@@ -307,9 +418,15 @@ var EcomIo = function () {
     'listCollections': function (callback, filter) {
       let endpoint = '/collections.json'
       if (filter) {
-        endpoint += filter
+        if (typeof filter !== 'undefined' && typeof filter === 'object') {
+          pagination(callback, endpoint, filter)
+        } else {
+          let msg = 'The' + filter + 'must be a object'
+          errorHandling(callback, msg)
+        }
+      } else {
+        pagination(callback, endpoint)
       }
-      runMethod(callback, endpoint)
     },
 
     'searchProduts': function (callback, term, from, size, sort, specs, brands, categories, prices, dsl) {
