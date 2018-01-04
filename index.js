@@ -179,9 +179,54 @@ var EcomIo = function () {
     }
   }
 
+  let idValidate = function (callback, id) {
+    // check MongoDB ObjectID
+    let msg
+    if (typeof id === 'string') {
+      // RegEx pattern
+      if (id.match(/^[a-f0-9]{24}$/)) {
+        return true
+      } else {
+        msg = 'ID must be a valid 24 hexadecimal digits string, lowercase only'
+      }
+    } else {
+      msg = 'ID is required and must be a string'
+    }
+    errorHandling(callback, msg)
+    return false
+  }
+
+  let getByField = function (callback, field, fieldName, resource, endpoint, ioMethod) {
+    // common function to all getAnyByAny methods
+    if (typeof field === 'string') {
+      runMethod(function (err, body) {
+        // replace callback
+        if (!err) {
+          let results = body.result
+          // results must be an array of one object with _id property
+          if (Array.isArray(results) && typeof results[0] === 'object' && results[0] !== null) {
+            // return resource object
+            ioMethod(callback, results[0]._id)
+          } else {
+            let msg = 'Any ' + resource + ' found with this ' + fieldName
+            errorHandling(callback, msg, body)
+          }
+        } else {
+          // only pass the error
+          callback(err, body)
+        }
+      }, endpoint)
+    } else {
+      let msg = 'The' + fieldName + ' is required and must be a string'
+      errorHandling(callback, msg)
+    }
+  }
+
   return {
     'init': function (StoreId, Logger) {
+      // set store ID
       storeId = StoreId
+
       if (typeof Logger === 'object' && Logger.hasOwnProperty('log') && Logger.hasOwnProperty('error')) {
         // log on file
         logger = Logger
@@ -190,30 +235,38 @@ var EcomIo = function () {
       }
     },
 
-    // return current store ID in use
+    // return current store ID
     'storeId': storeId,
 
-    // Function to get product by sku
-    'getProductBySku': function (callback, sku) {
-      let response = runMethod(callback, '/products.json?sku=' + sku).done(function () {
-        for (let i = 0; i < response.result; i++) {
-          EcomIo.getProduct(callback, response.result[i]._id)
-        }
-      })
-    },
-
-    // Function to get product by ID product
     'getProduct': function (callback, id) {
-      runMethod(callback, '/products/' + id + '.json')
+      if (idValidate(callback, id)) {
+        runMethod(callback, '/products/' + id + '.json')
+      }
     },
 
-    // Function to get order by ID order
+    'getProductBySku': function (callback, sku) {
+      let endpoint = '/products.json?sku=' + sku
+      getByField(callback, sku, 'SKU', 'product', endpoint, EcomIo.getProduct)
+    },
+
     'getOrder': function (callback, id) {
-      runMethod(callback, '/orders/' + id + '.json')
+      if (idValidate(callback, id)) {
+        runMethod(callback, '/orders/' + id + '.json')
+      }
     },
 
-    // Function to get all store brands
-    'getBrands': function (callback, filter) {
+    'getBrand': function (callback, id) {
+      if (idValidate(callback, id)) {
+        runMethod(callback, '/brands/' + id + '.json')
+      }
+    },
+
+    'getBrandBySlug': function (callback, slug) {
+      let endpoint = '/brands.json?limit=1&slug=' + slug
+      getByField(callback, slug, 'slug', 'brand', endpoint, EcomIo.getBrand)
+    },
+
+    'listBrands': function (callback, filter) {
       let endpoint = '/brands.json'
       if (filter) {
         endpoint += filter
@@ -221,8 +274,18 @@ var EcomIo = function () {
       runMethod(callback, endpoint)
     },
 
-    // Function to get all store categories
-    'getCategories': function (callback, filter) {
+    'getCategory': function (callback, id) {
+      if (idValidate(callback, id)) {
+        runMethod(callback, '/categories/' + id + '.json')
+      }
+    },
+
+    'getCategoryBySlug': function (callback, slug) {
+      let endpoint = '/categories.json?limit=1&slug=' + slug
+      getByField(callback, slug, 'slug', 'category', endpoint, EcomIo.getCategory)
+    },
+
+    'listCategories': function (callback, filter) {
       let endpoint = '/categories.json'
       if (filter) {
         endpoint += filter
@@ -230,7 +293,25 @@ var EcomIo = function () {
       runMethod(callback, endpoint)
     },
 
-    // Function to search products
+    'getCollection': function (callback, id) {
+      if (idValidate(callback, id)) {
+        runMethod(callback, '/collections/' + id + '.json')
+      }
+    },
+
+    'getCollectionBySlug': function (callback, slug) {
+      let endpoint = '/collections.json?limit=1&slug=' + slug
+      getByField(callback, slug, 'slug', 'collection', endpoint, EcomIo.getCollection)
+    },
+
+    'listCollections': function (callback, filter) {
+      let endpoint = '/collections.json'
+      if (filter) {
+        endpoint += filter
+      }
+      runMethod(callback, endpoint)
+    },
+
     'searchProduts': function (callback, term, from, size, sort, specs, brands, categories, prices, dsl) {
       let host = 'apx-search.e-com.plus'
       // proxy will pass XGET
@@ -462,14 +543,18 @@ var EcomIo = function () {
       runMethod(callback, endpoint, host, body)
     },
 
-    'getRecommendedProducts': function (callback, id) {
-      let host = 'apx-graphs.e-com.plus'
-      runMethod(callback, '/products/' + id + '/recommended.json', host)
+    'listRecommendedProducts': function (callback, id) {
+      if (idValidate(id)) {
+        let host = 'apx-graphs.e-com.plus'
+        runMethod(callback, '/products/' + id + '/recommended.json', host)
+      }
     },
 
-    'getRelatedProducts': function (callback, id) {
-      let host = 'apx-graphs.e-com.plus'
-      runMethod(callback, '/products/' + id + '/related.json', host)
+    'listRelatedProducts': function (callback, id) {
+      if (idValidate(id)) {
+        let host = 'apx-graphs.e-com.plus'
+        runMethod(callback, '/products/' + id + '/related.json', host)
+      }
     }
   }
 }
