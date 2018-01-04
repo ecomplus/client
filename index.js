@@ -107,6 +107,8 @@ var EcomIo = function () {
         })
         req.on('error', function (err) {
           logger.error(err)
+          // callback with null body
+          callback(err, null)
         })
 
         if (body) {
@@ -151,33 +153,35 @@ var EcomIo = function () {
 
   let response = function (status, data, callback) {
     // treat request response
-    // expecting JSON response body
+    let body
     try {
-      let body = JSON.parse(data)
-      let err
-      if (status === 200) {
-        err = null
-      } else {
-        let msg
-        if (body.hasOwnProperty('message')) {
-          msg = body.message
-        } else {
-          // probably an error response from Graphs or Search API
-          // not handling Neo4j and Elasticsearch errors
-          msg = 'Unknown error, see response objet to more info'
-        }
-        logger.log(logHeader('WARNING') + '\n' + msg)
-        err = new Error(msg)
-      }
-
-      // already verified callback valid function
-      callback(err, body)
-    } catch (e) {
-      logger.error(e)
-
+      // expecting valid JSON response body
+      body = JSON.parse(data)
+    } catch (err) {
+      logger.error(err)
       // callback with null body
-      callback(e, null)
+      callback(err, null)
+      return
     }
+
+    let err
+    if (status === 200) {
+      err = null
+    } else {
+      let msg
+      if (body.hasOwnProperty('message')) {
+        msg = body.message
+      } else {
+        // probably an error response from Graphs or Search API
+        // not handling Neo4j and Elasticsearch errors
+        msg = 'Unknown error, see response objet to more info'
+      }
+      logger.log(logHeader('WARNING') + '\n' + msg)
+      err = new Error(msg)
+    }
+
+    // already verified callback valid function
+    callback(err, body)
   }
 
   return {
