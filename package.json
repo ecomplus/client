@@ -1,12 +1,8 @@
 {
-  "name": "ecomplus-sdk-js",
-  "version": "0.0.0",
-  "description": "JS SDK for E-Com Plus Store API",
+  "name": "ecomplus-storefront",
+  "version": "1.0.0",
+  "description": "JS SDK for E-Com Plus APIs public resources",
   "main": "index.js",
-  "dependencies": {
-    "request": "2.^"
-  },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -16,13 +12,14 @@
   },
   "keywords": [
     "ecomplus",
+    "storefront",
     "API",
     "JS",
     "Node",
     "SDK",
     "JavaScript"
   ],
-  "author": "João Colen",
+  "author": "E-Com Club",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/ecomclub/ecomplus-sdk-js/issues"
