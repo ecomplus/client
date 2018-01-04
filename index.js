@@ -312,7 +312,9 @@ var EcomIo = function () {
     },
 
     // return current store ID
-    'storeId': storeId,
+    'storeId': function () {
+      return storeId
+    },
 
     'getProduct': function (callback, id) {
       if (idValidate(callback, id)) {
