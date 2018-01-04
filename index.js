@@ -279,7 +279,7 @@ var EcomIo = function () {
         if (query !== '') {
           query += '&'
         }
-        query += params[param]
+        query += param + '=' + params[param]
       }
     }
 
