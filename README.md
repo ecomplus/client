@@ -12,9 +12,9 @@ You can include minified script from URL:
 
 `<script src="https://ecom.nyc3.digitaloceanspaces.com/plus/js/sdk.min.js"></script>`
 
-Or install [npm package](https://www.npmjs.com/package/ecomplus-sdk-js):
+Or install [npm package](https://www.npmjs.com/package/ecomplus-storefront):
 
-`npm install --save ecomplus-sdk-js`
+`npm install --save ecomplus-storefront`
 
 # Getting Started
 The library declares an object called `EcomIo`,
