@@ -523,15 +523,15 @@ var EcomIo = function () {
                 'path': 'specs'
               },
               'aggs': {
-                'key': {
+                'grid': {
                   'terms': {
-                    'field': 'specs.key',
+                    'field': 'specs.grid',
                     'size': 12
                   },
                   'aggs': {
-                    'value': {
+                    'text': {
                       'terms': {
-                        'field': 'specs.value'
+                        'field': 'specs.text'
                       }
                     }
                   }
@@ -589,11 +589,11 @@ var EcomIo = function () {
             if (Array.isArray(specs[key]) && specs[key].length > 0) {
               nestedQuery.nested.query.bool.filter.push({
                 'term': {
-                  'specs.key': key
+                  'specs.grid': key
                 }
               }, {
                 'terms': {
-                  'specs.value': specs[key]
+                  'specs.text': specs[key]
                 }
               })
 
