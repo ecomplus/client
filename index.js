@@ -59,6 +59,11 @@ var EcomIo = function () {
     // retry up to 3 times if API returns 503
     let tries = 0
     sendRequest(tries, host, path, body, callback)
+
+    let msg = logHeader('INFO') +
+      '\nAPI endpoint' +
+      '\n' + endpoint
+    logger.log(msg)
   }
 
   let sendRequest = function (tries, host, path, body, callback) {
