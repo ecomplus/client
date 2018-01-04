@@ -288,13 +288,13 @@ var EcomIo = function () {
           query += param + '=' + params[param]
         }
       }
-      if (query !== '') {
-        query = '?' + query
-      }
     } else {
       query = customQuery
     }
 
+    if (query !== '') {
+      query = '?' + query
+    }
     return query
   }
 
