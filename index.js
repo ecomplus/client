@@ -228,64 +228,71 @@ var EcomIo = function () {
     }
   }
 
-  let queryString = function (offset, limit, sort, fields) {
+  let queryString = function (offset, limit, sort, fields, customQuery) {
     // mount query string with function params
     // common Restful URL params
     // ref.: https://ecomstore.docs.apiary.io/#introduction/overview/url-params
     let params = {}
-
-    // pagination
-    if (typeof offset === 'number' && offset > 0) {
-      params.offset = offset
-    }
-    if (typeof limit === 'number' && limit > 0) {
-      params.limit = limit
-    }
-
-    if (typeof sort === 'number') {
-      // defines most common sorting options
-      switch (sort) {
-        case 1:
-          // sort by name asc
-          params.sort = 'name'
-          break
-
-        case 2:
-          // sort by name desc
-          params.sort = '-name'
-          break
-      }
-    }
-
-    if (Array.isArray(fields)) {
-      let fieldsString = ''
-      for (let i = 0; i < fields.length; i++) {
-        if (typeof fields[i] === 'string') {
-          if (fieldsString !== '') {
-            // separate fields names by ,
-            // url encoded
-            fieldsString += '%2C'
-          }
-          // fields must be valid object properties
-          // does not need to encode
-          fieldsString += fields[i]
-        }
-      }
-      if (fieldsString !== '') {
-        params.fields = fieldsString
-      }
-    }
-
-    // serialize object to query string
     // default for empty string
     let query = ''
-    for (let param in params) {
-      if (params.hasOwnProperty(param)) {
-        if (query !== '') {
-          query += '&'
-        }
-        query += param + '=' + params[param]
+
+    if (typeof customQuery !== 'string') {
+      // pagination
+      if (typeof offset === 'number' && offset > 0) {
+        params.offset = offset
       }
+      if (typeof limit === 'number' && limit > 0) {
+        params.limit = limit
+      }
+
+      if (typeof sort === 'number') {
+        // defines most common sorting options
+        switch (sort) {
+          case 1:
+            // sort by name asc
+            params.sort = 'name'
+            break
+
+          case 2:
+            // sort by name desc
+            params.sort = '-name'
+            break
+        }
+      }
+
+      if (Array.isArray(fields)) {
+        let fieldsString = ''
+        for (let i = 0; i < fields.length; i++) {
+          if (typeof fields[i] === 'string') {
+            if (fieldsString !== '') {
+              // separate fields names by ,
+              // url encoded
+              fieldsString += '%2C'
+            }
+            // fields must be valid object properties
+            // does not need to encode
+            fieldsString += fields[i]
+          }
+        }
+        if (fieldsString !== '') {
+          params.fields = fieldsString
+        }
+      }
+
+      // serialize object to query string
+      for (let param in params) {
+        if (params.hasOwnProperty(param)) {
+          if (query !== '') {
+            query += '&'
+          }
+          query += param + '=' + params[param]
+        }
+      }
+      if (query !== '') {
+        query = '?' + query
+      }
+    } else {
+      query = customQuery
     }
 
     return query
@@ -335,8 +342,8 @@ var EcomIo = function () {
       getByField(callback, slug, 'slug', 'brand', endpoint, EcomIo.getBrand)
     },
 
-    'listBrands': function (callback, offset, limit, sort, fields) {
-      let endpoint = '/brands.json' + queryString(offset, limit, sort, fields)
+    'listBrands': function (callback, offset, limit, sort, fields, customQuery) {
+      let endpoint = '/brands.json' + queryString(offset, limit, sort, fields, customQuery)
       runMethod(callback, endpoint)
     },
 
@@ -351,8 +358,8 @@ var EcomIo = function () {
       getByField(callback, slug, 'slug', 'category', endpoint, EcomIo.getCategory)
     },
 
-    'listCategories': function (callback, offset, limit, sort, fields) {
-      let endpoint = '/categories.json' + queryString(offset, limit, sort, fields)
+    'listCategories': function (callback, offset, limit, sort, fields, customQuery) {
+      let endpoint = '/categories.json' + queryString(offset, limit, sort, fields, customQuery)
       runMethod(callback, endpoint)
     },
 
@@ -367,8 +374,8 @@ var EcomIo = function () {
       getByField(callback, slug, 'slug', 'collection', endpoint, EcomIo.getCollection)
     },
 
-    'listCollections': function (callback, offset, limit, sort, fields) {
-      let endpoint = '/collections.json' + queryString(offset, limit, sort, fields)
+    'listCollections': function (callback, offset, limit, sort, fields, customQuery) {
+      let endpoint = '/collections.json' + queryString(offset, limit, sort, fields, customQuery)
       runMethod(callback, endpoint)
     },
 
