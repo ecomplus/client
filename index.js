@@ -18,17 +18,16 @@ var EcomIo = function () {
   }
 
   let errorHandling = function (callback, errMsg, responseBody) {
-    if (responseBody === undefined) {
-      // default to null
-      // when error occurs before send API request
-      responseBody = null
-    }
-
-    logger.log(logHeader('WARNING') + '\n' + errMsg)
     if (typeof callback === 'function') {
       let err = new Error(errMsg)
-      callback(err, responseBody)
+      if (responseBody === undefined) {
+        // body null when error occurs before send API request
+        callback(err, null)
+      } else {
+        callback(err, responseBody)
+      }
     }
+    logger.log(logHeader('WARNING') + '\n' + errMsg)
   }
 
   let runMethod = function (callback, endpoint, host, body) {
@@ -164,9 +163,9 @@ var EcomIo = function () {
       return
     }
 
-    let err
     if (status === 200) {
-      err = null
+      // err null
+      callback(null, body)
     } else {
       let msg
       if (body.hasOwnProperty('message')) {
@@ -176,12 +175,8 @@ var EcomIo = function () {
         // not handling Neo4j and Elasticsearch errors
         msg = 'Unknown error, see response objet to more info'
       }
-      logger.log(logHeader('WARNING') + '\n' + msg)
-      err = new Error(msg)
+      errorHandling(callback, msg, body)
     }
-
-    // already verified callback valid function
-    callback(err, body)
   }
 
   return {
