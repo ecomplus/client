@@ -200,7 +200,7 @@ var EcomIo = function () {
     // filter for pagination and ordering
     let parameter = false
     if (filter) {
-      for (var key in filter) {
+      for (let key in filter) {
         // if the url parameters is more than one add & to endpoint
         if (parameter === true) {
           endpoint += '&'
