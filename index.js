@@ -196,101 +196,116 @@ var EcomIo = function () {
     return false
   }
 
-  let pagination = function (callback, endpoint, filter) {
-    // filter for pagination and ordering
-    let parameter = false
-    if (filter) {
-      for (let key in filter) {
-        // if the url parameters is more than one add & to endpoint
-        if (parameter === true) {
-          endpoint += '&'
-          parameter = false
-        }
-        if (filter.hasOwnProperty(key)) {
-          // the key of filter object is the url parameter (offset, limit, sort and fields)
-          // filter = {
-          //   'offset': 0,
-          //   'limit': 1000,
-          //   'sort': ['name', '-price'],
-          //   'fields': ['name', 'code', 'date']
-          // }
-          switch (key) {
-            case 'offset':
-              // offset value has to be a number
-              if (typeof filter[key] === 'number') {
-                endpoint += 'offset=' + filter[key]
-              } else {
-                // error message
-                let msg = 'The offset parameter must be a number'
-                errorHandling(callback, msg)
-              }
-              break
-            case 'limit':
-              // limit value has to be a number
-              if (typeof filter[key] === 'number') {
-                endpoint += 'limit=' + filter[key]
-              } else {
-                // error message
-                let msg = 'The limit parameter must be a number'
-                errorHandling(callback, msg)
-              }
-              break
-            case 'sort':
-              // sort value is a array with the names to sort.
-              // If the name has a '-' in beginning of the word the order to sort is descending
-              // example : { 'sort': [name, '-price'] }
-              if (Array.isArray(filter[key])) {
-                endpoint += 'sort='
-                for (let i = 0; i < filter[key].length; i++) {
-                  if (typeof filter[key][i] === 'string') {
-                    if (i !== filter[key].length - 1) {
-                      // escape string to endpoint
-                      endpoint += escape(filter[key][i]) + escape(',')
-                    } else {
-                      endpoint += escape(filter[key][i])
-                    }
-                  } else {
-                    let msg = filter[key][i] + 'is not a string'
-                    errorHandling(callback, msg)
-                    break
-                  }
-                }
-              } else {
-                // error message
-                let msg = 'The fields parameter must be a array'
-                errorHandling(callback, msg)
-              }
-              break
-            case 'fields':
-              // fields value is a array with fields names.
-              // example: fields: [name, code, date]
-              if (Array.isArray(filter[key])) {
-                endpoint += 'fields='
-                for (let i = 0; i < filter[key].length; i++) {
-                  if (typeof filter[key][i] === 'string') {
-                    if (i !== filter[key].length - 1) {
-                      // escape string to endpoint
-                      endpoint += escape(filter[key][i]) + escape(',')
-                    } else {
-                      endpoint += escape(filter[key][i])
-                    }
-                  } else {
-                    // error message
-                    let msg = filter[key][i] + 'is not a string'
-                    errorHandling(callback, msg)
-                    break
-                  }
-                }
-              } else {
-                let msg = 'The fields parameter must be a array'
-                errorHandling(callback, msg)
-              }
-              break
+  let pagination = function (callback, endpoint, offset, limit, sort, fields) {
+    // a counter to verify if it is more than one url parameters and add '&' to endpoint
+    let count = 0
+    // number of the total current of url parameters
+    let parameters = 0
+
+    if (typeof offset !== 'undefined' && typeof offset === 'number') {
+      // add more one to counter and make the number of parameters and the counter different
+      count++
+      // verify is is the first element or has more than one url parameters already
+      if (count > 1 && count > parameters) {
+        endpoint += '&offset=' + offset
+        // add more one to parameters and make the number of parameters and the counter equals
+        parameters++
+      } else {
+        // first url parameter
+        endpoint += 'offset=' + offset
+      }
+    } else {
+      // error message
+      let msg = 'The offset parameter must be a number'
+      errorHandling(callback, msg)
+    }
+
+    if (typeof limit !== 'undefined' && typeof limit === 'number') {
+      // add more one to counter and make the number of parameters and the counter different
+      count++
+      // verify is is the first element or has more than one url parameters already
+      if (count > 1 && count > parameters) {
+        endpoint += '&limit=' + offset
+        // add more one to parameters and make the number of parameters and the counter equals
+        parameters++
+      } else {
+        // first url parameter
+        endpoint += 'limit=' + offset
+      }
+    } else {
+      // error message
+      let msg = 'The limit parameter must be a number'
+      errorHandling(callback, msg)
+    }
+
+    if (typeof sort !== 'undefined' && Array.isArray(sort)) {
+      // add more one to counter and make the number of parameters and the counter different
+      count++
+      // verify is is the first element or has more than one url parameters already
+      if (count > 1 && count > parameters) {
+        endpoint += '&sort='
+        // add more one to parameters and make the number of parameters and the counter equals
+        parameters++
+      } else {
+        // first url parameter
+        endpoint += 'sort='
+      }
+      for (let i = 0; i < sort.length; i++) {
+        if (typeof sort[i] === 'string') {
+          // verify if it is not the last element
+          if (i !== sort.length - 1) {
+            // escape the string to endpoint
+            endpoint += escape(sort[i] + ',')
+          } else {
+            // escape the string to endpoint
+            endpoint += escape(sort[i])
           }
+        } else {
+          // error message
+          let msg = 'The' + sort[i] + 'is not a string'
+          errorHandling(callback, msg)
+          break
         }
       }
-      // set parameter true because if funtion returns to loop add '&' to endpoint
-      parameter = true
+    } else {
+      // error message
+      let msg = 'The sort parameter must be a array of string'
+      errorHandling(callback, msg)
+    }
+
+    if (typeof fields !== 'undefined' && Array.isArray(fields)) {
+      // add more one to counter and make the number of parameters and the counter different
+      count++
+      // verify is is the first element or has more than one url parameters already
+      if (count > 1 && count > parameters) {
+        endpoint += '&fields='
+        // add more one to parameters and make the number of parameters and the counter equals
+        parameters++
+      } else {
+        // first url parameter
+        endpoint += 'fields='
+      }
+      for (let i = 0; i < fields.length; i++) {
+        if (typeof fields[i] === 'string') {
+          // verify if it is not the last element
+          if (i !== fields.length - 1) {
+            // escape the string to endpoint
+            endpoint += escape(fields[i] + ',')
+          } else {
+            // escape the string to endpoint
+            endpoint += escape(fields[i])
+          }
+        } else {
+          // error message
+          let msg = 'The' + fields[i] + 'is not a string'
+          errorHandling(callback, msg)
+          break
+        }
+      }
+    } else {
+      // error message
+      let msg = 'The fields parameter must be a array of string'
+      errorHandling(callback, msg)
     }
     runMethod(callback, endpoint)
   }
@@ -365,18 +380,9 @@ var EcomIo = function () {
       getByField(callback, slug, 'slug', 'brand', endpoint, EcomIo.getBrand)
     },
 
-    'listBrands': function (callback, filter) {
+    'listBrands': function (callback, offset, limit, sort, fields) {
       let endpoint = '/brands.json'
-      if (filter) {
-        if (typeof filter !== 'undefined' && typeof filter === 'object') {
-          pagination(callback, endpoint, filter)
-        } else {
-          let msg = 'The' + filter + 'must be a object'
-          errorHandling(callback, msg)
-        }
-      } else {
-        pagination(callback, endpoint)
-      }
+      pagination(callback, endpoint, offset, limit, sort, fields)
     },
 
     'getCategory': function (callback, id) {
@@ -390,18 +396,9 @@ var EcomIo = function () {
       getByField(callback, slug, 'slug', 'category', endpoint, EcomIo.getCategory)
     },
 
-    'listCategories': function (callback, filter) {
+    'listCategories': function (callback, offset, limit, sort, fields) {
       let endpoint = '/categories.json'
-      if (filter) {
-        if (typeof filter !== 'undefined' && typeof filter === 'object') {
-          pagination(callback, endpoint, filter)
-        } else {
-          let msg = 'The' + filter + 'must be a object'
-          errorHandling(callback, msg)
-        }
-      } else {
-        pagination(callback, endpoint)
-      }
+      pagination(callback, endpoint, offset, limit, sort, fields)
     },
 
     'getCollection': function (callback, id) {
@@ -415,18 +412,9 @@ var EcomIo = function () {
       getByField(callback, slug, 'slug', 'collection', endpoint, EcomIo.getCollection)
     },
 
-    'listCollections': function (callback, filter) {
+    'listCollections': function (callback, offset, limit, sort, fields) {
       let endpoint = '/collections.json'
-      if (filter) {
-        if (typeof filter !== 'undefined' && typeof filter === 'object') {
-          pagination(callback, endpoint, filter)
-        } else {
-          let msg = 'The' + filter + 'must be a object'
-          errorHandling(callback, msg)
-        }
-      } else {
-        pagination(callback, endpoint)
-      }
+      pagination(callback, endpoint, offset, limit, sort, fields)
     },
 
     'searchProduts': function (callback, term, from, size, sort, specs, brands, categories, prices, dsl) {
