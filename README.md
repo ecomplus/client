@@ -3,11 +3,6 @@ JS library for E-Com Plus storefront with methods to access public resources fro
 [Store API](https://ecomstore.docs.apiary.io),
 [Graphs API](https://ecomgraphs.docs.apiary.io) and
 [Search API](https://ecomsearch.docs.apiary.io).
-# ecomplus-sdk-js
-JS library for E-Com Plus storefront with methods to access public resources from
-[Store API](https://ecomstore.docs.apiary.io),
-[Graphs API](https://ecomgraphs.docs.apiary.io) and
-[Search API](https://ecomsearch.docs.apiary.io).
 
 __This library implements only GET requests to public resources, so there aren't authentication.__
 
