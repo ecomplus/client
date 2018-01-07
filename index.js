@@ -202,6 +202,14 @@ var EcomIo = function () {
     return false
   }
 
+  let getById = function (callback, resource, id) {
+    if (idValidate(callback, id)) {
+      // use Cloudflare cache of Store API
+      let host = 'cache.e-com.plus'
+      runMethod(callback, '/' + resource + '/' + id + '.json', host)
+    }
+  }
+
   let getByField = function (callback, field, fieldName, resource, endpoint, ioMethod) {
     // common function to all getAnyByAny methods
     if (typeof field === 'string') {
@@ -317,11 +325,7 @@ var EcomIo = function () {
     },
 
     'getProduct': function (callback, id) {
-      if (idValidate(callback, id)) {
-        // use Cloudflare cache of Store API
-        let host = 'cache.e-com.plus'
-        runMethod(callback, '/products/' + id + '.json', host)
-      }
+      getById(callback, 'products', id)
     },
 
     'getProductBySku': function (callback, sku) {
@@ -330,19 +334,11 @@ var EcomIo = function () {
     },
 
     'getOrder': function (callback, id) {
-      if (idValidate(callback, id)) {
-        // use Cloudflare cache of Store API
-        let host = 'cache.e-com.plus'
-        runMethod(callback, '/orders/' + id + '.json', host)
-      }
+      getById(callback, 'orders', id)
     },
 
     'getBrand': function (callback, id) {
-      if (idValidate(callback, id)) {
-        // use Cloudflare cache of Store API
-        let host = 'cache.e-com.plus'
-        runMethod(callback, '/brands/' + id + '.json', host)
-      }
+      getById(callback, 'brands', id)
     },
 
     'getBrandBySlug': function (callback, slug) {
@@ -356,11 +352,7 @@ var EcomIo = function () {
     },
 
     'getCategory': function (callback, id) {
-      if (idValidate(callback, id)) {
-        // use Cloudflare cache of Store API
-        let host = 'cache.e-com.plus'
-        runMethod(callback, '/categories/' + id + '.json', host)
-      }
+      getById(callback, 'categories', id)
     },
 
     'getCategoryBySlug': function (callback, slug) {
@@ -374,11 +366,7 @@ var EcomIo = function () {
     },
 
     'getCollection': function (callback, id) {
-      if (idValidate(callback, id)) {
-        // use Cloudflare cache of Store API
-        let host = 'cache.e-com.plus'
-        runMethod(callback, '/collections/' + id + '.json', host)
-      }
+      getById(callback, 'collections', id)
     },
 
     'getCollectionBySlug': function (callback, slug) {
