@@ -318,7 +318,9 @@ var EcomIo = function () {
 
     'getProduct': function (callback, id) {
       if (idValidate(callback, id)) {
-        runMethod(callback, '/products/' + id + '.json')
+        // use Cloudflare cache of Store API
+        let host = 'cache.e-com.plus'
+        runMethod(callback, '/products/' + id + '.json', host)
       }
     },
 
@@ -329,13 +331,17 @@ var EcomIo = function () {
 
     'getOrder': function (callback, id) {
       if (idValidate(callback, id)) {
-        runMethod(callback, '/orders/' + id + '.json')
+        // use Cloudflare cache of Store API
+        let host = 'cache.e-com.plus'
+        runMethod(callback, '/orders/' + id + '.json', host)
       }
     },
 
     'getBrand': function (callback, id) {
       if (idValidate(callback, id)) {
-        runMethod(callback, '/brands/' + id + '.json')
+        // use Cloudflare cache of Store API
+        let host = 'cache.e-com.plus'
+        runMethod(callback, '/brands/' + id + '.json', host)
       }
     },
 
@@ -351,7 +357,9 @@ var EcomIo = function () {
 
     'getCategory': function (callback, id) {
       if (idValidate(callback, id)) {
-        runMethod(callback, '/categories/' + id + '.json')
+        // use Cloudflare cache of Store API
+        let host = 'cache.e-com.plus'
+        runMethod(callback, '/categories/' + id + '.json', host)
       }
     },
 
@@ -367,7 +375,9 @@ var EcomIo = function () {
 
     'getCollection': function (callback, id) {
       if (idValidate(callback, id)) {
-        runMethod(callback, '/collections/' + id + '.json')
+        // use Cloudflare cache of Store API
+        let host = 'cache.e-com.plus'
+        runMethod(callback, '/collections/' + id + '.json', host)
       }
     },
 
