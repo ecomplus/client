@@ -337,6 +337,18 @@ var EcomIo = function () {
       getById(callback, 'orders', id)
     },
 
+    'getCart': function (callback, id) {
+      getById(callback, 'carts', id)
+    },
+
+    'getCustomer': function (callback, id) {
+      getById(callback, 'customers', id)
+    },
+
+    'getApplication': function (callback, id) {
+      getById(callback, 'applications', id)
+    },
+
     'getBrand': function (callback, id) {
       getById(callback, 'brands', id)
     },
