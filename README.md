@@ -189,7 +189,7 @@ EcomIo.getBrandBySlug(callback, 'brand-four')
 
 ### listBrands(callback, offset, limit, sort, fields, customQuery)
 It is a method to list all the store brands.
-Offset, limit, sort and fields are URL parameters (metadata) for pagination and ordering, you can use customQuery to query by particular object properties.
+Offset, limit, sort and fields are [URL parameters](https://ecomstore.docs.apiary.io/#introduction/overview/url-params) (metadata) for pagination and ordering, you can use customQuery to query by particular object properties.
 
 #### Arguments
 |  Name       | Type     | Required     |
@@ -248,7 +248,7 @@ EcomIo.getCategoryBySlug(callback, 'category-four')
 ```
 ### listCategories(callback, offset, limit, sort, fields, customQuery)
 Similar to `listBrands` but here the returned body is all the store categories.
-Offset, limit, sort and fields are URL parameters (metadata) for pagination and ordering, you can use customQuery to query by particular object properties.
+Offset, limit, sort and fields are [URL parameters](https://ecomstore.docs.apiary.io/#introduction/overview/url-params) (metadata) for pagination and ordering, you can use customQuery to query by particular object properties.
 
 #### Arguments
 |  Name       | Type     | Required     |
@@ -307,7 +307,7 @@ EcomIo.getCollectionBySlug(callback, 'special-collection')
 ```
 ### listCollections(callback, offset, limit, sort, fields, customQuery)
 Similar to `listBrands` but here the returned body is all the store collection.
-Offset, limit, sort and fields are URL parameters (metadata) for pagination and ordering, you can use customQuery to query by particular object properties.
+Offset, limit, sort and fields are [URL parameters](https://ecomstore.docs.apiary.io/#introduction/overview/url-params) (metadata) for pagination and ordering, you can use customQuery to query by particular object properties.
 
 #### Arguments
 |  Name       | Type     | Required     |
@@ -350,18 +350,18 @@ specifications.
 [Type mapping reference](https://ecomsearch.docs.apiary.io/#reference/items).
 
 #### Arguments
-|  Name        | Type             | Description                                                  | Required      |
-| :---:        | :---:            | :---:                                                        | :---:         |
-| callback     | Function         | [Callback function](#callback)                               | Required      |
-| term         | String           | It is the term that you are searching for                    | Required      |
-| from         | number           | It is like the offset from URL parameters                    | Not Required  |
-| size         | number           | It is like the limit from URL parameters                     | Not Required  |
-| sort         | Number or Object | Sort products, default for views                             | Not Required  |
-| specs        | Object           | It is a object to filter results by prices                   | Not Required  |
-| brands       | Object           | It is a array of brands to filter results by brands          | Not Required  |
-| categories   | Object           | It is a array of categories to filter results by categories  | Not Required  |
-|  prices      | Object           | It is a object to filter results by prices                   | Not Required  |
-|  customDsl   | Object           | It is a object, to create your own request body search       | Not Required  |
+|  Name        | Type             | Description                                                                                                      | Required      |
+| :---:        | :---:            | :---:                                                                                                            | :---:         |
+| callback     | Function         | [Callback function](#callback)                                                                                   | Required      |
+| term         | String           | It is the term that you are searching for                                                                        | Required      |
+| from         | number           | It is like the offset from [URL parameters](https://ecomstore.docs.apiary.io/#introduction/overview/url-params)  | Not Required  |
+| size         | number           | It is like the limit from [URL parameters](https://ecomstore.docs.apiary.io/#introduction/overview/url-params)   | Not Required  |
+| sort         | Number or Object | Sort products, default for views                                                                                 | Not Required  |
+| specs        | Object           | It is a object to filter results by prices                                                                       | Not Required  |
+| brands       | Object           | It is a array of brands to filter results by brands                                                              | Not Required  |
+| categories   | Object           | It is a array of categories to filter results by categories                                                      | Not Required  |
+|  prices      | Object           | It is a object to filter results by prices                                                                       | Not Required  |
+|  customDsl   | Object           | It is a object, to create your own request body search                                                           | Not Required  |
 
 #### Example
 Search by term only:
@@ -374,7 +374,7 @@ We use a
 because we will query in two fields, the name and the keywords of each product.
 
 #### From and Size
-The from and size parameters are for pagination the results. The from is like the offset in URL parameters and the size is like the limit. If you dont pass any argument for the size, the limit to return is default to 24. It is based on [From/Size](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-from-size.html) from Elasticsearch documentation.
+The from and size parameters are for pagination the results. The from is like the offset in [URL parameters](https://ecomstore.docs.apiary.io/#introduction/overview/url-params) and the size is like the limit. If you dont pass any argument for the size, the limit to return is default to 24. It is based on [From/Size](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-from-size.html) from Elasticsearch documentation.
 
 #### Sort
 The sort argument is based on
