@@ -388,7 +388,7 @@ The order that the resultant products will be sort is:
 3. The products with more ad relevance;
 4. Sort object.
 
-#### Sort Object
+##### Sort Object
 To make your work easier, we have created three default sort options, by views, price and sales:
 
 | Number | Name  | Usage |
@@ -413,8 +413,16 @@ specs = {
 #### Brands
 The brands parameter is an array that we use to filter the search. So if you want to filter by Brands you can pass an array of brands.
 
+```javascript
+brands = ['brand1', 'brand2']
+```
+
 #### Categories
 It is very similar to brands argument, categories parameter is an array of categories that we use to filter the search.
+
+```javascript
+categories = ['category1', 'category2']
+```
 
 #### Prices
 The prices argument is a object that we use to filter the search too. You can limit the search by pass the minimum and the maximum prices. It is based on
