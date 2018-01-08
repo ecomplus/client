@@ -222,10 +222,10 @@ EcomIo.listBrands(callback, 'limit=2&offset=4')
 Similar to `getBrand` but here the returned body is the category.
 
 #### Arguments
-| Name     | Type     |
-| :---:    | :---:    |
-| callback | Function |
-| id       | String   |
+| Name     | Type     | Required |
+| :---:    | :---:    | :---:    |
+| callback | Function | Required |
+| id       | String   | Required |
 
 #### Example
 ```javascript
@@ -281,10 +281,10 @@ EcomIo.listCategories(callback, 'limit=2&offset=4')
 Similar to `getBrand` but here the returned body is the collection.
 
 #### Arguments
-| Name     | Type     |
-| :---:    | :---:    |
-| callback | Function |
-| id       | String   |
+| Name     | Type     | Required |
+| :---:    | :---:    | :---:    |
+| callback | Function | Required |
+| id       | String   | Required |
 
 #### Example
 ```javascript
