@@ -340,7 +340,7 @@ EcomIo.listCollections(callback, 'limit=2&offset=4')
 This method calls [E-Com Plus Search API](https://ecomsearch.docs.apiary.io/#),
 that proxy pass all requests to Elasticsearch
 [Search APIs](https://www.elastic.co/guide/en/elasticsearch/reference/current/search.html)
-with _XGET_ method (read only). Responses are the same as returned from _Eslasticsearch REST API_,
+with _XGET_ method (read only). Responses are the same as returned from _Elasticsearch REST API_,
 so you can read their documentation to get more info and examples.
 
 You must follow
@@ -357,11 +357,11 @@ specifications.
 | from         | number           | It is like the offset from [URL parameters](https://ecomstore.docs.apiary.io/#introduction/overview/url-params)  | Not Required  |
 | size         | number           | It is like the limit from [URL parameters](https://ecomstore.docs.apiary.io/#introduction/overview/url-params)   | Not Required  |
 | sort         | Number or Object | Sort products, default for views                                                                                 | Not Required  |
-| specs        | Object           | It is a object to filter results by specifications  | Not Required  |
-| brands       | Object           | It is a array of brands to filter results by brands | Not Required  |
-| categories   | Object           | It is a array of categories to filter results by categories | Not Required  |
-|  prices      | Object           | It is a object to filter results by prices | Not Required  |
-|  customDsl   | Object           | It is a object, to create your own request body search | Not Required  |
+| specs        | Object           | It is an object to filter results by specifications  | Not Required  |
+| brands       | Object           | It is an array of brands to filter results by brands | Not Required  |
+| categories   | Object           | It is an array of categories to filter results by categories | Not Required  |
+|  prices      | Object           | It is an object to filter results by prices | Not Required  |
+|  customDsl   | Object           | It is an object, to create your own request body search | Not Required  |
 
 #### Example
 Search by term only:
