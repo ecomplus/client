@@ -350,18 +350,18 @@ specifications.
 [Type mapping reference](https://ecomsearch.docs.apiary.io/#reference/items).
 
 #### Arguments
-|  Name        | Type             | Description                                                                                                      | Required      |
-| :---:        | :---:            | :---:                                                                                                            | :---:         |
-| callback     | Function         | [Callback function](#callback)                                                                                   | Required      |
-| term         | String           | It is the term that you are searching for                                                                        | Required      |
+|  Name        | Type             | Description | Required |
+| :---:        | :---:            | :---: | :---: |
+| callback     | Function         | [Callback function](#callback) | Required |
+| term         | String           | It is the term that you are searching for | Required |
 | from         | number           | It is like the offset from [URL parameters](https://ecomstore.docs.apiary.io/#introduction/overview/url-params)  | Not Required  |
 | size         | number           | It is like the limit from [URL parameters](https://ecomstore.docs.apiary.io/#introduction/overview/url-params)   | Not Required  |
 | sort         | Number or Object | Sort products, default for views                                                                                 | Not Required  |
-| specs        | Object           | It is a object to filter results by prices                                                                       | Not Required  |
-| brands       | Object           | It is a array of brands to filter results by brands                                                              | Not Required  |
-| categories   | Object           | It is a array of categories to filter results by categories                                                      | Not Required  |
-|  prices      | Object           | It is a object to filter results by prices                                                                       | Not Required  |
-|  customDsl   | Object           | It is a object, to create your own request body search                                                           | Not Required  |
+| specs        | Object           | It is a object to filter results by specifications  | Not Required  |
+| brands       | Object           | It is a array of brands to filter results by brands | Not Required  |
+| categories   | Object           | It is a array of categories to filter results by categories | Not Required  |
+|  prices      | Object           | It is a object to filter results by prices | Not Required  |
+|  customDsl   | Object           | It is a object, to create your own request body search | Not Required  |
 
 #### Example
 Search by term only:
