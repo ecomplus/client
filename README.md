@@ -388,7 +388,7 @@ The order that the resultant products will be sort is:
 3. The products with more ad relevance;
 4. Sort object.
 
-##### Sort Object
+#### Sort Object
 To make your work easier, we have created three default sort options, by views, price and sales:
 
 | Number | Name  | Usage |
