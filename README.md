@@ -393,27 +393,16 @@ To make your work easier, we have created three default sort options, by views, 
 
 | Number | Name  | Usage |
 | :---:  | :---: | :---: |
-| 0      | views | Sort by views, products with more views will appear first |
 | 1      | sales | Sort by sales, products that sells more will appear first |
 | 2      | price | Sort by price ascending, products with lowest price will appear first |
 | 3      | price | Sort by price descending, products with highest price will appear first |
 
 If `sort` argument is undefined or null, default is to sort by views.
 
-If you don't want to sort by views, sales or prices,
-you can pass a sort object **but you have to follow the Elasticsearch documentation**.
-
-#### Example of sort object
-```javascript
-sort = {
-  'sales' : 'desc'
-}
-```
-
 #### Specs
-The specs is a object with specifications properties that we use to filter the search.
+The specs is a object with specifications properties that we use to filter the search. The key is the property name and the value is an array with the properties values.
 
-#### Example of filter object
+#### Example of specs object
 ```javascript
 specs = {
   'color': ['blue', 'red'],
@@ -432,6 +421,7 @@ The prices argument is a object that we use to filter the search too. You can li
 [Range query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-range-query.html)
 from Elasticsearch documentation.
 
+#### Example of prices object
 ```javascript
 prices = {
   'min': 10,
