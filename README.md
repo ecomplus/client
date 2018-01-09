@@ -256,7 +256,7 @@ EcomIo.listBrands(callback)
 
 EcomIo.listBrands(callback, 0, 1000, 1, ['name'])
 
-EcomIo.listBrands(callback, 'limit=2&offset=4')
+EcomIo.listBrands(callback, null, null, null, null, 'limit=2&offset=4')
 ```
 
 ### getCategory(callback, id)
@@ -315,7 +315,7 @@ EcomIo.listCategories(callback)
 
 EcomIo.listCategories(callback, 0, 1000, 1, ['name'])
 
-EcomIo.listCategories(callback, 'limit=2&offset=4')
+EcomIo.listCategories(callback, null, null, null, null, 'limit=2&offset=4')
 ```
 
 ### getCollection(callback, id)
@@ -374,7 +374,7 @@ EcomIo.listCollections(callback)
 
 EcomIo.listCollections(callback, 0, 1000, 1, ['name'])
 
-EcomIo.listCollections(callback, 'limit=2&offset=4')
+EcomIo.listCollections(callback, null, null, null, null, 'limit=2&offset=4')
 ```
 
 ### searchProduts(callback, term, from, size, sort, specs, brands, categories, prices, customDsl)
@@ -399,7 +399,7 @@ specifications.
 | term         | String           | It is the term that you are searching for | Required |
 | from         | number           | It is like the offset from [URL parameters](https://ecomstore.docs.apiary.io/#introduction/overview/url-params)  | Not Required  |
 | size         | number           | It is like the limit from [URL parameters](https://ecomstore.docs.apiary.io/#introduction/overview/url-params)   | Not Required  |
-| sort         | Number or Object | Sort products, default for views                                                                                 | Not Required  |
+| sort         | number           | Sort products, default for views                                                                                 | Not Required  |
 | specs        | Object           | It is an object to filter results by specifications  | Not Required  |
 | brands       | Object           | It is an array of brands to filter results by brands | Not Required  |
 | categories   | Object           | It is an array of categories to filter results by categories | Not Required  |
@@ -432,7 +432,7 @@ The order that the resultant products will be sort is:
 4. Sort object.
 
 ##### Sort Object
-To make your work easier, we have created three default sort options, by views, price and sales:
+We have created three default sort options, by views, price and sales:
 
 | Number | Name  | Usage |
 | :---:  | :---: | :---: |
