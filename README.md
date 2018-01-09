@@ -154,6 +154,47 @@ It is a method to get order by the ID.
 ``` javascript
 EcomIo.getOrder(callback, 'fe1000000000000000000005')
 ```
+### getCart(callback, id)
+It is a method to get cart by the ID.
+
+#### Arguments
+|  Name    | Type     | Required  |
+| :---:    | :---:    | :---:     |
+| callback | Function | Required  |
+| id       | String   | Required  |
+
+#### Example
+```javascript
+EcomIo.getCart(callback, '2ca000000000000000000003')
+```
+
+### getCustomer(callback, id)
+It is a method to get customer by the ID.
+
+#### Arguments
+|  Name    | Type     | Required  |
+| :---:    | :---:    | :---:     |
+| callback | Function | Required  |
+| id       | String   | Required  |
+
+#### Example
+```javascript
+EcomIo.getCustomer(callback, '3c1000000000000000000003')
+```
+
+### getApplication(callback, id)
+It is a method to get application by the ID.
+
+#### Arguments
+|  Name    | Type     | Required  |
+| :---:    | :---:    | :---:     |
+| callback | Function | Required  |
+| id       | String   | Required  |
+
+#### Example
+```javascript
+EcomIo.getApplication(callback, '42aa00000000000000000111')
+```
 
 ### getBrand(callback, id)
 It is a method to get brand by the ID.
