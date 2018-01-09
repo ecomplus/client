@@ -390,6 +390,8 @@ specifications.
 
 [Type mapping reference](https://ecomsearch.docs.apiary.io/#reference/items).
 
+**The term is the only argument that is required but, if you send the customDsl you dont dont need to send the term.**
+
 #### Arguments
 |  Name        | Type             | Description | Required |
 | :---:        | :---:            | :---: | :---: |
@@ -441,7 +443,7 @@ To make your work easier, we have created three default sort options, by views, 
 If `sort` argument is undefined or null, default is to sort by views.
 
 #### Specs
-The specs is a object with specifications properties that we use to filter the search. The key is the property name and the value is an array with the properties values.
+The specs is a object with specifications properties that we use to filter the search. The key is the specifications name and the value is an array with the specifications values.
 
 #### Example of specs object
 ```javascript
@@ -478,7 +480,7 @@ prices = {
 }
 ```
 #### CustomDsl
-The customDsl it is a object that you can pass to do your own request body search to Elasticsearch. So if you want to the search by something else that we are not using, you can create a body based on [Request body Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html) and do it. **But remember must be a valid body from Request body search from Elasticsearch documentation.**
+The customDsl it is a object that you can pass to do your own request body search to Elasticsearch. So if you want to search by something else that we are not using, you can create a body based on [Request body Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html) and do it. **But remember must be a valid body from Request body search from Elasticsearch documentation.** 
 
 ### getRecommendedProducts(callback, id)
 Returns up to 12 recommended products, selecting the products that was more
