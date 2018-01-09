@@ -110,18 +110,19 @@ var EcomIo = function () {
           // treat response
           response(res.statusCode, rawData, callback)
         })
-        req.on('error', function (err) {
-          logger.error(err)
-          // callback with null body
-          callback(err, null)
-        })
-
-        if (body) {
-          // send JSON body
-          req.write(JSON.stringify(body))
-        }
-        req.end()
       })
+      
+      req.on('error', function (err) {
+        logger.error(err)
+        // callback with null body
+        callback(err, null)
+      })
+
+      if (body) {
+        // send JSON body
+        req.write(JSON.stringify(body))
+      }
+      req.end()
     } else {
       // call with AJAX
       let ajax = new XMLHttpRequest()
