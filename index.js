@@ -111,7 +111,7 @@ var EcomIo = function () {
           response(res.statusCode, rawData, callback)
         })
       })
-      
+
       req.on('error', function (err) {
         logger.error(err)
         // callback with null body
