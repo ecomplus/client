@@ -42,39 +42,43 @@ Before you call the other methods you need to initialize the library with the st
 The `Logger` argument is not required, but you can pass a _Console_ object,
 with properties _log_ and _error_, if you want to save output on file.
 
-#### Arguments
+**Arguments**
+
 | Name    | Type             | Required     |
 | :---:   | :---:            | :---:        |
 | StoreId | Number           | Required     |
 | Logger  | `Console` object | Not required |
 
-#### Example
+**Example**
+
 ```javascript
 EcomIo.init(100)
 ```
 
-## Methods
+# Methods
 The object returned from almost all methods is the response body of Store API endpoints,
 so if you want to see more examples, you should access the
 [API documentation](https://ecomstore.docs.apiary.io/#).
 
-### getProduct
-> (callback, id)
+## Get Product
+`getProduct(callback, id)`
 
-It is a method to get a product by the ID.
+> It is a method to read a product object by the ID.
 
-###### Arguments
+**Arguments**
+
 |  Name    | Type     | Required   |
 | :---:    | :---:    | :---:      |
 | callback | Function | Required   |
 | id       | String   | Required   |
 
-###### Example
+**Example**
+
 ```javascript
 EcomIo.getProduct(callback, '123a5432109876543210cdef')
 ```
-#### Return
-Example of returned body object:
+
+**Return**
 
 ```json
 {
@@ -90,76 +94,47 @@ Example of returned body object:
   "price": 42.9,
   "base_price": 60,
   "quantity": 100,
-  "dimensions": {
-    "width": {
-      "value": 10,
-      "unit": "cm"
-    },
-    "height": {
-      "value": 8,
-      "unit": "cm"
-    },
-    "length": {
-      "value": 8,
-      "unit": "cm"
-    }
-  },
-  "weight": {
-    "value": 400,
-    "unit": "g"
-  },
-  "brands": [
-    {
-      "_id": "a10000000000000000000001",
-      "name": "Shirts Example",
-      "slug": "shirts-example",
-      "logo": {
-        "url": "https://mycdn.com/shirts-example.jpg",
-        "size": "100x50"
-      }
-    }
-  ],
-  "categories": [
-    {
-      "_id": "f10000000000000000000001",
-      "name": "Polo Shirts",
-      "slug": "polo"
-    }
-  ]
+  ...
 }
  ```
 
-### getProductBySku(callback, sku)
-Similar to `getProduct` but here you pass the product SKU instead of ID.
+## Get Product By Sku
+`getProductBySku(callback, sku)`
 
-#### Arguments
+> Similar to `getProduct`, with the same return,
+but here you pass the product SKU instead of ID.
+
+**Arguments**
+
 |  Name    | Type     | Required  |
 | :---:    | :---:    | :---:     |
 | callback | Function | Required  |
 | sku      | String   | Required  |
 
-#### Example
+**Example**
+
 ```javascript
 EcomIo.getProductBySku(callback, 'COD1')
 ```
 
-#### Return
-Different from the [store API](https://ecomstore.docs.apiary.io/#),
-in that case the return is the same of `getProduct`.
+## Get Order
+`getOrder(callback, id)`
 
-### getOrder(callback, id)
-It is a method to get order by the ID.
+> It is a method to read an order object by the ID.
 
-#### Arguments
+**Arguments**
+
 |  Name    | Type     | Required |
 | :---:    | :---:    | :---:    |
 | callback | Function | Required |
 | id       | String   | Required |
 
-#### Example
+**Example**
+
 ``` javascript
 EcomIo.getOrder(callback, 'fe1000000000000000000005')
 ```
+
 ### getCart(callback, id)
 It is a method to get cart by the ID.
 
