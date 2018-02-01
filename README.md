@@ -193,7 +193,7 @@ EcomIo.getBrand(callback, 'a10000000000000000000001')
 | slug      | String   | :heavy_check_mark: |
 
 ```javascript
-EcomIo.getBrandBySlug(callback, 'brand-four')
+EcomIo.findBrandBySlug(callback, 'brand-four')
 ```
 
 ## List Brands
@@ -261,7 +261,7 @@ EcomIo.getCategory(callback, 'f10000000000000000000001')
 | slug      | String   | :heavy_check_mark: |
 
 ```javascript
-EcomIo.getCategoryBySlug(callback, 'category-four')
+EcomIo.findCategoryBySlug(callback, 'category-four')
 ```
 
 ## List Categories
@@ -315,7 +315,7 @@ EcomIo.getCollection(callback, 'f10000000000000000000001')
 | slug      | String   | :heavy_check_mark: |
 
 ```javascript
-EcomIo.getCollectionBySlug(callback, 'special-collection')
+EcomIo.findCollectionBySlug(callback, 'special-collection')
 ```
 
 ## List Collections
