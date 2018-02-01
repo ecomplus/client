@@ -267,7 +267,7 @@ EcomIo.getCategoryBySlug(callback, 'category-four')
 ## List Categories
 `listCategories(callback, offset, limit, sort, fields, customQuery)`
 
-> Similar to [`listBrands`](#get-brand-by-slug),
+> Similar to [`listBrands`](#list-brands),
 but listing store categories.
 
 | Arguments   | Type     | Required |
