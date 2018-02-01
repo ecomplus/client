@@ -18,6 +18,38 @@ Or install [npm package](https://www.npmjs.com/package/ecomplus-storefront):
 
 `npm install --save ecomplus-storefront`
 
+# Summary
+
+1. [Getting Started](#getting-started)
+    * [Callback](#callback)
+    * [Initialize](#initialize)
+2. [Methods](#methods)
+    * [Get Product](#get-product)
+    * [Get Product By Sku](#get-product-by-sku)
+    * [Get Order](#get-order)
+    * [Get Cart](#get-cart)
+    * [Get Customer](#get-customer)
+    * [Get Application](#get-application)
+    * [Get Brand](#get-brand)
+    * [Find Brand By Slug](#find-brand-by-slug)
+    * [List Brands](#list-brands)
+    * [Get Category](#get-category)
+    * [Find Category By Slug](#find-category-by-slug)
+    * [List Categories](#list-categories)
+    * [Get Collections](#get-collections)
+    * [Find Collection By Slug](#Find Collection-by-slug)
+    * [List Collections](#list-collections)
+    * [Search Products](#search-products)
+        * [Term](#term)
+        * [Sort](#sort)
+        * [Specs](#specs)
+        * [Brands](#brands)
+        * [Categories](#categories)
+        * [Prices](#prices)
+        * [Custom DSL](#custom-dsl)
+    * [Get Recommended Products](#get-recommended-products)
+    * [Get Related Products](#get-related-products)
+
 # Getting Started
 The library declares an object called `EcomIo`,
 with methods (object properties) to read public resources from the APIs.
@@ -329,7 +361,7 @@ EcomIo.listCategories(callback, null, null, null, null, 'limit=2&offset=4')
 EcomIo.getCollection(callback, 'f10000000000000000000001')
 ```
 
-## Find Collection
+## Find Collection By Slug
 `findCollectionBySlug(callback, slug)`
 
 [API reference](https://ecomstore.docs.apiary.io/#reference/collections/all-collections/find-collections)
