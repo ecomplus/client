@@ -354,7 +354,7 @@ var EcomIo = function () {
       getById(callback, 'brands', id)
     },
 
-    'getBrandBySlug': function (callback, slug) {
+    'findBrandBySlug': function (callback, slug) {
       let endpoint = '/brands.json?limit=1&slug=' + slug
       getByField(callback, slug, 'slug', 'brand', endpoint, EcomIo.getBrand)
     },
@@ -368,7 +368,7 @@ var EcomIo = function () {
       getById(callback, 'categories', id)
     },
 
-    'getCategoryBySlug': function (callback, slug) {
+    'findCategoryBySlug': function (callback, slug) {
       let endpoint = '/categories.json?limit=1&slug=' + slug
       getByField(callback, slug, 'slug', 'category', endpoint, EcomIo.getCategory)
     },
@@ -382,7 +382,7 @@ var EcomIo = function () {
       getById(callback, 'collections', id)
     },
 
-    'getCollectionBySlug': function (callback, slug) {
+    'findCollectionBySlug': function (callback, slug) {
       let endpoint = '/collections.json?limit=1&slug=' + slug
       getByField(callback, slug, 'slug', 'collection', endpoint, EcomIo.getCollection)
     },
