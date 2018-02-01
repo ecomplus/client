@@ -6,11 +6,15 @@ JS library for E-Com Plus storefront with methods to access public resources fro
 
 __This library implements only GET requests to public resources, so there aren't authentication.__
 
-You can include minified script from URL:
+You can include minified script,
+[together with Axios](#https://github.com/axios/axios), from URL below:
 
 [https://ecom.nyc3.digitaloceanspaces.com/plus/js/sdk.min.js](https://ecom.nyc3.digitaloceanspaces.com/plus/js/sdk.min.js)
 
-`<script src="https://ecom.nyc3.digitaloceanspaces.com/plus/js/sdk.min.js"></script>`
+```html
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://ecom.nyc3.digitaloceanspaces.com/plus/js/sdk.min.js"></script>
+```
 
 Or install [npm package](https://www.npmjs.com/package/ecomplus-storefront):
 
@@ -480,7 +484,7 @@ prices = {
 }
 ```
 #### CustomDsl
-The customDsl it is a object that you can pass to do your own request body search to Elasticsearch. So if you want to search by something else that we are not using, you can create a body based on [Request body Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html) and do it. **But remember must be a valid body from Request body search from Elasticsearch documentation.** 
+The customDsl it is a object that you can pass to do your own request body search to Elasticsearch. So if you want to search by something else that we are not using, you can create a body based on [Request body Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html) and do it. **But remember must be a valid body from Request body search from Elasticsearch documentation.**
 
 ### getRecommendedProducts(callback, id)
 Returns up to 12 recommended products, selecting the products that was more

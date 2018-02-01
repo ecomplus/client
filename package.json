@@ -27,5 +27,8 @@
   "homepage": "https://github.com/ecomclub/ecomplus-sdk-js#readme",
   "standard": {
     "globals": [ "XMLHttpRequest" ]
+  },
+  "dependencies": {
+    "axios": "0.x"
   }
 }
