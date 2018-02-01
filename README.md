@@ -377,6 +377,8 @@ EcomIo.listCollections(callback, null, null, null, null, 'limit=2&offset=4')
 ## Search Products
 `searchProducts(callback, term, from, size, sort, specs, brands, categories, prices, customDsl)`
 
+[API reference](#https://ecomsearch.docs.apiary.io/#reference/items/items-search/complex-search)
+
 This method calls [E-Com Plus Search API](https://ecomsearch.docs.apiary.io/#),
 that proxy pass all requests to Elasticsearch
 [Search APIs](https://www.elastic.co/guide/en/elasticsearch/reference/current/search.html)
@@ -393,7 +395,7 @@ specifications and this
 | callback   | Function | :heavy_check_mark: |         | [Callback function](#callback) |
 | term       | String   |                    |         | Term that you are searching for |
 | from       | number   |                    | 0       | Results offset number |
-| size       | number   |                    | 12      | Maximum number of results |
+| size       | number   |                    | 24      | Maximum number of results |
 | sort       | number   |                    | 0       | Results ordering, default is by views |
 | specs      | Object   |                    |         | Filter results by item specifications |
 | brands     | Array    |                    |         | Filter results by brands |
@@ -431,7 +433,7 @@ The order that the resultant products will be sort is:
 
 Default enumered `sort` options:
 
-| Number | Name  | Usage |
+| Number | Field | Usage |
 | :---:  | :---: | :---: |
 | 0      | views | Sort by popularity, products with more page views will appear first |
 | 1      | sales | Sort by sales, products that sells more will appear first |
@@ -448,69 +450,92 @@ with the specifications values.
 
 ```javascript
 // sample specs object
-specs = {
+let specs = {
   'color': [ 'blue', 'red' ],
   'size': [ 'G' ]
 }
 ```
 
 ### Brands
-The brands parameter is an array that we use to filter the search. So if you want to filter by Brands you can pass an array of brands.
+The `brands` argument should be an array of brands IDs to filter the search.
+If used, only products of specified brand(s) will be returned.
 
 ```javascript
-brands = ['brand1', 'brand2']
+// sample brands array
+let brands = [
+  'a10000000000000000001110',
+  'a10000000000000000001111'
+]
 ```
 
-#### Categories
-It is very similar to brands argument, categories parameter is an array of categories that we use to filter the search.
+### Categories
+The `categories` argument should be an array of categories IDs to filter the search.
+If used, only products of specified categorie(s) will be returned.
 
 ```javascript
-categories = ['category1', 'category2']
+// sample categories array
+let categories = [
+  'b10000000000000000001110',
+  'b10000000000000000001111'
+]
 ```
 
-#### Prices
-The prices argument is a object that we use to filter the search too. You can limit the search by pass the minimum and the maximum prices. It is based on
+### Prices
+The prices argument should be an object to filter search by price range.
+You can pass the minimum and the maximum prices.
+
+It's based on
 [Range query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-range-query.html)
 from Elasticsearch documentation.
 
-#### Example of prices object
 ```javascript
-prices = {
+// sample prices object
+let prices = {
   'min': 10,
   'max': 100
 }
 ```
-#### CustomDsl
-The customDsl it is a object that you can pass to do your own request body search to Elasticsearch. So if you want to search by something else that we are not using, you can create a body based on [Request body Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html) and do it. **But remember must be a valid body from Request body search from Elasticsearch documentation.**
 
-### getRecommendedProducts(callback, id)
+### Custom DSL
+The `customDsl` is an object that you can pass
+to run your own Elasticsearch
+[Query DSL](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html).
+
+**It must be a valid
+[Request Body Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html).**
+
+## Get Recommended Products
+`getRecommendedProducts(callback, id)`
+
+[API reference](#https://ecomgraphs.docs.apiary.io/#reference/products/recommended/list-recommended-items)
+
 Returns up to 12 recommended products, selecting the products that was more
 times bought together with the reference product.
 You should use it to do something like "who bought it, bought too".
 
-#### Arguments
-| Name     | Type     | Required |
-| :---:    | :---:    | :---:    |
-| callback | Function | Required |
-| id       | String   | Required |
+| Arguments | Type     | Required |
+| :---:     | :---:    | :---: |
+| callback  | Function | :heavy_check_mark: |
+| id        | String   | :heavy_check_mark: |
 
-#### Example
 ```javascript
 EcomIo.getRecommendedProducts(callback, 'a00000000000000000000000')
 ```
 
-### getRelatedProducts(callback, id)
+## Get Related Products
+`getRelatedProducts(callback, id)`
+
+[API reference](#https://ecomgraphs.docs.apiary.io/#reference/products/related/list-related-items)
+
 Returns up to 12 related products, selecting the products that have more categories
 in common with the reference product.
 You should use it to do something like "you can also be interested by".
 
-#### Arguments
-| Name     | Type     |  Required |
-| :---:    | :---:    |  :---:    |
-| callback | Function |  Required |
-| id       | String   |  Required |
+| Arguments | Type     | Required |
+| :---:     | :---:    | :---: |
+| callback  | Function | :heavy_check_mark: |
+| id        | String   | :heavy_check_mark: |
 
-#### Example
 ```javascript
 EcomIo.getRelatedProducts(callback, 'a00000000000000000000000')
 ```
