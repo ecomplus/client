@@ -30,7 +30,7 @@ it's the function that you should pass to treat the request response.
 | Arguments | Type                   | Required |
 | :---:     | :---:                  | :---: |
 | err       | `Error` object or null | :heavy_check_mark: |
-| body      | Object or null         | |
+| body      | Object or null         | :heavy_check_mark: |
 
 If the method runs correctly,
 `err` will be null, otherwise, it will be an
@@ -66,7 +66,7 @@ so if you want to see more examples, you should access the
 ## Get Product
 `getProduct(callback, id)`
 
-> It is a method to read a product object by the ID.
+> Method to read a product object by the ID.
 
 | Arguments | Type     | Required |
 | :---:     | :---:    | :---: |
@@ -115,21 +115,21 @@ EcomIo.getProductBySku(callback, 'COD1')
 ## Get Order
 `getOrder(callback, id)`
 
-> It is a method to read an order object by the ID.
+> Method to read an order object by the ID.
 
 | Arguments | Type     | Required |
 | :---:     | :---:    | :---: |
 | callback  | Function | :heavy_check_mark: |
 | id        | String   | :heavy_check_mark: |
 
-``` javascript
+```javascript
 EcomIo.getOrder(callback, 'fe1000000000000000000005')
 ```
 
 ## Get Cart
-`getCart(callback, id)``
+`getCart(callback, id)`
 
-> It is a method to read a cart object by the ID.
+> Method to read a cart object by the ID.
 
 | Arguments | Type     | Required |
 | :---:     | :---:    | :---: |
@@ -143,7 +143,7 @@ EcomIo.getCart(callback, '2ca000000000000000000003')
 ## Get Customer
 `getCustomer(callback, id)`
 
-> It is a method to read a customer object by the ID.
+> Method to read a customer object by the ID.
 
 | Arguments | Type     | Required |
 | :---:     | :---:    | :---: |
@@ -157,7 +157,7 @@ EcomIo.getCustomer(callback, '3c1000000000000000000003')
 ## Get Application
 `getApplication(callback, id)`
 
-> It is a method to read an application object by the ID.
+> Method to read an application object by the ID.
 
 | Arguments | Type     | Required |
 | :---:     | :---:    | :---: |
@@ -171,7 +171,7 @@ EcomIo.getApplication(callback, '42aa00000000000000000111')
 ## Get Brand
 `getBrand(callback, id)`
 
-> It is a method to read a brand object by the ID.
+> Method to read a brand object by the ID.
 
 | Arguments | Type     | Required |
 | :---:     | :---:    | :---: |
@@ -182,10 +182,10 @@ EcomIo.getApplication(callback, '42aa00000000000000000111')
 EcomIo.getBrand(callback, 'a10000000000000000000001')
 ```
 
-## Get Brand By Slug
-`getBrandBySlug(callback, slug)`
+## Find Brand By Slug
+`findBrandBySlug(callback, slug)`
 
-> It is a method to search and read a brand by the slug.
+> Method to find and read a brand by the slug.
 
 | Arguments | Type     | Required |
 | :---:     | :---:    | :---: |
@@ -196,34 +196,44 @@ EcomIo.getBrand(callback, 'a10000000000000000000001')
 EcomIo.getBrandBySlug(callback, 'brand-four')
 ```
 
-## listBrands(callback, offset, limit, sort, fields, customQuery)
-It is a method to list all the store brands.
-Offset, limit, sort and fields are [URL parameters](https://ecomstore.docs.apiary.io/#introduction/overview/url-params) (metadata) for pagination and ordering, you can use customQuery to query by particular object properties.
+## List Brands
+`listBrands(callback, offset, limit, sort, fields, customQuery)`
 
-#### Arguments
-|  Name       | Type     | Required     |
-| :---:       | :---:    | :---:        |
-| callback    | Function | Required     |
-| offset      | Number   | Not required |
-| limit       | Number   | Not required |
-| sort        | Number   | Not required |
-| fields      | Array    | Not required |
-| customQuery | String   | Not required |
+> Method to list the store brands.
 
-**We have created two default sort options:**
+Offset, limit, sort and fields are
+[URL parameters](https://ecomstore.docs.apiary.io/#introduction/overview/url-params) (metadata)
+for pagination and ordering,
+you can use customQuery to query by particular object properties.
 
-| Number | Name  | Usage                   |
-| :---:  | :---: | :---:                   |
-| 1      | name  | Sort by name ascending  |
-| 2      | name  | Sort by name descending |
+| Arguments   | Type     | Required |
+| :---:       | :---:    | :---: |
+| callback    | Function | :heavy_check_mark: |
+| offset      | Number   | |
+| limit       | Number   | |
+| sort        | Number   | |
+| fields      | Array    | |
+| customQuery | String   | |
 
+Default enumered `sort` options:
 
-#### Example
+| Number | Usage |
+| :---:  | :---: |
+| 1      | Sort by name ascending |
+| 2      | Sort by name descending |
+| 3      | Sort by creation date ascending |
+| 4      | Sort by creation date descending |
+| 5      | Sort by popularity descending |
+
 ```javascript
 EcomIo.listBrands(callback)
+```
 
+```javascript
 EcomIo.listBrands(callback, 0, 1000, 1, ['name'])
+```
 
+```javascript
 EcomIo.listBrands(callback, null, null, null, null, 'limit=2&offset=4')
 ```
 
