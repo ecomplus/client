@@ -66,8 +66,9 @@ so if you want to see more examples, you should access the
 ## Get Product
 `getProduct(callback, id)`
 
+[API reference](https://ecomstore.docs.apiary.io/#reference/products/specific-product/read-product)
+
 > Method to read a product object by the ID.
-[API reference](https://ecomstore.docs.apiary.io/#reference/products/specific-product/read-product).
 
 | Arguments | Type     | Required |
 | :---:     | :---:    | :---: |
@@ -116,8 +117,9 @@ EcomIo.getProductBySku(callback, 'COD1')
 ## Get Order
 `getOrder(callback, id)`
 
+[API reference](https://ecomstore.docs.apiary.io/#reference/orders/specific-order/read-order)
+
 > Method to read an order object by the ID.
-[API reference](https://ecomstore.docs.apiary.io/#reference/orders/specific-order/read-order).
 
 | Arguments | Type     | Required |
 | :---:     | :---:    | :---: |
@@ -131,8 +133,9 @@ EcomIo.getOrder(callback, 'fe1000000000000000000005')
 ## Get Cart
 `getCart(callback, id)`
 
+[API reference](https://ecomstore.docs.apiary.io/#reference/carts/specific-cart/read-cart)
+
 > Method to read a cart object by the ID.
-[API reference](https://ecomstore.docs.apiary.io/#reference/carts/specific-cart/read-cart).
 
 | Arguments | Type     | Required |
 | :---:     | :---:    | :---: |
@@ -146,8 +149,9 @@ EcomIo.getCart(callback, '2ca000000000000000000003')
 ## Get Customer
 `getCustomer(callback, id)`
 
+[API reference](https://ecomstore.docs.apiary.io/#reference/customers/specific-customer/read-customer)
+
 > Method to read a customer object by the ID.
-[API reference](https://ecomstore.docs.apiary.io/#reference/customers/specific-customer/read-customer).
 
 | Arguments | Type     | Required |
 | :---:     | :---:    | :---: |
@@ -161,8 +165,9 @@ EcomIo.getCustomer(callback, '3c1000000000000000000003')
 ## Get Application
 `getApplication(callback, id)`
 
+[API reference](https://ecomstore.docs.apiary.io/#reference/applications/specific-application/read-application)
+
 > Method to read an application object by the ID.
-[API reference](https://ecomstore.docs.apiary.io/#reference/applications/specific-application/read-application).
 
 | Arguments | Type     | Required |
 | :---:     | :---:    | :---: |
@@ -176,8 +181,9 @@ EcomIo.getApplication(callback, '42aa00000000000000000111')
 ## Get Brand
 `getBrand(callback, id)`
 
+[API reference](https://ecomstore.docs.apiary.io/#reference/brands/specific-brand/read-brand)
+
 > Method to read a brand object by the ID.
-[API reference](https://ecomstore.docs.apiary.io/#reference/brands/specific-brand/read-brand).
 
 | Arguments | Type     | Required |
 | :---:     | :---:    | :---: |
@@ -191,8 +197,9 @@ EcomIo.getBrand(callback, 'a10000000000000000000001')
 ## Find Brand By Slug
 `findBrandBySlug(callback, slug)`
 
+[API reference](https://ecomstore.docs.apiary.io/#reference/brands/all-brands/find-brands)
+
 > Method to find and read a brand by the slug.
-[API reference](https://ecomstore.docs.apiary.io/#reference/brands/all-brands/find-brands).
 
 | Arguments | Type     | Required |
 | :---:     | :---:    | :---: |
@@ -206,8 +213,9 @@ EcomIo.findBrandBySlug(callback, 'brand-four')
 ## List Brands
 `listBrands(callback, offset, limit, sort, fields, customQuery)`
 
+[API reference](https://ecomstore.docs.apiary.io/#reference/brands/all-brands/pagination-and-ordering)
+
 > Method to list the store brands.
-[API reference](https://ecomstore.docs.apiary.io/#reference/brands/all-brands/pagination-and-ordering).
 
 | Arguments   | Type     | Required |
 | :---:       | :---:    | :---: |
@@ -245,8 +253,9 @@ EcomIo.listBrands(callback, null, null, null, null, 'limit=2&offset=4')
 ## Get Category
 `getCategory(callback, id)`
 
+[API reference](https://ecomstore.docs.apiary.io/#reference/categories/specific-category/read-category)
+
 > Method to read a category object by the ID.
-[API reference](https://ecomstore.docs.apiary.io/#reference/categories/specific-category/read-category).
 
 | Arguments | Type     | Required |
 | :---:     | :---:    | :---: |
@@ -260,8 +269,9 @@ EcomIo.getCategory(callback, 'f10000000000000000000001')
 ## Find Category By Slug
 `findCategoryBySlug(callback, slug)`
 
+[API reference](https://ecomstore.docs.apiary.io/#reference/categories/all-categories/find-categories)
+
 > Method to find and read a category by the slug.
-[API reference](https://ecomstore.docs.apiary.io/#reference/categories/all-categories/find-categories).
 
 | Arguments | Type     | Required |
 | :---:     | :---:    | :---: |
@@ -275,9 +285,10 @@ EcomIo.findCategoryBySlug(callback, 'category-four')
 ## List Categories
 `listCategories(callback, offset, limit, sort, fields, customQuery)`
 
+[API reference](https://ecomstore.docs.apiary.io/#reference/categories/all-categories/pagination-and-ordering)
+
 > Similar to [`listBrands`](#list-brands),
 but listing store categories.
-[API reference](https://ecomstore.docs.apiary.io/#reference/categories/all-categories/pagination-and-ordering).
 
 | Arguments   | Type     | Required |
 | :---:       | :---:    | :---: |
@@ -301,8 +312,9 @@ EcomIo.listCategories(callback, null, null, null, null, 'limit=2&offset=4')
 ## Get Collections
 `getCollection(callback, id)`
 
+[API reference](https://ecomstore.docs.apiary.io/#reference/collections/specific-collection/read-collection)
+
 > Method to read a collection object by the ID.
-[API reference](https://ecomstore.docs.apiary.io/#reference/collections/specific-collection/read-collection).
 
 | Arguments | Type     | Required |
 | :---:     | :---:    | :---: |
@@ -316,8 +328,9 @@ EcomIo.getCollection(callback, 'f10000000000000000000001')
 ## Find Collection
 `findCollectionBySlug(callback, slug)`
 
+[API reference](https://ecomstore.docs.apiary.io/#reference/collections/all-collections/find-collections)
+
 > Method to find and read a collection by the slug.
-[API reference](https://ecomstore.docs.apiary.io/#reference/collections/all-collections/find-collections).
 
 | Arguments | Type     | Required |
 | :---:     | :---:    | :---: |
@@ -331,9 +344,10 @@ EcomIo.findCollectionBySlug(callback, 'special-collection')
 ## List Collections
 `listCollections(callback, offset, limit, sort, fields, customQuery)`
 
+[API reference](https://ecomstore.docs.apiary.io/#reference/collections/all-collections/pagination-and-ordering)
+
 > Similar to [`listBrands`](#list-brands),
 but listing store collections.
-[API reference](https://ecomstore.docs.apiary.io/#reference/collections/all-collections/pagination-and-ordering).
 
 | Arguments   | Type     | Required |
 | :---:       | :---:    | :---: |
