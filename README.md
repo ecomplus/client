@@ -201,11 +201,6 @@ EcomIo.getBrandBySlug(callback, 'brand-four')
 
 > Method to list the store brands.
 
-Offset, limit, sort and fields are
-[URL parameters](https://ecomstore.docs.apiary.io/#introduction/overview/url-params) (metadata)
-for pagination and ordering,
-you can use customQuery to query by particular object properties.
-
 | Arguments   | Type     | Required |
 | :---:       | :---:    | :---: |
 | callback    | Function | :heavy_check_mark: |
@@ -214,6 +209,11 @@ you can use customQuery to query by particular object properties.
 | sort        | Number   | |
 | fields      | Array    | |
 | customQuery | String   | |
+
+Offset, limit, sort and fields are
+[URL parameters](https://ecomstore.docs.apiary.io/#introduction/overview/url-params) (metadata)
+for pagination and ordering,
+you can use customQuery to query by particular object properties.
 
 Default enumered `sort` options:
 
@@ -237,62 +237,56 @@ EcomIo.listBrands(callback, 0, 1000, 1, ['name'])
 EcomIo.listBrands(callback, null, null, null, null, 'limit=2&offset=4')
 ```
 
-### getCategory(callback, id)
-Similar to `getBrand` but here the returned body is the category.
+## Get Category
+`getCategory(callback, id)`
 
-#### Arguments
-| Name     | Type     | Required |
-| :---:    | :---:    | :---:    |
-| callback | Function | Required |
-| id       | String   | Required |
+> Method to read a category object by the ID.
 
-#### Example
+| Arguments | Type     | Required |
+| :---:     | :---:    | :---: |
+| callback  | Function | :heavy_check_mark: |
+| id        | String   | :heavy_check_mark: |
+
 ```javascript
 EcomIo.getCategory(callback, 'f10000000000000000000001')
 ```
-### getCategoryBySlug(callback, slug)
-Similar to `getBrandBySlug` but here the returned body is the category.
 
-#### Arguments
-|  Name    | Type     | Required |
-| :---:    | :---:    | :---:    |
-| callback | Function | Required |
-| slug     | String   | Required |
+## Find Category By Slug
+`findCategoryBySlug(callback, slug)`
 
+> Method to find and read a category by the slug.
 
-#### Example
-With no filter:
+| Arguments | Type     | Required |
+| :---:     | :---:    | :---: |
+| callback  | Function | :heavy_check_mark: |
+| slug      | String   | :heavy_check_mark: |
+
 ```javascript
 EcomIo.getCategoryBySlug(callback, 'category-four')
 ```
-### listCategories(callback, offset, limit, sort, fields, customQuery)
-Similar to `listBrands` but here the returned body is all the store categories.
-Offset, limit, sort and fields are [URL parameters](https://ecomstore.docs.apiary.io/#introduction/overview/url-params) (metadata) for pagination and ordering, you can use customQuery to query by particular object properties.
 
-#### Arguments
-|  Name       | Type     | Required     |
-| :---:       | :---:    | :---:        |
-| callback    | Function | Required     |
-| offset      | Number   | Not required |
-| limit       | Number   | Not required |
-| sort        | Number   | Not required |
-| fields      | Array    | Not required |
-| customQuery | String   | Not required |
+## List Categories
+`listCategories(callback, offset, limit, sort, fields, customQuery)`
 
-**We have created two default sort options:**
+> Similar to [`getBrandBySlug`](#get-brand-by-slug), but
+listing store categories.
 
-| Number | Name  | Usage                   |
-| :---:  | :---: | :---:                   |
-| 1      | name  | Sort by name ascending  |
-| 2      | name  | Sort by name descending |
+| Arguments   | Type     | Required |
+| :---:       | :---:    | :---: |
+| callback    | Function | :heavy_check_mark: |
+| offset      | Number   | |
+| limit       | Number   | |
+| sort        | Number   | |
+| fields      | Array    | |
+| customQuery | String   | |
 
-
-#### Example
 ```javascript
 EcomIo.listCategories(callback)
-
+```
+```javascript
 EcomIo.listCategories(callback, 0, 1000, 1, ['name'])
-
+```
+```javascript
 EcomIo.listCategories(callback, null, null, null, null, 'limit=2&offset=4')
 ```
 
