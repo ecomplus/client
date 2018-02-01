@@ -79,21 +79,21 @@ EcomIo.getProduct(callback, '123a5432109876543210cdef')
 
 Example of returned `body`:
 
-```json
+```javascript
 {
-  "_id": "123a5432109876543210cdef",
-  "store_id": 100,
-  "sku": "s-MP_2B4",
-  "name": "Mens Pique Polo Shirt",
-  "keywords": [
-    "tshirt",
-    "t-shirt",
-    "man"
+  '_id': '123a5432109876543210cdef',
+  'store_id': 100,
+  'sku': 's-MP_2B4',
+  'name': 'Mens Pique Polo Shirt',
+  'keywords': [
+    'tshirt',
+    't-shirt',
+    'man'
   ],
-  "price": 42.9,
-  "base_price": 60,
-  "quantity": 100,
-  ...
+  'price': 42.9,
+  'base_price': 60,
+  'quantity': 100,
+  // ...
 }
  ```
 
