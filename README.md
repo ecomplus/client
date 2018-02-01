@@ -63,13 +63,13 @@ so if you want to see more examples, you should access the
 
 It is a method to get a product by the ID.
 
-**Arguments**
+###### Arguments
 |  Name    | Type     | Required   |
 | :---:    | :---:    | :---:      |
 | callback | Function | Required   |
 | id       | String   | Required   |
 
-**Example**
+###### Example
 ```javascript
 EcomIo.getProduct(callback, '123a5432109876543210cdef')
 ```
