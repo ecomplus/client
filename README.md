@@ -6,10 +6,8 @@ JS library for E-Com Plus storefront with methods to access public resources fro
 
 __This library implements only GET requests to public resources, so there aren't authentication.__
 
-You can include minified script,
-[together with Axios](https://github.com/axios/axios), from URL below:
-
-[https://ecom.nyc3.digitaloceanspaces.com/plus/js/sdk.min.js](https://ecom.nyc3.digitaloceanspaces.com/plus/js/sdk.min.js)
+You can include minified script
+[together with Axios](https://github.com/axios/axios):
 
 ```html
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -29,23 +27,32 @@ All the methods are functions with _callback_ as his first argument,
 it's the function that you should pass to treat the request response.
 `callback` function must have two arguments:
 
-| Name  | Type             | Description |
-| :---: | :---:            | :---: |
-| err   | Null or Object   | [Error Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error) |
-| body  | Object           | Response body object (JSON parsed) |
+| Name  | Type                   | Required |
+| :---: | :---:                  | :---: |
+| err   | `Error` object or null | :heavy_check_mark: |
+| body  | Object or null         | |
+
+If the method runs correctly,
+`err` will be null, otherwise, it will be an
+[Error object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Error).
+
+The response object from the APIs is
+parsed and returned in `body`, it's null if no
+JSON response can be captured.
 
 ## Initialize
 `init(StoreId, Logger)`
 
 Before you call the other methods you need to initialize the library with the store ID.
 
-The `Logger` argument is not required, but you can pass a `Console` object,
+The `Logger` argument is not required, but you can pass a
+[Console object](https://developer.mozilla.org/docs/Web/API/Console),
 with properties `log` and `error`, if you want to save output on file.
 
 **Arguments**
 
 | Name    | Type             | Required |
-| :---:   | :---:            | :---:    |
+| :---:   | :---:            | :---: |
 | StoreId | Number           | :heavy_check_mark: |
 | Logger  | `Console` object | |
 
@@ -106,10 +113,10 @@ but here you pass the product SKU instead of ID.
 
 **Arguments**
 
-|  Name    | Type     | Required  |
-| :---:    | :---:    | :---:     |
-| callback | Function | Required  |
-| sku      | String   | Required  |
+|  Name    | Type     | Required |
+| :---:    | :---:    | :---: |
+| callback | Function | :heavy_check_mark: |
+| sku      | String   | :heavy_check_mark: |
 
 **Example**
 
@@ -125,9 +132,9 @@ EcomIo.getProductBySku(callback, 'COD1')
 **Arguments**
 
 |  Name    | Type     | Required |
-| :---:    | :---:    | :---:    |
-| callback | Function | Required |
-| id       | String   | Required |
+| :---:    | :---:    | :---: |
+| callback | Function | :heavy_check_mark: |
+| id       | String   | :heavy_check_mark: |
 
 **Example**
 
@@ -135,44 +142,51 @@ EcomIo.getProductBySku(callback, 'COD1')
 EcomIo.getOrder(callback, 'fe1000000000000000000005')
 ```
 
-### getCart(callback, id)
-It is a method to get cart by the ID.
+## Get Cart
+`getCart(callback, id)``
+It is a method to read a cart object by the ID.
 
-#### Arguments
-|  Name    | Type     | Required  |
-| :---:    | :---:    | :---:     |
-| callback | Function | Required  |
-| id       | String   | Required  |
+**Arguments**
 
-#### Example
+|  Name    | Type     | Required |
+| :---:    | :---:    | :---: |
+| callback | Function | :heavy_check_mark: |
+| id       | String   | :heavy_check_mark: |
+
+**Example**
+
 ```javascript
 EcomIo.getCart(callback, '2ca000000000000000000003')
 ```
 
-### getCustomer(callback, id)
-It is a method to get customer by the ID.
+## Get Customer
+`getCustomer(callback, id)`
 
-#### Arguments
+> It is a method to read a customer object by the ID.
+
+**Arguments**
+
 |  Name    | Type     | Required  |
 | :---:    | :---:    | :---:     |
 | callback | Function | Required  |
 | id       | String   | Required  |
 
-#### Example
+**Example**
+
 ```javascript
 EcomIo.getCustomer(callback, '3c1000000000000000000003')
 ```
 
-### getApplication(callback, id)
-It is a method to get application by the ID.
+## Get Application
+`getApplication(callback, id)`
 
-#### Arguments
-|  Name    | Type     | Required  |
-| :---:    | :---:    | :---:     |
-| callback | Function | Required  |
-| id       | String   | Required  |
+> It is a method to read an application object by the ID.
 
-#### Example
+| Arguments | Type     | Required  |
+| :---:     | :---:    | :---:     |
+| callback  | Function | Required  |
+| id        | String   | Required  |
+
 ```javascript
 EcomIo.getApplication(callback, '42aa00000000000000000111')
 ```
