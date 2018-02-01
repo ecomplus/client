@@ -39,15 +39,15 @@ it's the function that you should pass to treat the request response.
 
 Before you call the other methods you need to initialize the library with the store ID.
 
-The `Logger` argument is not required, but you can pass a _Console_ object,
-with properties _log_ and _error_, if you want to save output on file.
+The `Logger` argument is not required, but you can pass a `Console` object,
+with properties `log` and `error`, if you want to save output on file.
 
 **Arguments**
 
-| Name    | Type             | Required     |
-| :---:   | :---:            | :---:        |
-| StoreId | Number           | Required     |
-| Logger  | `Console` object | Not required |
+| Name    | Type             | Required |
+| :---:   | :---:            | :---:    |
+| StoreId | Number           | :heavy_check_mark: |
+| Logger  | `Console` object | |
 
 **Example**
 
@@ -67,10 +67,10 @@ so if you want to see more examples, you should access the
 
 **Arguments**
 
-|  Name    | Type     | Required   |
-| :---:    | :---:    | :---:      |
-| callback | Function | Required   |
-| id       | String   | Required   |
+|  Name    | Type     | Required |
+| :---:    | :---:    | :---: |
+| callback | Function | :heavy_check_mark: |
+| id       | String   | :heavy_check_mark: |
 
 **Example**
 
