@@ -377,7 +377,7 @@ EcomIo.listCollections(callback, null, null, null, null, 'limit=2&offset=4')
 ## Search Products
 `searchProducts(callback, term, from, size, sort, specs, brands, categories, prices, customDsl)`
 
-[API reference](#https://ecomsearch.docs.apiary.io/#reference/items/items-search/complex-search)
+[API reference](https://ecomsearch.docs.apiary.io/#reference/items/items-search/complex-search)
 
 This method calls [E-Com Plus Search API](https://ecomsearch.docs.apiary.io/#),
 that proxy pass all requests to Elasticsearch
@@ -507,7 +507,7 @@ to run your own Elasticsearch
 ## Get Recommended Products
 `getRecommendedProducts(callback, id)`
 
-[API reference](#https://ecomgraphs.docs.apiary.io/#reference/products/recommended/list-recommended-items)
+[API reference](https://ecomgraphs.docs.apiary.io/#reference/products/recommended/list-recommended-items)
 
 Returns up to 12 recommended products, selecting the products that was more
 times bought together with the reference product.
@@ -525,7 +525,7 @@ EcomIo.getRecommendedProducts(callback, 'a00000000000000000000000')
 ## Get Related Products
 `getRelatedProducts(callback, id)`
 
-[API reference](#https://ecomgraphs.docs.apiary.io/#reference/products/related/list-related-items)
+[API reference](https://ecomgraphs.docs.apiary.io/#reference/products/related/list-related-items)
 
 Returns up to 12 related products, selecting the products that have more categories
 in common with the reference product.
