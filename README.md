@@ -501,8 +501,8 @@ The `customDsl` is an object that you can pass
 to run your own Elasticsearch
 [Query DSL](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html).
 
-**It must be a valid
-[Request Body Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html).**
+It must be a valid
+[Request Body Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html).
 
 ## Get Recommended Products
 `getRecommendedProducts(callback, id)`
