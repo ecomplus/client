@@ -243,9 +243,11 @@ Default enumered `sort` options:
 ```javascript
 EcomIo.listBrands(callback)
 ```
+
 ```javascript
 EcomIo.listBrands(callback, 0, 1000, 1, ['name'])
 ```
+
 ```javascript
 EcomIo.listBrands(callback, null, null, null, null, 'limit=2&offset=4')
 ```
@@ -302,9 +304,11 @@ but listing store categories.
 ```javascript
 EcomIo.listCategories(callback)
 ```
+
 ```javascript
 EcomIo.listCategories(callback, 0, 1000, 1, ['name'])
 ```
+
 ```javascript
 EcomIo.listCategories(callback, null, null, null, null, 'limit=2&offset=4')
 ```
@@ -361,57 +365,60 @@ but listing store collections.
 ```javascript
 EcomIo.listCollections(callback)
 ```
+
 ```javascript
 EcomIo.listCollections(callback, 0, 1000, 1, ['name'])
 ```
+
 ```javascript
 EcomIo.listCollections(callback, null, null, null, null, 'limit=2&offset=4')
 ```
 
-### searchProduts(callback, term, from, size, sort, specs, brands, categories, prices, customDsl)
+## Search Products
+`searchProducts(callback, term, from, size, sort, specs, brands, categories, prices, customDsl)`
+
 This method calls [E-Com Plus Search API](https://ecomsearch.docs.apiary.io/#),
 that proxy pass all requests to Elasticsearch
 [Search APIs](https://www.elastic.co/guide/en/elasticsearch/reference/current/search.html)
-with _XGET_ method (read only). Responses are the same as returned from _Elasticsearch REST API_,
+with `XGET` HTTP verb (read only). Responses are the same as returned from _Elasticsearch REST API_,
 so you can read their documentation to get more info and examples.
 
 You must follow
 [Request Body Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html)
-specifications.
+specifications and this
+[type mapping](https://ecomsearch.docs.apiary.io/#reference/items) reference.
 
-[Type mapping reference](https://ecomsearch.docs.apiary.io/#reference/items).
+| Arguments  | Type     | Required           | Default | Description |
+| :---:      | :---:    | :---:              | :---:   | :---: |
+| callback   | Function | :heavy_check_mark: |         | [Callback function](#callback) |
+| term       | String   |                    |         | Term that you are searching for |
+| from       | number   |                    | 0       | Results offset number |
+| size       | number   |                    | 12      | Maximum number of results |
+| sort       | number   |                    | 0       | Results ordering, default is by views |
+| specs      | Object   |                    |         | Filter results by item specifications |
+| brands     | Array    |                    |         | Filter results by brands |
+| categories | Array    |                    |         | Filter results by categories |
+| prices     | Object   |                    |         | Filter results by prices `min` and `max` |
+| customDsl  | Object   |                    |         | Custom search request body |
 
-**The term is the only argument that is required but, if you send the customDsl you dont dont need to send the term.**
-
-#### Arguments
-|  Name        | Type             | Description | Required |
-| :---:        | :---:            | :---: | :---: |
-| callback     | Function         | [Callback function](#callback) | Required |
-| term         | String           | It is the term that you are searching for | Required |
-| from         | number           | It is like the offset from [URL parameters](https://ecomstore.docs.apiary.io/#introduction/overview/url-params)  | Not Required  |
-| size         | number           | It is like the limit from [URL parameters](https://ecomstore.docs.apiary.io/#introduction/overview/url-params)   | Not Required  |
-| sort         | number           | Sort products, default for views                                                                                 | Not Required  |
-| specs        | Object           | It is an object to filter results by specifications  | Not Required  |
-| brands       | Object           | It is an array of brands to filter results by brands | Not Required  |
-| categories   | Object           | It is an array of categories to filter results by categories | Not Required  |
-|  prices      | Object           | It is an object to filter results by prices | Not Required  |
-|  customDsl   | Object           | It is an object, to create your own request body search | Not Required  |
-
-#### Example
-Search by term only:
 ```javascript
-EcomIo.searchProduts(callback, 'tshirt')
+// list trending items
+EcomIo.searchProduts(callback)
 ```
-#### Term
+
+### Term
 We use a
 [multi match query](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-multi-match-query.html)
-because we will query in two fields, the name and the keywords of each product.
+to search specified `term` in two fields,
+the `name` and `keywords` of each product.
 
-#### From and Size
-The from and size parameters are for pagination the results. The from is like the offset in [URL parameters](https://ecomstore.docs.apiary.io/#introduction/overview/url-params) and the size is like the limit. If you dont pass any argument for the size, the limit to return is default to 24. It is based on [From/Size](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-from-size.html) from Elasticsearch documentation.
+```javascript
+// search product by term
+EcomIo.searchProduts(callback, 'tshirt')
+```
 
-#### Sort
-The sort argument is based on
+### Sort
+The `sort` argument is based on
 [sort](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-sort.html)
 from Elasticsearch documentation.
 
@@ -420,31 +427,34 @@ The order that the resultant products will be sort is:
 1. The available products;
 2. Search score;
 3. The products with more ad relevance;
-4. Sort object.
+4. Sort option.
 
-##### Sort Object
-We have created three default sort options, by views, price and sales:
+Default enumered `sort` options:
 
 | Number | Name  | Usage |
 | :---:  | :---: | :---: |
+| 0      | views | Sort by popularity, products with more page views will appear first |
 | 1      | sales | Sort by sales, products that sells more will appear first |
 | 2      | price | Sort by price ascending, products with lowest price will appear first |
 | 3      | price | Sort by price descending, products with highest price will appear first |
 
-If `sort` argument is undefined or null, default is to sort by views.
+If `sort` argument is undefined or null, default is to sort by `views`.
 
-#### Specs
-The specs is a object with specifications properties that we use to filter the search. The key is the specifications name and the value is an array with the specifications values.
+### Specs
+The `specs` argument should be an
+object with specifications properties that we use to filter the search.
+The key is the specifications name and the value is an array
+with the specifications values.
 
-#### Example of specs object
 ```javascript
+// sample specs object
 specs = {
-  'color': ['blue', 'red'],
-  'size': ['G']
+  'color': [ 'blue', 'red' ],
+  'size': [ 'G' ]
 }
 ```
 
-#### Brands
+### Brands
 The brands parameter is an array that we use to filter the search. So if you want to filter by Brands you can pass an array of brands.
 
 ```javascript
