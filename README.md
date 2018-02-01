@@ -7,7 +7,7 @@ JS library for E-Com Plus storefront with methods to access public resources fro
 __This library implements only GET requests to public resources, so there aren't authentication.__
 
 You can include minified script,
-[together with Axios](#https://github.com/axios/axios), from URL below:
+[together with Axios](https://github.com/axios/axios), from URL below:
 
 [https://ecom.nyc3.digitaloceanspaces.com/plus/js/sdk.min.js](https://ecom.nyc3.digitaloceanspaces.com/plus/js/sdk.min.js)
 
@@ -58,23 +58,25 @@ The object returned from almost all methods is the response body of Store API en
 so if you want to see more examples, you should access the
 [API documentation](https://ecomstore.docs.apiary.io/#).
 
-### getProduct(callback, id)
+### getProduct
+> (callback, id)
+
 It is a method to get a product by the ID.
 
-#### Arguments
+**Arguments**
 |  Name    | Type     | Required   |
 | :---:    | :---:    | :---:      |
 | callback | Function | Required   |
 | id       | String   | Required   |
 
-#### Example
+**Example**
 ```javascript
 EcomIo.getProduct(callback, '123a5432109876543210cdef')
 ```
 #### Return
 Example of returned body object:
 
-```javascript
+```json
 {
   "_id": "123a5432109876543210cdef",
   "store_id": 100,
