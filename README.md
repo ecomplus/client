@@ -100,7 +100,7 @@ Example of returned `body`:
 ## Get Product By Sku
 `getProductBySku(callback, sku)`
 
-> Similar to `getProduct`, with the same return,
+> Similar to [`getProduct`](#get-product), with the same return,
 but here you pass the product SKU instead of ID.
 
 | Arguments | Type     | Required |
@@ -214,7 +214,6 @@ Offset, limit, sort and fields are
 [URL parameters](https://ecomstore.docs.apiary.io/#introduction/overview/url-params) (metadata)
 for pagination and ordering,
 you can use customQuery to query by particular object properties.
-
 Default enumered `sort` options:
 
 | Number | Usage |
@@ -268,7 +267,7 @@ EcomIo.getCategoryBySlug(callback, 'category-four')
 ## List Categories
 `listCategories(callback, offset, limit, sort, fields, customQuery)`
 
-> Similar to [`getBrandBySlug`](#get-brand-by-slug), but
+> Similar to [`listBrands`](#get-brand-by-slug), but
 listing store categories.
 
 | Arguments   | Type     | Required |
