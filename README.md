@@ -27,10 +27,10 @@ All the methods are functions with _callback_ as his first argument,
 it's the function that you should pass to treat the request response.
 `callback` function must have two arguments:
 
-| Name  | Type                   | Required |
-| :---: | :---:                  | :---: |
-| err   | `Error` object or null | :heavy_check_mark: |
-| body  | Object or null         | |
+| Arguments | Type                   | Required |
+| :---:     | :---:                  | :---: |
+| err       | `Error` object or null | :heavy_check_mark: |
+| body      | Object or null         | |
 
 If the method runs correctly,
 `err` will be null, otherwise, it will be an
@@ -49,14 +49,10 @@ The `Logger` argument is not required, but you can pass a
 [Console object](https://developer.mozilla.org/docs/Web/API/Console),
 with properties `log` and `error`, if you want to save output on file.
 
-**Arguments**
-
-| Name    | Type             | Required |
-| :---:   | :---:            | :---: |
-| StoreId | Number           | :heavy_check_mark: |
-| Logger  | `Console` object | |
-
-**Example**
+| Arguments | Type             | Required |
+| :---:     | :---:            | :---: |
+| StoreId   | Number           | :heavy_check_mark: |
+| Logger    | `Console` object | |
 
 ```javascript
 EcomIo.init(100)
@@ -72,20 +68,16 @@ so if you want to see more examples, you should access the
 
 > It is a method to read a product object by the ID.
 
-**Arguments**
-
-|  Name    | Type     | Required |
-| :---:    | :---:    | :---: |
-| callback | Function | :heavy_check_mark: |
-| id       | String   | :heavy_check_mark: |
-
-**Example**
+| Arguments | Type     | Required |
+| :---:     | :---:    | :---: |
+| callback  | Function | :heavy_check_mark: |
+| id        | String   | :heavy_check_mark: |
 
 ```javascript
 EcomIo.getProduct(callback, '123a5432109876543210cdef')
 ```
 
-**Return**
+Example of returned `body`:
 
 ```json
 {
@@ -111,14 +103,10 @@ EcomIo.getProduct(callback, '123a5432109876543210cdef')
 > Similar to `getProduct`, with the same return,
 but here you pass the product SKU instead of ID.
 
-**Arguments**
-
-|  Name    | Type     | Required |
-| :---:    | :---:    | :---: |
-| callback | Function | :heavy_check_mark: |
-| sku      | String   | :heavy_check_mark: |
-
-**Example**
+| Arguments | Type     | Required |
+| :---:     | :---:    | :---: |
+| callback  | Function | :heavy_check_mark: |
+| sku       | String   | :heavy_check_mark: |
 
 ```javascript
 EcomIo.getProductBySku(callback, 'COD1')
@@ -129,14 +117,10 @@ EcomIo.getProductBySku(callback, 'COD1')
 
 > It is a method to read an order object by the ID.
 
-**Arguments**
-
-|  Name    | Type     | Required |
-| :---:    | :---:    | :---: |
-| callback | Function | :heavy_check_mark: |
-| id       | String   | :heavy_check_mark: |
-
-**Example**
+| Arguments | Type     | Required |
+| :---:     | :---:    | :---: |
+| callback  | Function | :heavy_check_mark: |
+| id        | String   | :heavy_check_mark: |
 
 ``` javascript
 EcomIo.getOrder(callback, 'fe1000000000000000000005')
@@ -144,16 +128,13 @@ EcomIo.getOrder(callback, 'fe1000000000000000000005')
 
 ## Get Cart
 `getCart(callback, id)``
-It is a method to read a cart object by the ID.
 
-**Arguments**
+> It is a method to read a cart object by the ID.
 
-|  Name    | Type     | Required |
-| :---:    | :---:    | :---: |
-| callback | Function | :heavy_check_mark: |
-| id       | String   | :heavy_check_mark: |
-
-**Example**
+| Arguments | Type     | Required |
+| :---:     | :---:    | :---: |
+| callback  | Function | :heavy_check_mark: |
+| id        | String   | :heavy_check_mark: |
 
 ```javascript
 EcomIo.getCart(callback, '2ca000000000000000000003')
@@ -164,14 +145,10 @@ EcomIo.getCart(callback, '2ca000000000000000000003')
 
 > It is a method to read a customer object by the ID.
 
-**Arguments**
-
-|  Name    | Type     | Required  |
-| :---:    | :---:    | :---:     |
-| callback | Function | Required  |
-| id       | String   | Required  |
-
-**Example**
+| Arguments | Type     | Required |
+| :---:     | :---:    | :---: |
+| callback  | Function | :heavy_check_mark: |
+| id        | String   | :heavy_check_mark: |
 
 ```javascript
 EcomIo.getCustomer(callback, '3c1000000000000000000003')
@@ -182,48 +159,44 @@ EcomIo.getCustomer(callback, '3c1000000000000000000003')
 
 > It is a method to read an application object by the ID.
 
-| Arguments | Type     | Required  |
-| :---:     | :---:    | :---:     |
-| callback  | Function | Required  |
-| id        | String   | Required  |
+| Arguments | Type     | Required |
+| :---:     | :---:    | :---: |
+| callback  | Function | :heavy_check_mark: |
+| id        | String   | :heavy_check_mark: |
 
 ```javascript
 EcomIo.getApplication(callback, '42aa00000000000000000111')
 ```
 
-### getBrand(callback, id)
-It is a method to get brand by the ID.
+## Get Brand
+`getBrand(callback, id)`
 
-#### Arguments
-|  Name    | Type     | Required |
-| :---:    | :---:    | :---:    |
-| callback | Function | Required |
-| id       | String   | Required |
+> It is a method to read a brand object by the ID.
 
+| Arguments | Type     | Required |
+| :---:     | :---:    | :---: |
+| callback  | Function | :heavy_check_mark: |
+| id        | String   | :heavy_check_mark: |
 
-#### Example
-With no filter:
 ```javascript
 EcomIo.getBrand(callback, 'a10000000000000000000001')
 ```
 
-### getBrandBySlug(callback, slug)
-It is a method to get brand by the slug.
+## Get Brand By Slug
+`getBrandBySlug(callback, slug)`
 
-#### Arguments
-|  Name    | Type     | Required |
-| :---:    | :---:    | :---:    |
-| callback | Function | Required |
-| slug     | String   | Required |
+> It is a method to search and read a brand by the slug.
 
+| Arguments | Type     | Required |
+| :---:     | :---:    | :---: |
+| callback  | Function | :heavy_check_mark: |
+| slug      | String   | :heavy_check_mark: |
 
-#### Example
-With no filter:
 ```javascript
 EcomIo.getBrandBySlug(callback, 'brand-four')
 ```
 
-### listBrands(callback, offset, limit, sort, fields, customQuery)
+## listBrands(callback, offset, limit, sort, fields, customQuery)
 It is a method to list all the store brands.
 Offset, limit, sort and fields are [URL parameters](https://ecomstore.docs.apiary.io/#introduction/overview/url-params) (metadata) for pagination and ordering, you can use customQuery to query by particular object properties.
 
