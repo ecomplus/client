@@ -1,6 +1,7 @@
 # ecomplus-sdk-js
 
 [![npm version](https://img.shields.io/npm/v/ecomplus-sdk.svg)](https://www.npmjs.org/ecomplus-sdk)
+[![license mit](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 JS library for E-Com Plus storefront with methods to access public resources from
 [Store API](https://ecomstore.docs.apiary.io),
