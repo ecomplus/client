@@ -1,5 +1,5 @@
 {
-  "name": "ecomplus-storefront",
+  "name": "ecomplus-sdk",
   "version": "1.0.0",
   "description": "JS SDK for E-Com Plus APIs public resources",
   "main": "index.js",
@@ -26,9 +26,9 @@
   },
   "homepage": "https://github.com/ecomclub/ecomplus-sdk-js#readme",
   "standard": {
-    "globals": [ "XMLHttpRequest" ]
-  },
-  "dependencies": {
-    "axios": "0.x"
+    "globals": [
+      "XMLHttpRequest",
+      "XDomainRequest"
+    ]
   }
 }
