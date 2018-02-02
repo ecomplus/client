@@ -281,6 +281,21 @@ var EcomIo = function () {
     }
   }
 
+  var getList = function (callback, resource, offset, limit, sort, fields, customQuery) {
+    // common function to all listAny methods
+    var query = queryString(offset, limit, sort, fields, customQuery)
+    var endpoint = '/' + resource + '.json'
+    var host
+    if (query === '') {
+      // cacheable
+      // use Cloudflare cache of Store API
+      host = 'ioapi.ecvol.com'
+    } else {
+      endpoint += query
+    }
+    runMethod(callback, endpoint, host)
+  }
+
   var queryString = function (offset, limit, sort, fields, customQuery) {
     // mount query string with function params
     // common Restful URL params
@@ -400,14 +415,11 @@ var EcomIo = function () {
 
     'findBrandBySlug': function (callback, slug) {
       var endpoint = '/brands.json?limit=1&slug=' + slug
-      getByField(callback, slug, 'slug', 'brand', endpoint, EcomIo.getBrand)
+      runMethod(callback, endpoint)
     },
 
     'listBrands': function (callback, offset, limit, sort, fields, customQuery) {
-      // use Cloudflare cache of Store API
-      var host = 'ioapi.ecvol.com'
-      var endpoint = '/brands.json' + queryString(offset, limit, sort, fields, customQuery)
-      runMethod(callback, endpoint, host)
+      getList(callback, 'brands', offset, limit, sort, fields, customQuery)
     },
 
     'getCategory': function (callback, id) {
@@ -416,14 +428,11 @@ var EcomIo = function () {
 
     'findCategoryBySlug': function (callback, slug) {
       var endpoint = '/categories.json?limit=1&slug=' + slug
-      getByField(callback, slug, 'slug', 'category', endpoint, EcomIo.getCategory)
+      runMethod(callback, endpoint)
     },
 
     'listCategories': function (callback, offset, limit, sort, fields, customQuery) {
-      // use Cloudflare cache of Store API
-      var host = 'ioapi.ecvol.com'
-      var endpoint = '/categories.json' + queryString(offset, limit, sort, fields, customQuery)
-      runMethod(callback, endpoint, host)
+      getList(callback, 'categories', offset, limit, sort, fields, customQuery)
     },
 
     'getCollection': function (callback, id) {
@@ -432,14 +441,11 @@ var EcomIo = function () {
 
     'findCollectionBySlug': function (callback, slug) {
       var endpoint = '/collections.json?limit=1&slug=' + slug
-      getByField(callback, slug, 'slug', 'collection', endpoint, EcomIo.getCollection)
+      runMethod(callback, endpoint)
     },
 
     'listCollections': function (callback, offset, limit, sort, fields, customQuery) {
-      // use Cloudflare cache of Store API
-      var host = 'ioapi.ecvol.com'
-      var endpoint = '/collections.json' + queryString(offset, limit, sort, fields, customQuery)
-      runMethod(callback, endpoint, host)
+      getList(callback, 'collections', offset, limit, sort, fields, customQuery)
     },
 
     'searchProduts': function (callback, term, from, size, sort, specs, brands, categories, prices, customDsl) {
