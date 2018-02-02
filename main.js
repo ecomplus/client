@@ -126,7 +126,43 @@ var EcomIo = function () {
       req.end()
     } else {
       // call with AJAX
-      var ajax = new XMLHttpRequest()
+      var ajax
+      if (window.XDomainRequest) {
+        // IE 8,9
+        ajax = new XDomainRequest()
+
+        ajax.ontimeout = ajax.onerror = function () {
+          // try to resend request
+          setTimeout(function () {
+            sendRequest(tries, host, path, body, callback)
+          }, 500)
+        }
+
+        ajax.onload = function () {
+          // treat response
+          response(200, this.responseText, callback)
+        }
+      } else {
+        // supported by recent browsers
+        ajax = new XMLHttpRequest()
+
+        ajax.onreadystatechange = function () {
+          if (this.readyState === 4) {
+            // request finished and response is ready
+            if (this.status === 503 && tries < 3) {
+              // try to resend request
+              setTimeout(function () {
+                sendRequest(tries, host, path, body, callback)
+              }, 500)
+              return
+            }
+
+            // treat response
+            response(this.status, this.responseText, callback)
+          }
+        }
+      }
+
       var url = 'https://' + host + path
       ajax.open(method, url, true)
 
@@ -135,22 +171,6 @@ var EcomIo = function () {
         ajax.send(JSON.stringify(body))
       } else {
         ajax.send()
-      }
-
-      ajax.onreadystatechange = function () {
-        if (this.readyState === 4) {
-          // request finished and response is ready
-          if (this.status === 503 && tries < 3) {
-            // try to resend request
-            setTimeout(function () {
-              sendRequest(tries, host, path, body, callback)
-            }, 500)
-            return
-          }
-
-          // treat response
-          response(this.status, this.responseText, callback)
-        }
       }
     }
 
