@@ -2,7 +2,7 @@
   "name": "ecomplus-sdk",
   "version": "1.0.2",
   "description": "JS SDK for E-Com Plus APIs public resources",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
