@@ -7,20 +7,20 @@ if (typeof module !== 'undefined' && module.exports) {
 }
 
 var EcomIo = function () {
-  let storeId, https, logger
+  var storeId, https, logger
 
   if (isNodeJs) {
     https = require('https')
   }
 
-  let logHeader = function (logType) {
+  var logHeader = function (logType) {
     // common header for logger.log
     return 'E-Com Plus SDK ' + logType + ':'
   }
 
-  let errorHandling = function (callback, errMsg, responseBody) {
+  var errorHandling = function (callback, errMsg, responseBody) {
     if (typeof callback === 'function') {
-      let err = new Error(errMsg)
+      var err = new Error(errMsg)
       if (responseBody === undefined) {
         // body null when error occurs before send API request
         callback(err, null)
@@ -31,14 +31,15 @@ var EcomIo = function () {
     logger.log(logHeader('WARNING') + '\n' + errMsg)
   }
 
-  let runMethod = function (callback, endpoint, host, body) {
+  var runMethod = function (callback, endpoint, host, body) {
+    var msg
     if (typeof callback !== 'function') {
-      let msg = 'You need to specify a callback function to receive the request response'
+      msg = 'You need to specify a callback function to receive the request response'
       errorHandling(null, msg)
       return
     }
 
-    let path
+    var path
     if (!host) {
       // default to E-Com Plus Store API
       // https://ecomstore.docs.apiary.io/
@@ -57,18 +58,18 @@ var EcomIo = function () {
     // eg.: /v1/products.json
 
     // retry up to 3 times if API returns 503
-    let tries = 0
+    var tries = 0
     sendRequest(tries, host, path, body, callback)
 
-    let msg = logHeader('INFO') +
+    msg = logHeader('INFO') +
       '\nAPI endpoint' +
       '\n' + endpoint
     logger.log(msg)
   }
 
-  let sendRequest = function (tries, host, path, body, callback) {
+  var sendRequest = function (tries, host, path, body, callback) {
     // send request to API
-    let method
+    var method
     if (!body) {
       // default to GET request
       method = 'GET'
@@ -79,7 +80,7 @@ var EcomIo = function () {
 
     if (isNodeJs === true) {
       // call with NodeJS http module
-      let options = {
+      var options = {
         hostname: host,
         path: path,
         method: method,
@@ -89,7 +90,7 @@ var EcomIo = function () {
         }
       }
 
-      let req = https.request(options, function (res) {
+      var req = https.request(options, function (res) {
         if (res.statusCode === 503 && tries < 3) {
           // try to resend request
           setTimeout(function () {
@@ -100,7 +101,7 @@ var EcomIo = function () {
           return
         }
 
-        let rawData = ''
+        var rawData = ''
         res.setEncoding('utf8')
         res.on('data', function (chunk) {
           // buffer
@@ -125,8 +126,8 @@ var EcomIo = function () {
       req.end()
     } else {
       // call with AJAX
-      let ajax = new XMLHttpRequest()
-      let url = 'https://' + host + path
+      var ajax = new XMLHttpRequest()
+      var url = 'https://' + host + path
       ajax.open(method, url, true)
 
       if (body) {
@@ -157,9 +158,9 @@ var EcomIo = function () {
     tries++
   }
 
-  let response = function (status, data, callback) {
+  var response = function (status, data, callback) {
     // treat request response
-    let body
+    var body
     try {
       // expecting valid JSON response body
       body = JSON.parse(data)
@@ -174,7 +175,7 @@ var EcomIo = function () {
       // err null
       callback(null, body)
     } else {
-      let msg
+      var msg
       if (body.hasOwnProperty('message')) {
         msg = body.message
       } else {
@@ -186,9 +187,9 @@ var EcomIo = function () {
     }
   }
 
-  let idValidate = function (callback, id) {
+  var idValidate = function (callback, id) {
     // check MongoDB ObjectID
-    let msg
+    var msg
     if (typeof id === 'string') {
       // RegEx pattern
       if (id.match(/^[a-f0-9]{24}$/)) {
@@ -203,27 +204,27 @@ var EcomIo = function () {
     return false
   }
 
-  let getById = function (callback, resource, id) {
+  var getById = function (callback, resource, id) {
     if (idValidate(callback, id)) {
       // use Cloudflare cache of Store API
-      let host = 'cache.e-com.plus'
+      var host = 'cache.e-com.plus'
       runMethod(callback, '/' + resource + '/' + id + '.json', host)
     }
   }
 
-  let getByField = function (callback, field, fieldName, resource, endpoint, ioMethod) {
+  var getByField = function (callback, field, fieldName, resource, endpoint, ioMethod) {
     // common function to all getAnyByAny methods
     if (typeof field === 'string') {
       runMethod(function (err, body) {
         // replace callback
         if (!err) {
-          let results = body.result
+          var results = body.result
           // results must be an array of one object with _id property
           if (Array.isArray(results) && typeof results[0] === 'object' && results[0] !== null) {
             // return resource object
             ioMethod(callback, results[0]._id)
           } else {
-            let msg = 'Any ' + resource + ' found with this ' + fieldName
+            var msg = 'Any ' + resource + ' found with this ' + fieldName
             errorHandling(callback, msg, body)
           }
         } else {
@@ -232,18 +233,18 @@ var EcomIo = function () {
         }
       }, endpoint)
     } else {
-      let msg = 'The' + fieldName + ' is required and must be a string'
+      var msg = 'The' + fieldName + ' is required and must be a string'
       errorHandling(callback, msg)
     }
   }
 
-  let queryString = function (offset, limit, sort, fields, customQuery) {
+  var queryString = function (offset, limit, sort, fields, customQuery) {
     // mount query string with function params
     // common Restful URL params
     // ref.: https://ecomstore.docs.apiary.io/#introduction/overview/url-params
-    let params = {}
+    var params = {}
     // default for empty string
-    let query = ''
+    var query = ''
 
     if (typeof customQuery !== 'string') {
       // pagination
@@ -270,8 +271,8 @@ var EcomIo = function () {
       }
 
       if (Array.isArray(fields)) {
-        let fieldsString = ''
-        for (let i = 0; i < fields.length; i++) {
+        var fieldsString = ''
+        for (var i = 0; i < fields.length; i++) {
           if (typeof fields[i] === 'string') {
             if (fieldsString !== '') {
               // separate fields names by ,
@@ -289,7 +290,7 @@ var EcomIo = function () {
       }
 
       // serialize object to query string
-      for (let param in params) {
+      for (var param in params) {
         if (params.hasOwnProperty(param)) {
           if (query !== '') {
             query += '&'
@@ -330,7 +331,7 @@ var EcomIo = function () {
     },
 
     'getProductBySku': function (callback, sku) {
-      let endpoint = '/products.json?sku=' + sku
+      var endpoint = '/products.json?sku=' + sku
       getByField(callback, sku, 'SKU', 'product', endpoint, EcomIo.getProduct)
     },
 
@@ -355,12 +356,12 @@ var EcomIo = function () {
     },
 
     'findBrandBySlug': function (callback, slug) {
-      let endpoint = '/brands.json?limit=1&slug=' + slug
+      var endpoint = '/brands.json?limit=1&slug=' + slug
       getByField(callback, slug, 'slug', 'brand', endpoint, EcomIo.getBrand)
     },
 
     'listBrands': function (callback, offset, limit, sort, fields, customQuery) {
-      let endpoint = '/brands.json' + queryString(offset, limit, sort, fields, customQuery)
+      var endpoint = '/brands.json' + queryString(offset, limit, sort, fields, customQuery)
       runMethod(callback, endpoint)
     },
 
@@ -369,12 +370,12 @@ var EcomIo = function () {
     },
 
     'findCategoryBySlug': function (callback, slug) {
-      let endpoint = '/categories.json?limit=1&slug=' + slug
+      var endpoint = '/categories.json?limit=1&slug=' + slug
       getByField(callback, slug, 'slug', 'category', endpoint, EcomIo.getCategory)
     },
 
     'listCategories': function (callback, offset, limit, sort, fields, customQuery) {
-      let endpoint = '/categories.json' + queryString(offset, limit, sort, fields, customQuery)
+      var endpoint = '/categories.json' + queryString(offset, limit, sort, fields, customQuery)
       runMethod(callback, endpoint)
     },
 
@@ -383,21 +384,21 @@ var EcomIo = function () {
     },
 
     'findCollectionBySlug': function (callback, slug) {
-      let endpoint = '/collections.json?limit=1&slug=' + slug
+      var endpoint = '/collections.json?limit=1&slug=' + slug
       getByField(callback, slug, 'slug', 'collection', endpoint, EcomIo.getCollection)
     },
 
     'listCollections': function (callback, offset, limit, sort, fields, customQuery) {
-      let endpoint = '/collections.json' + queryString(offset, limit, sort, fields, customQuery)
+      var endpoint = '/collections.json' + queryString(offset, limit, sort, fields, customQuery)
       runMethod(callback, endpoint)
     },
 
     'searchProduts': function (callback, term, from, size, sort, specs, brands, categories, prices, customDsl) {
-      let host = 'apx-search.e-com.plus'
+      var host = 'apx-search.e-com.plus'
       // proxy will pass XGET
-      // let method = 'POST'
-      let endpoint = '/items.json'
-      let body
+      // var method = 'POST'
+      var endpoint = '/items.json'
+      var body, msg
 
       if (typeof customDsl === 'object' && customDsl !== null) {
         // custom Query DSL
@@ -407,7 +408,7 @@ var EcomIo = function () {
       } else {
         // term is required
         if (typeof term !== 'string') {
-          let msg = 'Search term is required and must be a string'
+          msg = 'Search term is required and must be a string'
           errorHandling(callback, msg)
           return
         }
@@ -549,7 +550,7 @@ var EcomIo = function () {
         if (typeof specs === 'object' && specs !== null && Object.keys(specs).length > 0) {
           // nested ELS object
           // http://nocf-www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-nested-query.html
-          let nestedQuery = {
+          var nestedQuery = {
             'nested': {
               'path': 'specs',
               'query': {
@@ -560,7 +561,7 @@ var EcomIo = function () {
             }
           }
 
-          for (let key in specs) {
+          for (var key in specs) {
             if (Array.isArray(specs[key]) && specs[key].length > 0) {
               nestedQuery.nested.query.bool.filter.push({
                 'term': {
@@ -598,7 +599,7 @@ var EcomIo = function () {
 
         // price ranges
         if (typeof prices === 'object' && prices !== null && Object.keys(prices).length > 0) {
-          let rangeQuery = {
+          var rangeQuery = {
             'range': {
               'price': {}
             }
@@ -615,7 +616,7 @@ var EcomIo = function () {
         }
       }
 
-      let msg = logHeader('INFO') +
+      msg = logHeader('INFO') +
         '\nQuery DSL' +
         '\n' + JSON.stringify(body)
       logger.log(msg)
@@ -625,14 +626,14 @@ var EcomIo = function () {
 
     'listRecommendedProducts': function (callback, id) {
       if (idValidate(id)) {
-        let host = 'apx-graphs.e-com.plus'
+        var host = 'apx-graphs.e-com.plus'
         runMethod(callback, '/products/' + id + '/recommended.json', host)
       }
     },
 
     'listRelatedProducts': function (callback, id) {
       if (idValidate(id)) {
-        let host = 'apx-graphs.e-com.plus'
+        var host = 'apx-graphs.e-com.plus'
         runMethod(callback, '/products/' + id + '/related.json', host)
       }
     },
