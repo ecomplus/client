@@ -384,6 +384,9 @@ var EcomIo = function () {
       return storeId
     },
 
+    // Store API
+    // https://ecomstore.docs.apiary.io/
+
     'getProduct': function (callback, id) {
       getById(callback, 'products', id)
     },
@@ -447,6 +450,9 @@ var EcomIo = function () {
     'listCollections': function (callback, offset, limit, sort, fields, customQuery) {
       getList(callback, 'collections', offset, limit, sort, fields, customQuery)
     },
+
+    // Search API
+    // https://ecomsearch.docs.apiary.io/
 
     'searchProduts': function (callback, term, from, size, sort, specs, brands, categories, prices, customDsl) {
       var host = 'apx-search.e-com.plus'
@@ -678,6 +684,68 @@ var EcomIo = function () {
 
       runMethod(callback, endpoint, host, body)
     },
+
+    // Storefront API
+    // no documentation yet
+
+    'mapBySlug': function (callback, slug) {
+      // returns resource and ID
+      var host = 'iostorefront.ecvol.com'
+      var endpoint = '/' + storeId + '+' + slug.replace(/\//g, '+') + '.json'
+
+      // middleware callback
+      var Callback = function (err, body) {
+        if (!err) {
+          var val = body.GET
+          if (val) {
+            /*
+            {
+              "GET": "[resource]+[id]"
+            }
+            */
+            val = val.split('+')
+            // overwrite body
+            body = {
+              'resource': val[0],
+              '_id': val[1]
+            }
+
+            // success, pass the object
+            callback(null, body)
+          } else {
+            // Redis key not found
+            body = {
+              'status': 404,
+              'error_code': -44,
+              'message': 'Page not found, invalid slug or store ID'
+            }
+            var msg = body.message
+            errorHandling(callback, msg, body)
+          }
+        } else {
+          // just pass the error
+          callback(err, body)
+        }
+      }
+
+      runMethod(Callback, endpoint, host)
+    },
+
+    'mapByWindowUri': function (callback) {
+      // convenience only
+      // remove the first / char from pathname
+      if (!isNodeJs) {
+        var slug = window.location.pathname.slice(1)
+        EcomIo.mapBySlug(slug)
+      } else {
+        // on browser only
+        var msg = 'This method is available client side only (JS on browser)'
+        errorHandling(callback, msg)
+      }
+    },
+
+    // Graphs API
+    // https://ecomgraphs.docs.apiary.io/
 
     'listRecommendedProducts': function (callback, id) {
       if (idValidate(id)) {
