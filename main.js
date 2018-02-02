@@ -733,10 +733,10 @@ var EcomIo = function () {
 
     'mapByWindowUri': function (callback) {
       // convenience only
-      // remove the first / char from pathname
       if (!isNodeJs) {
+        // remove the first / char from pathname
         var slug = window.location.pathname.slice(1)
-        EcomIo.mapBySlug(slug)
+        EcomIo.mapBySlug(callback, slug)
       } else {
         // on browser only
         var msg = 'This method is available client side only (JS on browser)'
