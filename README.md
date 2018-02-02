@@ -12,7 +12,7 @@ __This library implements only GET requests to public resources, so there aren't
 Include minified script:
 
 ```html
-<script src="https://ecom.nyc3.digitaloceanspaces.com/plus/js/sdk.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/ecomplus-sdk@1/dist/sdk.min.js"></script>
 ```
 
 Or install [npm package](https://www.npmjs.com/package/ecomplus-sdk):
