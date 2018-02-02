@@ -9,7 +9,7 @@ JS library for E-Com Plus storefront with methods to access public resources fro
 
 __This library implements only GET requests to public resources, so there aren't authentication.__
 
-Include minified script from CDN:
+Include minified script via CDN:
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/ecomplus-sdk@1/dist/sdk.min.js"></script>
