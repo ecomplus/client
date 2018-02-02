@@ -404,8 +404,10 @@ var EcomIo = function () {
     },
 
     'listBrands': function (callback, offset, limit, sort, fields, customQuery) {
+      // use Cloudflare cache of Store API
+      var host = 'ioapi.ecvol.com'
       var endpoint = '/brands.json' + queryString(offset, limit, sort, fields, customQuery)
-      runMethod(callback, endpoint)
+      runMethod(callback, endpoint, host)
     },
 
     'getCategory': function (callback, id) {
@@ -418,8 +420,10 @@ var EcomIo = function () {
     },
 
     'listCategories': function (callback, offset, limit, sort, fields, customQuery) {
+      // use Cloudflare cache of Store API
+      var host = 'ioapi.ecvol.com'
       var endpoint = '/categories.json' + queryString(offset, limit, sort, fields, customQuery)
-      runMethod(callback, endpoint)
+      runMethod(callback, endpoint, host)
     },
 
     'getCollection': function (callback, id) {
@@ -432,8 +436,10 @@ var EcomIo = function () {
     },
 
     'listCollections': function (callback, offset, limit, sort, fields, customQuery) {
+      // use Cloudflare cache of Store API
+      var host = 'ioapi.ecvol.com'
       var endpoint = '/collections.json' + queryString(offset, limit, sort, fields, customQuery)
-      runMethod(callback, endpoint)
+      runMethod(callback, endpoint, host)
     },
 
     'searchProduts': function (callback, term, from, size, sort, specs, brands, categories, prices, customDsl) {
@@ -670,14 +676,16 @@ var EcomIo = function () {
     'listRecommendedProducts': function (callback, id) {
       if (idValidate(id)) {
         var host = 'apx-graphs.e-com.plus'
-        runMethod(callback, '/products/' + id + '/recommended.json', host)
+        var endpoint = '/products/' + id + '/recommended.json'
+        runMethod(callback, endpoint, host)
       }
     },
 
     'listRelatedProducts': function (callback, id) {
       if (idValidate(id)) {
         var host = 'apx-graphs.e-com.plus'
-        runMethod(callback, '/products/' + id + '/related.json', host)
+        var endpoint = '/products/' + id + '/related.json'
+        runMethod(callback, endpoint, host)
       }
     },
 
