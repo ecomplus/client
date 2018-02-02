@@ -635,7 +635,10 @@ var EcomIo = function () {
         let host = 'apx-graphs.e-com.plus'
         runMethod(callback, '/products/' + id + '/related.json', host)
       }
-    }
+    },
+
+    // provide external use as http client
+    'http': runMethod
   }
 }
 EcomIo = EcomIo()

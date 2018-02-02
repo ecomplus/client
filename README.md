@@ -6,11 +6,9 @@ JS library for E-Com Plus storefront with methods to access public resources fro
 
 __This library implements only GET requests to public resources, so there aren't authentication.__
 
-You can include minified script
-[together with Axios](https://github.com/axios/axios):
+Include minified script:
 
 ```html
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="https://ecom.nyc3.digitaloceanspaces.com/plus/js/sdk.min.js"></script>
 ```
 
