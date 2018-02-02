@@ -45,14 +45,21 @@ var EcomIo = function () {
       // https://ecomstore.docs.apiary.io/
       host = 'api.e-com.plus'
       path = '/v1'
-    } else if (host !== 'api.e-com.plus') {
-      // Graphs API or Search API
-      // https://ecomgraphs.docs.apiary.io/
-      // https://ecomsearch.docs.apiary.io/
-      path = '/api/v1'
     } else {
-      // host defined to Store API
-      path = '/v1'
+      switch (host) {
+        case 'ioapi.ecvol.com':
+        case 'api.e-com.plus':
+          // host defined to Store API
+          path = '/v1'
+          break
+
+        default:
+          // Storefront API, Main API, Graphs API or Search API
+          // https://ecomplus.docs.apiary.io/
+          // https://ecomgraphs.docs.apiary.io/
+          // https://ecomsearch.docs.apiary.io/
+          path = '/api/v1'
+      }
     }
     path += endpoint
     // eg.: /v1/products.json
@@ -76,6 +83,22 @@ var EcomIo = function () {
     } else {
       // request with body
       method = 'POST'
+    }
+
+    if (tries === 1) {
+      // tried once with error
+      // check if is requesting from Cloudflare cache
+      switch (host) {
+        case 'ioapi.ecvol.com':
+          // try with live Store API
+          host = 'api.e-com.plus'
+          break
+
+        case 'io.ecvol.com':
+          // try with live E-Com Plus Main API
+          host = 'e-com.plus'
+          break
+      }
     }
 
     if (isNodeJs === true) {
@@ -227,7 +250,7 @@ var EcomIo = function () {
   var getById = function (callback, resource, id) {
     if (idValidate(callback, id)) {
       // use Cloudflare cache of Store API
-      var host = 'cache.e-com.plus'
+      var host = 'ioapi.ecvol.com'
       runMethod(callback, '/' + resource + '/' + id + '.json', host)
     }
   }
