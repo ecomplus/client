@@ -1,4 +1,7 @@
 # ecomplus-sdk-js
+
+[![npm v](https://img.shields.io/npm/v/ecomplus-sdk.svg?style=flat-square)](https://www.npmjs.org/ecomplus-sdk)
+
 JS library for E-Com Plus storefront with methods to access public resources from
 [Store API](https://ecomstore.docs.apiary.io),
 [Graphs API](https://ecomgraphs.docs.apiary.io) and
@@ -12,9 +15,9 @@ Include minified script:
 <script src="https://ecom.nyc3.digitaloceanspaces.com/plus/js/sdk.min.js"></script>
 ```
 
-Or install [npm package](https://www.npmjs.com/package/ecomplus-storefront):
+Or install [npm package](https://www.npmjs.com/package/ecomplus-sdk):
 
-`npm install --save ecomplus-storefront`
+`npm install --save ecomplus-sdk`
 
 # Summary
 
