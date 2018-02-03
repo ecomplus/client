@@ -54,6 +54,7 @@ Or install [npm package](https://www.npmjs.com/package/ecomplus-sdk):
     * [Get Related Products](#get-related-products)
     * [Map By Slug](#map-by-slug)
     * [Map By Window URI](#map-by-window-uri)
+    * [Get Any By ID](#get-any-by-id)
 
 # Getting Started
 The library declares an object called `EcomIo`,
@@ -664,4 +665,20 @@ from `window.location`.
 
 ```javascript
 EcomIo.mapByWindowUri(callback)
+```
+
+## Get Any By ID
+`getById(callback, resource, id)`
+
+> Wildcard method to read any public resource
+object from [Store API](https://ecomstore.docs.apiary.io/) by the ID.
+
+| Arguments | Type     | Required |
+| :---:     | :---:    | :---: |
+| callback  | Function | :heavy_check_mark: |
+| resource  | String   | :heavy_check_mark: |
+| id        | String   | :heavy_check_mark: |
+
+```javascript
+EcomIo.getById(callback, 'products', '123a5432109876543210cdef')
 ```
