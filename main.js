@@ -368,6 +368,13 @@ var EcomIo = function () {
 
   return {
     'init': function (callback, StoreId, StoreObjectId, Logger) {
+      if (typeof Logger === 'object' && Logger.hasOwnProperty('log') && Logger.hasOwnProperty('error')) {
+        // log on file
+        logger = Logger
+      } else {
+        logger = console
+      }
+
       if (storeId) {
         // set store ID
         storeId = StoreId
@@ -400,13 +407,6 @@ var EcomIo = function () {
           var msg = 'It is necessary to specify the store ID as an init argument'
           errorHandling(callback, msg)
         }
-      }
-
-      if (typeof Logger === 'object' && Logger.hasOwnProperty('log') && Logger.hasOwnProperty('error')) {
-        // log on file
-        logger = Logger
-      } else {
-        logger = console
       }
     },
 
