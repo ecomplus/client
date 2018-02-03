@@ -7,7 +7,7 @@ if (typeof module !== 'undefined' && module.exports) {
 }
 
 var EcomIo = function () {
-  var storeId, https, logger
+  var storeId, storeObjectId, https, logger
 
   if (isNodeJs) {
     https = require('https')
@@ -367,9 +367,40 @@ var EcomIo = function () {
   }
 
   return {
-    'init': function (StoreId, Logger) {
-      // set store ID
-      storeId = StoreId
+    'init': function (callback, StoreId, StoreObjectId, Logger) {
+      if (storeId) {
+        // set store ID
+        storeId = StoreId
+        storeObjectId = StoreObjectId
+
+        if (typeof callback === 'function') {
+          callback(null, null)
+        }
+      } else {
+        if (!isNodeJs) {
+          // get store ID from Main API
+          // http://ecomplus.docs.apiary.io/
+          var host = 'io.ecvol.com'
+          var endpoint = '/domains/' + window.location.hostname + '.json'
+
+          // middleware callback
+          var Callback = function (err, body) {
+            if (!err) {
+              storeId = body.store_id
+              storeObjectId = body.store_object_id
+            }
+
+            if (typeof callback === 'function') {
+              // pass to callback
+              callback(err, body)
+            }
+          }
+          runMethod(Callback, endpoint, host)
+        } else {
+          var msg = 'It is necessary to specify the store ID as an init argument'
+          errorHandling(callback, msg)
+        }
+      }
 
       if (typeof Logger === 'object' && Logger.hasOwnProperty('log') && Logger.hasOwnProperty('error')) {
         // log on file
@@ -384,8 +415,20 @@ var EcomIo = function () {
       return storeId
     },
 
+    // return current store object ID
+    'storeObjectId': function () {
+      return storeObjectId
+    },
+
     // Store API
     // https://ecomstore.docs.apiary.io/
+
+    'getStore': function (callback, id) {
+      if (id === undefined && storeObjectId) {
+        id = storeObjectId
+      }
+      getById(callback, 'stores', id)
+    },
 
     'getProduct': function (callback, id) {
       getById(callback, 'products', id)
