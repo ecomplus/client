@@ -52,6 +52,8 @@ Or install [npm package](https://www.npmjs.com/package/ecomplus-sdk):
         - [Custom DSL](#custom-dsl)
     * [Get Recommended Products](#get-recommended-products)
     * [Get Related Products](#get-related-products)
+    * [Map By Slug](#map-by-slug)
+    * [Map By Window URI](#map-by-window-uri)
 
 # Getting Started
 The library declares an object called `EcomIo`,
@@ -178,7 +180,7 @@ Example of returned `body`:
   'quantity': 100,
   // ...
 }
- ```
+```
 
 ## Get Product By Sku
 `getProductBySku(callback, sku)`
@@ -590,14 +592,16 @@ It must be a valid
 
 [API reference](https://ecomgraphs.docs.apiary.io/#reference/products/recommended/list-recommended-items)
 
-Returns up to 12 recommended products, selecting the products that was more
-times bought together with the reference product.
-You should use it to do something like "who bought it, bought too".
+> Method to get a list of products to recommend together with one reference product.
 
 | Arguments | Type     | Required |
 | :---:     | :---:    | :---: |
 | callback  | Function | :heavy_check_mark: |
 | id        | String   | :heavy_check_mark: |
+
+Returns up to 12 recommended products, selecting the products that was more
+times bought together with the reference product.
+You should use it to do something like "who bought it, bought too".
 
 ```javascript
 EcomIo.getRecommendedProducts(callback, 'a00000000000000000000000')
@@ -608,15 +612,56 @@ EcomIo.getRecommendedProducts(callback, 'a00000000000000000000000')
 
 [API reference](https://ecomgraphs.docs.apiary.io/#reference/products/related/list-related-items)
 
-Returns up to 12 related products, selecting the products that have more categories
-in common with the reference product.
-You should use it to do something like "you can also be interested by".
+> Method to get a list of products similar to one reference product.
 
 | Arguments | Type     | Required |
 | :---:     | :---:    | :---: |
 | callback  | Function | :heavy_check_mark: |
 | id        | String   | :heavy_check_mark: |
 
+Returns up to 12 related products, selecting the products that have more categories
+in common with the reference product.
+You should use it to do something like "you can also be interested by".
+
 ```javascript
 EcomIo.getRelatedProducts(callback, 'a00000000000000000000000')
+```
+
+## Map By Slug
+`mapBySlug(callback, slug)`
+
+> Method to discouver the respective resource and ID by the page slug.
+
+| Arguments | Type     | Required |
+| :---:     | :---:    | :---: |
+| callback  | Function | :heavy_check_mark: |
+| slug      | String   | :heavy_check_mark: |
+
+```javascript
+EcomIo.mapBySlug(callback, 'product-sample-slug')
+```
+
+Example of returned `body`:
+
+```javascript
+{
+  'resource': 'products',
+  '_id': '123a5432109876543210cdef'
+}
+```
+
+## Map By Window URI
+`mapByWindowUri(callback)`
+
+> Does the same as [`mapBySlug`](#map-by-slug), but sets slug automaticlly
+from `window.location`.
+
+| Arguments | Type     | Required |
+| :---:     | :---:    | :---: |
+| callback  | Function | :heavy_check_mark: |
+
+**This method is available client side only (JS on browser)**
+
+```javascript
+EcomIo.mapByWindowUri(callback)
 ```
