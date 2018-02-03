@@ -494,6 +494,9 @@ var EcomIo = function () {
       getList(callback, 'collections', offset, limit, sort, fields, customQuery)
     },
 
+    // fallback
+    'getById': getById,
+
     // Search API
     // https://ecomsearch.docs.apiary.io/
 
