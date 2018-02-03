@@ -26,6 +26,7 @@ Or install [npm package](https://www.npmjs.com/package/ecomplus-sdk):
     * [Callback](#callback)
     * [Initialize](#initialize)
 2. [Methods](#methods)
+    * [Get Store](#get-store)
     * [Get Product](#get-product)
     * [Get Product By Sku](#get-product-by-sku)
     * [Get Order](#get-order)
@@ -112,6 +113,36 @@ EcomIo.init(callback, 100, '5a674f224e0dcec2c3353d9d')
 The object returned from almost all methods is the response body of Store API endpoints,
 so if you want to see more examples, you should access the
 [API documentation](https://ecomstore.docs.apiary.io/#).
+
+## Get Store
+`getStore(callback, id)`
+
+[API reference](https://ecomstore.docs.apiary.io/#reference/stores/specific-store/read-store)
+
+> Method to read a store object by the ID.
+
+| Arguments | Type     | Required |
+| :---:     | :---:    | :---: |
+| callback  | Function | :heavy_check_mark: |
+| id        | String   | |
+
+The `id` is not required only if
+[`StoreObjectId`](#initialize) is set, then this method
+will get the object of current store.
+
+`StoreObjectId` will be set automaticly
+if SDK is running on storefront with browser.
+
+```javascript
+// get current store object
+// uses saved StoreObjectId
+EcomIo.getStore(callback)
+```
+
+```javascript
+// specific store by object id
+EcomIo.getStore(callback, '5a674f224e0dcec2c3353d9d')
+```
 
 ## Get Product
 `getProduct(callback, id)`
