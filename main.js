@@ -510,12 +510,14 @@ var EcomIo = function () {
         // https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html
         body = customDsl
       } else {
+        /*
         // term is required
         if (typeof term !== 'string') {
           msg = 'Search term is required and must be a string'
           errorHandling(callback, msg)
           return
         }
+        */
 
         if (typeof sort === 'number') {
           // defines most common sorting options
@@ -558,13 +560,6 @@ var EcomIo = function () {
 
         body = {
           'query': {
-            'multi_match': {
-              'query': term,
-              'fields': [
-                'name',
-                'keywords'
-              ]
-            },
             'sort': [
               {
                 'available': true
@@ -636,6 +631,19 @@ var EcomIo = function () {
             }
           }
         }
+
+        // search term
+        if (typeof term === 'string') {
+          // https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-multi-match-query.html
+          body.query.multi_match = {
+            'query': term,
+            'fields': [
+              'name',
+              'keywords'
+            ]
+          }
+        }
+
         // pagination
         // https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-from-size.html
         if (typeof from === 'number' && from > 0) {
