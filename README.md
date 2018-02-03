@@ -75,21 +75,37 @@ parsed and returned in `body`, it's null if no
 JSON response can be captured.
 
 ## Initialize
-`init(StoreId, Logger)`
+`init(callback, StoreId, StoreObjectId, Logger)`
 
-Before you call the other methods you need to initialize the library with the store ID.
+Before you call the other methods you need to initialize the library.
+
+In client JS (browser) `StoreId` is not required,
+if undefined, it will be set in function of site domain name.
+
+You have to define `StoreId`,
+and should also define `StoreObjectId`,
+if using SDK on backend with Node.js, or if you are embedding
+the store in another external site, such as a blog, not in the storefront.
 
 The `Logger` argument is not required, but you can pass a
 [Console object](https://developer.mozilla.org/docs/Web/API/Console),
 with properties `log` and `error`, if you want to save output on file.
 
-| Arguments | Type             | Required |
-| :---:     | :---:            | :---: |
-| StoreId   | Number           | :heavy_check_mark: |
-| Logger    | `Console` object | |
+| Arguments     | Type             | Required |
+| :---:         | :---:            | :---: |
+| callback      | Function         | :heavy_check_mark: |
+| StoreId       | Number           | |
+| StoreObjectId | String           | |
+| Logger        | `Console` object | |
 
 ```javascript
-EcomIo.init(100)
+// JS on browser
+EcomIo.init(callback)
+```
+
+```javascript
+// Node.js
+EcomIo.init(callback, 100, '5a674f224e0dcec2c3353d9d')
 ```
 
 # Methods
