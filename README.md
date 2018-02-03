@@ -100,12 +100,12 @@ with properties `log` and `error`, if you want to save output on file.
 | Logger        | `Console` object | |
 
 ```javascript
-// JS on browser
+// storefront on browser
 EcomIo.init(callback)
 ```
 
 ```javascript
-// Node.js
+// Node.js or not storefront site
 EcomIo.init(callback, 100, '5a674f224e0dcec2c3353d9d')
 ```
 
