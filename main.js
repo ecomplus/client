@@ -551,7 +551,7 @@ var EcomIo = function () {
                 'views': 'desc'
               }
           }
-        } else {
+        } else if (!sort) {
           // default sort by views
           sort = {
             'views': 'desc'
