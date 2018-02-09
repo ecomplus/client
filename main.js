@@ -528,7 +528,9 @@ var EcomIo = function () {
             case 1:
               // sort by sales
               sort = {
-                'sales': 'desc'
+                'sales': {
+                  'order': 'desc'
+                }
               }
               break
 
@@ -536,7 +538,9 @@ var EcomIo = function () {
               // sort by price
               // lowest price -> highest price
               sort = {
-                'price': 'asc'
+                'price': {
+                  'order': 'asc'
+                }
               }
               break
 
@@ -544,35 +548,31 @@ var EcomIo = function () {
               // sort by price
               // highest price -> lowest price
               sort = {
-                'price': 'desc'
+                'price': {
+                  'order': 'desc'
+                }
               }
               break
 
             default:
               // default sort by views
               sort = {
-                'views': 'desc'
+                'views': {
+                  'order': 'desc'
+                }
               }
           }
         } else if (!sort) {
           // default sort by views
           sort = {
-            'views': 'desc'
+            'views': {
+              'order': 'desc'
+            }
           }
         }
 
         body = {
           'query': {
-            'sort': [
-              {
-                'available': true
-              },
-              '_score',
-              {
-                'ad_relevance': 'desc'
-              },
-              sort
-            ],
             'bool': {
               // condition, only visible products
               'filter': [
@@ -584,6 +584,20 @@ var EcomIo = function () {
               ]
             }
           },
+          'sort': [
+            {
+              'available': {
+                'order': 'desc'
+              }
+            },
+            '_score',
+            {
+              'ad_relevance': {
+                'order': 'desc'
+              }
+            },
+            sort
+          ],
           'aggs': {
             'brands': {
               'terms': {
@@ -638,12 +652,14 @@ var EcomIo = function () {
         // search term
         if (typeof term === 'string') {
           // https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-multi-match-query.html
-          body.query.multi_match = {
-            'query': term,
-            'fields': [
-              'name',
-              'keywords'
-            ]
+          body.query.bool.must = {
+            'multi_match': {
+              'query': term,
+              'fields': [
+                'name',
+                'keywords'
+              ]
+            }
           }
         }
 
