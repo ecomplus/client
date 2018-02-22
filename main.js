@@ -1,5 +1,3 @@
-'use strict'
-
 var isNodeJs = false
 // Verify if the script is Node JS
 if (typeof module !== 'undefined' && module.exports) {
@@ -7,6 +5,8 @@ if (typeof module !== 'undefined' && module.exports) {
 }
 
 var EcomIo = function () {
+  'use strict'
+
   var storeId, storeObjectId, https, logger
 
   if (isNodeJs) {
