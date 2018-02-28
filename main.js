@@ -71,7 +71,7 @@
 
       // retry up to 3 times if API returns 503
       var tries = 0
-      sendRequest(tries, host, path, body, callback)
+      sendRequest(tries, host, path, body, callback, endpoint)
 
       msg = logHeader('INFO') +
         '\nAPI endpoint' +
@@ -79,7 +79,7 @@
       logger.log(msg)
     }
 
-    var sendRequest = function (tries, host, path, body, callback) {
+    var sendRequest = function (tries, host, path, body, callback, endpoint) {
       // send request to API
       var method
       if (!body) {
@@ -90,21 +90,21 @@
         method = 'POST'
       }
 
-      if (tries === 1) {
+      if (tries === 1 && endpoint) {
         // tried once with error
         // check if is requesting from Cloudflare cache
         switch (host) {
           case 'ioapi.ecvol.com':
             // try with live Store API
             host = 'api.e-com.plus'
-            // fix pathname
-            path = '/v1'
-            break
+            runMethod(callback, endpoint, host, body)
+            return
 
           case 'io.ecvol.com':
             // try with live E-Com Plus Main API
             host = 'e-com.plus'
-            break
+            runMethod(callback, endpoint, host, body)
+            return
         }
       }
 
