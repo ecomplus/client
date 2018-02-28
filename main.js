@@ -49,8 +49,12 @@
       } else {
         switch (host) {
           case 'ioapi.ecvol.com':
+            // host defined to Store API cache
+            // store ID on URL, eg.: /100/v1
+            path = '/' + storeId + '/v1'
+            break
+
           case 'api.e-com.plus':
-            // host defined to Store API
             path = '/v1'
             break
 
@@ -93,6 +97,8 @@
           case 'ioapi.ecvol.com':
             // try with live Store API
             host = 'api.e-com.plus'
+            // fix pathname
+            path = '/v1'
             break
 
           case 'io.ecvol.com':
