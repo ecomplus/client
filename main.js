@@ -376,7 +376,7 @@
           logger = console
         }
 
-        if (storeId) {
+        if (StoreId && StoreObjectId) {
           // set store ID
           storeId = StoreId
           storeObjectId = StoreObjectId
