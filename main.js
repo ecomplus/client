@@ -91,6 +91,12 @@
         // request with body
         method = 'POST'
       }
+      // default request headers
+      let headers = {
+        'Content-Type': 'application/json',
+        'X-Store-ID': storeId,
+        'Cache-Control': 'no-cache'
+      }
 
       var resend = function () {
         if (endpoint) {
@@ -135,10 +141,7 @@
           hostname: host,
           path: path,
           method: method,
-          headers: {
-            'Content-Type': 'application/json',
-            'X-Store-ID': storeId
-          }
+          headers: headers
         }
 
         var req = https.request(options, function (res) {
@@ -205,6 +208,11 @@
 
         var url = 'https://' + host + path
         ajax.open(method, url, true)
+        for (var header in headers) {
+          if (headers.hasOwnProperty(header)) {
+            ajax.setRequestHeader(header, headers[header])
+          }
+        }
 
         if (body) {
           // send JSON body
