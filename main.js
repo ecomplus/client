@@ -32,7 +32,7 @@
       logger.log(logHeader('WARNING') + '\n' + errMsg)
     }
 
-    var runMethod = function (callback, endpoint, host, body) {
+    var runMethod = function (callback, endpoint, host, body, tries) {
       var msg
       if (typeof callback !== 'function') {
         msg = 'You need to specify a callback function to receive the request response'
@@ -70,7 +70,9 @@
       // eg.: /v1/products.json
 
       // retry up to 3 times if API returns 503
-      var tries = 0
+      if (typeof tries !== 'number') {
+        tries = 0
+      }
       sendRequest(tries, host, path, body, callback, endpoint)
 
       msg = logHeader('INFO') +
@@ -90,22 +92,41 @@
         method = 'POST'
       }
 
-      if (tries === 1 && endpoint) {
-        // tried once with error
-        // check if is requesting from Cloudflare cache
-        switch (host) {
-          case 'ioapi.ecvol.com':
-            // try with live Store API
-            host = 'api.e-com.plus'
-            runMethod(callback, endpoint, host, body)
-            return
+      var resend = function () {
+        if (endpoint) {
+          // tried once with error
+          // try the inverse, live to cache or cache to live
+          switch (host) {
+            case 'ioapi.ecvol.com':
+              // try with live Store API
+              host = 'api.e-com.plus'
+              runMethod(callback, endpoint, host, body, tries)
+              return
 
-          case 'io.ecvol.com':
-            // try with live E-Com Plus Main API
-            host = 'e-com.plus'
-            runMethod(callback, endpoint, host, body)
-            return
+            case 'io.ecvol.com':
+              // try with live E-Com Plus Main API
+              host = 'e-com.plus'
+              runMethod(callback, endpoint, host, body, tries)
+              return
+
+            case 'api.e-com.plus':
+              // try with cached Store API
+              host = 'ioapi.ecvol.com'
+              runMethod(callback, endpoint, host, body, tries)
+              return
+
+            case 'e-com.plus':
+              // try with cached E-Com Plus Main API
+              host = 'io.ecvol.com'
+              runMethod(callback, endpoint, host, body, tries)
+              return
+          }
         }
+
+        // try to resend request
+        setTimeout(function () {
+          sendRequest(tries, host, path, body, callback)
+        }, 500)
       }
 
       if (isNodeJs === true) {
@@ -122,10 +143,7 @@
 
         var req = https.request(options, function (res) {
           if (res.statusCode === 503 && tries < 3) {
-            // try to resend request
-            setTimeout(function () {
-              sendRequest(tries, host, path, body, callback)
-            }, 500)
+            resend()
             // consume response data to free up memory
             res.resume()
             return
@@ -162,12 +180,8 @@
           ajax = new XDomainRequest()
 
           ajax.ontimeout = ajax.onerror = function () {
-            // try to resend request
-            setTimeout(function () {
-              sendRequest(tries, host, path, body, callback)
-            }, 500)
+            resend()
           }
-
           ajax.onload = function () {
             // treat response
             response(200, this.responseText, callback)
@@ -180,15 +194,11 @@
             if (this.readyState === 4) {
               // request finished and response is ready
               if (this.status === 503 && tries < 3) {
-                // try to resend request
-                setTimeout(function () {
-                  sendRequest(tries, host, path, body, callback)
-                }, 500)
-                return
+                resend()
+              } else {
+                // treat response
+                response(this.status, this.responseText, callback)
               }
-
-              // treat response
-              response(this.status, this.responseText, callback)
             }
           }
         }
