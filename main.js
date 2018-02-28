@@ -94,8 +94,12 @@
       // default request headers
       var headers = {
         'Content-Type': 'application/json',
-        'X-Store-ID': storeId,
         'Cache-Control': 'no-cache'
+      }
+      // add custom headers only when necessary
+      // prevent CORS preflight request
+      if (host === 'api.e-com.plus') {
+        headers['X-Store-ID'] = storeId
       }
 
       var resend = function () {
