@@ -92,7 +92,7 @@
         method = 'POST'
       }
       // default request headers
-      let headers = {
+      var headers = {
         'Content-Type': 'application/json',
         'X-Store-ID': storeId,
         'Cache-Control': 'no-cache'
