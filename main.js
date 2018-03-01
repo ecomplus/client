@@ -92,14 +92,15 @@
         method = 'POST'
       }
       // default request headers
-      var headers = {
-        'Content-Type': 'application/json',
-        'Cache-Control': 'no-cache'
-      }
+      var headers = {}
       // add custom headers only when necessary
       // prevent CORS preflight request
-      if (host === 'api.e-com.plus') {
-        headers['X-Store-ID'] = storeId
+      switch (host) {
+        case 'api.e-com.plus':
+        case 'apx-search.e-com.plus':
+        case 'apx-graphs.e-com.plus':
+          headers['X-Store-ID'] = storeId
+          break
       }
 
       var resend = function () {
