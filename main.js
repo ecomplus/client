@@ -226,7 +226,7 @@
         } else {
           url += '?'
         }
-        url += new Date().getTime()
+        url += '_=' + new Date().getTime()
         ajax.open(method, url, true)
 
         for (var header in headers) {
