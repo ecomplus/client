@@ -101,6 +101,14 @@
         case 'apx-graphs.e-com.plus':
           headers['X-Store-ID'] = storeId
           break
+
+        case 'ioapi.ecvol.com':
+        case 'io.ecvol.com':
+        case 'iostorefront.ecvol.com':
+          // fix URL, from .json to .js
+          // using js extension only for convenience with Cloudflare cache
+          path = path.replace('.json', '.js')
+          break
       }
 
       var resend = function () {
