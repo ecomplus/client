@@ -75,10 +75,12 @@
       }
       sendRequest(tries, host, path, body, callback, endpoint)
 
+      /*
       msg = logHeader('INFO') +
         '\nAPI endpoint' +
         '\n' + endpoint
       logger.log(msg)
+      */
     }
 
     var sendRequest = function (tries, host, path, body, callback, endpoint) {
