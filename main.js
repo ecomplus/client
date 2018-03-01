@@ -220,13 +220,20 @@
         }
 
         var url = 'https://' + host + path
+        // add query param to prevent cache
+        if (path.indexOf('?') >= 0) {
+          url += '&'
+        } else {
+          url += '?'
+        }
+        url += new Date().getTime()
         ajax.open(method, url, true)
+
         for (var header in headers) {
           if (headers.hasOwnProperty(header)) {
             ajax.setRequestHeader(header, headers[header])
           }
         }
-
         if (body) {
           // send JSON body
           ajax.send(JSON.stringify(body))
