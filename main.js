@@ -223,12 +223,13 @@
 
         var url = 'https://' + host + path
         // add query param to prevent cache
+        // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest#Bypassing_the_cache
         if (path.indexOf('?') >= 0) {
           url += '&'
         } else {
           url += '?'
         }
-        url += '_=' + new Date().getTime()
+        url += new Date().getTime()
         ajax.open(method, url, true)
 
         for (var header in headers) {
