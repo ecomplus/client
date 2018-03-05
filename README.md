@@ -544,7 +544,7 @@ let specs = {
 
 ### IDs
 The `ids` argument should be an array of products IDs to filter the search.
-If used, only the products of specified IDs will be returned.
+If used, only the products of specified object ID(s) will be returned.
 
 ```javascript
 // sample ids array
