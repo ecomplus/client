@@ -531,7 +531,7 @@
       // Search API
       // https://ecomsearch.docs.apiary.io/
 
-      'searchProduts': function (callback, term, from, size, sort, specs, brands, categories, prices, customDsl) {
+      'searchProducts': function (callback, term, from, size, sort, specs, brands, categories, prices, customDsl) {
         var host = 'apx-search.e-com.plus'
         // proxy will pass XGET
         // var method = 'POST'

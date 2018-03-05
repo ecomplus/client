@@ -489,7 +489,7 @@ specifications and this
 
 ```javascript
 // list trending items
-EcomIo.searchProduts(callback)
+EcomIo.searchProducts(callback)
 ```
 
 ### Term
@@ -500,7 +500,7 @@ the `name` and `keywords` of each product.
 
 ```javascript
 // search product by term
-EcomIo.searchProduts(callback, 'tshirt')
+EcomIo.searchProducts(callback, 'tshirt')
 ```
 
 ### Sort
