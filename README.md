@@ -46,6 +46,7 @@ Or install [npm package](https://www.npmjs.com/package/ecomplus-sdk):
         - [Term](#term)
         - [Sort](#sort)
         - [Specs](#specs)
+        - [IDs](#ids)
         - [Brands](#brands)
         - [Categories](#categories)
         - [Prices](#prices)
@@ -459,7 +460,7 @@ EcomIo.listCollections(callback, null, null, null, null, 'limit=2&offset=4')
 ```
 
 ## Search Products
-`searchProducts(callback, term, from, size, sort, specs, brands, categories, prices, customDsl)`
+`searchProducts(callback, term, from, size, sort, specs, ids, brands, categories, prices, customDsl)`
 
 [API reference](https://ecomsearch.docs.apiary.io/#reference/items/items-search/complex-search)
 
@@ -482,6 +483,7 @@ specifications and this
 | size       | number   |                    | 24      | Maximum number of results |
 | sort       | number   |                    | 0       | Results ordering, default is by views |
 | specs      | Object   |                    |         | Filter results by item specifications |
+| ids        | Array    |                    |         | Filter results by product IDs |
 | brands     | Array    |                    |         | Filter results by brands |
 | categories | Array    |                    |         | Filter results by categories |
 | prices     | Object   |                    |         | Filter results by prices `min` and `max` |
@@ -538,6 +540,19 @@ let specs = {
   'color': [ 'blue', 'red' ],
   'size': [ 'G' ]
 }
+```
+
+### IDs
+The `ids` argument should be an array of products IDs to filter the search.
+If used, only the products of specified IDs will be returned.
+
+```javascript
+// sample ids array
+let ids = [
+  '1234567890abcdef01291510',
+  '1234567890abcdef01291511',
+  '1234567890abcdef01291512'
+]
 ```
 
 ### Brands

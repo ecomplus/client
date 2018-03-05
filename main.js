@@ -531,18 +531,18 @@
       // Search API
       // https://ecomsearch.docs.apiary.io/
 
-      'searchProducts': function (callback, term, from, size, sort, specs, brands, categories, prices, customDsl) {
+      'searchProducts': function (callback, term, from, size, sort, specs, ids, brands, categories, prices, dsl) {
         var host = 'apx-search.e-com.plus'
         // proxy will pass XGET
         // var method = 'POST'
         var endpoint = '/items.json'
         var body, msg
 
-        if (typeof customDsl === 'object' && customDsl !== null) {
+        if (typeof dsl === 'object' && dsl !== null) {
           // custom Query DSL
           // must be a valid search request body
           // https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html
-          body = customDsl
+          body = dsl
         } else {
           /*
           // term is required
@@ -739,6 +739,16 @@
                 body.query.bool.filter.push(nestedQuery)
               }
             }
+          }
+
+          if (Array.isArray(ids) && ids.length > 0) {
+            // add filter
+            // search by product Object IDs
+            body.query.bool.filter.push({
+              'terms': {
+                '_id': ids
+              }
+            })
           }
 
           if (Array.isArray(brands) && brands.length > 0) {
