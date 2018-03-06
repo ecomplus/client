@@ -102,6 +102,7 @@
         case 'apx-search.e-com.plus':
         case 'apx-graphs.e-com.plus':
           headers['X-Store-ID'] = storeId
+          headers['Content-Type'] = 'application/json'
           break
       }
 
