@@ -789,11 +789,12 @@
           }
         }
 
+        /*
         msg = logHeader('INFO') +
           '\nQuery DSL' +
           '\n' + JSON.stringify(body)
         logger.log(msg)
-
+        */
         runMethod(callback, endpoint, host, body)
       },
 
