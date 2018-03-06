@@ -537,7 +537,7 @@
         // proxy will pass XGET
         // var method = 'POST'
         var endpoint = '/items.json'
-        var body, msg
+        var body
 
         if (typeof dsl === 'object' && dsl !== null) {
           // custom Query DSL
