@@ -804,7 +804,8 @@
       'mapBySlug': function (callback, slug) {
         // returns resource and ID
         var host = 'iostorefront.ecvol.com'
-        var endpoint = '/' + storeId + '+' + slug.replace(/\//g, '+') + '.json'
+        // replace bars and dots in the slug with +
+        var endpoint = '/' + storeId + '+' + slug.replace(/[/.]/g, '+') + '.json'
 
         // middleware callback
         var Callback = function (err, body) {
