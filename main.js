@@ -143,7 +143,7 @@
         }, 500)
       }
 
-      if (isNodeJs === true && https) {
+      if (https) {
         // call with NodeJS http module
         var options = {
           hostname: host,
