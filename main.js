@@ -10,7 +10,7 @@
   var EcomIo = (function () {
     var storeId, storeObjectId, https, logger
 
-    if (isNodeJs) {
+    if (isNodeJs && typeof XMLHttpRequest === 'undefined' && typeof XDomainRequest === 'undefined') {
       https = require('https')
     }
 
@@ -143,7 +143,7 @@
         }, 500)
       }
 
-      if (isNodeJs === true) {
+      if (isNodeJs === true && https) {
         // call with NodeJS http module
         var options = {
           hostname: host,
@@ -416,7 +416,7 @@
             callback(null, null)
           }
         } else {
-          if (!isNodeJs) {
+          if (typeof location === 'object') {
             // get store ID from Main API
             // http://ecomplus.docs.apiary.io/
             var host = 'io.ecvol.com'
@@ -847,7 +847,7 @@
 
       'mapByWindowUri': function (callback) {
         // convenience only
-        if (!isNodeJs) {
+        if (typeof location === 'object') {
           // remove the first / char from pathname
           var slug = window.location.pathname.slice(1)
           EcomIo.mapBySlug(callback, slug)
