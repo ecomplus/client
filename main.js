@@ -418,7 +418,8 @@
               'id': null,
               'channel_id': null,
               'store_id': storeId,
-              'store_object_id': storeObjectId
+              'store_object_id': storeObjectId,
+              'default_lang': null
             }
             // err null
             callback(null, body)
