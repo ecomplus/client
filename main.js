@@ -413,7 +413,15 @@
           storeObjectId = StoreObjectId
 
           if (typeof callback === 'function') {
-            callback(null, null)
+            // simulate domains API response
+            let body = {
+              'id': null,
+              'channel_id': null,
+              'store_id': storeId,
+              'store_object_id': storeObjectId
+            }
+            // err null
+            callback(null, body)
           }
         } else {
           if (typeof location === 'object') {
