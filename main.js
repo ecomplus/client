@@ -813,8 +813,8 @@
       'mapBySlug': function (callback, slug) {
         // returns resource and ID
         var host = 'iostorefront.ecvol.com'
-        // replace bars and dots in the slug with +
-        var endpoint = '/' + storeId + '+' + slug.replace(/[/.]/g, '+') + '.json'
+        // encode Redis key on URL
+        var endpoint = '/' + encodeURIComponent(storeId + '+' + slug) + '.json'
 
         // middleware callback
         var Callback = function (err, body) {
