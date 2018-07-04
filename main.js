@@ -813,8 +813,8 @@
       'mapBySlug': function (callback, slug) {
         // returns resource and ID
         var host = 'iostorefront.ecvol.com'
-        // encode Redis key on URL
-        var endpoint = '/' + encodeURIComponent(storeId + '+' + slug) + '.json'
+        // replace / with $ on slug to escape URL
+        var endpoint = '/' + storeId + '@' + slug.replace('/', '$') + '.json'
 
         // middleware callback
         var Callback = function (err, body) {
@@ -823,10 +823,10 @@
             if (val) {
               /*
               {
-                "GET": "[resource]+[id]"
+                "GET": "[resource]@[id]"
               }
               */
-              val = val.split('+')
+              val = val.split('@')
               // overwrite body
               body = {
                 'resource': val[0],
