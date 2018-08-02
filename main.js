@@ -414,7 +414,7 @@
 
           if (typeof callback === 'function') {
             // simulate domains API response
-            let body = {
+            var body = {
               'id': null,
               'channel_id': null,
               'store_id': storeId,
