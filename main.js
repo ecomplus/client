@@ -7,6 +7,15 @@
     isNodeJs = true
   }
 
+  // define APIs hosts
+  var apiStore = 'api.e-com.plus'
+  var apiStoreCache = 'ioapi.ecvol.com'
+  var apiMain = 'e-com.plus'
+  var apiMainCache = 'io.ecvol.com'
+  var apiSearch = 'apx-search.e-com.plus'
+  var apiGraphs = 'apx-graphs.e-com.plus'
+  var apiModules = 'apx-mods.e-com.plus'
+
   var EcomIo = (function () {
     var storeId, storeObjectId, https, logger
 
@@ -43,26 +52,26 @@
       var path
       if (!host) {
         // default to E-Com Plus Store API
-        // https://ecomstore.docs.apiary.io/
-        host = 'api.e-com.plus'
+        // https://developers.e-com.plus/docs/reference/store/
+        host = apiStore
         path = '/v1'
       } else {
         switch (host) {
-          case 'ioapi.ecvol.com':
+          case apiStoreCache:
             // host defined to Store API cache
             // store ID on URL, eg.: /100/v1
             path = '/' + storeId + '/v1'
             break
 
-          case 'api.e-com.plus':
+          case apiStore:
             path = '/v1'
             break
 
           default:
             // Storefront API, Main API, Graphs API or Search API
             // https://ecomplus.docs.apiary.io/
-            // https://ecomgraphs.docs.apiary.io/
-            // https://ecomsearch.docs.apiary.io/
+            // https://developers.e-com.plus/docs/reference/graphs/
+            // https://developers.e-com.plus/docs/reference/search/
             path = '/api/v1'
         }
       }
@@ -98,9 +107,9 @@
       // add custom headers only when necessary
       // prevent CORS preflight request
       switch (host) {
-        case 'api.e-com.plus':
-        case 'apx-search.e-com.plus':
-        case 'apx-graphs.e-com.plus':
+        case apiStore:
+        case apiSearch:
+        case apiGraphs:
           headers['X-Store-ID'] = storeId
           headers['Content-Type'] = 'application/json'
           break
@@ -111,27 +120,27 @@
           // tried once with error
           // try the inverse, live to cache or cache to live
           switch (host) {
-            case 'ioapi.ecvol.com':
+            case apiStoreCache:
               // try with live Store API
-              host = 'api.e-com.plus'
+              host = apiStore
               runMethod(callback, endpoint, host, body, tries)
               return
 
-            case 'io.ecvol.com':
+            case apiMainCache:
               // try with live E-Com Plus Main API
-              host = 'e-com.plus'
+              host = apiMain
               runMethod(callback, endpoint, host, body, tries)
               return
 
-            case 'api.e-com.plus':
+            case apiStore:
               // try with cached Store API
-              host = 'ioapi.ecvol.com'
+              host = apiStoreCache
               runMethod(callback, endpoint, host, body, tries)
               return
 
-            case 'e-com.plus':
+            case apiMain:
               // try with cached E-Com Plus Main API
-              host = 'io.ecvol.com'
+              host = apiMainCache
               runMethod(callback, endpoint, host, body, tries)
               return
           }
@@ -282,7 +291,7 @@
     var getById = function (callback, resource, id) {
       if (idValidate(callback, id)) {
         // use Cloudflare cache of Store API
-        var host = 'ioapi.ecvol.com'
+        var host = apiStoreCache
         runMethod(callback, '/' + resource + '/' + id + '.json', host)
       }
     }
@@ -321,7 +330,7 @@
       if (query === '') {
         // cacheable
         // use Cloudflare cache of Store API
-        host = 'ioapi.ecvol.com'
+        host = apiStoreCache
       } else {
         endpoint += query
       }
@@ -331,7 +340,7 @@
     var queryString = function (offset, limit, sort, fields, customQuery) {
       // mount query string with function params
       // common Restful URL params
-      // ref.: https://ecomstore.docs.apiary.io/#introduction/overview/url-params
+      // ref.: https://developers.e-com.plus/docs/reference/store/#url-params
       var params = {}
       // default for empty string
       var query = ''
@@ -428,7 +437,7 @@
           if (typeof location === 'object') {
             // get store ID from Main API
             // http://ecomplus.docs.apiary.io/
-            var host = 'io.ecvol.com'
+            var host = apiMainCache
             var endpoint = '/domains/' + window.location.hostname + '.json'
 
             // middleware callback
@@ -461,8 +470,9 @@
         return storeObjectId
       },
 
-      // Store API
-      // https://ecomstore.docs.apiary.io/
+      /* Store API
+      https://developers.e-com.plus/docs/reference/store/
+      */
 
       'getStore': function (callback, id) {
         if (id === undefined && storeObjectId) {
@@ -538,11 +548,12 @@
       // fallback
       'getById': getById,
 
-      // Search API
-      // https://ecomsearch.docs.apiary.io/
+      /* Search API
+      https://developers.e-com.plus/docs/reference/search/
+      */
 
       'searchProducts': function (callback, term, from, size, sort, specs, ids, brands, categories, prices, dsl) {
-        var host = 'apx-search.e-com.plus'
+        var host = apiSearch
         // proxy will pass XGET
         // var method = 'POST'
         var endpoint = '/items.json'
@@ -807,8 +818,9 @@
         runMethod(callback, endpoint, host, body)
       },
 
-      // Storefront API
-      // no documentation yet
+      /* Storefront API
+      no documentation yet
+      */
 
       'mapBySlug': function (callback, slug) {
         // returns resource and ID
@@ -867,12 +879,13 @@
         }
       },
 
-      // Graphs API
-      // https://ecomgraphs.docs.apiary.io/
+      /* Graphs API
+      https://developers.e-com.plus/docs/reference/graphs/
+      */
 
       'listRecommendedProducts': function (callback, id) {
         if (idValidate(id)) {
-          var host = 'apx-graphs.e-com.plus'
+          var host = apiGraphs
           var endpoint = '/products/' + id + '/recommended.json'
           runMethod(callback, endpoint, host)
         }
@@ -880,10 +893,44 @@
 
       'listRelatedProducts': function (callback, id) {
         if (idValidate(id)) {
-          var host = 'apx-graphs.e-com.plus'
+          var host = apiGraphs
           var endpoint = '/products/' + id + '/related.json'
           runMethod(callback, endpoint, host)
         }
+      },
+
+      /* Modules API
+      no documentation yet
+      */
+
+      'calculateShipping': function (callback, body) {
+        /*
+        body reference:
+        https://apx-mods.e-com.plus/api/v1/calculate_shipping/schema.json?store_id=100
+        https://apx-mods.e-com.plus/api/v1/calculate_shipping/response_schema.json?store_id=100
+        */
+        var endpoint = '/calculate_shipping.json'
+        runMethod(callback, endpoint, apiModules, body)
+      },
+
+      'listPayments': function (callback, body) {
+        /*
+        body reference:
+        https://apx-mods.e-com.plus/api/v1/list_payments/schema.json?store_id=100
+        https://apx-mods.e-com.plus/api/v1/list_payments/response_schema.json?store_id=100
+        */
+        var endpoint = '/list_payments.json'
+        runMethod(callback, endpoint, apiModules, body)
+      },
+
+      'createTransaction': function (callback, body) {
+        /*
+        body reference:
+        https://apx-mods.e-com.plus/api/v1/create_transaction/schema.json?store_id=100
+        https://apx-mods.e-com.plus/api/v1/create_transaction/response_schema.json?store_id=100
+        */
+        var endpoint = '/create_transaction.json'
+        runMethod(callback, endpoint, apiModules, body)
       },
 
       // provide external use as http client
