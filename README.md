@@ -56,6 +56,10 @@ Or install [npm package](https://www.npmjs.com/package/ecomplus-sdk):
     * [Map By Slug](#map-by-slug)
     * [Map By Window URI](#map-by-window-uri)
     * [Get Any By ID](#get-any-by-id)
+    * [Modules](#modules)
+        - [Calculate Shipping](#calculate-shipping)
+        - [List Payments](#list-payments)
+        - [Create Transaction](#create-transaction)
 
 # Getting Started
 The library declares an object called `EcomIo`,
@@ -697,3 +701,23 @@ object from [Store API](https://ecomstore.docs.apiary.io/) by the ID.
 ```javascript
 EcomIo.getById(callback, 'products', '123a5432109876543210cdef')
 ```
+
+## Modules
+Working with Modules API
+
+> TODO documentation
+
+### Calculate Shipping
+`calculateShipping(callback, body)`
+
+> TODO documentation
+
+### List Payments
+`listPayments(callback, body)`
+
+> TODO documentation
+
+### Create Transaction
+`createTransaction(callback, body)`
+
+> TODO documentation
