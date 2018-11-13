@@ -15,6 +15,7 @@
   var apiSearch = 'apx-search.e-com.plus'
   var apiGraphs = 'apx-graphs.e-com.plus'
   var apiModules = 'apx-mods.e-com.plus'
+  var apiStorefront = 'iostorefront.ecvol.com'
 
   var EcomIo = (function () {
     var storeId, storeObjectId, https, logger
@@ -824,7 +825,7 @@
 
       'mapBySlug': function (callback, slug) {
         // returns resource and ID
-        var host = 'iostorefront.ecvol.com'
+        var host = apiStorefront
         // replace / with $ on slug to escape URL
         var endpoint = '/' + storeId + '@' + slug.replace('/', '$') + '.json'
 
