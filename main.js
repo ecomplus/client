@@ -885,7 +885,7 @@
       */
 
       'listRecommendedProducts': function (callback, id) {
-        if (idValidate(id)) {
+        if (idValidate(callback, id)) {
           var host = apiGraphs
           var endpoint = '/products/' + id + '/recommended.json'
           runMethod(callback, endpoint, host)
@@ -893,7 +893,7 @@
       },
 
       'listRelatedProducts': function (callback, id) {
-        if (idValidate(id)) {
+        if (idValidate(callback, id)) {
           var host = apiGraphs
           var endpoint = '/products/' + id + '/related.json'
           runMethod(callback, endpoint, host)
