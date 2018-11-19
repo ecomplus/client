@@ -51,8 +51,8 @@ Or install [npm package](https://www.npmjs.com/package/ecomplus-sdk):
         - [Categories](#categories)
         - [Prices](#prices)
         - [Custom DSL](#custom-dsl)
-    * [Get Recommended Products](#get-recommended-products)
-    * [Get Related Products](#get-related-products)
+    * [List Recommended Products](#list-recommended-products)
+    * [List Related Products](#list-related-products)
     * [Map By Slug](#map-by-slug)
     * [Map By Window URI](#map-by-window-uri)
     * [Get Any By ID](#get-any-by-id)
@@ -607,8 +607,8 @@ to run your own Elasticsearch
 It must be a valid
 [Request Body Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html).
 
-## Get Recommended Products
-`getRecommendedProducts(callback, id)`
+## List Recommended Products
+`listRecommendedProducts(callback, id)`
 
 [API reference](https://ecomgraphs.docs.apiary.io/#reference/products/recommended/list-recommended-items)
 
@@ -624,11 +624,11 @@ times bought together with the reference product.
 You should use it to do something like "who bought it, bought too".
 
 ```javascript
-EcomIo.getRecommendedProducts(callback, 'a00000000000000000000000')
+EcomIo.listRecommendedProducts(callback, 'a00000000000000000000000')
 ```
 
-## Get Related Products
-`getRelatedProducts(callback, id)`
+## List Related Products
+`listRelatedProducts(callback, id)`
 
 [API reference](https://ecomgraphs.docs.apiary.io/#reference/products/related/list-related-items)
 
@@ -644,7 +644,7 @@ in common with the reference product.
 You should use it to do something like "you can also be interested by".
 
 ```javascript
-EcomIo.getRelatedProducts(callback, 'a00000000000000000000000')
+EcomIo.listRelatedProducts(callback, 'a00000000000000000000000')
 ```
 
 ## Map By Slug
