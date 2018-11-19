@@ -748,12 +748,16 @@
             for (var key in specs) {
               if (Array.isArray(specs[key]) && specs[key].length > 0) {
                 nestedQuery.nested.query.bool.filter.push({
-                  'term': {
-                    'specs.grid': key
-                  }
-                }, {
-                  'terms': {
-                    'specs.text': specs[key]
+                  'bool': {
+                    'filter': [{
+                      'term': {
+                        'specs.grid': key
+                      }
+                    }, {
+                      'terms': {
+                        'specs.text': specs[key]
+                      }
+                    }]
                   }
                 })
 
