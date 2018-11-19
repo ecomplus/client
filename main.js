@@ -734,35 +734,29 @@
           if (typeof specs === 'object' && specs !== null && Object.keys(specs).length > 0) {
             // nested ELS object
             // http://nocf-www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-nested-query.html
-            var nestedQuery = {
-              'nested': {
-                'path': 'specs',
-                'query': {
-                  'bool': {
-                    'filter': []
-                  }
-                }
-              }
-            }
-
             for (var key in specs) {
               if (Array.isArray(specs[key]) && specs[key].length > 0) {
-                nestedQuery.nested.query.bool.filter.push({
-                  'bool': {
-                    'filter': [{
-                      'term': {
-                        'specs.grid': key
+                // add filter
+                body.query.bool.filter.push({
+                  'nested': {
+                    'path': 'specs',
+                    'query': {
+                      'bool': {
+                        'filter': [
+                          {
+                            'term': {
+                              'specs.grid': key
+                            }
+                          }, {
+                            'terms': {
+                              'specs.text': specs[key]
+                            }
+                          }
+                        ]
                       }
-                    }, {
-                      'terms': {
-                        'specs.text': specs[key]
-                      }
-                    }]
+                    }
                   }
                 })
-
-                // add filter
-                body.query.bool.filter.push(nestedQuery)
               }
             }
           }
