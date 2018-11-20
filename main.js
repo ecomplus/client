@@ -16,6 +16,7 @@
   var apiGraphs = 'apx-graphs.e-com.plus'
   var apiModules = 'apx-mods.e-com.plus'
   var apiStorefront = 'iostorefront.ecvol.com'
+  var apiCheckout = 'checkout.e-com.plus'
 
   var EcomIo = (function () {
     var storeId, storeObjectId, https, logger
@@ -923,6 +924,19 @@
         */
         var endpoint = '/create_transaction.json'
         runMethod(callback, endpoint, apiModules, body)
+      },
+
+      /* Checkout API
+      no documentation yet
+      */
+
+      'checkout': function (callback, body) {
+        /*
+        body reference:
+        https://checkout.e-com.plus/api/v1/do/schema.json?store_id=100
+        */
+        var endpoint = '/do.json'
+        runMethod(callback, endpoint, apiCheckout, body)
       },
 
       // provide external use as http client
