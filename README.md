@@ -60,6 +60,7 @@ Or install [npm package](https://www.npmjs.com/package/ecomplus-sdk):
         - [Calculate Shipping](#calculate-shipping)
         - [List Payments](#list-payments)
         - [Create Transaction](#create-transaction)
+    * [Checkout](#checkout)
 
 # Getting Started
 The library declares an object called `EcomIo`,
@@ -719,5 +720,12 @@ Working with Modules API
 
 ### Create Transaction
 `createTransaction(callback, body)`
+
+> TODO documentation
+
+## Checkout
+`checkout(callback, body)`
+
+> Method to create order with Checkout API
 
 > TODO documentation
