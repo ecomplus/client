@@ -818,7 +818,7 @@
         // returns resource and ID
         var host = apiStorefront
         // replace / with $ on slug to escape URL
-        var endpoint = '/' + storeId + '@' + slug.replace('/', '$') + '.json'
+        var endpoint = '/' + storeId + '@' + slug.replace(/\//g, '$') + '.json'
 
         // middleware callback
         var Callback = function (err, body) {
