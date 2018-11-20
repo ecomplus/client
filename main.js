@@ -930,7 +930,7 @@
         body reference:
         https://apx-mods.e-com.plus/api/v1/checkout/schema.json?store_id=100
         */
-        var endpoint = '/checkout.json'
+        var endpoint = '/@checkout.json'
         runMethod(callback, endpoint, apiModules, body)
       },
 
