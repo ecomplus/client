@@ -575,53 +575,59 @@
           }
           */
 
-          if (typeof sort === 'number') {
-            // defines most common sorting options
-            switch (sort) {
-              case 1:
-                // sort by sales
-                sort = {
-                  'sales': {
-                    'order': 'desc'
-                  }
-                }
-                break
-
-              case 2:
-                // sort by price
-                // lowest price -> highest price
-                sort = {
-                  'price': {
-                    'order': 'asc'
-                  }
-                }
-                break
-
-              case 3:
-                // sort by price
-                // highest price -> lowest price
-                sort = {
-                  'price': {
-                    'order': 'desc'
-                  }
-                }
-                break
-
-              default:
-                // default sort by views
-                sort = {
-                  'views': {
-                    'order': 'desc'
-                  }
-                }
-            }
-          } else if (!sort) {
-            // default sort by views
-            sort = {
-              'views': {
+          // handle results sorting
+          var order = [
+            {
+              'available': {
                 'order': 'desc'
               }
-            }
+            },
+            {
+              'ad_relevance': {
+                'order': 'desc'
+              }
+            },
+            '_score'
+          ]
+
+          // defines most common sorting options
+          switch (sort) {
+            case 1:
+              // sort by sales after relevance
+              order.splice(2, 0, {
+                'sales': {
+                  'order': 'desc'
+                }
+              })
+              break
+
+            case 2:
+              // sort by price
+              // lowest price -> highest price
+              order.splice(1, 0, {
+                'price': {
+                  'order': 'asc'
+                }
+              })
+              break
+
+            case 3:
+              // sort by price
+              // highest price -> lowest price
+              order.splice(1, 0, {
+                'price': {
+                  'order': 'desc'
+                }
+              })
+              break
+
+            default:
+              // default sort by views after preseted sorting options
+              order.push({
+                'views': {
+                  'order': 'desc'
+                }
+              })
           }
 
           body = {
@@ -637,20 +643,7 @@
                 ]
               }
             },
-            'sort': [
-              {
-                'available': {
-                  'order': 'desc'
-                }
-              },
-              '_score',
-              {
-                'ad_relevance': {
-                  'order': 'desc'
-                }
-              },
-              sort
-            ],
+            'sort': order,
             'aggs': {
               'brands': {
                 'terms': {
