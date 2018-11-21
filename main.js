@@ -111,6 +111,7 @@
         case apiStore:
         case apiSearch:
         case apiGraphs:
+        case apiModules:
           headers['X-Store-ID'] = storeId
           headers['Content-Type'] = 'application/json'
           break
