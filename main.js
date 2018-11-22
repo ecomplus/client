@@ -665,7 +665,7 @@
                   'grid': {
                     'terms': {
                       'field': 'specs.grid',
-                      'size': 12
+                      'size': 30
                     },
                     'aggs': {
                       'text': {
