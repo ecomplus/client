@@ -765,22 +765,27 @@
             })
           }
 
-          if (Array.isArray(brands) && brands.length > 0) {
-            // add filter
-            body.query.bool.filter.push({
-              'terms': {
-                'brands.name': brands
-              }
-            })
+          // handle filter by categories and brands with IDs or names
+          var filterFields = {
+            'brands': brands,
+            'categories': categories
           }
-
-          if (Array.isArray(categories) && categories.length > 0) {
-            // add filter
-            body.query.bool.filter.push({
-              'terms': {
-                'categories.name': categories
+          for (var field in filterFields) {
+            var filterVal = filterFields[field]
+            if (Array.isArray(filterVal) && filterVal.length > 0) {
+              if (/^[a-f0-9]{24}$/.test(filterVal[0])) {
+                // filtering by ObjectID
+                field += '._id'
+              } else {
+                // filtering by name
+                field += '.name'
               }
-            })
+
+              // add filter
+              var filterObj = { 'terms': {} }
+              filterObj[field] = filterVal
+              body.query.bool.filter.push(filterObj)
+            }
           }
 
           // price ranges
