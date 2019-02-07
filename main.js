@@ -783,7 +783,7 @@
 
               // add filter
               var filterObj = { 'terms': {} }
-              filterObj[field] = filterVal
+              filterObj.terms[field] = filterVal
               body.query.bool.filter.push(filterObj)
             }
           }
