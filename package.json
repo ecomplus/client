@@ -1,6 +1,6 @@
 {
   "name": "ecomplus-sdk",
-  "version": "1.15.6",
+  "version": "1.15.7",
   "description": "JS SDK for E-Com Plus APIs public resources",
   "main": "main.js",
   "scripts": {
