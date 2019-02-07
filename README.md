@@ -561,26 +561,40 @@ let ids = [
 ```
 
 ### Brands
-The `brands` argument should be an array of brands IDs to filter the search.
+The `brands` argument should be an array of brands IDs or names to filter the search.
 If used, only products of specified brand(s) will be returned.
 
 ```javascript
 // sample brands array
 let brands = [
-  'a10000000000000000001110',
-  'a10000000000000000001111'
+  'a10000000000000000001110'
+]
+```
+
+```javascript
+// sample brands array with names
+let brands = [
+  'Lenovo',
+  'HP'
 ]
 ```
 
 ### Categories
-The `categories` argument should be an array of categories IDs to filter the search.
+The `categories` argument should be an array of categories IDs or names to filter the search.
 If used, only products of specified categorie(s) will be returned.
 
 ```javascript
 // sample categories array
 let categories = [
-  'b10000000000000000001110',
-  'b10000000000000000001111'
+  'b10000000000000000001110'
+]
+```
+
+```javascript
+// sample categories array with names
+let brands = [
+  'Laptops',
+  'All-in-One Computers'
 ]
 ```
 
