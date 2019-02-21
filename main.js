@@ -708,6 +708,25 @@
                 ]
               }
             }
+
+            // handle terms suggestion
+            // 'did you mean?'
+            // https://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters.html
+            body.suggest = {
+              'text': term,
+              /*
+              'keywords': {
+                'term': {
+                  'field': 'name'
+                }
+              },
+              */
+              'terms': {
+                'phrase': {
+                  'field': 'name'
+                }
+              }
+            }
           }
 
           // pagination
