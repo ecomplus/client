@@ -1,10 +1,11 @@
 {
   "name": "ecomplus-sdk",
-  "version": "1.15.7",
+  "version": "1.15.8",
   "description": "JS SDK for E-Com Plus APIs public resources",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dist": "uglifyjs main.js -o dist/sdk.min.js -c -m --source-map \"url='sdk.min.js.map'\""
   },
   "repository": {
     "type": "git",
