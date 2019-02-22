@@ -714,15 +714,8 @@
             // https://www.elastic.co/guide/en/elasticsearch/reference/current/search-suggesters.html
             body.suggest = {
               'text': term,
-              /*
-              'keywords': {
+              'words': {
                 'term': {
-                  'field': 'name'
-                }
-              },
-              */
-              'terms': {
-                'phrase': {
                   'field': 'name'
                 }
               }
