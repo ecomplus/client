@@ -547,8 +547,9 @@
         getList(callback, 'collections', offset, limit, sort, fields, customQuery)
       },
 
-      // fallback
+      // generic methods to extend usage
       'getById': getById,
+      'getList': getList,
 
       /* Search API
       https://developers.e-com.plus/docs/reference/search/
