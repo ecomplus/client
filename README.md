@@ -704,7 +704,7 @@ EcomIo.mapByWindowUri(callback)
 ## Get Any By ID
 `getById(callback, resource, id)`
 
-> Wildcard method to read any public resource
+> Generic method to read any public resource
 object from [Store API](https://ecomstore.docs.apiary.io/) by the ID.
 
 | Arguments | Type     | Required |
@@ -715,6 +715,34 @@ object from [Store API](https://ecomstore.docs.apiary.io/) by the ID.
 
 ```javascript
 EcomIo.getById(callback, 'products', '123a5432109876543210cdef')
+```
+
+## Get Any List
+`getList(callback, resource, offset, limit, sort, fields, customQuery)`
+
+> Generic method to read any public resource
+list from [Store API](https://ecomstore.docs.apiary.io/).
+
+| Arguments   | Type     | Required |
+| :---:       | :---:    | :---: |
+| callback    | Function | :heavy_check_mark: |
+| resource    | String   | :heavy_check_mark: |
+| offset      | Number   | |
+| limit       | Number   | |
+| sort        | Number   | |
+| fields      | Array    | |
+| customQuery | String   | |
+
+```javascript
+EcomIo.getList(callback, 'grids')
+```
+
+```javascript
+EcomIo.getList(callback, 'grids', 0, 1000, 1, ['title'])
+```
+
+```javascript
+EcomIo.getList(callback, 'grids', null, null, null, null, 'limit=2&offset=4')
 ```
 
 ## Modules
