@@ -1,0 +1,8 @@
+export const API_STORE = 'https://api.e-com.plus/v1/'
+export const API_STORE_CACHE = 'https://ioapi.ecvol.com/:id/v1/'
+export const API_SEARCH = 'https://apx-search.e-com.plus/api/v1/'
+export const API_MODULES = 'https://apx-mods.e-com.plus/api/v1/'
+export const API_STOREFRONT = 'https://iostorefront.ecvol.com/api/v1/'
+export const API_GRAPHS = 'https://apx-graphs.e-com.plus/api/v1/'
+export const API_MAIN = 'https://e-com.plus/api/v1/'
+export const API_MAIN_CACHE = 'https://io.ecvol.com/api/v1/'
