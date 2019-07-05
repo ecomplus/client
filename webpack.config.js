@@ -7,15 +7,15 @@ module.exports = {
   mode: devMode ? 'development' : 'production',
   entry: path.resolve(__dirname, 'src/index.js'),
   output: {
-    library: 'ecomUtils',
+    library: 'ecomClient',
     libraryTarget: 'umd',
     path: path.resolve(__dirname, 'dist'),
-    filename: 'ecom-utils.min.js'
+    filename: 'ecom-client.min.js'
   },
   devServer: {
     contentBase: path.resolve(__dirname, 'test'),
     compress: true,
-    port: 9315,
+    port: 9245,
     open: true
   },
   module: {
