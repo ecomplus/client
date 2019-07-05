@@ -6,7 +6,8 @@
   "jsdelivr": "dist/ecom-client.min.js",
   "unpkg": "dist/ecom-client.min.js",
   "scripts": {
-    "doc": "rm -rf ./docs/* & jsdoc src -r README.md -d ./docs -t ./node_modules/docdash"
+    "doc": "rm -rf ./docs/* & jsdoc src -r README.md -d ./docs -t ./node_modules/docdash",
+    "release": "node ./build/bin.js & standard-version"
   },
   "repository": {
     "type": "git",
