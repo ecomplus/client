@@ -4,4 +4,30 @@
  * @license MIT
  */
 
-console.log(2)
+import _self from './lib/self'
+
+/**
+ * JS client for E-Com Plus REST APIs.
+ * @module @ecomplus/client
+ * @exports {@link ecomClient}
+ *
+ * @example
+ * // ES import
+ * import ecomClient from '@ecomplus/client'
+ *
+ * @example
+ * // With CommonJS
+ * const ecomClient = require('@ecomplus/client')
+ *
+ * @example
+ * <!-- Global `ecomClient` from CDN on browser -->
+ * <script src="https://cdn.jsdelivr.net/npm/@ecomplus/client"></script>
+ */
+
+export {
+  _self
+}
+
+/**
+ * @namespace ecomClient
+ */
