@@ -1,3 +1,7 @@
+# ecomplus-client
+
+**[WIP]** JS client for E-Com Plus REST APIs
+
 # ecomplus-sdk-js
 
 [![npm version](https://img.shields.io/npm/v/ecomplus-sdk.svg)](https://www.npmjs.org/ecomplus-sdk)

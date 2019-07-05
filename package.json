@@ -1,39 +1,36 @@
 {
-  "name": "ecomplus-sdk",
-  "version": "1.16.0",
-  "description": "JS SDK for E-Com Plus APIs public resources",
-  "main": "main.js",
+  "name": "@ecomplus/client",
+  "version": "0.0.1",
+  "description": "JS client for E-Com Plus REST APIs",
+  "main": "dist/ecom-client.min.js",
+  "jsdelivr": "dist/ecom-client.min.js",
+  "unpkg": "dist/ecom-client.min.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dist": "uglifyjs main.js -o dist/sdk.min.js -c -m --source-map \"url='sdk.min.js.map'\""
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ecomclub/ecomplus-sdk-js.git"
+    "url": "git+https://github.com/ecomclub/ecomplus-client.git"
   },
   "keywords": [
     "ecomplus",
-    "storefront",
-    "API",
-    "JS",
-    "Node",
-    "SDK",
-    "JavaScript"
+    "ecommerce-apis",
+    "js-client",
+    "rest-apis",
+    "jamstack",
+    "headless-ecommerce"
   ],
-  "author": "E-Com Club",
+  "author": "E-Com Club <ti@e-com.club>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ecomclub/ecomplus-sdk-js/issues"
+    "url": "https://github.com/ecomclub/ecomplus-client/issues"
   },
-  "homepage": "https://github.com/ecomclub/ecomplus-sdk-js#readme",
-  "standard": {
-    "globals": [
-      "XMLHttpRequest",
-      "XDomainRequest",
-      "window"
-    ]
-  },
+  "homepage": "https://github.com/ecomclub/ecomplus-client#readme",
   "devDependencies": {
-    "standard": "*"
+    "@commitlint/cli": "^8.0.0",
+    "@commitlint/config-conventional": "^8.0.0",
+    "husky": "^3.0.0",
+    "standard": "^12.0.1",
+    "standard-version": "^6.0.1"
   }
 }
