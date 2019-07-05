@@ -6,6 +6,8 @@
   "jsdelivr": "dist/ecom-client.min.js",
   "unpkg": "dist/ecom-client.min.js",
   "scripts": {
+    "serve": "webpack-dev-server",
+    "build": "node ./build/bin.js",
     "doc": "rm -rf ./docs/* & jsdoc src -r README.md -d ./docs -t ./node_modules/docdash",
     "release": "node ./build/bin.js & standard-version"
   },
@@ -35,6 +37,7 @@
   "devDependencies": {
     "@babel/core": "^7.5.0",
     "@babel/plugin-transform-runtime": "^7.5.0",
+    "@babel/preset-env": "^7.5.0",
     "@commitlint/cli": "^8.0.0",
     "@commitlint/config-conventional": "^8.0.0",
     "babel-loader": "^8.0.6",
