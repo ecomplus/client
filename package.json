@@ -27,13 +27,36 @@
     "url": "https://github.com/ecomclub/ecomplus-client/issues"
   },
   "homepage": "https://github.com/ecomclub/ecomplus-client#readme",
+  "dependencies": {
+    "@babel/polyfill": "^7.4.4",
+    "@babel/runtime": "^7.5.0",
+    "core-js": "^3.1.4"
+  },
   "devDependencies": {
+    "@babel/core": "^7.5.0",
+    "@babel/plugin-transform-runtime": "^7.5.0",
     "@commitlint/cli": "^8.0.0",
     "@commitlint/config-conventional": "^8.0.0",
+    "babel-loader": "^8.0.6",
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^5.0.3",
     "docdash": "^1.1.1",
     "husky": "^3.0.0",
     "jsdoc": "^3.6.2",
     "standard": "^12.0.1",
-    "standard-version": "^6.0.1"
-  }
+    "standard-version": "^6.0.1",
+    "webpack": "^4.35.2",
+    "webpack-cli": "^3.3.5",
+    "webpack-dev-server": "^3.7.2"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "browserslist": [
+    "last 1 version",
+    "not dead",
+    "> 0.2%"
+  ]
 }
