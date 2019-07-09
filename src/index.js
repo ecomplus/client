@@ -6,6 +6,8 @@
 
 import _self from './lib/self'
 
+import requestStoreApi from './methods/request-store-api'
+
 /**
  * JS client for E-Com Plus REST APIs.
  * @module @ecomplus/client
@@ -25,7 +27,8 @@ import _self from './lib/self'
  */
 
 export {
-  _self
+  _self,
+  requestStoreApi
 }
 
 /**
