@@ -8,7 +8,7 @@
   "scripts": {
     "serve": "webpack-dev-server",
     "build": "node ./build/bin.js",
-    "doc": "rm -rf ./docs/* & jsdoc src -r README.md -d ./docs -t ./node_modules/docdash",
+    "doc": "rm -rf ./docs/*; jsdoc ./src -r ./README.md -d ./docs -t ./node_modules/docdash",
     "release": "node ./build/bin.js & standard-version"
   },
   "repository": {
