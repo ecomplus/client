@@ -22,9 +22,14 @@ const requestStoreApi = (
   // first check if it's a public request
   if (method.toLowerCase() === 'get' && !authenticationId) {
     // less timeout for public requests
-    timeout = 5000
-    // use cache API host for public requests
-    baseURL = isCacheOnline ? API_STORE_CACHE : API_STORE
+    if (isCacheOnline && !/\?/.test(url) && (!axiosConfig || !axiosConfig.params)) {
+      // use cache API host
+      timeout = 2500
+      baseURL = API_STORE_CACHE.replace(':id', storeId)
+    } else {
+      timeout = 5000
+      baseURL = API_STORE
+    }
   } else {
     baseURL = API_STORE
     // setup authentication headers
