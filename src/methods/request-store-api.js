@@ -50,10 +50,11 @@ const requestStoreApi = (
   })
 
     .catch(err => {
-      if (baseURL === API_STORE_CACHE) {
+      let { response } = err
+      if (response && baseURL === API_STORE_CACHE) {
         // retry with live Store API
-        let { status } = err.response
-        if (!status || status >= 500) {
+        let { status } = response
+        if (!status || status < 100 || status >= 500) {
           isCacheOnline = false
           setTimeout(() => { isCacheOnline = true }, 30000)
           // resend request with same params
