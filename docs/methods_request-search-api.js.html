@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>methods/request-store-api.js - Documentation</title>
+    <title>methods/request-search-api.js - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -32,7 +32,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">methods/request-store-api.js</h1>
+    <h1 class="page-title">methods/request-search-api.js</h1>
     
 
     
@@ -43,90 +43,37 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import { _config } from '@ecomplus/utils'
-import { IS_BROWSER, API_STORE, API_STORE_CACHE } from './../lib/constants'
+import { IS_BROWSER, API_SEARCH } from './../lib/constants'
 import axios from './../lib/axios'
 
-// save Store Cache API status
-let isCacheOnline = true
-
-const requestStoreApi = (
+// returns axios request promise
+const requestSearchApi = (
   url,
-  authenticationId,
-  accessToken,
   method = 'get',
   data,
   storeId = _config.get('store_id'),
   axiosConfig
-) => {
-  let timeout, baseURL
-  const headers = {
+) => axios.request({
+  data,
+  // set 10s default timeout for search requests on browser
+  timeout: IS_BROWSER ? 10000 : 30000,
+  ...axiosConfig,
+  url,
+  baseURL: API_SEARCH,
+  method,
+  headers: {
     'X-Store-ID': storeId
   }
-
-  // first check if it's a public request
-  if (method.toLowerCase() === 'get' &amp;&amp; !authenticationId) {
-    // less timeout for public requests
-    if (isCacheOnline &amp;&amp; !/\?/.test(url) &amp;&amp; (!axiosConfig || !axiosConfig.params)) {
-      // use cache API host
-      timeout = 2500
-      baseURL = API_STORE_CACHE.replace(':id', storeId)
-    } else {
-      // set 5s default timeout on browser
-      timeout = IS_BROWSER ? 5000 : 30000
-      baseURL = API_STORE
-    }
-  } else {
-    baseURL = API_STORE
-    // setup authentication headers
-    headers['X-My-ID'] = authenticationId
-    headers['X-Access-Token'] = accessToken
-  }
-
-  // returns axios request promise
-  return axios.request({
-    data,
-    timeout,
-    ...axiosConfig,
-    url,
-    baseURL,
-    method,
-    headers
-  })
-
-    .catch(err => {
-      if (baseURL === API_STORE_CACHE) {
-        // retry with live Store API
-        let { status } = err.response
-        if (!status || status >= 500) {
-          isCacheOnline = false
-          setTimeout(() => { isCacheOnline = true }, 30000)
-          // resend request with same params
-          return requestStoreApi(
-            url,
-            authenticationId,
-            accessToken,
-            method,
-            data,
-            storeId,
-            axiosConfig
-          )
-        }
-      }
-      // chain promise catch
-      throw err
-    })
-}
+})
 
 /**
  * @method
  * @memberof ecomClient
- * @name requestStoreApi
+ * @name requestSearchApi
  * @description Send HTTP request to
- * [E-Com Plus Store REST API]{@link https://developers.e-com.plus/docs/api/#/store/}.
+ * [E-Com Plus Search REST API]{@link https://developers.e-com.plus/docs/api/#/search/}.
  *
  * @param {string} url - API endpoint to request or absolute URI
- * @param {string} [authenticationId] - My ID for authenticated request
- * @param {string} [accessToken] - Access token for authenticated request
  * @param {string} [method='get'] - Request method (HTTP verb)
  * @param {object} [data] - Request body object
  * @param {number} [storeId=_config.get('store_id')] - E-Com Plus Store ID number
@@ -141,8 +88,8 @@ const requestStoreApi = (
  *
  * @example
 
-// Simple GET request (public)
-ecomClient.requestStoreApi('/products.json')
+// Simple search request (ELS URI Search)
+ecomClient.requestSearchApi('/items.json?q=sku:123')
   .then(response => console.log(response.data))
   .catch(error => {
     console.error(error)
@@ -153,22 +100,26 @@ ecomClient.requestStoreApi('/products.json')
 
  * @example
 
-// Authenticated request
-this.authenticationId = 'myAuthenticationId'
-this.accessToken = 'myAccessToken'
-ecomClient.requestStoreApi(
-  '/products.json',
-  this.authenticationId,
-  this.accessToken,
-  'post',
-  { sku: '123', name: 'Sample Prduct 123' }
-)
+// Complex search request (ELS Request Body Search)
+const data = {
+  query: {
+    bool: {
+      must: {
+        multi_match: {
+          query: 'tshirt',
+          fields: [ 'name', 'keywords' ]
+        }
+      }
+    }
+  }
+}
+ecomClient.requestSearchApi('/items.json', 'post', data)
   .then(({ data, status }) => console.log(status, data))
   .catch(error => console.error(error))
 
  */
 
-export default requestStoreApi
+export default requestSearchApi
 </code></pre>
         </article>
     </section>
