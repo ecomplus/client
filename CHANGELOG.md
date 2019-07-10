@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.3.0](https://github.com/ecomclub/ecomplus-client/compare/v0.2.1...v0.3.0) (2019-07-10)
+
+
+### Bug Fixes
+
+* **request-store-api:** default 5s timeout for live api on browser only ([8894f01](https://github.com/ecomclub/ecomplus-client/commit/8894f01))
+
+
+### Features
+
+* **constant:** add IS_BROWSER boolean ([b10fc39](https://github.com/ecomclub/ecomplus-client/commit/b10fc39))
+* **method:** new 'requestSearchApi' method ([119b0f4](https://github.com/ecomclub/ecomplus-client/commit/119b0f4))
+
+
+
 ### [0.2.1](https://github.com/ecomclub/ecomplus-client/compare/v0.2.0...v0.2.1) (2019-07-10)
 
 
