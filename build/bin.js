@@ -17,7 +17,9 @@ if (!webpackConfig.plugins) {
   webpackConfig.plugins = []
 }
 webpackConfig.plugins.push(
-  new CleanWebpackPlugin()
+  new CleanWebpackPlugin(),
+  // don't include dependencies to lib output
+  new webpack.IgnorePlugin(/(@ecomplus\/utils|axios)/)
 )
 
 const fatalError = err => {
