@@ -76,7 +76,8 @@ const requestStoreApi = (
  * @method
  * @memberof ecomClient
  * @name requestStoreApi
- * @description Send HTTP request to E-Com Plus Store REST API.
+ * @description Send HTTP request to
+ * [E-Com Plus Store REST API]{@link https://developers.e-com.plus/docs/api/#/store/}.
  *
  * @param {string} url - API endpoint to request or absolute URI
  * @param {string} [authenticationId] - My ID for authenticated request
