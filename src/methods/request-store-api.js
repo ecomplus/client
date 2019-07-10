@@ -7,11 +7,11 @@ let isCacheOnline = true
 
 const requestStoreApi = (
   url,
+  authenticationId,
+  accessToken,
   method = 'get',
   data,
   storeId = _config.get('store_id'),
-  authenticationId,
-  accessToken,
   axiosConfig
 ) => {
   let timeout, baseURL
@@ -39,13 +39,13 @@ const requestStoreApi = (
 
   // returns axios request promise
   return axios.request({
+    data,
+    timeout,
+    ...axiosConfig,
     url,
     baseURL,
     method,
-    data,
-    headers,
-    timeout,
-    ...axiosConfig
+    headers
   })
 
     .catch(err => {
@@ -58,11 +58,11 @@ const requestStoreApi = (
           // resend request with same params
           return requestStoreApi(
             url,
+            authenticationId,
+            accessToken,
             method,
             data,
             storeId,
-            authenticationId,
-            accessToken,
             axiosConfig
           )
         }
@@ -78,11 +78,11 @@ const requestStoreApi = (
  * @name requestStoreApi
  * @description Send HTTP request to E-Com Plus Store REST API.
  * @param {string} url - API endpoint to request or full absolute URI
+ * @param {string} [authenticationId] - My ID for authenticated request
+ * @param {string} [accessToken] - Access token for authenticated request
  * @param {string} [method='get'] - Request method (HTTP verb)
  * @param {object} [data] - Request body object
  * @param {number} [storeId=_config.get('store_id')] - E-Com Plus Store ID number
- * @param {string} [authenticationId] - My ID for authenticated request
- * @param {string} [accessToken] - Access token for authenticated request
  * @param {object} [axiosConfig] - Additional settings with custom axios config object
  * @returns {Promise<response|error>}
  * Axios request promise resolved with
@@ -107,11 +107,10 @@ const requestStoreApi = (
  * this.accessToken = 'myAccessToken'
  * ecomClient.requestStoreApi(
  *   '/products.json',
- *   'post',
- *   { sku: '123', name: 'Sample Prduct 123' },
- *   ecomUtils._config.get('store_id'),
  *   this.authenticationId,
- *   this.accessToken
+ *   this.accessToken,
+ *   'post',
+ *   { sku: '123', name: 'Sample Prduct 123' }
  * )
  *   .then(({ data, status }) => console.log(status, data))
  *   .catch(error => console.error(error))
