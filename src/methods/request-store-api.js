@@ -1,5 +1,5 @@
 import { _config } from '@ecomplus/utils'
-import { API_STORE, API_STORE_CACHE } from './../lib/constants'
+import { IS_BROWSER, API_STORE, API_STORE_CACHE } from './../lib/constants'
 import axios from './../lib/axios'
 
 // save Store Cache API status
@@ -27,7 +27,8 @@ const requestStoreApi = (
       timeout = 2500
       baseURL = API_STORE_CACHE.replace(':id', storeId)
     } else {
-      timeout = 5000
+      // set 5s default timeout on browser
+      timeout = IS_BROWSER ? 5000 : 30000
       baseURL = API_STORE
     }
   } else {
