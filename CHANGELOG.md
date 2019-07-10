@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.1](https://github.com/ecomclub/ecomplus-client/compare/v0.2.0...v0.2.1) (2019-07-10)
+
+
+### Bug Fixes
+
+* **request-store-api:** fix handling chosing cache or live api host ([4553d64](https://github.com/ecomclub/ecomplus-client/commit/4553d64))
+* **request-store-api:** fix some fuction params default values ([2fc15b8](https://github.com/ecomclub/ecomplus-client/commit/2fc15b8))
+* **request-store-api:** revert 'requestStoreApi' params order ([9310837](https://github.com/ecomclub/ecomplus-client/commit/9310837))
+
+
+### Build System
+
+* **bin:** don't include dependencies to lib production output ([4a84564](https://github.com/ecomclub/ecomplus-client/commit/4a84564))
+
+
+
 ## [0.2.0](https://github.com/ecomclub/ecomplus-client/compare/v1.16.0...v0.2.0) (2019-07-09)
 
 
