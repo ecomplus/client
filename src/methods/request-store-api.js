@@ -77,13 +77,16 @@ const requestStoreApi = (
  * @memberof ecomClient
  * @name requestStoreApi
  * @description Send HTTP request to E-Com Plus Store REST API.
- * @param {string} url - API endpoint to request or full absolute URI
+ *
+ * @param {string} url - API endpoint to request or absolute URI
  * @param {string} [authenticationId] - My ID for authenticated request
  * @param {string} [accessToken] - Access token for authenticated request
  * @param {string} [method='get'] - Request method (HTTP verb)
  * @param {object} [data] - Request body object
  * @param {number} [storeId=_config.get('store_id')] - E-Com Plus Store ID number
- * @param {object} [axiosConfig] - Additional settings with custom axios config object
+ * @param {object} [axiosConfig] - Additional
+ * [axios config]{@link https://github.com/axios/axios#request-config} settings
+ *
  * @returns {Promise<response|error>}
  * Axios request promise resolved with
  * [response]{@link https://github.com/axios/axios#response-schema}
