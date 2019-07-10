@@ -1,6 +1,6 @@
 import { _config } from '@ecomplus/utils'
 import { IS_BROWSER, API_STORE, API_STORE_CACHE } from './../lib/constants'
-import axios from './../lib/axios'
+import { request } from './../lib/axios'
 
 // save Store Cache API status
 let isCacheOnline = true
@@ -39,7 +39,7 @@ const requestStoreApi = (
   }
 
   // returns axios request promise
-  return axios.request({
+  return request({
     data,
     timeout,
     ...axiosConfig,

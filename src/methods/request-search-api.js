@@ -1,6 +1,6 @@
 import { _config } from '@ecomplus/utils'
 import { IS_BROWSER, API_SEARCH } from './../lib/constants'
-import axios from './../lib/axios'
+import { request } from './../lib/axios'
 
 // returns axios request promise
 const requestSearchApi = (
@@ -9,7 +9,7 @@ const requestSearchApi = (
   data,
   storeId = _config.get('store_id'),
   axiosConfig
-) => axios.request({
+) => request({
   data,
   // set 10s default timeout for search requests on browser
   timeout: IS_BROWSER ? 10000 : 30000,
