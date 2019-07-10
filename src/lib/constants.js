@@ -1,3 +1,5 @@
+export const IS_BROWSER = Boolean(typeof window === 'object' && window !== null && window.document)
+
 export const API_STORE = 'https://api.e-com.plus/v1/'
 export const API_STORE_CACHE = 'https://ioapi.ecvol.com/:id/v1/'
 export const API_SEARCH = 'https://apx-search.e-com.plus/api/v1/'
