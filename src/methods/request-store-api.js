@@ -96,29 +96,32 @@ const requestStoreApi = (
  * [error]{@link https://github.com/axios/axios#handling-errors}.
  *
  * @example
- * // Simple GET request (public)
- * ecomClient.requestStoreApi('/products.json')
- *   .then(response => console.log(response.data))
- *   .catch(error => {
- *     console.error(error)
- *     if (error.response) {
- *       console.log(error.response)
- *     }
- *   })
- *
+
+// Simple GET request (public)
+ecomClient.requestStoreApi('/products.json')
+  .then(response => console.log(response.data))
+  .catch(error => {
+    console.error(error)
+    if (error.response) {
+      console.log(error.response)
+    }
+  })
+
  * @example
- * // Authenticated request
- * this.authenticationId = 'myAuthenticationId'
- * this.accessToken = 'myAccessToken'
- * ecomClient.requestStoreApi(
- *   '/products.json',
- *   this.authenticationId,
- *   this.accessToken,
- *   'post',
- *   { sku: '123', name: 'Sample Prduct 123' }
- * )
- *   .then(({ data, status }) => console.log(status, data))
- *   .catch(error => console.error(error))
+
+// Authenticated request
+this.authenticationId = 'myAuthenticationId'
+this.accessToken = 'myAccessToken'
+ecomClient.requestStoreApi(
+  '/products.json',
+  this.authenticationId,
+  this.accessToken,
+  'post',
+  { sku: '123', name: 'Sample Prduct 123' }
+)
+  .then(({ data, status }) => console.log(status, data))
+  .catch(error => console.error(error))
+
  */
 
 export default requestStoreApi
