@@ -2,6 +2,37 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.4.0](https://github.com/ecomclub/ecomplus-client/compare/v0.3.0...v0.4.0) (2019-07-11)
+
+
+### Bug Fixes
+
+* **lib:** importing request function from lib properly ([1f381f3](https://github.com/ecomclub/ecomplus-client/commit/1f381f3))
+* **request:** fix importing api constants ([5c39a82](https://github.com/ecomclub/ecomplus-client/commit/5c39a82))
+* **request-store-api:** fix handling request error ([c8b89e4](https://github.com/ecomclub/ecomplus-client/commit/c8b89e4))
+* **request-store-api:** store id only on url when using cache api ([761e278](https://github.com/ecomclub/ecomplus-client/commit/761e278))
+
+
+### Build System
+
+* **bin:** setup config for multiple webpack outputs ([2e24605](https://github.com/ecomclub/ecomplus-client/commit/2e24605))
+* **webpack:** edit default webpack output filename ([c7a33c0](https://github.com/ecomclub/ecomplus-client/commit/c7a33c0))
+
+
+### Features
+
+* **constants:** add API_PASSPORT to constants ([1ad714b](https://github.com/ecomclub/ecomplus-client/commit/1ad714b))
+* **method:** new 'requestModulesApi' method ([ae12547](https://github.com/ecomclub/ecomplus-client/commit/ae12547))
+* **methods:** add 'requestGraphsApi' and 'requestPlatformApi' methods ([3cc269c](https://github.com/ecomclub/ecomplus-client/commit/3cc269c))
+* **request:** add request function to lib, handle 503 errors and queue ([86c2f8c](https://github.com/ecomclub/ecomplus-client/commit/86c2f8c))
+
+
+### Tests
+
+* **fix:** update script src to new webpack output filename ([4fcd915](https://github.com/ecomclub/ecomplus-client/commit/4fcd915))
+
+
+
 ## [0.3.0](https://github.com/ecomclub/ecomplus-client/compare/v0.2.1...v0.3.0) (2019-07-10)
 
 
