@@ -13,4 +13,3 @@ const instance = axios.create({
 })
 
 export default instance
-export const { request } = instance
