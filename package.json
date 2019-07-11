@@ -30,7 +30,6 @@
   },
   "homepage": "https://github.com/ecomclub/ecomplus-client#readme",
   "dependencies": {
-    "@babel/polyfill": "^7.4.4",
     "@babel/runtime": "^7.5.4",
     "@ecomplus/utils": "^0.5.3",
     "axios": "^0.19.0",
