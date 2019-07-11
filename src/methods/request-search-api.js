@@ -1,6 +1,6 @@
 import { _config } from '@ecomplus/utils'
 import { IS_BROWSER, API_SEARCH } from './../lib/constants'
-import { request } from './../lib/axios'
+import request from './../lib/request'
 
 // returns axios request promise
 const requestSearchApi = (

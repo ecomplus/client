@@ -1,6 +1,6 @@
 import { _config } from '@ecomplus/utils'
 import { IS_BROWSER, API_STORE, API_STORE_CACHE } from './../lib/constants'
-import { request } from './../lib/axios'
+import request from './../lib/request'
 
 // save Store Cache API status
 let isCacheOnline = true
