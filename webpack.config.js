@@ -10,7 +10,7 @@ module.exports = {
     library: 'ecomClient',
     libraryTarget: 'umd',
     path: path.resolve(__dirname, 'dist'),
-    filename: 'ecom-client.min.js',
+    filename: 'ecom-client.js',
     globalObject: 'this'
   },
   devServer: {
