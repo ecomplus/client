@@ -9,7 +9,7 @@
     "serve": "webpack-dev-server",
     "build": "node ./build/bin.js",
     "doc": "rm -rf ./docs/*; jsdoc ./src -r ./README.md -d ./docs -t ./node_modules/docdash",
-    "release": "node ./build/bin.js & standard-version"
+    "release": "rm -rf ./dist; node ./build/bin.js & standard-version"
   },
   "repository": {
     "type": "git",
@@ -42,8 +42,6 @@
     "@commitlint/cli": "^8.0.0",
     "@commitlint/config-conventional": "^8.0.0",
     "babel-loader": "^8.0.6",
-    "clean-webpack-plugin": "^3.0.0",
-    "copy-webpack-plugin": "^5.0.3",
     "docdash": "^1.1.1",
     "husky": "^3.0.0",
     "jsdoc": "^3.6.2",
