@@ -14,10 +14,7 @@ const requestStoreApi = (
   storeId = _config.get('store_id'),
   axiosConfig
 ) => {
-  let timeout, baseURL
-  const headers = {
-    'X-Store-ID': storeId
-  }
+  let timeout, baseURL, headers
 
   // first check if it's a public request
   if (method.toLowerCase() === 'get' && !authenticationId) {
@@ -25,17 +22,25 @@ const requestStoreApi = (
     if (isCacheOnline && !/\?/.test(url) && (!axiosConfig || !axiosConfig.params)) {
       // use cache API host
       timeout = 2500
+      // Store ID on URL
       baseURL = API_STORE_CACHE.replace(':id', storeId)
     } else {
       // set 5s default timeout on browser
       timeout = IS_BROWSER ? 5000 : 30000
       baseURL = API_STORE
+      // Store ID on header
+      headers = {
+        'X-Store-ID': storeId
+      }
     }
   } else {
     baseURL = API_STORE
     // setup authentication headers
-    headers['X-My-ID'] = authenticationId
-    headers['X-Access-Token'] = accessToken
+    headers = {
+      'X-Store-ID': storeId,
+      'X-My-ID': authenticationId,
+      'X-Access-Token': accessToken
+    }
   }
 
   // returns axios request promise
