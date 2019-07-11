@@ -7,6 +7,7 @@
 import _self from './lib/self'
 
 import requestStoreApi from './methods/request-store-api'
+import requestModulesApi from './methods/request-modules-api'
 import requestSearchApi from './methods/request-search-api'
 import requestGraphsApi from './methods/request-graphs-api'
 import requestPlatformApi from './methods/request-platform-api'
@@ -32,6 +33,7 @@ import requestPlatformApi from './methods/request-platform-api'
 export {
   _self,
   requestStoreApi,
+  requestModulesApi,
   requestGraphsApi,
   requestSearchApi,
   requestPlatformApi
