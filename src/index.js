@@ -8,6 +8,8 @@ import _self from './lib/self'
 
 import requestStoreApi from './methods/request-store-api'
 import requestSearchApi from './methods/request-search-api'
+import requestGraphsApi from './methods/request-graphs-api'
+import requestPlatformApi from './methods/request-platform-api'
 
 /**
  * JS client for E-Com Plus REST APIs.
@@ -30,7 +32,9 @@ import requestSearchApi from './methods/request-search-api'
 export {
   _self,
   requestStoreApi,
-  requestSearchApi
+  requestGraphsApi,
+  requestSearchApi,
+  requestPlatformApi
 }
 
 /**
