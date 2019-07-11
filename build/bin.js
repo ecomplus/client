@@ -10,17 +10,9 @@ const path = require('path')
 // build bundle with Webpack
 const webpack = require('webpack')
 const webpackConfig = require(path.join(process.cwd(), 'webpack.config'))
-
-// additional Webpack plugins
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-if (!webpackConfig.plugins) {
-  webpackConfig.plugins = []
-}
-webpackConfig.plugins.push(
-  new CleanWebpackPlugin(),
-  // don't include dependencies to lib output
-  new webpack.IgnorePlugin(/(@ecomplus\/utils|axios)/)
-)
+// handle Webpack output object and plugins
+const webpackOutput = { ...webpackConfig.output }
+const webpackPlugins = (webpackConfig.plugins && webpackConfig.plugins.concat()) || []
 
 const fatalError = err => {
   if (err) {
@@ -30,7 +22,44 @@ const fatalError = err => {
   process.exit(1)
 }
 
-webpack(webpackConfig, (err, stats) => {
+// setup config for multiple outputs
+const webpackConfigList = []
+
+;[
+  '.all',
+  '.browser',
+  ''
+].forEach(outputType => {
+  let config = {
+    ...webpackConfig,
+    output: {
+      ...webpackOutput,
+      // custom filename by output type
+      filename: webpackOutput.filename.replace('.js', `${outputType}.min.js`)
+    }
+  }
+
+  // setup Webpack plugins by output type
+  switch (outputType) {
+    case '.all':
+      // dependencies and polyfills
+      break
+    case '.browser':
+      // lib and polyfills
+      config.plugins = webpackPlugins.concat([
+        new webpack.IgnorePlugin(/(@ecomplus\/utils|axios)/)
+      ])
+      break
+    default:
+      // standalone lib output
+      config.plugins = webpackPlugins.concat([
+        new webpack.IgnorePlugin(/(@babel\/runtime|@ecomplus\/utils|axios|core-js)/)
+      ])
+  }
+  webpackConfigList.push(config)
+})
+
+webpack(webpackConfigList, (err, stats) => {
   // console.log(stats)
   if (err) {
     fatalError(err)
