@@ -5,7 +5,7 @@ import {
   API_STOREFRONT,
   API_GRAPHS,
   API_PLATFORM
-} from '/.constants'
+} from './constants'
 import axios from './axios'
 
 // set delay between requests by API
