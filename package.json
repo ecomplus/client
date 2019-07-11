@@ -3,8 +3,8 @@
   "version": "0.3.0",
   "description": "JS client for E-Com Plus REST APIs",
   "main": "dist/ecom-client.min.js",
-  "jsdelivr": "dist/ecom-client.min.js",
-  "unpkg": "dist/ecom-client.min.js",
+  "browser": "dist/ecom-client.browser.min.js",
+  "unpkg": "dist/ecom-client.browser.min.js",
   "scripts": {
     "serve": "webpack-dev-server",
     "build": "node ./build/bin.js",
@@ -31,7 +31,7 @@
   "homepage": "https://github.com/ecomclub/ecomplus-client#readme",
   "dependencies": {
     "@babel/runtime": "^7.5.4",
-    "@ecomplus/utils": "^0.5.3",
+    "@ecomplus/utils": "^0.5.4",
     "axios": "^0.19.0",
     "core-js": "^3.1.4"
   },
