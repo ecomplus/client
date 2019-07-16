@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>methods/request-search-api.js - Documentation</title>
+    <title>methods/request-graphs-api.js - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -32,7 +32,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">methods/request-search-api.js</h1>
+    <h1 class="page-title">methods/request-graphs-api.js</h1>
     
 
     
@@ -43,24 +43,20 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import { _config } from '@ecomplus/utils'
-import { IS_BROWSER, API_SEARCH } from './../lib/constants'
+import { IS_BROWSER, API_GRAPHS } from './../lib/constants'
 import request from './../lib/request'
 
 // returns axios request promise
-const requestSearchApi = (
+const requestGraphsApi = (
   url,
-  method = 'get',
-  data,
   storeId = _config.get('store_id'),
   axiosConfig
 ) => request({
-  data,
-  // set 10s default timeout for search requests on browser
-  timeout: IS_BROWSER ? 10000 : 30000,
+  // set 5s default timeout for graphs requests on browser
+  timeout: IS_BROWSER ? 5000 : 30000,
   ...axiosConfig,
   url,
-  baseURL: API_SEARCH,
-  method,
+  baseURL: API_GRAPHS,
   headers: {
     'X-Store-ID': storeId
   }
@@ -69,13 +65,11 @@ const requestSearchApi = (
 /**
  * @method
  * @memberof ecomClient
- * @name requestSearchApi
- * @description Send HTTP request to
- * [E-Com Plus Search REST API]{@link https://developers.e-com.plus/docs/api/#/search/}.
+ * @name requestGraphsApi
+ * @description Send HTTP GET request to
+ * [E-Com Plus Graphs REST API]{@link https://developers.e-com.plus/docs/api/#/graphs/}.
  *
  * @param {string} url - API endpoint to request or absolute URI
- * @param {string} [method='get'] - Request method (HTTP verb)
- * @param {object} [data] - Request body object
  * @param {number} [storeId=_config.get('store_id')] - E-Com Plus Store ID number
  * @param {object} [axiosConfig] - Additional
  * [axios config]{@link https://github.com/axios/axios#request-config} settings
@@ -88,38 +82,11 @@ const requestSearchApi = (
  *
  * @example
 
-// Simple search request (ELS URI Search)
-ecomClient.requestSearchApi('/items.json?q=sku:123')
-  .then(response => console.log(response.data))
-  .catch(error => {
-    console.error(error)
-    if (error.response) {
-      console.log(error.response)
-    }
-  })
-
- * @example
-
-// Complex search request (ELS Request Body Search)
-const data = {
-  query: {
-    bool: {
-      must: {
-        multi_match: {
-          query: 'tshirt',
-          fields: [ 'name', 'keywords' ]
-        }
-      }
-    }
-  }
-}
-ecomClient.requestSearchApi('/items.json', 'post', data)
-  .then(({ data, status }) => console.log(status, data))
-  .catch(error => console.error(error))
+// TODO
 
  */
 
-export default requestSearchApi
+export default requestGraphsApi
 </code></pre>
         </article>
     </section>

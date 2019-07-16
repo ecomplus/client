@@ -27,7 +27,7 @@
 
 <nav >
     
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-@ecomplus_client.html">@ecomplus/client</a></li></ul><h3>Namespaces</h3><ul><li><a href="ecomClient.html">ecomClient</a><ul class='methods'><li data-type='method'><a href="ecomClient.html#.requestSearchApi">requestSearchApi</a></li><li data-type='method'><a href="ecomClient.html#.requestStoreApi">requestStoreApi</a></li></ul></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-@ecomplus_client.html">@ecomplus/client</a></li></ul><h3>Namespaces</h3><ul><li><a href="ecomClient.html">ecomClient</a><ul class='methods'><li data-type='method'><a href="ecomClient.html#.requestGraphsApi">requestGraphsApi</a></li><li data-type='method'><a href="ecomClient.html#.requestModulesApi">requestModulesApi</a></li><li data-type='method'><a href="ecomClient.html#.requestPlatformApi">requestPlatformApi</a></li><li data-type='method'><a href="ecomClient.html#.requestSearchApi">requestSearchApi</a></li><li data-type='method'><a href="ecomClient.html#.requestStoreApi">requestStoreApi</a></li></ul></li></ul>
 </nav>
 
 <div id="main">
@@ -62,7 +62,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line36">line 36</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line42">line 42</a>
     </li></ul></dd>
     
 
@@ -123,6 +123,786 @@
 
     
         <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id=".requestGraphsApi"><span class="type-signature">(static) </span>requestGraphsApi<span class="signature">(url, storeId<span class="signature-attributes">opt</span>, axiosConfig<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise.&lt;(response|error)>}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="methods_request-graphs-api.js.html">methods/request-graphs-api.js</a>, <a href="methods_request-graphs-api.js.html#line21">line 21</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    Send HTTP GET request to
+<a href="https://developers.e-com.plus/docs/api/#/graphs/">E-Com Plus Graphs REST API</a>.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// TODO</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>url</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">API endpoint to request or absolute URI</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>storeId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>_config.get('store_id')</code>
+                
+                </td>
+            
+
+            <td class="description last">E-Com Plus Store ID number</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>axiosConfig</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">Additional
+<a href="https://github.com/axios/axios#request-config">axios config</a> settings</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Axios request promise resolved with
+<a href="https://github.com/axios/axios#response-schema">response</a>
+or rejected with
+<a href="https://github.com/axios/axios#handling-errors">error</a>.
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;(response|error)></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".requestModulesApi"><span class="type-signature">(static) </span>requestModulesApi<span class="signature">(url, storeId<span class="signature-attributes">opt</span>, axiosConfig<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise.&lt;(response|error)>}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="methods_request-modules-api.js.html">methods/request-modules-api.js</a>, <a href="methods_request-modules-api.js.html#line23">line 23</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    Send HTTP GET request to
+<a href="https://developers.e-com.plus/docs/api/#/modules/">E-Com Plus Modules REST API</a>.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// TODO</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>url</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">API endpoint to request or absolute URI</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>storeId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>_config.get('store_id')</code>
+                
+                </td>
+            
+
+            <td class="description last">E-Com Plus Store ID number</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>axiosConfig</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">Additional
+<a href="https://github.com/axios/axios#request-config">axios config</a> settings</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Axios request promise resolved with
+<a href="https://github.com/axios/axios#response-schema">response</a>
+or rejected with
+<a href="https://github.com/axios/axios#handling-errors">error</a>.
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;(response|error)></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".requestPlatformApi"><span class="type-signature">(static) </span>requestPlatformApi<span class="signature">(url, storeId<span class="signature-attributes">opt</span>, axiosConfig<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise.&lt;(response|error)>}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="methods_request-platform-api.js.html">methods/request-platform-api.js</a>, <a href="methods_request-platform-api.js.html#line49">line 49</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    Send HTTP GET request to
+<a href="https://developers.e-com.plus/docs/api/#/platform/">E-Com Plus Platform REST API</a>.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// TODO</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>url</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">API endpoint to request or absolute URI</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>storeId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>_config.get('store_id')</code>
+                
+                </td>
+            
+
+            <td class="description last">E-Com Plus Store ID number</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>axiosConfig</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">Additional
+<a href="https://github.com/axios/axios#request-config">axios config</a> settings</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Axios request promise resolved with
+<a href="https://github.com/axios/axios#response-schema">response</a>
+or rejected with
+<a href="https://github.com/axios/axios#handling-errors">error</a>.
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;(response|error)></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
 
         
             
@@ -502,7 +1282,7 @@ or rejected with
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="methods_request-store-api.js.html">methods/request-store-api.js</a>, <a href="methods_request-store-api.js.html#line76">line 76</a>
+        <a href="methods_request-store-api.js.html">methods/request-store-api.js</a>, <a href="methods_request-store-api.js.html#line82">line 82</a>
     </li></ul></dd>
     
 
@@ -936,7 +1716,7 @@ or rejected with
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.2</a> on Wed Jul 10 2019 14:24:19 GMT-0300 (Brasilia Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Tue Jul 16 2019 19:33:15 GMT-0300 (Brasilia Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>
