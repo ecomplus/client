@@ -26,8 +26,8 @@ const fatalError = err => {
 const webpackConfigList = []
 
 ;[
-  '.all',
-  '.browser',
+  '.bundle',
+  '.polyfill',
   ''
 ].forEach(outputType => {
   let config = {
@@ -41,10 +41,10 @@ const webpackConfigList = []
 
   // setup Webpack plugins by output type
   switch (outputType) {
-    case '.all':
+    case '.bundle':
       // dependencies and polyfills
       break
-    case '.browser':
+    case '.polyfill':
       // lib and polyfills
       config.plugins = webpackPlugins.concat([
         new webpack.IgnorePlugin(/(@ecomplus\/utils|axios)/)
