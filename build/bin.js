@@ -39,17 +39,21 @@ const webpackConfigList = []
   }
 
   // edit Webpack config by output type
-  switch (outputType) {
-    case '.bundle':
-      // dependencies and polyfills
-      break
-    case '.polyfill':
-      // lib and polyfills
-      config.externals = /^(@ecomplus\/utils|axios)/i
-      break
-    default:
+  if (outputType !== '.bundle') {
+    // lib and polyfills without external dependencies
+    config.externals = [{
+      '@ecomplus/utils': {
+        commonjs: '@ecomplus/utils',
+        commonjs2: '@ecomplus/utils',
+        root: 'ecomUtils'
+      },
+      'axios': 'axios'
+    }]
+    if (outputType === '') {
       // standalone lib output
-      config.externals = /^(@babel\/runtime|@ecomplus\/utils|axios|core-js)/i
+      // also ignore polyfills
+      config.externals.push(/^(@babel\/runtime|core-js)/i)
+    }
   }
   webpackConfigList.push(config)
 })
