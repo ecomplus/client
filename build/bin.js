@@ -12,7 +12,6 @@ const webpack = require('webpack')
 const webpackConfig = require(path.join(process.cwd(), 'webpack.config'))
 // handle Webpack output object and plugins
 const webpackOutput = { ...webpackConfig.output }
-const webpackPlugins = (webpackConfig.plugins && webpackConfig.plugins.concat()) || []
 
 const fatalError = err => {
   if (err) {
@@ -39,22 +38,18 @@ const webpackConfigList = []
     }
   }
 
-  // setup Webpack plugins by output type
+  // edit Webpack config by output type
   switch (outputType) {
     case '.bundle':
       // dependencies and polyfills
       break
     case '.polyfill':
       // lib and polyfills
-      config.plugins = webpackPlugins.concat([
-        new webpack.IgnorePlugin(/(@ecomplus\/utils|axios)/)
-      ])
+      config.externals = /^(@ecomplus\/utils|axios)/i
       break
     default:
       // standalone lib output
-      config.plugins = webpackPlugins.concat([
-        new webpack.IgnorePlugin(/(@babel\/runtime|@ecomplus\/utils|axios|core-js)/)
-      ])
+      config.externals = /^(@babel\/runtime|@ecomplus\/utils|axios|core-js)/i
   }
   webpackConfigList.push(config)
 })
