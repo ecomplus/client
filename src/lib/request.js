@@ -50,7 +50,7 @@ const request = (config, api, delay = 170) => axios.request(config).catch(err =>
   throw err
 })
 
-export default axiosConfig => () => {
+export default axiosConfig => {
   const uri = axios.getUri(axiosConfig)
   let api, delay
   for (api in delays) {
