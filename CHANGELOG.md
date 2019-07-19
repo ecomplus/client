@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.5.1](https://github.com/ecomclub/ecomplus-client/compare/v0.5.0...v0.5.1) (2019-07-19)
+
+
+### Bug Fixes
+
+* **request:** complete absolute URI, check for debug option ([72909e3](https://github.com/ecomclub/ecomplus-client/commit/72909e3))
+* **request:** fix exported request function ([4a7d3bb](https://github.com/ecomclub/ecomplus-client/commit/4a7d3bb))
+
+
+### Tests
+
+* **debug:** set window.ECOMCLIENT_DEBUG = true ([d4e9d19](https://github.com/ecomclub/ecomplus-client/commit/d4e9d19))
+
+
+
 ## [0.5.0](https://github.com/ecomclub/ecomplus-client/compare/v0.4.3...v0.5.0) (2019-07-19)
 
 
