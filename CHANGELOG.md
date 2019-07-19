@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.5.0](https://github.com/ecomclub/ecomplus-client/compare/v0.4.3...v0.5.0) (2019-07-19)
+
+
+### Bug Fixes
+
+* **methods:** renaming all client methods ([4fda72e](https://github.com/ecomclub/ecomplus-client/commit/4fda72e))
+
+
+### BREAKING CHANGES
+
+* **methods:** all methods will no more work with old names
+
+
+
 ### [0.4.3](https://github.com/ecomclub/ecomplus-client/compare/v0.4.2...v0.4.3) (2019-07-17)
 
 
