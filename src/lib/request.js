@@ -19,6 +19,10 @@ const scheduledRequests = {}
 // store APIs on idle after 503 response
 const waitingApis = []
 
+// check for debug option
+const env = (typeof window === 'object' && window) || (typeof process === 'object' && process && process.env)
+const debug = (env && (env.ECOMCLIENT_DEBUG === true || env.ECOMCLIENT_DEBUG === 'true'))
+
 const request = (config, api, delay = 170) => axios.request(config).catch(err => {
   // handle 503 errors here
   let { response } = err
@@ -51,7 +55,20 @@ const request = (config, api, delay = 170) => axios.request(config).catch(err =>
 })
 
 export default axiosConfig => {
-  const uri = axios.getUri(axiosConfig)
+  const { method, baseURL } = axiosConfig
+  let uri = axios.getUri(axiosConfig)
+  if (!uri.startsWith('http')) {
+    // complete absolute URI
+    if (baseURL.slice(-1) === '/' && uri.charAt(0) === '/') {
+      // prevent duplicated bars
+      uri = uri.substr(1)
+    }
+    uri = baseURL + uri
+  }
+  if (debug) {
+    console.log(`[ecomClient]: ${((method && method.toUpperCase()) || 'GET')} '${uri}'`)
+  }
+
   let api, delay
   for (api in delays) {
     if (delays.hasOwnProperty(api) && uri.indexOf(api) === 0) {
@@ -71,6 +88,9 @@ export default axiosConfig => {
     // there's no delay when queue is 0 (first request)
     const queue = scheduledRequests[api] || 0
     scheduledRequests[api] = queue + 1
+    if (debug) {
+      console.log(`[ecomClient]: request delay ${delay * queue}ms`)
+    }
 
     // returns promise resolved with request after timeout
     return new Promise((resolve, reject) => {
