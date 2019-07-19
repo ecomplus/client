@@ -1,20 +1,18 @@
 import { _config } from '@ecomplus/utils'
-import { API_MODULES } from './../lib/constants'
+import { IS_BROWSER, API_GRAPHS } from './../lib/constants'
 import request from './../lib/request'
 
 // returns axios request promise
-const requestModulesApi = (
+const graphs = (
   url,
-  method = 'get',
-  data,
   storeId = _config.get('store_id'),
   axiosConfig
 ) => request({
-  data,
+  // set 5s default timeout for graphs requests on browser
+  timeout: IS_BROWSER ? 5000 : 30000,
   ...axiosConfig,
   url,
-  baseURL: API_MODULES,
-  method,
+  baseURL: API_GRAPHS,
   headers: {
     'X-Store-ID': storeId
   }
@@ -23,9 +21,9 @@ const requestModulesApi = (
 /**
  * @method
  * @memberof ecomClient
- * @name requestModulesApi
+ * @name graphs
  * @description Send HTTP GET request to
- * [E-Com Plus Modules REST API]{@link https://developers.e-com.plus/docs/api/#/modules/}.
+ * [E-Com Plus Graphs REST API]{@link https://developers.e-com.plus/docs/api/#/graphs/}.
  *
  * @param {string} url - API endpoint to request or absolute URI
  * @param {number} [storeId=_config.get('store_id')] - E-Com Plus Store ID number
@@ -44,4 +42,4 @@ const requestModulesApi = (
 
  */
 
-export default requestModulesApi
+export default graphs
