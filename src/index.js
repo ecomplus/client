@@ -6,11 +6,11 @@
 
 import _self from './lib/self'
 
-import store from './methods/store'
-import modules from './methods/modules'
-import search from './methods/search'
-import graphs from './methods/graphs'
-import platform from './methods/platform'
+import apiStore from './methods/api-store'
+import apiPlatform from './methods/api-platform'
+import apiSearch from './methods/api-search'
+import apiGraphs from './methods/api-graphs'
+import apiModules from './methods/api-modules'
 
 /**
  * JS client for E-Com Plus REST APIs.
@@ -32,11 +32,11 @@ import platform from './methods/platform'
 
 export {
   _self,
-  store,
-  modules,
-  graphs,
-  search,
-  platform
+  apiStore,
+  apiPlatform,
+  apiSearch,
+  apiGraphs,
+  apiModules
 }
 
 /**

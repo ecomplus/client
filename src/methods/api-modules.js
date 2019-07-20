@@ -3,7 +3,7 @@ import { API_MODULES } from './../lib/constants'
 import request from './../lib/request'
 
 // returns axios request promise
-const modules = (
+const apiModules = (
   url,
   method = 'get',
   data,
@@ -23,7 +23,7 @@ const modules = (
 /**
  * @method
  * @memberof ecomClient
- * @name modules
+ * @name apiModules
  * @description Send HTTP GET request to
  * [E-Com Plus Modules REST API]{@link https://developers.e-com.plus/docs/api/#/modules/}.
  *
@@ -44,4 +44,4 @@ const modules = (
 
  */
 
-export default modules
+export default apiModules

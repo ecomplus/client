@@ -5,7 +5,7 @@ import request from './../lib/request'
 // save Store Cache API status
 let isCacheOnline = true
 
-const store = (
+const apiStore = (
   url,
   authenticationId,
   accessToken,
@@ -63,7 +63,7 @@ const store = (
           isCacheOnline = false
           setTimeout(() => { isCacheOnline = true }, 30000)
           // resend request with same params
-          return store(
+          return apiStore(
             url,
             authenticationId,
             accessToken,
@@ -82,7 +82,7 @@ const store = (
 /**
  * @method
  * @memberof ecomClient
- * @name store
+ * @name apiStore
  * @description Send HTTP request to
  * [E-Com Plus Store REST API]{@link https://developers.e-com.plus/docs/api/#/store/}.
  *
@@ -104,7 +104,7 @@ const store = (
  * @example
 
 // Simple GET request (public)
-ecomClient.store('/products.json')
+ecomClient.apiStore('/products.json')
   .then(response => console.log(response.data))
   .catch(error => {
     console.error(error)
@@ -118,7 +118,7 @@ ecomClient.store('/products.json')
 // Authenticated request
 this.authenticationId = 'myAuthenticationId'
 this.accessToken = 'myAccessToken'
-ecomClient.store(
+ecomClient.apiStore(
   '/products.json',
   this.authenticationId,
   this.accessToken,
@@ -130,4 +130,4 @@ ecomClient.store(
 
  */
 
-export default store
+export default apiStore

@@ -2,7 +2,7 @@ import { _config } from '@ecomplus/utils'
 import { IS_BROWSER, API_PLATFORM, API_PLATFORM_CACHE } from './../lib/constants'
 import request from './../lib/request'
 
-const platform = (
+const apiPlatform = (
   url,
   storeId = _config.get('store_id'),
   axiosConfig
@@ -34,7 +34,7 @@ const platform = (
         let { status } = response
         if (!status || status < 100 || status >= 500) {
           // resend request with same params
-          return platform(
+          return apiPlatform(
             url,
             storeId,
             axiosConfig
@@ -49,7 +49,7 @@ const platform = (
 /**
  * @method
  * @memberof ecomClient
- * @name platform
+ * @name apiPlatform
  * @description Send HTTP GET request to
  * [E-Com Plus Platform REST API]{@link https://developers.e-com.plus/docs/api/#/platform/}.
  *
@@ -70,4 +70,4 @@ const platform = (
 
  */
 
-export default platform
+export default apiPlatform
