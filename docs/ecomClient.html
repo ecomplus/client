@@ -27,7 +27,7 @@
 
 <nav >
     
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-@ecomplus_client.html">@ecomplus/client</a></li></ul><h3>Namespaces</h3><ul><li><a href="ecomClient.html">ecomClient</a><ul class='methods'><li data-type='method'><a href="ecomClient.html#.apiGraphs">apiGraphs</a></li><li data-type='method'><a href="ecomClient.html#.apiModules">apiModules</a></li><li data-type='method'><a href="ecomClient.html#.apiPlatform">apiPlatform</a></li><li data-type='method'><a href="ecomClient.html#.apiSearch">apiSearch</a></li><li data-type='method'><a href="ecomClient.html#.apiStore">apiStore</a></li></ul></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-@ecomplus_client.html">@ecomplus/client</a></li></ul><h3>Namespaces</h3><ul><li><a href="ecomClient.html">ecomClient</a><ul class='methods'><li data-type='method'><a href="ecomClient.html#.apiGraphs">apiGraphs</a></li><li data-type='method'><a href="ecomClient.html#.apiModules">apiModules</a></li><li data-type='method'><a href="ecomClient.html#.apiPassport">apiPassport</a></li><li data-type='method'><a href="ecomClient.html#.apiPlatform">apiPlatform</a></li><li data-type='method'><a href="ecomClient.html#.apiSearch">apiSearch</a></li><li data-type='method'><a href="ecomClient.html#.apiStore">apiStore</a></li></ul></li></ul>
 </nav>
 
 <div id="main">
@@ -62,7 +62,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line42">line 42</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line44">line 44</a>
     </li></ul></dd>
     
 
@@ -518,6 +518,413 @@ or rejected with
             
 
             <td class="description last">API endpoint to request or absolute URI</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>storeId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>_config.get('store_id')</code>
+                
+                </td>
+            
+
+            <td class="description last">E-Com Plus Store ID number</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>axiosConfig</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">Additional
+<a href="https://github.com/axios/axios#request-config">axios config</a> settings</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Axios request promise resolved with
+<a href="https://github.com/axios/axios#response-schema">response</a>
+or rejected with
+<a href="https://github.com/axios/axios#handling-errors">error</a>.
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;(response|error)></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".apiPassport"><span class="type-signature">(static) </span>apiPassport<span class="signature">(url, customerId, accessToken, method<span class="signature-attributes">opt</span>, data<span class="signature-attributes">opt</span>, storeId<span class="signature-attributes">opt</span>, axiosConfig<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise.&lt;(response|error)>}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="methods_api-passport.js.html">methods/api-passport.js</a>, <a href="methods_api-passport.js.html#line35">line 35</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    Send HTTP request to
+<a href="https://developers.e-com.plus/docs/api/#/passport/">E-Com Plus Passport REST API</a>
+with customer login authentication.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// TODO</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>url</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">API endpoint to request or absolute URI</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>customerId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">My ID for authenticated request</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>accessToken</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">Access token for authenticated request</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>method</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>'get'</code>
+                
+                </td>
+            
+
+            <td class="description last">Request method (HTTP verb)</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>data</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">Request body object</td>
         </tr>
 
     
@@ -1716,7 +2123,7 @@ or rejected with
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Sat Jul 20 2019 15:51:14 GMT-0300 (Brasilia Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Sat Jul 20 2019 18:21:07 GMT-0300 (Brasilia Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>
