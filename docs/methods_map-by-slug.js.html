@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>methods/api-modules.js - Documentation</title>
+    <title>methods/map-by-slug.js - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -32,7 +32,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">methods/api-modules.js</h1>
+    <h1 class="page-title">methods/map-by-slug.js</h1>
     
 
     
@@ -43,44 +43,72 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import { _config } from '@ecomplus/utils'
-import { API_MODULES } from './../lib/constants'
+import { IS_BROWSER, API_STOREFRONT } from './../lib/constants'
 import request from './../lib/request'
 
-// returns axios request promise
-const apiModules = (
-  url,
-  method = 'get',
-  data,
-  storeId = _config.get('store_id'),
-  axiosConfig
-) => request({
-  data,
-  ...axiosConfig,
-  url,
-  baseURL: API_MODULES,
-  method,
-  headers: {
-    'X-Store-ID': storeId
+const mapBySlug = (slug, storeId = _config.get('store_id')) => {
+  let isCurrentObject
+  if (IS_BROWSER) {
+    // remove the first / char from pathname
+    const windowSlug = window.location.pathname.slice(1)
+    if (!slug) {
+      // get slug from current browser window
+      slug = windowSlug
+      isCurrentObject = true
+    } else if (slug === windowSlug) {
+      isCurrentObject = true
+    }
   }
-})
+  // replace / with $ on slug to escape URL
+  const endpoint = '/' + storeId + '@' + slug.replace(/\//g, '$') + '.json'
+
+  // send request to Storefront API (Webdis)
+  return request({
+    url: endpoint,
+    baseURL: API_STOREFRONT,
+    // short 5s timeout
+    timeout: 5000
+  }).then(response => {
+    // { "GET": "[resource]@[id]" }
+    const val = response.data.GET
+    if (val) {
+      const [ resource, resourceId ] = val.split('@')
+      if (resourceId) {
+        if (isCurrentObject) {
+          // set current object info on config
+          _config.set('page_resource', resource)
+          _config.set('page_object_id', resourceId)
+        }
+
+        // returns object with resource info on promise chain
+        return {
+          resource,
+          _id: resourceId
+        }
+      }
+    }
+
+    // throw error to handle promise catch
+    let err = new Error('Resource not found, invalid slug or store ID')
+    // simulate axios error object
+    err.response = response
+    throw err
+  })
+}
 
 /**
  * @method
  * @memberof ecomClient
- * @name apiModules
- * @description Send HTTP GET request to
- * [E-Com Plus Modules REST API]{@link https://developers.e-com.plus/docs/api/#/modules/}.
+ * @name mapBySlug
+ * @description Get resource and Object ID (and set on `_config`) based on slug.
  *
- * @param {string} url - API endpoint to request or absolute URI
- * @param {number} [storeId=_config.get('store_id')] - E-Com Plus Store ID number
- * @param {object} [axiosConfig] - Additional
- * [axios config]{@link https://github.com/axios/axios#request-config} settings
+ * @param {string} [slug=location.pathname.slice(1)] - Slug string (URL without first bar),
+ * on browser it'll use global location object by default
  *
- * @returns {Promise&lt;response|error>}
- * Axios request promise resolved with
- * [response]{@link https://github.com/axios/axios#response-schema}
+ * @returns {Promise&lt;{resource,_id}|error>}
+ * Promise resolved with found resource info (object with `resource` and `_id`)
  * or rejected with
- * [error]{@link https://github.com/axios/axios#handling-errors}.
+ * [axios error]{@link https://github.com/axios/axios#handling-errors}.
  *
  * @example
 
@@ -88,7 +116,7 @@ const apiModules = (
 
  */
 
-export default apiModules
+export default mapBySlug
 </code></pre>
         </article>
     </section>

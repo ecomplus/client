@@ -27,7 +27,7 @@
 
 <nav >
     
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-@ecomplus_client.html">@ecomplus/client</a></li></ul><h3>Namespaces</h3><ul><li><a href="ecomClient.html">ecomClient</a><ul class='methods'><li data-type='method'><a href="ecomClient.html#.apiGraphs">apiGraphs</a></li><li data-type='method'><a href="ecomClient.html#.apiModules">apiModules</a></li><li data-type='method'><a href="ecomClient.html#.apiPassport">apiPassport</a></li><li data-type='method'><a href="ecomClient.html#.apiPlatform">apiPlatform</a></li><li data-type='method'><a href="ecomClient.html#.apiSearch">apiSearch</a></li><li data-type='method'><a href="ecomClient.html#.apiStore">apiStore</a></li><li data-type='method'><a href="ecomClient.html#.getStoreId">getStoreId</a></li></ul></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-@ecomplus_client.html">@ecomplus/client</a></li></ul><h3>Namespaces</h3><ul><li><a href="ecomClient.html">ecomClient</a><ul class='methods'><li data-type='method'><a href="ecomClient.html#.apiGraphs">apiGraphs</a></li><li data-type='method'><a href="ecomClient.html#.apiModules">apiModules</a></li><li data-type='method'><a href="ecomClient.html#.apiPassport">apiPassport</a></li><li data-type='method'><a href="ecomClient.html#.apiPlatform">apiPlatform</a></li><li data-type='method'><a href="ecomClient.html#.apiSearch">apiSearch</a></li><li data-type='method'><a href="ecomClient.html#.apiStore">apiStore</a></li><li data-type='method'><a href="ecomClient.html#.getStoreId">getStoreId</a></li><li data-type='method'><a href="ecomClient.html#.mapBySlug">mapBySlug</a></li></ul></li></ul>
 </nav>
 
 <div id="main">
@@ -62,7 +62,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line46">line 46</a>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line48">line 48</a>
     </li></ul></dd>
     
 
@@ -2108,7 +2108,7 @@ or rejected with
 
     
 
-    <h4 class="name" id=".getStoreId"><span class="type-signature">(static) </span>getStoreId<span class="signature">(domain<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise.&lt;(storeId|error)>}</span></h4>
+    <h4 class="name" id=".getStoreId"><span class="type-signature">(static) </span>getStoreId<span class="signature">(domain<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise.&lt;({store_id, store_object_id}|error)>}</span></h4>
 
     
 
@@ -2120,7 +2120,7 @@ or rejected with
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="methods_get-store-id.js.html">methods/get-store-id.js</a>, <a href="methods_get-store-id.js.html#line36">line 36</a>
+        <a href="methods_get-store-id.js.html">methods/get-store-id.js</a>, <a href="methods_get-store-id.js.html#line35">line 35</a>
     </li></ul></dd>
     
 
@@ -2173,7 +2173,18 @@ or rejected with
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>// TODO</code></pre>
+    <pre class="prettyprint"><code>ecomClient.getStoreId('shop-plus.e-com.plus')
+  .then(channel => {
+    console.log(channel.store_id)
+    console.log(channel.store_object_id)
+    console.log(channel)
+  })
+  .catch(error => {
+    console.error(error)
+    if (error.response) {
+      console.log(error.response)
+    }
+  })</code></pre>
 
 
 
@@ -2266,7 +2277,8 @@ use global location object by default</td>
 
         
 <div class="param-desc">
-    Promise resolved with `storeId` number or rejected with
+    Promise resolved with sales channel info (object with `store_id` and `store_object_id`)
+or rejected with
 <a href="https://github.com/axios/axios#handling-errors">axios error</a>.
 </div>
 
@@ -2278,7 +2290,193 @@ use global location object by default</td>
     </dt>
     <dd>
         
-<span class="param-type">Promise.&lt;(storeId|error)></span>
+<span class="param-type">Promise.&lt;({store_id, store_object_id}|error)></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".mapBySlug"><span class="type-signature">(static) </span>mapBySlug<span class="signature">(slug<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise.&lt;({resource, _id}|error)>}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="methods_map-by-slug.js.html">methods/map-by-slug.js</a>, <a href="methods_map-by-slug.js.html#line55">line 55</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    Get resource and Object ID (and set on `_config`) based on slug.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>// TODO</code></pre>
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>slug</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    <code>location.pathname.slice(1)</code>
+                
+                </td>
+            
+
+            <td class="description last">Slug string (URL without first bar),
+on browser it'll use global location object by default</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    Promise resolved with found resource info (object with `resource` and `_id`)
+or rejected with
+<a href="https://github.com/axios/axios#handling-errors">axios error</a>.
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;({resource, _id}|error)></span>
 
 
     </dd>
@@ -2308,7 +2506,7 @@ use global location object by default</td>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Sat Jul 20 2019 23:08:10 GMT-0300 (Brasilia Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Sun Jul 21 2019 15:56:41 GMT-0300 (Brasilia Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>
