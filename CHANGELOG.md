@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.6.0](https://github.com/ecomclub/ecomplus-client/compare/v0.5.1...v0.6.0) (2019-07-21)
+
+
+### Bug Fixes
+
+* **constants:** removing ':id' from API_PASSPORT ([1741906](https://github.com/ecomclub/ecomplus-client/commit/1741906))
+* **get-store-id:** also sets channel ID on config ([2bf6f9e](https://github.com/ecomclub/ecomplus-client/commit/2bf6f9e))
+* **get-store-id:** returns channel info object on promise chain ([c5c3a50](https://github.com/ecomclub/ecomplus-client/commit/c5c3a50))
+* **methods:** renaming request methods with prefix 'api' ([f36f02e](https://github.com/ecomclub/ecomplus-client/commit/f36f02e))
+
+
+### Features
+
+* **method:** new 'apiPassport' method ([c510b5c](https://github.com/ecomclub/ecomplus-client/commit/c510b5c))
+* **method:** new 'getStoreId' method ([7c89bc8](https://github.com/ecomclub/ecomplus-client/commit/7c89bc8))
+* **method:** new 'mapBySlug' method ([9596528](https://github.com/ecomclub/ecomplus-client/commit/9596528))
+
+
+### BREAKING CHANGES
+
+* **get-store-id:** changed returned object on 'getStoreId' resolve
+* **methods:** old request methods will not work (renamed)
+
+
+
 ### [0.5.1](https://github.com/ecomclub/ecomplus-client/compare/v0.5.0...v0.5.1) (2019-07-19)
 
 
