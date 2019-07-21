@@ -12,6 +12,7 @@ import apiSearch from './methods/api-search'
 import apiGraphs from './methods/api-graphs'
 import apiModules from './methods/api-modules'
 import apiPassport from './methods/api-passport'
+import getStoreId from './methods/get-store-id'
 
 /**
  * JS client for E-Com Plus REST APIs.
@@ -38,7 +39,8 @@ export {
   apiSearch,
   apiGraphs,
   apiModules,
-  apiPassport
+  apiPassport,
+  getStoreId
 }
 
 /**
