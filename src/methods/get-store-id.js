@@ -12,8 +12,7 @@ const getStoreId = domain => {
   // send request to Platform API
   return apiPlatform(endpoint).then(({ data }) => {
     // set Store IDs on config
-    _config.set('store_id', data.store_id)
-    _config.set('store_object_id', data.store_object_id)
+    ;[ 'store_id', 'store_object_id', 'channel_id' ].forEach(prop => _config.set(prop, data[prop]))
 
     // check for default sales channel language
     const lang = data.default_lang
@@ -48,7 +47,14 @@ const getStoreId = domain => {
  *
  * @example
 
-// TODO
+ecomClient.getStoreId('shop-plus.e-com.plus')
+  .then(storeId => console.log(storeId))
+  .catch(error => {
+    console.error(error)
+    if (error.response) {
+      console.log(error.response)
+    }
+  })
 
  */
 
