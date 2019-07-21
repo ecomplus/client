@@ -27,8 +27,8 @@ const getStoreId = domain => {
       }
     }
 
-    // returns Store ID number on promise chain
-    return data.store_id
+    // returns channel info object on promise chain
+    return data
   })
 }
 
@@ -41,14 +41,19 @@ const getStoreId = domain => {
  * @param {string} [domain=location.hostname] - Sales channel domain name, on browser it'll
  * use global location object by default
  *
- * @returns {Promise<storeId|error>}
- * Promise resolved with `storeId` number or rejected with
+ * @returns {Promise<{store_id,store_object_id}|error>}
+ * Promise resolved with sales channel info (object with `store_id` and `store_object_id`)
+ * or rejected with
  * [axios error]{@link https://github.com/axios/axios#handling-errors}.
  *
  * @example
 
 ecomClient.getStoreId('shop-plus.e-com.plus')
-  .then(storeId => console.log(storeId))
+  .then(channel => {
+    console.log(channel.store_id)
+    console.log(channel.store_object_id)
+    console.log(channel)
+  })
   .catch(error => {
     console.error(error)
     if (error.response) {
