@@ -25,7 +25,7 @@ const debug = (env && (env.ECOMCLIENT_DEBUG === true || env.ECOMCLIENT_DEBUG ===
 
 const request = (config, api, delay = 170) => axios.request(config).catch(err => {
   // handle 503 errors here
-  let { response } = err
+  const { response } = err
   if (response && response.status === 503) {
     // service unavailable, probably blocked by proxy
     if (api) {
@@ -76,7 +76,7 @@ export default axiosConfig => {
 
   let api, delay
   for (api in delays) {
-    if (delays.hasOwnProperty(api) && uri.indexOf(api) === 0) {
+    if (delays[api] !== undefined && uri.indexOf(api) === 0) {
       // API matched
       // delayed request
       delay = delays[api]

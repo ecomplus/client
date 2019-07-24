@@ -28,10 +28,10 @@ const apiPlatform = (
   })
 
     .catch(err => {
-      let { response } = err
+      const { response } = err
       if (response && baseURL === API_PLATFORM_CACHE) {
         // retry with live Main API
-        let { status } = response
+        const { status } = response
         if (!status || status < 100 || status >= 500) {
           // resend request with same params
           return apiPlatform(

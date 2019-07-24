@@ -8,7 +8,7 @@ const instance = axios.create({
   timeout: 60000
 })
 // always JSON for request with body data
-;[ 'post', 'patch', 'put' ].forEach(method => {
+;['post', 'patch', 'put'].forEach(method => {
   instance.defaults.headers[method]['Content-Type'] = 'application/json'
 })
 
