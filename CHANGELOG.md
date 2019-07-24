@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.7.0](https://github.com/ecomclub/ecomplus-client/compare/v0.6.0...v0.7.0) (2019-07-24)
+
+
+### Bug Fixes
+
+* **request:** all APIs endpoints have JSON extension ([f945c1a](https://github.com/ecomclub/ecomplus-client/commit/f945c1a))
+
+
+### chore
+
+* **methods:** removing 'getStoreId' and 'mapBySlug' ([5012ae1](https://github.com/ecomclub/ecomplus-client/commit/5012ae1))
+
+
+### Features
+
+* **method:** new 'storefront' method (Storefront API) ([2e15e05](https://github.com/ecomclub/ecomplus-client/commit/2e15e05))
+
+
+### BREAKING CHANGES
+
+* **methods:** 'getStoreId' and 'mapBySlug' will no more work
+
+
+
 ## [0.6.0](https://github.com/ecomclub/ecomplus-client/compare/v0.5.1...v0.6.0) (2019-07-21)
 
 
