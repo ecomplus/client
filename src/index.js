@@ -12,13 +12,11 @@ import apiSearch from './methods/api-search'
 import apiGraphs from './methods/api-graphs'
 import apiModules from './methods/api-modules'
 import apiPassport from './methods/api-passport'
-import getStoreId from './methods/get-store-id'
-import mapBySlug from './methods/map-by-slug'
 
 /**
  * JS client for E-Com Plus REST APIs.
  * @module @ecomplus/client
- * @exports {@link ecomClient}
+ * @see ecomClient
  *
  * @example
  * // ES import
@@ -40,9 +38,7 @@ export {
   apiSearch,
   apiGraphs,
   apiModules,
-  apiPassport,
-  getStoreId,
-  mapBySlug
+  apiPassport
 }
 
 /**
