@@ -12,6 +12,7 @@ import search from './methods/search'
 import graphs from './methods/graphs'
 import modules from './methods/modules'
 import passport from './methods/passport'
+import storefront from './methods/storefront'
 
 /**
  * JS client for E-Com Plus REST APIs.
@@ -38,9 +39,16 @@ export {
   search,
   graphs,
   modules,
-  passport
+  passport,
+  storefront
 }
 
 /**
  * @namespace ecomClient
+ * @description
+ * TL;DR: You're probably wanting to use
+ * [Store API]{@link ecomClient.store}.
+ * <br>
+ * Although, we have methods to run requests for
+ * almost all E-Com Plus APIs below.
  */
