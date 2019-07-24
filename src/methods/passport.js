@@ -2,7 +2,7 @@ import { _config } from '@ecomplus/utils'
 import { API_PASSPORT } from './../lib/constants'
 import request from './../lib/request'
 
-const apiPassport = (
+const passport = (
   url,
   customerId,
   accessToken,
@@ -35,7 +35,7 @@ const apiPassport = (
 /**
  * @method
  * @memberof ecomClient
- * @name apiPassport
+ * @name passport
  * @description Send HTTP request to
  * [E-Com Plus Passport REST API]{@link https://developers.e-com.plus/docs/api/#/passport/}
  * with customer login authentication.
@@ -61,4 +61,4 @@ const apiPassport = (
 
  */
 
-export default apiPassport
+export default passport

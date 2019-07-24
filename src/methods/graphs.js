@@ -3,7 +3,7 @@ import { IS_BROWSER, API_GRAPHS } from './../lib/constants'
 import request from './../lib/request'
 
 // returns axios request promise
-const apiGraphs = (
+const graphs = (
   url,
   storeId = _config.get('store_id'),
   axiosConfig
@@ -21,7 +21,7 @@ const apiGraphs = (
 /**
  * @method
  * @memberof ecomClient
- * @name apiGraphs
+ * @name graphs
  * @description Send HTTP GET request to
  * [E-Com Plus Graphs REST API]{@link https://developers.e-com.plus/docs/api/#/graphs/}.
  *
@@ -42,4 +42,4 @@ const apiGraphs = (
 
  */
 
-export default apiGraphs
+export default graphs

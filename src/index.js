@@ -6,12 +6,12 @@
 
 import _self from './lib/self'
 
-import apiStore from './methods/api-store'
-import apiPlatform from './methods/api-platform'
-import apiSearch from './methods/api-search'
-import apiGraphs from './methods/api-graphs'
-import apiModules from './methods/api-modules'
-import apiPassport from './methods/api-passport'
+import store from './methods/store'
+import platform from './methods/platform'
+import search from './methods/search'
+import graphs from './methods/graphs'
+import modules from './methods/modules'
+import passport from './methods/passport'
 
 /**
  * JS client for E-Com Plus REST APIs.
@@ -33,12 +33,12 @@ import apiPassport from './methods/api-passport'
 
 export {
   _self,
-  apiStore,
-  apiPlatform,
-  apiSearch,
-  apiGraphs,
-  apiModules,
-  apiPassport
+  store,
+  platform,
+  search,
+  graphs,
+  modules,
+  passport
 }
 
 /**

@@ -3,7 +3,7 @@ import { IS_BROWSER, API_SEARCH } from './../lib/constants'
 import request from './../lib/request'
 
 // returns axios request promise
-const apiSearch = (
+const search = (
   url,
   method = 'get',
   data,
@@ -25,7 +25,7 @@ const apiSearch = (
 /**
  * @method
  * @memberof ecomClient
- * @name apiSearch
+ * @name search
  * @description Send HTTP request to
  * [E-Com Plus Search REST API]{@link https://developers.e-com.plus/docs/api/#/search/}.
  *
@@ -45,7 +45,7 @@ const apiSearch = (
  * @example
 
 // Simple search request (ELS URI Search)
-ecomClient.apiSearch('/items.json?q=sku:123')
+ecomClient.search('/items.json?q=sku:123')
   .then(response => console.log(response.data))
   .catch(error => {
     console.error(error)
@@ -69,10 +69,10 @@ const data = {
     }
   }
 }
-ecomClient.apiSearch('/items.json', 'post', data)
+ecomClient.search('/items.json', 'post', data)
   .then(({ data, status }) => console.log(status, data))
   .catch(error => console.error(error))
 
  */
 
-export default apiSearch
+export default search
