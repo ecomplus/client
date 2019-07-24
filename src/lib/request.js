@@ -55,7 +55,12 @@ const request = (config, api, delay = 170) => axios.request(config).catch(err =>
 })
 
 export default axiosConfig => {
-  const { method, baseURL } = axiosConfig
+  const { url, method, baseURL } = axiosConfig
+  if (!url.indexOf('.json') === -1) {
+    // all APIs endpoints have JSON extension
+    axiosConfig.url = url.replace(/^([^?]+)(\?.*)?$/, '$1.json$2')
+  }
+
   let uri = axios.getUri(axiosConfig)
   if (!uri.startsWith('http')) {
     // complete absolute URI
