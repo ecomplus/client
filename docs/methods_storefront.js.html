@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>@ecomplus/client - Documentation</title>
+    <title>methods/storefront.js - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -32,155 +32,74 @@
 
 <div id="main">
     
-    <h1 class="page-title">@ecomplus/client</h1>
+    <h1 class="page-title">methods/storefront.js</h1>
     
 
     
 
 
 
-
-<section>
-
-<header>
     
-        
-            
-        
-    
-</header>
-
-<article>
-    
-        <div class="container-overview">
-        
-            
-                <div class="description">JS client for E-Com Plus REST APIs.</div>
-            
-
-            
-                
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line17">line 17</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-see">See:</dt>
-    <dd class="tag-see">
-        <ul>
-            <li><a href="ecomClient.html">ecomClient</a></li>
-        </ul>
-    </dd>
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <h5>Examples</h5>
-    
-    <pre class="prettyprint"><code>// ES import
-import ecomClient from '@ecomplus/client'</code></pre>
-
-    <pre class="prettyprint"><code>// With CommonJS
-const ecomClient = require('@ecomplus/client')</code></pre>
-
-    <pre class="prettyprint"><code>&lt;!-- Global `ecomClient` from CDN on browser -->
-&lt;script src="https://cdn.jsdelivr.net/npm/@ecomplus/client">&lt;/script></code></pre>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            
-        
-        </div>
-    
-
-    
-
-    
-
-    
-    
-    
-
-     
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { _config } from '@ecomplus/utils'
+import { IS_BROWSER, API_STOREFRONT } from './../lib/constants'
+import request from './../lib/request'
+
+const storefront = (
+  url,
+  storeId = _config.get('store_id'),
+  axiosConfig
+) => {
+  if (url.charAt(0) === '/') {
+    // prevent duplicated bars
+    url = url.substr(1)
+  }
+  if (!/^\/?[0-9]+@?/.test(url) &amp;&amp; storeId) {
+    // force endpoint starting with Store ID
+    url = storeId + '@' + url
+  }
+  // replace / with $ on slug to escape URL
+  url = '/' + url.replace(/\//g, '$')
+
+  // returns axios request promise
+  return request({
+    // set 5s default timeout for Storefront API requests on browser
+    timeout: IS_BROWSER ? 5000 : 30000,
+    ...axiosConfig,
+    url,
+    baseURL: API_STOREFRONT
+  })
+}
+
+/**
+ * @method
+ * @memberof ecomClient
+ * @name storefront
+ * @description Send HTTP GET request to
+ * [E-Com Plus Storefront REST API]{@link https://developers.e-com.plus/docs/api/#/storefront/}.
+ *
+ * @param {string} url - API endpoint to request or absolute URI
+ * @param {number} [storeId=_config.get('store_id')] - E-Com Plus Store ID number
+ * @param {object} [axiosConfig] - Additional
+ * [axios config]{@link https://github.com/axios/axios#request-config} settings
+ *
+ * @returns {Promise&lt;response|error>}
+ * Axios request promise resolved with
+ * [response]{@link https://github.com/axios/axios#response-schema}
+ * or rejected with
+ * [error]{@link https://github.com/axios/axios#handling-errors}.
+ *
+ * @example
+
+// TODO
+
+ */
+
+export default storefront
+</code></pre>
+        </article>
+    </section>
 
 
 
