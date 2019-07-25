@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.8.0](https://github.com/ecomclub/ecomplus-client/compare/v0.7.1...v0.8.0) (2019-07-25)
+
+
+### chore
+
+* **methods:** using always a config object as method unique param ([e9a4e09](https://github.com/ecomclub/ecomplus-client/commit/e9a4e09))
+
+
+### BREAKING CHANGES
+
+* **methods:** all methods params edited, old calls will no more work
+
+
+
 ### [0.7.1](https://github.com/ecomclub/ecomplus-client/compare/v0.7.0...v0.7.1) (2019-07-24)
 
 
