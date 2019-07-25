@@ -3,11 +3,11 @@ import { IS_BROWSER, API_GRAPHS } from './../lib/constants'
 import request from './../lib/request'
 
 // returns axios request promise
-const graphs = (
+const graphs = ({
   url,
   storeId = _config.get('store_id'),
   axiosConfig
-) => request({
+}) => request({
   // set 5s default timeout for graphs requests on browser
   timeout: IS_BROWSER ? 5000 : 30000,
   ...axiosConfig,
@@ -25,9 +25,10 @@ const graphs = (
  * @description Send HTTP GET request to
  * [E-Com Plus Graphs REST API]{@link https://developers.e-com.plus/docs/api/#/graphs/}.
  *
- * @param {string} url - API endpoint to request or absolute URI
- * @param {number} [storeId=_config.get('store_id')] - E-Com Plus Store ID number
- * @param {object} [axiosConfig] - Additional
+ * @param {object} cfg - Request config options
+ * @param {string} cfg.url - API endpoint to request or absolute URI
+ * @param {number} [cfg.storeId=_config.get('store_id')] - E-Com Plus Store ID number
+ * @param {object} [cfg.axiosConfig] - Additional
  * [axios config]{@link https://github.com/axios/axios#request-config} settings
  *
  * @returns {Promise<response|error>}

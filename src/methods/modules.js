@@ -3,13 +3,13 @@ import { API_MODULES } from './../lib/constants'
 import request from './../lib/request'
 
 // returns axios request promise
-const modules = (
+const modules = ({
   url,
   method = 'get',
   data,
   storeId = _config.get('store_id'),
   axiosConfig
-) => request({
+}) => request({
   data,
   ...axiosConfig,
   url,
@@ -27,9 +27,10 @@ const modules = (
  * @description Send HTTP GET request to
  * [E-Com Plus Modules REST API]{@link https://developers.e-com.plus/docs/api/#/modules/}.
  *
- * @param {string} url - API endpoint to request or absolute URI
- * @param {number} [storeId=_config.get('store_id')] - E-Com Plus Store ID number
- * @param {object} [axiosConfig] - Additional
+ * @param {object} cfg - Request config options
+ * @param {string} cfg.url - API endpoint to request or absolute URI
+ * @param {number} [cfg.storeId=_config.get('store_id')] - E-Com Plus Store ID number
+ * @param {object} [cfg.axiosConfig] - Additional
  * [axios config]{@link https://github.com/axios/axios#request-config} settings
  *
  * @returns {Promise<response|error>}

@@ -5,7 +5,7 @@ import request from './../lib/request'
 // save Store Cache API status
 let isCacheOnline = true
 
-const store = (
+const store = ({
   url,
   authenticationId,
   accessToken,
@@ -13,7 +13,7 @@ const store = (
   data,
   storeId = _config.get('store_id'),
   axiosConfig
-) => {
+}) => {
   let timeout, baseURL, headers
 
   // first check if it's a public request
@@ -86,13 +86,14 @@ const store = (
  * @description Send HTTP request to
  * [E-Com Plus Store REST API]{@link https://developers.e-com.plus/docs/api/#/store/}.
  *
- * @param {string} url - API endpoint to request or absolute URI
- * @param {string} [authenticationId] - My ID for authenticated request
- * @param {string} [accessToken] - Access token for authenticated request
- * @param {string} [method='get'] - Request method (HTTP verb)
- * @param {object} [data] - Request body object
- * @param {number} [storeId=_config.get('store_id')] - E-Com Plus Store ID number
- * @param {object} [axiosConfig] - Additional
+ * @param {object} cfg - Request config options
+ * @param {string} cfg.url - API endpoint to request or absolute URI
+ * @param {string} [cfg.authenticationId] - My ID for authenticated request
+ * @param {string} [cfg.accessToken] - Access token for authenticated request
+ * @param {string} [cfg.method='get'] - Request method (HTTP verb)
+ * @param {object} [cfg.data] - Request body object
+ * @param {number} [cfg.storeId=_config.get('store_id')] - E-Com Plus Store ID number
+ * @param {object} [cfg.axiosConfig] - Additional
  * [axios config]{@link https://github.com/axios/axios#request-config} settings
  *
  * @returns {Promise<response|error>}
@@ -104,7 +105,7 @@ const store = (
  * @example
 
 // Simple GET request (public)
-ecomClient.store('/products.json')
+ecomClient.store({ url: '/products.json' })
   .then(response => console.log(response.data))
   .catch(error => {
     console.error(error)
@@ -116,15 +117,15 @@ ecomClient.store('/products.json')
  * @example
 
 // Authenticated request
-this.authenticationId = 'myAuthenticationId'
-this.accessToken = 'myAccessToken'
-ecomClient.store(
-  '/products.json',
-  this.authenticationId,
-  this.accessToken,
-  'post',
-  { sku: '123', name: 'Sample Prduct 123' }
-)
+const authenticationId = 'myAuthenticationId'
+const accessToken = 'myAccessToken'
+ecomClient.store({
+  url: '/products.json',
+  authenticationId,
+  accessToken,
+  method: 'post',
+  data: { sku: '123', name: 'Sample Prduct 123' }
+})
   .then(({ data, status }) => console.log(status, data))
   .catch(error => console.error(error))
 

@@ -2,11 +2,11 @@ import { _config } from '@ecomplus/utils'
 import { IS_BROWSER, API_STOREFRONT } from './../lib/constants'
 import request from './../lib/request'
 
-const storefront = (
+const storefront = ({
   url,
   storeId = _config.get('store_id'),
   axiosConfig
-) => {
+}) => {
   if (url.charAt(0) === '/') {
     // prevent duplicated bars
     url = url.substr(1)
@@ -35,9 +35,10 @@ const storefront = (
  * @description Send HTTP GET request to
  * [E-Com Plus Storefront REST API]{@link https://developers.e-com.plus/docs/api/#/storefront/}.
  *
- * @param {string} url - API endpoint to request or absolute URI
- * @param {number} [storeId=_config.get('store_id')] - E-Com Plus Store ID number
- * @param {object} [axiosConfig] - Additional
+ * @param {object} cfg - Request config options
+ * @param {string} cfg.url - API endpoint to request or absolute URI
+ * @param {number} [cfg.storeId=_config.get('store_id')] - E-Com Plus Store ID number
+ * @param {object} [cfg.axiosConfig] - Additional
  * [axios config]{@link https://github.com/axios/axios#request-config} settings
  *
  * @returns {Promise<response|error>}

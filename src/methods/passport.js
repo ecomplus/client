@@ -2,7 +2,7 @@ import { _config } from '@ecomplus/utils'
 import { API_PASSPORT } from './../lib/constants'
 import request from './../lib/request'
 
-const passport = (
+const passport = ({
   url,
   customerId,
   accessToken,
@@ -10,7 +10,7 @@ const passport = (
   data,
   storeId = _config.get('store_id'),
   axiosConfig
-) => {
+}) => {
   let baseURL = API_PASSPORT
   if (!url.startsWith('http') && !url.startsWith('/' + storeId)) {
     // set Store ID on URL
@@ -40,13 +40,14 @@ const passport = (
  * [E-Com Plus Passport REST API]{@link https://developers.e-com.plus/docs/api/#/passport/}
  * with customer login authentication.
  *
- * @param {string} url - API endpoint to request or absolute URI
- * @param {string} customerId - My ID for authenticated request
- * @param {string} accessToken - Access token for authenticated request
- * @param {string} [method='get'] - Request method (HTTP verb)
- * @param {object} [data] - Request body object
- * @param {number} [storeId=_config.get('store_id')] - E-Com Plus Store ID number
- * @param {object} [axiosConfig] - Additional
+ * @param {object} cfg - Request config options
+ * @param {string} cfg.url - API endpoint to request or absolute URI
+ * @param {string} cfg.customerId - My ID for authenticated request
+ * @param {string} cfg.accessToken - Access token for authenticated request
+ * @param {string} [cfg.method='get'] - Request method (HTTP verb)
+ * @param {object} [cfg.data] - Request body object
+ * @param {number} [cfg.storeId=_config.get('store_id')] - E-Com Plus Store ID number
+ * @param {object} [cfg.axiosConfig] - Additional
  * [axios config]{@link https://github.com/axios/axios#request-config} settings
  *
  * @returns {Promise<response|error>}
