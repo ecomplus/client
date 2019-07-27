@@ -29,7 +29,7 @@ import storefront from './methods/storefront'
  *
  * @example
  * <!-- Global `ecomClient` from CDN on browser -->
- * <script src="https://cdn.jsdelivr.net/npm/@ecomplus/client"></script>
+ * <script src="https://cdn.jsdelivr.net/npm/@ecomplus/client/dist/ecom-client.polyfill.min.js"></script>
  */
 
 export {
