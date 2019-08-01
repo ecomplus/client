@@ -29,7 +29,7 @@ It's available for both Node.js and browser environments.
 ### Dependencies
 
 It requires and doesn't include
-[`axios`](https://github.com/ecomclub/ecomplus-utils) and
+[`axios`](https://github.com/axios/axios) and
 [`@ecomplus/utils`](https://github.com/ecomclub/ecomplus-utils).
 
 It'll be automatically imported if you're developing on Node.js
