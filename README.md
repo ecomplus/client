@@ -26,6 +26,17 @@ It's available for both Node.js and browser environments.
 - [Get started](https://developers.e-com.plus/ecomplus-client/module-@ecomplus_client.html)
 - [Methods](https://developers.e-com.plus/ecomplus-client/ecomClient.html)
 
+### Dependencies
+
+It requires and doesn't include
+[`axios`](https://github.com/ecomclub/ecomplus-utils) and
+[`@ecomplus/utils`](https://github.com/ecomclub/ecomplus-utils).
+
+It'll be automatically imported if you're developing on Node.js
+environment or using a bundler such as Webpack,
+**in other case those libraries must be included manually on
+window scope**.
+
 ## Development
 
 We're using
