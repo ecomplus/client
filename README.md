@@ -6,6 +6,8 @@
 
 JS client for E-Com Plus REST APIs
 
+[Changelog](https://github.com/ecomclub/ecomplus-client/blob/master/CHANGELOG.md)
+
 ## Usage
 
 **TL;DR**: We have
