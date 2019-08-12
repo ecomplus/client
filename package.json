@@ -1,6 +1,6 @@
 {
   "name": "@ecomplus/client",
-  "version": "0.8.0",
+  "version": "1.0.0",
   "description": "JS client for E-Com Plus REST APIs",
   "main": "dist/ecom-client.min.js",
   "module": "src/index.js",
