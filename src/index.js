@@ -2,19 +2,8 @@
  * https://github.com/ecomclub/ecomplus-client
  * @author E-Com Club <ti@e-com.club>
  * @license MIT
- */
-
-import _self from './lib/self'
-
-import store from './methods/store'
-import platform from './methods/platform'
-import search from './methods/search'
-import graphs from './methods/graphs'
-import modules from './methods/modules'
-import passport from './methods/passport'
-import storefront from './methods/storefront'
-
-/**
+ *
+ * @description
  * JS client for E-Com Plus REST APIs.
  * @module @ecomplus/client
  * @see ecomClient
@@ -32,23 +21,9 @@ import storefront from './methods/storefront'
  * <script src="https://cdn.jsdelivr.net/npm/@ecomplus/client/dist/ecom-client.polyfill.min.js"></script>
  */
 
-export {
-  _self,
-  store,
-  platform,
-  search,
-  graphs,
-  modules,
-  passport,
-  storefront
-}
+import * as ecomClient from './ecom-client'
 
-/**
- * @namespace ecomClient
- * @description
- * TL;DR: You're probably wanting to use
- * [Store API]{@link ecomClient.store}.
- * <br>
- * Although, we have methods to run requests for
- * almost all E-Com Plus APIs below.
- */
+export default ecomClient
+
+// named exports off all methods
+export * from './ecom-client'
