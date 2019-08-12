@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>@ecomplus/client - Documentation</title>
+    <title>ecom-client.js - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -32,165 +32,49 @@
 
 <div id="main">
     
-    <h1 class="page-title">@ecomplus/client</h1>
+    <h1 class="page-title">ecom-client.js</h1>
     
 
     
 
 
 
-
-<section>
-
-<header>
     
-        
-            
-        
-    
-</header>
-
-<article>
-    
-        <div class="container-overview">
-        
-            
-                <div class="description">JS client for E-Com Plus REST APIs.</div>
-            
-
-            
-                
-
-
-
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1">line 1</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-author">Author:</dt>
-    <dd class="tag-author">
-        <ul>
-            <li><a href="mailto:ti@e-com.club">E-Com Club</a></li>
-        </ul>
-    </dd>
-    
-
-    
-
-    
-    <dt class="tag-license">License:</dt>
-    <dd class="tag-license"><ul class="dummy"><li>MIT</li></ul></dd>
-    
-
-    
-
-    
-
-    
-    <dt class="tag-see">See:</dt>
-    <dd class="tag-see">
-        <ul>
-            <li><a href="ecomClient.html">ecomClient</a></li>
-        </ul>
-    </dd>
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <h5>Examples</h5>
-    
-    <pre class="prettyprint"><code>// ES import
-import ecomClient from '@ecomplus/client'</code></pre>
-
-    <pre class="prettyprint"><code>// With CommonJS
-const ecomClient = require('@ecomplus/client')</code></pre>
-
-    <pre class="prettyprint"><code>&lt;!-- Global `ecomClient` from CDN on browser -->
-&lt;script src="https://cdn.jsdelivr.net/npm/@ecomplus/client/dist/ecom-client.polyfill.min.js">&lt;/script></code></pre>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            
-        
-        </div>
-    
-
-    
-
-    
-
-    
-    
-    
-
-     
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @namespace ecomClient
+ * @description
+ * TL;DR: You're probably wanting to use
+ * [Store API]{@link ecomClient.store}.
+ * &lt;br>
+ * Although, we have methods to run requests for
+ * almost all E-Com Plus APIs below.
+ */
+
+import _self from './lib/self'
+
+import store from './methods/store'
+import platform from './methods/platform'
+import search from './methods/search'
+import graphs from './methods/graphs'
+import modules from './methods/modules'
+import passport from './methods/passport'
+import storefront from './methods/storefront'
+
+export {
+  _self,
+  store,
+  platform,
+  search,
+  graphs,
+  modules,
+  passport,
+  storefront
+}
+</code></pre>
+        </article>
+    </section>
 
 
 
