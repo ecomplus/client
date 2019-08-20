@@ -33,7 +33,7 @@ const passport = ({
     baseURL,
     method,
     // setup authentication headers
-    headers: headers
+    headers
   })
 }
 
