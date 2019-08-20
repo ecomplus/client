@@ -17,6 +17,14 @@ const passport = ({
     baseURL += storeId
   }
 
+  let headers
+  if (customerId && accessToken) {
+    headers = {
+      'X-My-ID': customerId,
+      'X-Access-Token': accessToken
+    }
+  }
+
   // returns axios request promise
   return request({
     data,
@@ -25,10 +33,7 @@ const passport = ({
     baseURL,
     method,
     // setup authentication headers
-    headers: {
-      'X-My-ID': customerId,
-      'X-Access-Token': accessToken
-    }
+    headers
   })
 }
 
@@ -42,8 +47,8 @@ const passport = ({
  *
  * @param {object} cfg - Request config options
  * @param {string} cfg.url - API endpoint to request or absolute URI
- * @param {string} cfg.customerId - My ID for authenticated request
- * @param {string} cfg.accessToken - Access token for authenticated request
+ * @param {string} [cfg.customerId] - My ID for authenticated request
+ * @param {string} [cfg.accessToken] - Access token for authenticated request
  * @param {string} [cfg.method='get'] - Request method (HTTP verb)
  * @param {object} [cfg.data] - Request body object
  * @param {number} [cfg.storeId=_config.get('store_id')] - E-Com Plus Store ID number
