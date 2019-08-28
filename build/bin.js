@@ -68,8 +68,6 @@ webpackConfigList.push({
   },
   output: {
     ...webpackOutput,
-    // CommonJS output instead of UMD
-    libraryTarget: 'commonjs',
     filename: webpackOutput.filename.replace('.js', '.node.js')
   },
   externals: /^(@babel\/runtime|core-js|@ecomplus\/utils|axios)/i
