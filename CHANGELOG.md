@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.1](https://github.com/ecomclub/ecomplus-client/compare/v1.1.0...v1.1.1) (2019-08-28)
+
+
+### Build System
+
+* **webpack:** add Node.js target output ([20d0f3d](https://github.com/ecomclub/ecomplus-client/commit/20d0f3d))
+
+
+
 ## [1.1.0](https://github.com/ecomclub/ecomplus-client/compare/v1.0.3...v1.1.0) (2019-08-28)
 
 
