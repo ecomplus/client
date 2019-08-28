@@ -24,12 +24,13 @@ const fatalError = err => {
 // setup config for multiple outputs
 const webpackConfigList = []
 
+// web target builds
 ;[
   '.bundle',
   '.polyfill',
   ''
 ].forEach(outputType => {
-  let config = {
+  const config = {
     ...webpackConfig,
     output: {
       ...webpackOutput,
@@ -47,7 +48,7 @@ const webpackConfigList = []
         commonjs2: '@ecomplus/utils',
         root: 'ecomUtils'
       },
-      'axios': 'axios'
+      axios: 'axios'
     }]
     if (outputType === '') {
       // standalone lib output
@@ -56,6 +57,22 @@ const webpackConfigList = []
     }
   }
   webpackConfigList.push(config)
+})
+
+// add Node.js output
+webpackConfigList.push({
+  ...webpackConfig,
+  target: 'node',
+  optimization: {
+    minimize: false
+  },
+  output: {
+    ...webpackOutput,
+    // CommonJS output instead of UMD
+    libraryTarget: 'commonjs',
+    filename: webpackOutput.filename.replace('.js', '.node.js')
+  },
+  externals: /^(@babel\/runtime|core-js|@ecomplus\/utils|axios)/i
 })
 
 webpack(webpackConfigList, (err, stats) => {
@@ -67,7 +84,7 @@ webpack(webpackConfigList, (err, stats) => {
   // check and handle webpack errors and warnings
   const info = stats.toJson()
   if (stats.hasErrors()) {
-    let err = info.errors
+    const err = info.errors
     fatalError(err)
   }
   if (stats.hasWarnings()) {
