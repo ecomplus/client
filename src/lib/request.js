@@ -21,38 +21,46 @@ const waitingApis = []
 
 // check for debug option
 const env = (typeof window === 'object' && window) || (typeof process === 'object' && process && process.env)
-const debug = (env && (env.ECOMCLIENT_DEBUG === true || env.ECOMCLIENT_DEBUG === 'true'))
+const checkEnvVar = prop => env && (env[prop] === true || env[prop] === 'true')
+const debug = checkEnvVar('ECOMCLIENT_DEBUG')
 
-const request = (config, api, delay = 170) => axios.request(config).catch(err => {
-  // handle 503 errors here
-  const { response } = err
-  if (response && response.status === 503) {
-    // service unavailable, probably blocked by proxy
-    if (api) {
-      // add API to idle
-      waitingApis.push(api)
-    }
-
-    // retry with new promise
-    return new Promise((resolve, reject) => {
-      // wait and resend request
-      setTimeout(() => {
-        if (api) {
-          // unset API idle
-          const index = waitingApis.indexOf(api)
-          if (index > -1) {
-            waitingApis.splice(index, 1)
-          }
-        }
-        // new axios request without error handler
-        axios.request(config).then(resolve).catch(reject)
-      }, delay)
-    })
+const request = (config, api, delay = 170) => {
+  if (checkEnvVar('ECOMCLIENT_NOTIMEOUT') && config.timeout) {
+    // reset request timeout
+    config.timeout = 0
   }
 
-  // chain promise catch
-  throw err
-})
+  return axios.request(config).catch(err => {
+    // handle 503 errors here
+    const { response } = err
+    if (response && response.status === 503) {
+      // service unavailable, probably blocked by proxy
+      if (api) {
+        // add API to idle
+        waitingApis.push(api)
+      }
+
+      // retry with new promise
+      return new Promise((resolve, reject) => {
+        // wait and resend request
+        setTimeout(() => {
+          if (api) {
+            // unset API idle
+            const index = waitingApis.indexOf(api)
+            if (index > -1) {
+              waitingApis.splice(index, 1)
+            }
+          }
+          // new axios request without error handler
+          axios.request(config).then(resolve).catch(reject)
+        }, delay)
+      })
+    }
+
+    // chain promise catch
+    throw err
+  })
+}
 
 export default axiosConfig => {
   const { url, method, baseURL } = axiosConfig
