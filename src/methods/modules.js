@@ -24,11 +24,13 @@ const modules = ({
  * @method
  * @memberof ecomClient
  * @name modules
- * @description Send HTTP GET request to
+ * @description Send HTTP request to
  * [E-Com Plus Modules REST API]{@link https://developers.e-com.plus/docs/api/#/modules/}.
  *
  * @param {object} cfg - Request config options
  * @param {string} cfg.url - API endpoint to request or absolute URI
+ * @param {string} [cfg.method='get'] - Request method (HTTP verb)
+ * @param {object} [cfg.data] - Request body object
  * @param {number} [cfg.storeId=_config.get('store_id')] - E-Com Plus Store ID number
  * @param {object} [cfg.axiosConfig] - Additional
  * [axios config]{@link https://github.com/axios/axios#request-config} settings
