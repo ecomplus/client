@@ -1,11 +1,10 @@
 /**
- * https://github.com/ecomclub/ecomplus-client
- * @author E-Com Club <ti@e-com.club>
- * @license MIT
- *
- * @description
  * JS client for E-Com Plus REST APIs.
+ * {@link https://github.com/ecomclub/ecomplus-client GitHub}
+ *
  * @module @ecomplus/client
+ * @author E-Com Club <ti@e-com.club>
+ * @return {@link ecomClient}
  * @see ecomClient
  *
  * @example
