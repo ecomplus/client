@@ -53,7 +53,7 @@ const webpackConfigList = []
     if (outputType === '') {
       // standalone lib output
       // also ignore polyfills
-      config.externals.push(/^(@babel\/runtime|core-js)/i)
+      config.externals.push(/^core-js/i)
     }
   }
   webpackConfigList.push(config)
@@ -70,7 +70,7 @@ webpackConfigList.push({
     ...webpackOutput,
     filename: webpackOutput.filename.replace('.js', '.node.js')
   },
-  externals: /^(@ecomplus\/utils|axios)/i
+  externals: /^(core-js|@ecomplus\/utils)/i
 })
 
 webpack(webpackConfigList, (err, stats) => {
