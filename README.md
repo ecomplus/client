@@ -55,13 +55,13 @@ It requires and _may not_ include
 
 #### Node.js
 
-```console
+```bash
 npm i --save @ecomplus/utils @ecomplus/client
 ```
 
 #### Webpack
 
-```console
+```bash
 npm i --save core-js @ecomplus/utils @ecomplus/client
 ```
 
