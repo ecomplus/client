@@ -28,10 +28,29 @@ It's available for both Node.js and browser environments.
 - [Get started](https://developers.e-com.plus/ecomplus-client/module-@ecomplus_client.html)
 - [Methods](https://developers.e-com.plus/ecomplus-client/ecomClient.html)
 
+### Store API request example
+
+```js
+import { store } from '@ecomplus/utils'
+
+const authenticationId = 'myAuthenticationId'
+const accessToken = 'myAccessToken'
+
+ecomClient.store({
+  url: '/products.json',
+  authenticationId,
+  accessToken,
+  method: 'post',
+  data: { sku: '123', name: 'Sample Prduct 123' }
+})
+  .then(({ data, status }) => console.log(status, data))
+  .catch(error => console.error(error))
+```
+
 ### Dependencies
 
-It requires and doesn't include
-[`axios`](https://github.com/axios/axios) and
+It requires and may not include
+`core-js`, [`axios`](https://github.com/axios/axios) and
 [`@ecomplus/utils`](https://github.com/ecomclub/ecomplus-utils).
 
 It'll be automatically imported if you're developing on Node.js
