@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/ecomclub/ecomplus-client/compare/v1.1.3...v2.0.0) (2019-12-22)
+
+
+### Build System
+
+* **babel:** remove babel runtime plugin ([2ba8dd4](https://github.com/ecomclub/ecomplus-client/commit/2ba8dd4))
+* **bin:** fix webpack externals for node (ecomplus/utils,axios) ([4ef168c](https://github.com/ecomclub/ecomplus-client/commit/4ef168c))
+* **bin:** fix webpack externals for node target (peer deps only) ([ceca7f6](https://github.com/ecomclub/ecomplus-client/commit/ceca7f6))
+* **bin:** fix webpack externals for node target (peer deps only) ([10b1166](https://github.com/ecomclub/ecomplus-client/commit/10b1166))
+
+
+### BREAKING CHANGES
+
+* **bin:** ecomplus/utils still not shipped but is no more direct dep
+
+
+
 ### [1.1.3](https://github.com/ecomclub/ecomplus-client/compare/v1.1.2...v1.1.3) (2019-09-04)
 
 
