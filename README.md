@@ -49,14 +49,30 @@ ecomClient.store({
 
 ### Dependencies
 
-It requires and may not include
+It requires and _may not_ include
 `core-js`, [`axios`](https://github.com/axios/axios) and
 [`@ecomplus/utils`](https://github.com/ecomclub/ecomplus-utils).
 
-It'll be automatically imported if you're developing on Node.js
-environment or using a bundler such as Webpack,
-**in other case those libraries must be included manually on
-window scope**.
+#### Node.js
+
+```console
+npm i --save @ecomplus/utils @ecomplus/client
+```
+
+#### Webpack
+
+```console
+npm i --save core-js @ecomplus/utils @ecomplus/client
+```
+
+#### CDN
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@ecomplus/client/dist/ecom-client.polyfill.min.js"></script>
+```
+
+`axios` and `ecomUtils` libraries **must be included separately**
+and available on window scope.
 
 ## Development
 
