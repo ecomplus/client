@@ -11,7 +11,7 @@
     "serve": "webpack-dev-server",
     "build": "node ./build/bin.js",
     "doc": "rm -rf ./docs/*; jsdoc ./src -r ./README.md -d ./docs -t ./node_modules/docdash",
-    "release": "rm -rf ./dist; node ./build/bin.js && standard-version"
+    "release": "rm -rf ./dist; npm ddp && node ./build/bin.js && standard-version"
   },
   "repository": {
     "type": "git",
@@ -32,26 +32,26 @@
   },
   "homepage": "https://github.com/ecomclub/ecomplus-client#readme",
   "dependencies": {
-    "@babel/runtime": "^7.6.3",
-    "@ecomplus/utils": "^1.1.0",
+    "@babel/runtime": "^7.7.7",
+    "@ecomplus/utils": "^1.2.3",
     "axios": "^0.19.0",
-    "core-js": "^3.2.1"
+    "core-js": "^3.6.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.6.4",
-    "@babel/plugin-transform-runtime": "^7.6.2",
-    "@babel/preset-env": "^7.6.3",
+    "@babel/core": "^7.7.7",
+    "@babel/plugin-transform-runtime": "^7.7.6",
+    "@babel/preset-env": "^7.7.7",
     "@commitlint/cli": "^8.2.0",
     "@commitlint/config-conventional": "^8.2.0",
     "babel-loader": "^8.0.6",
     "docdash": "^1.1.1",
-    "husky": "^3.0.8",
+    "husky": "^3.1.0",
     "jsdoc": "^3.6.3",
     "standard": "^13.1.0",
     "standard-version": "^6.0.1",
-    "webpack": "^4.41.1",
-    "webpack-cli": "^3.3.9",
-    "webpack-dev-server": "^3.8.2"
+    "webpack": "^4.41.4",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.10.1"
   },
   "husky": {
     "hooks": {
