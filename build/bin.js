@@ -70,7 +70,7 @@ webpackConfigList.push({
     ...webpackOutput,
     filename: webpackOutput.filename.replace('.js', '.node.js')
   },
-  externals: /^(@babel\/runtime|core-js|@ecomplus\/utils|axios)/i
+  externals: /^(@ecomplus\/utils|axios)/i
 })
 
 webpack(webpackConfigList, (err, stats) => {
