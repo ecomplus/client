@@ -31,7 +31,7 @@ It's available for both Node.js and browser environments.
 ### Store API request example
 
 ```js
-import { store } from '@ecomplus/utils'
+import { store } from '@ecomplus/client'
 
 const authenticationId = 'myAuthenticationId'
 const accessToken = 'myAccessToken'
