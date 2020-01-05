@@ -1,3 +1,9 @@
+/*!
+ * @ecomplus/client
+ * (c) E-Com Club <ti@e-com.club>
+ * Released under the MIT License.
+ */
+
 /**
  * JS client for E-Com Plus REST APIs.
  * {@link https://github.com/ecomclub/ecomplus-client GitHub}
