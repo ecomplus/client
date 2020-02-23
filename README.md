@@ -1,12 +1,12 @@
 # ecomplus-client
 
-[![CodeFactor](https://www.codefactor.io/repository/github/ecomclub/ecomplus-client/badge)](https://www.codefactor.io/repository/github/ecomclub/ecomplus-client)
+[![CodeFactor](https://www.codefactor.io/repository/github/ecomplus/client/badge)](https://www.codefactor.io/repository/github/ecomplus/client)
 [![npm version](https://img.shields.io/npm/v/@ecomplus/client.svg)](https://www.npmjs.org/@ecomplus/client)
 [![license mit](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 JS client for E-Com Plus REST APIs
 
-[Changelog](https://github.com/ecomclub/ecomplus-client/blob/master/CHANGELOG.md)
+[CHANGELOG](https://github.com/ecomplus/client/blob/master/CHANGELOG.md)
 
 ## Usage
 
@@ -51,7 +51,7 @@ ecomClient.store({
 
 It requires and _may not_ include
 `core-js`, [`axios`](https://github.com/axios/axios) and
-[`@ecomplus/utils`](https://github.com/ecomclub/ecomplus-utils).
+[`@ecomplus/utils`](https://github.com/ecomplus/utils).
 
 #### Node.js
 
@@ -109,7 +109,7 @@ npm run serve
 7. Commit changes following
 [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0-beta.4/);
 
-8. Create a new [PR](https://github.com/ecomclub/ecomplus-client/pulls)
+8. Create a new [PR](https://github.com/ecomplus/client/pulls)
 describing your proposal :)
 
 ### Deploy
