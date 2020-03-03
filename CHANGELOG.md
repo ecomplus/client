@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.4](https://github.com/ecomplus/client/compare/v2.0.3...v2.0.4) (2020-03-03)
+
+
+### Bug Fixes
+
+* **request:** also handle cuncorrent request, always shedule ([ed3a656](https://github.com/ecomplus/client/commit/ed3a6567a9c39be2cd9ef87bbaf4dba62d5fe09c))
+
 ### [2.0.3](https://github.com/ecomclub/ecomplus-client/compare/v2.0.2...v2.0.3) (2020-03-03)
 
 
