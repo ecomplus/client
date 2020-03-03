@@ -56,29 +56,18 @@
 
 
 
-    <section class="readme">
+    <section class="readme usertext">
         <article><h1>ecomplus-client</h1>
-<p><a href="https://www.codefactor.io/repository/github/ecomclub/ecomplus-client"><img src="https://www.codefactor.io/repository/github/ecomclub/ecomplus-client/badge" alt="CodeFactor"></a>
-<a href="https://www.npmjs.org/@ecomplus/client"><img src="https://img.shields.io/npm/v/@ecomplus/client.svg" alt="npm version"></a>
-<a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="license mit"></a></p>
+<p><a href="https://www.codefactor.io/repository/github/ecomplus/client"><img src="https://www.codefactor.io/repository/github/ecomplus/client/badge" alt="CodeFactor"></a> <a href="https://www.npmjs.org/@ecomplus/client"><img src="https://img.shields.io/npm/v/@ecomplus/client.svg" alt="npm version"></a> <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License MIT"></a></p>
 <p>JS client for E-Com Plus REST APIs</p>
-<p><a href="https://github.com/ecomclub/ecomplus-client/blob/master/CHANGELOG.md">Changelog</a></p>
+<p><a href="https://github.com/ecomplus/client/blob/master/CHANGELOG.md">CHANGELOG</a></p>
 <h2>Usage</h2>
-<p><strong>TL;DR</strong>: We have
-<a href="https://developers.e-com.plus/ecomplus-client/ecomClient.html">methods</a>
-to run requests for almost all E-Com Plus APIs,
-but you're probably searching for
-<a href="https://developers.e-com.plus/ecomplus-client/ecomClient.html#.store">Store API</a>.</p>
-<p>The <code>@ecomplus/client</code> package provides a
-<a href="https://developers.e-com.plus/ecomplus-client/ecomClient.html">list of methods</a>,
-each one is a function to request a specific E-Com Plus REST API,
-using <a href="https://github.com/axios/axios">axios</a> HTTP client
-and returning a
-<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>.</p>
+<p><strong>TL;DR</strong>: We have <a href="https://developers.e-com.plus/client/ecomClient.html">methods</a> to run requests for almost all E-Com Plus APIs, but you're probably searching for <a href="https://developers.e-com.plus/client/ecomClient.html#.store">Store API</a>.</p>
+<p>The <code>@ecomplus/client</code> package provides a <a href="https://developers.e-com.plus/client/ecomClient.html">list of methods</a>, each one is a function to request a specific E-Com Plus REST API, using <a href="https://github.com/axios/axios">axios</a> HTTP client and returning a <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a>.</p>
 <p>It's available for both Node.js and browser environments.</p>
 <ul>
-<li><a href="https://developers.e-com.plus/ecomplus-client/module-@ecomplus_client.html">Get started</a></li>
-<li><a href="https://developers.e-com.plus/ecomplus-client/ecomClient.html">Methods</a></li>
+<li><a href="https://developers.e-com.plus/client/module-@ecomplus_client.html">Get started</a></li>
+<li><a href="https://developers.e-com.plus/client/ecomClient.html">Methods</a></li>
 </ul>
 <h3>Store API request example</h3>
 <pre class="prettyprint source lang-js"><code>import { store } from '@ecomplus/client'
@@ -97,9 +86,7 @@ ecomClient.store({
   .catch(error => console.error(error))
 </code></pre>
 <h3>Dependencies</h3>
-<p>It requires and <em>may not</em> include
-<code>core-js</code>, <a href="https://github.com/axios/axios"><code>axios</code></a> and
-<a href="https://github.com/ecomclub/ecomplus-utils"><code>@ecomplus/utils</code></a>.</p>
+<p>It requires and <em>may not</em> include <code>core-js</code>, <a href="https://github.com/axios/axios"><code>axios</code></a> and <a href="https://github.com/ecomplus/utils"><code>@ecomplus/utils</code></a>.</p>
 <h4>Node.js</h4>
 <pre class="prettyprint source lang-bash"><code>npm i --save @ecomplus/utils @ecomplus/client
 </code></pre>
@@ -109,50 +96,16 @@ ecomClient.store({
 <h4>CDN</h4>
 <pre class="prettyprint source lang-html"><code>&lt;script src=&quot;https://cdn.jsdelivr.net/npm/@ecomplus/client/dist/ecom-client.polyfill.min.js&quot;>&lt;/script>
 </code></pre>
-<p><code>axios</code> and <code>ecomUtils</code> libraries <strong>must be included separately</strong>
-and available on window scope.</p>
+<p><code>axios</code> and <code>ecomUtils</code> libraries <strong>must be included separately</strong> and available on window scope.</p>
 <h2>Development</h2>
-<p>We're using
-<a href="https://www.conventionalcommits.org/en/v1.0.0-beta.4/">Conventional Commits</a>,
-all commit messages must follow these conventions.</p>
-<p>For documentation, we're using <a href="https://jsdoc.app/">jsdoc</a>,
-all methods should be well documented.</p>
-<h3>Contributing</h3>
-<ol>
-<li>
-<p>Fork the repository;</p>
-</li>
-<li>
-<p>Create a new branch with the name of your proposal;</p>
-</li>
-<li>
-<p>Clone the repository:</p>
-</li>
-</ol>
-<pre class="prettyprint source lang-bash"><code>git clone git@github.com:{user}/ecomplus-client.git
-</code></pre>
-<ol start="5">
-<li>Move to folder and install dependencies:</li>
-</ol>
-<pre class="prettyprint source lang-bash"><code>cd ecomplus-client
+<p>Fork/clone this repository and install dependencies normally:</p>
+<pre class="prettyprint source lang-bash"><code>git clone https://github.com/ecomplus/client
+cd client
 npm i
 </code></pre>
-<ol start="6">
-<li>Run dev server and use global <code>ecomClient</code>
-or edit <code>test/demo.js</code> for tests on http://localhost:9245/:</li>
-</ol>
-<pre class="prettyprint source lang-bash"><code>npm run serve
-</code></pre>
-<ol start="7">
-<li>
-<p>Commit changes following
-<a href="https://www.conventionalcommits.org/en/v1.0.0-beta.4/">Conventional Commits</a>;</p>
-</li>
-<li>
-<p>Create a new <a href="https://github.com/ecomclub/ecomplus-client/pulls">PR</a>
-describing your proposal :)</p>
-</li>
-</ol>
+<p>Then you can edit source files and test locally with <code>npm run serve</code>.</p>
+<h3>Contributing</h3>
+<p>Please read the <a href="CONTRIBUTING.md">contribution guidelines</a>.</p>
 <h3>Deploy</h3>
 <p>Take a look on <code>package.json</code> scripts:</p>
 <ul>
@@ -173,7 +126,7 @@ describing your proposal :)</p>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Sun Jan 05 2020 15:41:29 GMT-0300 (Brasilia Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Tue Mar 03 2020 15:17:15 GMT-0300 (Brasilia Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>
