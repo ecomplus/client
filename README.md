@@ -1,6 +1,6 @@
-# ecomplus-client
+# E-Com Plus Client
 
-[![CodeFactor](https://www.codefactor.io/repository/github/ecomplus/client/badge)](https://www.codefactor.io/repository/github/ecomplus/client) [![npm version](https://img.shields.io/npm/v/@ecomplus/client.svg)](https://www.npmjs.org/@ecomplus/client) [![License MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Publish](https://github.com/ecomplus/client/workflows/Publish/badge.svg)](https://github.com/ecomplus/client/actions?workflow=Publish) [![CodeFactor](https://www.codefactor.io/repository/github/ecomplus/client/badge)](https://www.codefactor.io/repository/github/ecomplus/client) [![npm version](https://img.shields.io/npm/v/@ecomplus/client.svg)](https://www.npmjs.org/@ecomplus/client) [![License MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 JS client for E-Com Plus REST APIs
 
