@@ -1,6 +1,8 @@
 import {
   API_STORE,
+  API_STORE_CACHE,
   API_PASSPORT,
+  API_SEARCH,
   API_MODULES,
   API_STOREFRONT,
   API_GRAPHS,
@@ -11,6 +13,7 @@ import axios from './axios'
 // set delay between requests by API
 const delays = {}
 delays[API_STORE] = delays[API_MODULES] = delays[API_PLATFORM] = 250
+delays[API_STORE_CACHE] = delays[API_SEARCH] = 50
 delays[API_STOREFRONT] = 400
 delays[API_GRAPHS] = 570
 delays[API_PASSPORT] = 1070
