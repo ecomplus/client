@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ecomclub/ecomplus-client.git"
+    "url": "git+https://github.com/ecomplus/client.git"
   },
   "keywords": [
     "ecomplus",
@@ -28,9 +28,9 @@
   "author": "E-Com Club <ti@e-com.club>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ecomclub/ecomplus-client/issues"
+    "url": "https://github.com/ecomplus/client/issues"
   },
-  "homepage": "https://github.com/ecomclub/ecomplus-client#readme",
+  "homepage": "https://github.com/ecomplus/client#readme",
   "peerDependencies": {
     "@ecomplus/utils": "1.x"
   },
