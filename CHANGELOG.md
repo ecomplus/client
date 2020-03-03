@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.3](https://github.com/ecomclub/ecomplus-client/compare/v2.0.2...v2.0.3) (2020-03-03)
+
+
+### Bug Fixes
+
+* **request:** add 50ms delay to search and cache api to prevent 503 ([c0eb251](https://github.com/ecomclub/ecomplus-client/commit/c0eb251bc94547bb3db41d3e609233a4acd06496))
+
 ### [2.0.2](https://github.com/ecomclub/ecomplus-client/compare/v2.0.1...v2.0.2) (2020-01-05)
 
 ### [2.0.1](https://github.com/ecomclub/ecomplus-client/compare/v2.0.0...v2.0.1) (2020-01-02)
