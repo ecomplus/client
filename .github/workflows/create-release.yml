@@ -6,7 +6,7 @@ on:
       - 'v*'
 
 jobs:
-  build:
+  create-release:
     name: Create GitHub Release
     runs-on: ubuntu-latest
 
