@@ -77,7 +77,7 @@ const request = (config, api, delay = 170, scheduleTime) => {
 }
 
 export default axiosConfig => {
-  const { url, method, baseURL } = axiosConfig
+  const { url, method, baseURL, timeout } = axiosConfig
   if (!url.indexOf('.json') === -1) {
     // all APIs endpoints have JSON extension
     axiosConfig.url = url.replace(/^([^?]+)(\?.*)?$/, '$1.json$2')
@@ -118,6 +118,7 @@ export default axiosConfig => {
 
   // returns promise resolved with request after timeout
   return new Promise((resolve, reject) => {
+    let retries = 0
     const schedule = () => {
       // calculate final delay with API queue and concurrent requests multipliers
       const requestDelay = delay * queue + concurrentRequests * 2.5
@@ -131,7 +132,16 @@ export default axiosConfig => {
         if (waitingApis.indexOf(api) <= -1) {
           // send request and reset scheduled requests count
           scheduledRequests[api]--
-          request(axiosConfig, api, delay, scheduleTime).then(resolve).catch(reject)
+          request(axiosConfig, api, delay, scheduleTime)
+            .then(resolve)
+            .catch(err => {
+              // retry server errors for requests without timeout
+              if (!timeout && retries < 2 && err.response && err.response.status >= 500) {
+                setTimeout(schedule, Math.max(delay, 600))
+                return retries++
+              }
+              reject(err)
+            })
         } else {
           // API on idle due to 503 response
           // schedule request again
