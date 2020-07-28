@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://github.com/ecomplus/client/compare/v2.0.4...v2.1.0) (2020-07-28)
+
+
+### Features
+
+* **request:** retry server errors for requests without timeout ([d991312](https://github.com/ecomplus/client/commit/d9913125382f0da1eae35c36bc312599d56378a4))
+
 ### [2.0.4](https://github.com/ecomplus/client/compare/v2.0.3...v2.0.4) (2020-03-03)
 
 
