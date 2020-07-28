@@ -1,7 +1,7 @@
 name: Publish
 
 on:
-  registry_package
+  registry_package:
   push:
     branches:
       - master
