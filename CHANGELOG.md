@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.1.2](https://github.com/ecomplus/client/compare/v2.1.1...v2.1.2) (2020-10-23)
+
+
+### Bug Fixes
+
+* **request-timeout:** increase cache api timeout on node ([dd48406](https://github.com/ecomplus/client/commit/dd48406f7fe6aaa2be3b565356af2054bc269033))
+
 ### [2.1.1](https://github.com/ecomplus/client/compare/v2.1.0...v2.1.1) (2020-09-10)
 
 ## [2.1.0](https://github.com/ecomplus/client/compare/v2.0.4...v2.1.0) (2020-07-28)
