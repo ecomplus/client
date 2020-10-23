@@ -21,7 +21,7 @@ const store = ({
     // less timeout for public requests
     if (isCacheOnline && !/\?/.test(url) && (!axiosConfig || !axiosConfig.params)) {
       // use cache API host
-      timeout = 2500
+      timeout = IS_BROWSER ? 2500 : 10000
       // Store ID on URL
       baseURL = API_STORE_CACHE.replace(':id', storeId)
     } else {
