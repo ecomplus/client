@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.1.4](https://github.com/ecomplus/client/compare/v2.1.3...v2.1.4) (2021-01-07)
+
+
+### Bug Fixes
+
+* **deps:** update dependency axios to v0.21.1 [security] ([#82](https://github.com/ecomplus/client/issues/82)) ([43b92ce](https://github.com/ecomplus/client/commit/43b92ce31ebd7b622b33e1a4c2294f70519add69))
+
 ### [2.1.3](https://github.com/ecomplus/client/compare/v2.1.2...v2.1.3) (2020-10-29)
 
 ### [2.1.2](https://github.com/ecomplus/client/compare/v2.1.1...v2.1.2) (2020-10-23)
