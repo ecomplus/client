@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.2.0](https://github.com/ecomplus/client/compare/v2.1.4...v2.2.0) (2021-01-24)
+
+
+### Features
+
+* **apis-base-urls:** support customizind default apis with env vars ([4d91564](https://github.com/ecomplus/client/commit/4d91564752316075ef8e0c9cf87037b60444d7ad))
+
+
+### Bug Fixes
+
+* **env:** syntax fix, must export default ([687e449](https://github.com/ecomplus/client/commit/687e44914cf2f3cd1135e40b98895831a978cfa2))
+* **request:** properlly checking '.json' extensions ([7b26cf0](https://github.com/ecomplus/client/commit/7b26cf09bf273a1410705e1b86f8b72ebdbf7529))
+
 ### [2.1.4](https://github.com/ecomplus/client/compare/v2.1.3...v2.1.4) (2021-01-07)
 
 
