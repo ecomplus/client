@@ -1,3 +1,5 @@
+import env from './env'
+
 import {
   API_STORE,
   API_PASSPORT,
@@ -6,6 +8,7 @@ import {
   API_GRAPHS,
   API_PLATFORM
 } from './constants'
+
 import axios from './axios'
 
 // set delay between requests by API
@@ -21,8 +24,7 @@ let concurrentRequests = 0
 const waitingApis = []
 
 // check for debug option
-const env = (typeof window === 'object' && window) || (typeof process === 'object' && process && process.env)
-const checkEnvVar = prop => env && (env[prop] === true || env[prop] === 'true')
+const checkEnvVar = prop => (env[prop] === true || env[prop] === 'true')
 const debug = checkEnvVar('ECOMCLIENT_DEBUG')
 
 const request = (config, api, delay = 170, scheduleTime) => {
@@ -78,7 +80,7 @@ const request = (config, api, delay = 170, scheduleTime) => {
 
 export default axiosConfig => {
   const { url, method, baseURL, timeout } = axiosConfig
-  if (!url.indexOf('.json') === -1) {
+  if (url.indexOf('.json') === -1) {
     // all APIs endpoints have JSON extension
     axiosConfig.url = url.replace(/^([^?]+)(\?.*)?$/, '$1.json$2')
   }
