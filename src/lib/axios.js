@@ -9,6 +9,9 @@ const instance = axios.create({
 })
 // always JSON for request with body data
 ;['post', 'patch', 'put'].forEach(method => {
+  if (!instance.defaults.headers) {
+    instance.defaults.headers = {}
+  }
   instance.defaults.headers[method]['Content-Type'] = 'application/json'
 })
 
