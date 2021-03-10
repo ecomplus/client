@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.2.1](https://github.com/ecomplus/client/compare/v2.2.0...v2.2.1) (2021-03-10)
+
+
+### Bug Fixes
+
+* **axios-instance:** ensure `defaults.headers[method]` is defined ([39b6c24](https://github.com/ecomplus/client/commit/39b6c24a5d1f3d03a9b3ff80376e78652ff2f421))
+* **axios-instance:** prevent 'Uncaught TypeError: instance.defaults.headers is undefined' error ([a1b1605](https://github.com/ecomplus/client/commit/a1b1605391e92cfaea1bfa82a5b9d81f1d5a7e08))
+
 ## [2.2.0](https://github.com/ecomplus/client/compare/v2.1.4...v2.2.0) (2021-01-24)
 
 
