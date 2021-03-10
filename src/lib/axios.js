@@ -8,16 +8,15 @@ const instance = axios.create({
   timeout: 60000
 })
 // always JSON for request with body data
-const { defaults } = instance
+if (!instance.defaults.headers) {
+  instance.defaults.headers = {}
+}
+const { headers } = instance.defaults
 ;['post', 'patch', 'put'].forEach(method => {
-  if (!defaults.headers) {
-    defaults.headers = {
-      [method]: {}
-    }
-  } else if (!defaults.headers[method]) {
-    defaults.headers[method] = {}
+  if (!headers[method]) {
+    headers[method] = {}
   }
-  defaults.headers[method]['Content-Type'] = 'application/json'
+  headers[method]['Content-Type'] = 'application/json'
 })
 
 export default instance
