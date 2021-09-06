@@ -38,10 +38,10 @@
     "core-js": "3.x"
   },
   "dependencies": {
-    "axios": "^0.21.1"
+    "axios": "^0.21.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.15.4",
+    "@babel/core": "^7.15.5",
     "@babel/preset-env": "^7.15.4",
     "@commitlint/cli": "^13.1.0",
     "@commitlint/config-conventional": "^13.1.0",
