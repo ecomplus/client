@@ -38,7 +38,7 @@
     "core-js": "3.x"
   },
   "dependencies": {
-    "axios": "^0.21.4"
+    "axios": "^0.22.0"
   },
   "devDependencies": {
     "@babel/core": "^7.15.5",
@@ -51,7 +51,7 @@
     "docdash": "^1.2.0",
     "husky": "^4.3.8",
     "jsdoc": "^3.6.7",
-    "standard": "^16.0.3",
+    "standard": "^16.0.4",
     "standard-version": "^9.3.1",
     "webpack": "^4.46.0",
     "webpack-cli": "^3.3.12",
