@@ -41,7 +41,7 @@
     "axios": "^0.27.2 || ^1.1.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.22.10",
+    "@babel/core": "^7.22.11",
     "@babel/preset-env": "^7.22.10",
     "@commitlint/cli": "^17.7.1",
     "@commitlint/config-conventional": "^17.7.0",
