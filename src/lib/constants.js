@@ -5,6 +5,7 @@ export const IS_BROWSER = Boolean(typeof window === 'object' && window !== null 
 export const API_STORE = env.ECOMCLIENT_API_STORE || 'https://api.e-com.plus/v1/'
 export const API_STORE_CACHE = env.ECOMCLIENT_API_STORE_CACHE || 'https://ioapi.ecvol.com/:id/v1/'
 export const API_PASSPORT = env.ECOMCLIENT_API_PASSPORT || 'https://passport.e-com.plus/v1/'
+export const API_PASSPORT_IDENTITY = env.ECOMCLIENT_API_PASSPORT_IDENTITY
 export const API_SEARCH = env.ECOMCLIENT_API_SEARCH || 'https://apx-search.e-com.plus/api/v1/'
 export const API_MODULES = env.ECOMCLIENT_API_MODULES || 'https://apx-mods.e-com.plus/api/v1/'
 export const API_STOREFRONT = env.ECOMCLIENT_API_STOREFRONT || 'https://iostorefront.ecvol.com/api/v1/'

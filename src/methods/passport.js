@@ -1,5 +1,5 @@
 import { _config } from '@ecomplus/utils'
-import { API_PASSPORT } from './../lib/constants'
+import { API_PASSPORT_IDENTITY, API_PASSPORT } from './../lib/constants'
 import request from './../lib/request'
 
 const passport = ({
@@ -12,6 +12,9 @@ const passport = ({
   axiosConfig
 }) => {
   let baseURL = API_PASSPORT
+  if (API_PASSPORT_IDENTITY && /\/(identify|token|oauth-providers)(\.json)?$/.test(url)) {
+    baseURL = API_PASSPORT_IDENTITY
+  }
   if (!url.startsWith('http') && !url.startsWith('/' + storeId)) {
     // set Store ID on URL
     baseURL += storeId
