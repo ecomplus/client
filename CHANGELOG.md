@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0](https://github.com/ecomplus/client/compare/v2.2.1...v2.3.0) (2024-03-22)
+
+
+### Features
+
+* support new optional `ECOMCLIENT_API_PASSPORT_IDENTITY` env for passport on identity endpoints ([9363e7c](https://github.com/ecomplus/client/commit/9363e7c735d768b6ac875e5460fee2d67d6fc8e2))
+
+
+### Bug Fixes
+
+* **deps:** edit axios semver to also be satisfied with v0 ([c1b4ec6](https://github.com/ecomplus/client/commit/c1b4ec6c4fa15c5a5cf9b5441cc9497d9e81adec))
+* **deps:** update all non-major dependencies ([#134](https://github.com/ecomplus/client/issues/134)) ([d86b1eb](https://github.com/ecomplus/client/commit/d86b1eb80a487cb342f9c810f55df417045f9ebf))
+* **deps:** update dependency axios to v1 ([#210](https://github.com/ecomplus/client/issues/210)) ([f959399](https://github.com/ecomplus/client/commit/f9593995f9c4d826dec785b483339d1c60f326f3))
+* **deps:** update dependency axios to v1.6.0 [security] ([#262](https://github.com/ecomplus/client/issues/262)) ([d6579b6](https://github.com/ecomplus/client/commit/d6579b65d87508dd45a814b5e8cfdc0de0c4daac))
+
 ### [2.2.1](https://github.com/ecomplus/client/compare/v2.2.0...v2.2.1) (2021-03-10)
 
 
