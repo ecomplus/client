@@ -32,10 +32,10 @@
   },
   "homepage": "https://github.com/ecomplus/client#readme",
   "peerDependencies": {
-    "@ecomplus/utils": "1.x"
+    "@ecomplus/utils": "1.4.1"
   },
   "optionalDependencies": {
-    "core-js": "3.x"
+    "core-js": "3.36.1"
   },
   "dependencies": {
     "axios": "^0.27.2 || ^1.1.2"
