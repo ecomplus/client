@@ -1,6 +1,13 @@
 # Changelog
 
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
+
+## [2.4.0](https://github.com/ecomplus/client/compare/v2.3.1...v2.4.0) (2024-10-08)
+
+
+### Features
+
+* supporting new `globalThis.ecomClientAxiosMidd` for mannual middleware/cache handling ([c38ba20](https://github.com/ecomplus/client/commit/c38ba2003664208d64de783e7ad5923c4d51caae))
 
 ### [2.3.1](https://github.com/ecomplus/client/compare/v2.3.0...v2.3.1) (2024-03-22)
 
