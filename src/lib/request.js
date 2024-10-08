@@ -35,47 +35,66 @@ const request = (config, api, delay = 170, scheduleTime) => {
     // reset request timeout
     config.timeout = 0
   }
-
-  return new Promise((resolve, reject) => {
-    concurrentRequests++
-    axios.request(config)
-      .then(resolve)
-
-      .catch(err => {
-        if (debug) {
-          err.message = `[ecomClient]: ${err.message}`
-          console.error(err)
-        }
-        // handle 503 errors here
-        const { response } = err
-        if (response && response.status === 503) {
-          // service unavailable, probably blocked by proxy
-          if (api) {
-            // add API to idle
-            waitingApis.push(api)
+  const next = () => {
+    return new Promise((resolve, reject) => {
+      concurrentRequests++
+      axios.request(config)
+        .then(resolve)
+        .catch(err => {
+          if (debug) {
+            err.message = `[ecomClient]: ${err.message}`
+            console.error(err)
           }
-
-          // retry with new promise
-          // wait and resend request
-          return setTimeout(() => {
+          // handle 503 errors here
+          const { response } = err
+          if (response && response.status === 503) {
+            // service unavailable, probably blocked by proxy
             if (api) {
-              // unset API idle
-              const index = waitingApis.indexOf(api)
-              if (index > -1) {
-                waitingApis.splice(index, 1)
-              }
+              // add API to idle
+              waitingApis.push(api)
             }
-            // new axios request without error handler
-            axios.request(config).then(resolve).catch(reject)
-          }, delay >= 170 ? delay : 170)
-        }
-        reject(err)
-      })
-
-      .finally(() => {
-        concurrentRequests--
-      })
-  })
+            // retry with new promise
+            // wait and resend request
+            return setTimeout(() => {
+              if (api) {
+                // unset API idle
+                const index = waitingApis.indexOf(api)
+                if (index > -1) {
+                  waitingApis.splice(index, 1)
+                }
+              }
+              // new axios request without error handler
+              axios.request(config).then(resolve).catch(reject)
+            }, delay >= 170 ? delay : 170)
+          }
+          reject(err)
+        })
+        .finally(() => {
+          concurrentRequests--
+        })
+    })
+  }
+  const { ecomClientAxiosMidd } = globalThis
+  if (typeof ecomClientAxiosMidd === 'function') {
+    return new Promise((resolve, reject) => {
+      ecomClientAxiosMidd(config)
+        .then((res) => {
+          if (res) {
+            resolve(res)
+            return
+          }
+          next().then(resolve).catch(reject)
+        })
+        .catch((err) => {
+          if (debug) {
+            err.message = `[ecomClient midd]: ${err.message}`
+            console.error(err)
+          }
+          next().then(resolve).catch(reject)
+        })
+    })
+  }
+  return next()
 }
 
 export default axiosConfig => {
