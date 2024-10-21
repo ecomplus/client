@@ -32,27 +32,27 @@
   },
   "homepage": "https://github.com/ecomplus/client#readme",
   "peerDependencies": {
-    "@ecomplus/utils": "1.x"
+    "@ecomplus/utils": "1.4.1"
   },
   "optionalDependencies": {
-    "core-js": "3.x"
+    "core-js": "3.38.1"
   },
   "dependencies": {
     "axios": "^0.27.2 || ^1.1.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.24.4",
-    "@babel/preset-env": "^7.24.4",
+    "@babel/core": "^7.25.8",
+    "@babel/preset-env": "^7.25.8",
     "@commitlint/cli": "^17.8.1",
     "@commitlint/config-conventional": "^17.8.1",
     "@ecomplus/utils": "^1.4.1",
-    "babel-loader": "^8.3.0",
-    "core-js": "^3.36.1",
+    "babel-loader": "^8.4.1",
+    "core-js": "^3.38.1",
     "docdash": "^2.0.2",
     "husky": "^8.0.3",
-    "jsdoc": "^4.0.2",
-    "standard": "^17.1.0",
-    "commit-and-tag-version": "^9.5.0",
+    "jsdoc": "^4.0.4",
+    "standard": "^17.1.2",
+    "commit-and-tag-version": "^9.6.0",
     "webpack": "^4.47.0",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.3"
